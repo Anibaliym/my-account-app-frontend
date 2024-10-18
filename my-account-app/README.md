@@ -36,3 +36,48 @@ Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
 1. Clona el repositorio:
    ```bash
    git clone https://github.com/tu-usuario/my-account-app.git
+
+2. Instala las dependencias:
+   ```bash
+   yarn install
+
+3. Ejecuta la aplicación en modo desarrollo:
+   ```bash
+   yarn dev
+
+## Uso
+
+Una vez que la aplicación esté en funcionamiento, los usuarios pueden:
+
+- Registrarse por medio de registro manual o por medio de la confiabilidad de el autensificador de google 
+- Una vez registrado ya puedes comenzar a añadir sus ingresos y gastos para comenzar con tu orden y planificación.
+- Visualizar y administrar y planificar gastos por mes.
+- Crear y planificar gastos futuros usando las hojas de cálculo integradas.
+- Planificar gastos con nuestra herramienta "CALCULADORA LISTA"
+- Tener una visión general del saldo disponible y por gastar, lo que les permitirá planificar mejor sus finanzas personales.
+
+## Imágenes de la aplicación
+
+### Pantalla de Login
+![Login](./9B5764E1-9E04-4730-BCAB-CBC872DEB2C2.png)
+
+### Pantalla de Registro
+![Registro](./77EF6397-5B91-4744-878A-C75FAA034267.png)
+
+### Ejemplo de hoja de cálculo personalizada
+![Hoja de cálculo](./68FDB2CF-AE6B-4BE2-ABB1-D1D1CC638AE6.jpeg)
+
+![Ejemplo 2](./82A36C2E-0404-400E-BC5C-1EE5D83E29C1.jpeg)
+
+![Ejemplo 3](./9B3DF3E2-C831-4581-9F45-41A6FE95D28E.jpeg)
+
+## Próximas funcionalidades
+
+- **Integración con APIs bancarias** para importar movimientos automáticamente.
+- **Notificaciones** para recordar fechas importantes de pagos.
+- **Visualización gráfica de gastos** para tener una mejor representación de los movimientos financieros.
+
+## Contribuciones
+
+Este proyecto está en desarrollo, por lo que cualquier contribución es bienvenida. Si tienes ideas, mejoras o encuentras errores, por favor abre un **issue** o envía un **pull request**.
+
