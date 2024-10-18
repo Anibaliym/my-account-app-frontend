@@ -1,6 +1,6 @@
 # My Account App
 
-**My Account App** es una aplicación que ayuda a los usuarios a gestionar de manera ordenada sus gastos mensuales y planificaciones anuales. Está diseñada tanto para uso personal como para ser potencialmente comercializada en el futuro.
+**My Account App (Mi Cuenta)** es una aplicación que ayuda a los usuarios a gestionar de manera ordenada sus gastos mensuales y planificaciones anuales. Está diseñada tanto para uso personal como para ser potencialmente comercializada en el futuro.
 
 Esta aplicación proporciona una plataforma visual e interactiva para llevar un seguimiento detallado de los movimientos financieros, al tiempo que permite realizar planificaciones a largo plazo mediante herramientas como hojas de cálculo, agendas y calendarios.
 
@@ -55,21 +55,6 @@ Una vez que la aplicación esté en funcionamiento, los usuarios pueden:
 - Crear y planificar gastos futuros usando las hojas de cálculo integradas.
 - Planificar gastos con nuestra herramienta "CALCULADORA LISTA"
 - Tener una visión general del saldo disponible y por gastar, lo que les permitirá planificar mejor sus finanzas personales.
-
-## Imágenes de la aplicación
-
-### Pantalla de Login
-![Login](./9B5764E1-9E04-4730-BCAB-CBC872DEB2C2.png)
-
-### Pantalla de Registro
-![Registro](./77EF6397-5B91-4744-878A-C75FAA034267.png)
-
-### Ejemplo de hoja de cálculo personalizada
-![Hoja de cálculo](./68FDB2CF-AE6B-4BE2-ABB1-D1D1CC638AE6.jpeg)
-
-![Ejemplo 2](./82A36C2E-0404-400E-BC5C-1EE5D83E29C1.jpeg)
-
-![Ejemplo 3](./9B3DF3E2-C831-4581-9F45-41A6FE95D28E.jpeg)
 
 ## Próximas funcionalidades
 
