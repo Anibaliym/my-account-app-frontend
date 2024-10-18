@@ -1,0 +1,59 @@
+.access-page-container {
+    background-color: var(--body-color); 
+    width:100%; 
+    height:100vh; 
+}
+
+.access-container {
+    background-color: var(--body-color); 
+    width:900px; 
+    margin:auto; 
+    margin-top: 100px; 
+    padding: 5px; 
+    box-shadow: 0px 0px 2px lightgray; 
+}
+
+.loginPresentation {
+    background: var(--primary-color);
+    color: white; 
+    padding-left: 50px;
+    border-radius: 3px; 
+    box-shadow: 0px 0px 3px var(--primary-color); 
+}
+
+.title-color-text {
+    color: var(--primary-color); 
+}
+
+li.input-box {
+    list-style: none;  
+    border-radius: 3px;
+    background-color: var(--primary-color-light);
+    transition: var(--tran-05);
+    display: flex;
+    align-items: center;
+}
+
+li.input-box input{
+    /* height: 100%; */
+    padding:10px; 
+    width: 90%;
+    outline: none;
+    border: none;
+    background-color: var(--primary-color-light);
+    color: var(--primary-color);
+    border-radius: 4px;
+    font-size: 15px;
+    /* font-weight: 500; */
+    /* font-family: arial;  */
+    transition: var(--tran-05);
+}
+
+select {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}

@@ -1,0 +1,47 @@
+export const accountsData = [
+    {
+        accountId: 1,
+        description: 'cuentas 2024',
+        icon: 'bx bx-ghost',
+        sheets: [
+            { sheetId: 1,    name: '/cuenta', description: 'cuentas del banco de chile' },
+            { sheetId: 2,    name: '/cuenta', description: 'febrero' },
+            { sheetId: 3,    name: '/cuenta', description: 'marzo' },
+            { sheetId: 4,    name: '/cuenta', description: 'abril' },
+            { sheetId: 5,    name: '/cuenta', description: 'mayo' },
+            { sheetId: 6,    name: '/cuenta', description: 'junio' },
+            { sheetId: 7,    name: '/cuenta', description: 'julio' },
+            { sheetId: 8,    name: '/cuenta', description: 'agosto' },
+            { sheetId: 9,    name: '/cuenta', description: 'septiembre' },
+            { sheetId: 10,   name: '/cuenta', description: 'octubre' },
+            { sheetId: 11,   name: '/cuenta', description: 'noviembre' },
+            { sheetId: 12,   name: '/cuenta', description: 'diciembre' },
+        ],
+    },
+    {
+        accountId: 2,
+        description: 'cuentas 2025',
+        icon: 'bx bx-ghost',
+        sheets: [
+            { sheetId: 1,    name: '/cuenta', description: 'enero' },
+            { sheetId: 2,    name: '/cuenta', description: 'febrero' },
+            { sheetId: 3,    name: '/cuenta', description: 'marzo' },
+            { sheetId: 4,    name: '/cuenta', description: 'abril' },
+            { sheetId: 5,    name: '/cuenta', description: 'mayo' },
+            { sheetId: 6,    name: '/cuenta', description: 'junio' },
+            { sheetId: 7,    name: '/cuenta', description: 'julio' },
+            { sheetId: 8,    name: '/cuenta', description: 'agosto' },
+            { sheetId: 9,    name: '/cuenta', description: 'septiembre' },
+            { sheetId: 10,   name: '/cuenta', description: 'octubre' },
+            { sheetId: 11,   name: '/cuenta', description: 'noviembre' },
+            { sheetId: 12,   name: '/cuenta', description: 'diciembre' },
+        ],
+    },
+    {
+        accountId: 3,
+        description: 'test 3',
+        icon: 'bx bx-ghost',
+        sheets: [],
+    },
+
+];
