@@ -1,11 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../assets/context/AuthContext';
-import { AccessUserMessage } from './AccessUserMessage';
 import { LoginUserApi } from '../../../assets/api/MyAccountAppAPI/User';
 
 const userInitialState = {
-    id: 1, 
+    id: '', 
     firstName: '', 
     lastName: '', 
     profilePicture: '', 
@@ -13,15 +12,14 @@ const userInitialState = {
     userType: ''
 }
 
-const loginInitialState = { userName: 'ANIBALIYM@GMAIL.COM', password: '111111' }; 
+const loginInitialState = { userName: '', password: '' }; 
 
-export const LoginForm = ({ activeForm, toggleForm }) => {
+export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const navigate = useNavigate();
-    
+
     const userRef = useRef(); 
     const passwordRef = useRef(); 
 
-    const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' }); 
     const [ loginState, setLoginState ] = useState(loginInitialState); 
     const { userName, password } = loginState; 
     const [ accessAllowed, setAccessAllowed] = useState(false); 
@@ -95,49 +93,45 @@ export const LoginForm = ({ activeForm, toggleForm }) => {
                 </small>
             </div>
 
-                <div className="row mt-5">
-                    <li className="input-box">
-                    <i className='bx bx-user login-icon'></i>
-                    <input
-                        ref={ userRef }
-                        type="text"
-                        placeholder="E-mail"
-                        name="userName"
-                        value={ userName }
-                        onChange={ onInputChange }
-                        onKeyDown={ onKeyDown }
-                        autoComplete="off"
-                    />
-                    </li>
-                </div>
-                
-                <div className="row mt-2">
-                    <li className="input-box">
-                    <i className='bx bx-lock-alt login-icon'></i>
+            <div className="row mt-5">
+                <li className="input-box">
+                <i className='bx bx-user login-icon'></i>
+                <input
+                    ref={ userRef }
+                    type="text"
+                    placeholder="E-mail"
+                    name="userName"
+                    value={ userName }
+                    onChange={ onInputChange }
+                    onKeyDown={ onKeyDown }
+                    autoComplete="off"
+                />
+                </li>
+            </div>
+            
+            <div className="row mt-2">
+                <li className="input-box">
+                <i className='bx bx-lock-alt login-icon'></i>
 
-                    <input
-                        ref={ passwordRef }
-                        type="password"
-                        name="password"
-                        placeholder="Contraseña"
-                        value={ password }
-                        onChange={ onInputChange }
-                        onKeyDown={ onKeyDown }
-                    />
-                    </li>
-                </div>
+                <input
+                    ref={ passwordRef }
+                    type="password"
+                    name="password"
+                    placeholder="Contraseña"
+                    value={ password }
+                    onChange={ onInputChange }
+                    onKeyDown={ onKeyDown }
+                />
+                </li>
+            </div>
 
-                <div className="row mt-4">
-                    <button className="btn btn-outline-primary" onClick={ onLogin }>
-                        Entrar
-                    </button>
-                    <button className="btn btn-outline-primary mt-2" onClick={ onLogin }>
-                        <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
-                    </button>
-                </div>
-
-            <div className="row mt-3">
-            { showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} type={ showUserMessage.type } /> }
+            <div className="row mt-4">
+                <button className="btn btn-outline-primary" onClick={ onLogin }>
+                    Entrar
+                </button>
+                <button className="btn btn-outline-primary mt-2" onClick={ onLogin }>
+                    <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
+                </button>
             </div>
         </div>
     );

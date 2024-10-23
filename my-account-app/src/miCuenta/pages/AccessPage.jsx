@@ -1,29 +1,14 @@
-import { useContext, useState } from 'react';
-import { AuthContext } from '../../assets/context/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 import { LoginForm } from '../components/access/LoginForm';
 import { RegisterForm } from '../components/access/RegisterForm';
+import { AccessUserMessage } from '../components/access/AccessUserMessage';
+
 import '/src/assets/css/Access.css'; 
 
-const usuario = {
-    id: 1, 
-    nombre: 'Anibal', 
-    apellido: 'Yañez'
-}
-
-const loginInitialState = { userName: '', password: '' }; 
-
 export const AccessPage = () => {
-    const navigate = useNavigate();  
-    const { login } = useContext(AuthContext); 
-
-    const [ toggleLoginRegister, setToggleLoginRegister ] = useState(false); 
-
-    const onLogin = async () => {
-        login(usuario.id, `${usuario.nombre} ${usuario.apellido}`);
-        navigate('/', { replace: true });
-    };
-
+    const [ toggleLoginRegister, setToggleLoginRegister ] = useState(true); 
+    const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' });
+    
     return (
         <div className="access-page-container">
             <br />
@@ -40,20 +25,22 @@ export const AccessPage = () => {
                             <p>Administrar tus cuentas y calcular tus proyecciones.</p>
                         </div>
 
-
                         <div className="col p-5">
-                        {
-                            (toggleLoginRegister) 
-                                ? <LoginForm activeForm={ toggleLoginRegister } toggleForm={ setToggleLoginRegister } /> 
-                                : <RegisterForm activeForm={ toggleLoginRegister } toggleForm={ setToggleLoginRegister } />
-                        }
+                            {
+                                (toggleLoginRegister) 
+                                    ? <LoginForm activeForm={ toggleLoginRegister } toggleForm={ setToggleLoginRegister } setShowUserMessage={ setShowUserMessage }/> 
+                                    : <RegisterForm activeForm={ toggleLoginRegister } toggleForm={ setToggleLoginRegister } setShowUserMessage={ setShowUserMessage }/>
+                            }
+                            <div className="row mt-3">
+                                { 
+                                    showUserMessage.show 
+                                    && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} type={ showUserMessage.type } /> 
+                                }
+                            </div>
                         </div>                    
-
-
                     </div>
                 </div>
             </div>
-
         </div>
-    )
+    ); 
 }

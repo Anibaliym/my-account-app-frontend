@@ -1,18 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
-import { AccessUserMessage } from './AccessUserMessage';
 import { RegisterUserApi } from '../../../assets/api/MyAccountAppAPI/User';
 
 const registerInitialState = {
-    firstName: 'Esteban',
-    lastName: 'Morales',
-    email: 'Esteban@gmail.com',
-    password: '111111',
-    passwordRepeat: '111111'
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    passwordRepeat: ''
 };
 
-export const RegisterForm = ({ activeForm, toggleForm }) => {
+export const RegisterForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const [ registerFormState, setRegisterFormState ] = useState(registerInitialState);
-    const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' });
     const { firstName, lastName, email, password, passwordRepeat } = registerFormState;
 
     const firstNameRef = useRef();
@@ -74,8 +72,7 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
         if (!validForm()) return;
       
         const { isError, data: responseData } = await RegisterUserApi(registerFormState);
-      
-        const { data, errors = [], resolution } = responseData;
+        const { errors } = responseData;
       
         if(isError){
             setShowUserMessage({ 
@@ -93,11 +90,14 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 });
             }
             else {
+
                 setShowUserMessage({ 
                     show: true, 
-                    message: 'Listo :)', 
+                    message: 'Registrado :)', 
                     type: 'success', 
                 });
+
+                onToggleForm(); 
             }
         }
     };
@@ -211,13 +211,8 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 </button>
 
                 <button className="btn btn-outline-primary mt-2">
-                        <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
-                    </button>
-
-            </div>
-
-            <div className="row mt-3">
-                { showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} type={ showUserMessage.type } /> }
+                    <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
+                </button>
             </div>
         </div>
     );
