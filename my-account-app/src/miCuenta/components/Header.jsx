@@ -39,7 +39,7 @@ export const Header = ({ setToggleSidebar, toggleSidebar }) => {
             <button id="toggle-btn" className="toggle-btn" onClick={ onToggleSidebar }>☰</button>
             
             <div className="user-info">
-                <span className="user-text">Anibal Yañez</span>
+                <span className="user-text">anibal yañez</span>
 
                 <div className="sidebar-footer">
                     <div className="toggle-switch" onClick={toggleDarkMode}>

@@ -14,7 +14,7 @@ export const Sidebar = ({ toggleSidebar }) => {
     };
 
     return (
-        <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' }` } >
+        <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
             <div className="sidebar-body">
                 { 
                     menuData.map(({ id, name, description, icon }) => (

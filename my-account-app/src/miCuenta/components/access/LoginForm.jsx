@@ -1,31 +1,32 @@
-// export const LoginForm = () => {
-//     return (
-//         <h1>login form</h1>
-//     )
-// }
-
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../assets/context/AuthContext';
 import { AccessUserMessage } from './AccessUserMessage';
+import { LoginUserApi } from '../../../assets/api/MyAccountAppAPI/User';
 
-const usuario = {
+const userInitialState = {
     id: 1, 
-    nombre: 'Anibal', 
-    apellido: 'Yañez'
+    firstName: '', 
+    lastName: '', 
+    profilePicture: '', 
+    email: '', 
+    userType: ''
 }
 
-const loginInitialState = { userName: 'anibaliym@gmail.com', password: 'admin' }; 
-// const loginInitialState = { userName: '', password: '' }; 
+const loginInitialState = { userName: 'ANIBALIYM@GMAIL.COM', password: '111111' }; 
 
 export const LoginForm = ({ activeForm, toggleForm }) => {
     const navigate = useNavigate();
+    
     const userRef = useRef(); 
     const passwordRef = useRef(); 
+
     const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' }); 
     const [ loginState, setLoginState ] = useState(loginInitialState); 
     const { userName, password } = loginState; 
-    const { login } = useContext(AuthContext); 
+    const [ accessAllowed, setAccessAllowed] = useState(false); 
+    const [ user, setUser ] = useState(userInitialState); 
+    const { Login } = useContext(AuthContext); 
 
     const onInputChange = ({ target }) => {
         const { name, value } = target;
@@ -50,25 +51,23 @@ export const LoginForm = ({ activeForm, toggleForm }) => {
             return;
         }
 
-        // const { isError, status, data: usuario } = await loginUsuario(userName.toUpperCase(), password);
+        const { isError, data } = await LoginUserApi(userName.toUpperCase(), password);
+        
+        setShowUserMessage({ show: isError, message: 'Ha ocurrido un error en la conexión con el servidor', type : 'danger' });
+        
+        if( isError ) return; 
 
-        // console.log(isError, status, usuario); 
-        // if ( isError ) {
-        //     passwordRef.current.select();
-        //     setShowUserMessage({ show: true, message: 'Ocurrio un error al intentar contactar con el servidor.', type : 'danger' });
-        //     return;
-        // }
-        // else {
-        //     if(status === 400){
-        //         setShowUserMessage({ show: true, message: 'Los datos proporcionados no son correctos. Por favor, inténtelo nuevamente.', type : 'warning' });
-        //         return; 
-        //     }
-        // }
+        const { resolution, errors, data: userData } = data; 
+        
+        setAccessAllowed(resolution); //Permite el acceso a al aplicación. 
+        
+        setShowUserMessage({ 
+            show: !resolution, 
+            message: (errors != undefined) ? errors[0] : '', 
+            type : 'danger' 
+        });
 
-        setShowUserMessage({show: true, message: `${usuario.id} - ${ usuario.nombre } - ${ usuario.apellido }`})
-
-        login(usuario.id, `${usuario.nombre} ${usuario.apellido}`);
-        navigate('/', { replace: true });
+        setUser(userData); 
     };
 
     const onToggleForm = () => {
@@ -78,6 +77,13 @@ export const LoginForm = ({ activeForm, toggleForm }) => {
     useEffect(() => {
         userRef.current.select();
     }, []);
+
+    useEffect(() => {
+        if (accessAllowed) {
+            Login(user);
+            navigate('/', { replace: true });
+        }
+    }, [ accessAllowed ]);
 
     return (
         <div className="animate__animated animate__fadeIn">
@@ -130,12 +136,8 @@ export const LoginForm = ({ activeForm, toggleForm }) => {
                     </button>
                 </div>
 
-
-
             <div className="row mt-3">
-                { 
-                    showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} />
-                }
+            { showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} type={ showUserMessage.type } /> }
             </div>
         </div>
     );

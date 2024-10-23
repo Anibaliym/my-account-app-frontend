@@ -10,14 +10,14 @@ const usuario = {
     nombre: 'Anibal', 
     apellido: 'Yañez'
 }
+
 const loginInitialState = { userName: '', password: '' }; 
 
 export const AccessPage = () => {
     const navigate = useNavigate();  
     const { login } = useContext(AuthContext); 
 
-    const [ toggleLoginRegister, setToggleLoginRegister ] = useState(true); 
-
+    const [ toggleLoginRegister, setToggleLoginRegister ] = useState(false); 
 
     const onLogin = async () => {
         login(usuario.id, `${usuario.nombre} ${usuario.apellido}`);

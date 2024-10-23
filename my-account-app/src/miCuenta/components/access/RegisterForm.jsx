@@ -1,26 +1,25 @@
-import { useEffect, useRef, useState } from "react";
-import { AccessUserMessage } from "./AccessUserMessage";
-
+import { useEffect, useRef, useState } from 'react';
+import { AccessUserMessage } from './AccessUserMessage';
+import { RegisterUserApi } from '../../../assets/api/MyAccountAppAPI/User';
 
 const registerInitialState = {
-    nombre: '',
-    apellido: '',
-    correo: '',
-    contrasena: '',
-    contrasenaRepeat: ''
+    firstName: 'Esteban',
+    lastName: 'Morales',
+    email: 'Esteban@gmail.com',
+    password: '111111',
+    passwordRepeat: '111111'
 };
 
 export const RegisterForm = ({ activeForm, toggleForm }) => {
     const [ registerFormState, setRegisterFormState ] = useState(registerInitialState);
     const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' });
+    const { firstName, lastName, email, password, passwordRepeat } = registerFormState;
 
-    const { nombre, apellido, correo, contrasena, contrasenaRepeat } = registerFormState;
-
-    const nombreRef = useRef();
-    const apellidoRef = useRef();
-    const correoRef = useRef();
-    const contrasenaRef = useRef();
-    const contrasenaRepeatRef = useRef();
+    const firstNameRef = useRef();
+    const lastNameRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const passwordRepeatRef = useRef();
 
     const onToggleForm = () => {
         toggleForm(!activeForm);
@@ -37,72 +36,74 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
         }
     };
 
+    const validForm = () => {
+        if (firstName.trim().length === 0) {
+            setShowUserMessage({ show: true, message: 'Debe ingresar el nombre', type: 'warning', type: 'warning' });
+            firstNameRef.current.focus();
+            return false;
+        }
+
+        if (lastName.trim().length === 0) {
+            setShowUserMessage({ show: true, message: 'Debe ingresar el apellido', type: 'warning' });
+            lastNameRef.current.focus();
+            return false;
+        }
+
+        if (email.trim().length === 0) {
+            setShowUserMessage({ show: true, message: 'Debe ingresar el correo', type: 'warning' });
+            emailRef.current.focus();
+            return false;
+        }
+
+        if (password.trim().length === 0) {
+            setShowUserMessage({ show: true, message: 'Debe ingresar la contraseña', type: 'warning' });
+            passwordRef.current.focus();
+            return false;
+        }
+
+        if (password !== passwordRepeat) {
+            setShowUserMessage({ show: true, message: 'Las contraseñas no coinciden', type: 'warning' });
+            passwordRepeatRef.current.focus();
+            return false;
+        }
+
+        return true; 
+    }
+
     const onRegisterUser = async () => {
-        if (nombre.trim().length === 0) {
-            setShowUserMessage({ show: true, message: 'Debe ingresar el nombre' });
-            nombreRef.current.focus();
-            return;
+        if (!validForm()) return;
+      
+        const { isError, data: responseData } = await RegisterUserApi(registerFormState);
+      
+        const { data, errors = [], resolution } = responseData;
+      
+        if(isError){
+            setShowUserMessage({ 
+                show: true, 
+                message: 'Ocurrio un error al contactarse con el servidor.', 
+                type: 'danger', 
+            });
         }
-
-        if (apellido.trim().length === 0) {
-            setShowUserMessage({ show: true, message: 'Debe ingresar el apellido' });
-            apellidoRef.current.focus();
-            return;
-        }
-
-        if (correo.trim().length === 0) {
-            setShowUserMessage({ show: true, message: 'Debe ingresar el correo' });
-            correoRef.current.focus();
-            return;
-        }
-
-        if (contrasena.trim().length === 0) {
-            setShowUserMessage({ show: true, message: 'Debe ingresar la contraseña' });
-            contrasenaRef.current.focus();
-            return;
-        }
-
-        if (contrasena !== contrasenaRepeat) {
-            setShowUserMessage({ show: true, message: 'Las contraseñas no coinciden' });
-            contrasenaRepeatRef.current.focus();
-            return;
-        }
-
-        const usuario = {
-            datosUsuario: {
-                nombre,
-                apellido,
-                tipoUsuario: 'ESTANDAR'
-            },
-            
-            datosUsuarioSeguridad: {
-                correo,
-                contrasena
+        else {
+            if(errors != null && errors.length > 0) {
+                setShowUserMessage({ 
+                    show: true, 
+                    message: errors[0], 
+                    type: 'warning', 
+                });
             }
-        };
-
-        try 
-        {
-            const response = await registrarUsuario(usuario.datosUsuario, usuario.datosUsuarioSeguridad);
-
-            if(response){
-                setShowUserMessage({ show: true, message: 'Usuario registrado con éxito' });
-                setRegisterFormState(registerInitialState);
+            else {
+                setShowUserMessage({ 
+                    show: true, 
+                    message: 'Listo :)', 
+                    type: 'success', 
+                });
             }
-            else
-                setShowUserMessage({ show: true, message: `No se pudo registrar el usuario, debido a que el correo "${ correo }" ya se encuentra en uso` });
-
-
-
-        } 
-            catch (error) {
-            console.error('Error al registrar usuario:', error);
-            setShowUserMessage({ show: true, message: 'Ocurrió un error al registrar el usuario' });
         }
     };
 
     useEffect(() => {
-        nombreRef.current.select();
+        firstNameRef.current.select();
     }, []);
 
 
@@ -124,11 +125,11 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 <div className="col">
                 <li className="input-box">
                     <input
-                    ref={nombreRef}
+                    ref={firstNameRef}
                     type="text"
                     placeholder="Nombre"
-                    name="nombre"
-                    value={nombre}
+                    name="firstName"
+                    value={firstName}
                     onChange={onInputChange}
                     onKeyDown={onKeyDown}
                     autoComplete="off"
@@ -138,11 +139,11 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 <div className="col">
                 <li className="input-box">
                     <input
-                    ref={apellidoRef}
+                    ref={lastNameRef}
                     type="text"
                     placeholder="Primer apellido"
-                    name="apellido"
-                    value={apellido}
+                    name="lastName"
+                    value={lastName}
                     onChange={onInputChange}
                     onKeyDown={onKeyDown}
                     autoComplete="off"
@@ -155,11 +156,11 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 <div className="col">
                 <li className="input-box">
                     <input
-                    ref={correoRef}
+                    ref={emailRef}
                     type="text"
                     placeholder="Correo"
-                    name="correo"
-                    value={correo}
+                    name="email"
+                    value={email}
                     onChange={onInputChange}
                     onKeyDown={onKeyDown}
                     autoComplete="off"
@@ -167,15 +168,16 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 </li>
                 </div>
             </div>
+            <hr />
             <div className="row mt-2">
                 <div className="col">
                 <li className="input-box">
                     <input
-                    ref={contrasenaRef}
+                    ref={passwordRef}
                     type="password"
                     placeholder="Contraseña"
-                    name="contrasena"
-                    value={contrasena}
+                    name="password"
+                    value={password}
                     onChange={onInputChange}
                     onKeyDown={onKeyDown}
                     autoComplete="off"
@@ -187,11 +189,11 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
                 <div className="col">
                 <li className="input-box">
                     <input
-                    ref={contrasenaRepeatRef}
+                    ref={passwordRepeatRef}
                     type="password"
                     placeholder="Repetir contraseña"
-                    name="contrasenaRepeat"
-                    value={contrasenaRepeat}
+                    name="passwordRepeat"
+                    value={passwordRepeat}
                     onChange={onInputChange}
                     onKeyDown={onKeyDown}
                     autoComplete="off"
@@ -215,7 +217,7 @@ export const RegisterForm = ({ activeForm, toggleForm }) => {
             </div>
 
             <div className="row mt-3">
-                { showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} /> }
+                { showUserMessage.show && <AccessUserMessage show={showUserMessage.show} message={showUserMessage.message} type={ showUserMessage.type } /> }
             </div>
         </div>
     );
