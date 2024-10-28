@@ -5,14 +5,20 @@ import { AuthContext } from '../../assets/context/AuthContext';
 export const Header = ({ setToggleSidebar, toggleSidebar }) => {
     const navigate = useNavigate(); 
     const [isDarkMode, setIsDarkMode] = useState(false);
-    const { user, logout } = useContext(AuthContext);
+    const { userAuth, logout } = useContext(AuthContext);
+    const [ user, setUser ] = useState({}); 
 
     useEffect(() => {
         const savedDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
+        const connectedUser = JSON.parse(localStorage.getItem('user'));
+
         if (savedDarkMode !== null) {
             setIsDarkMode(savedDarkMode);
             document.body.classList.toggle('dark', savedDarkMode);
         }
+
+        setUser(connectedUser); 
+        
     }, []);
 
     const toggleDarkMode = () => {
@@ -34,12 +40,15 @@ export const Header = ({ setToggleSidebar, toggleSidebar }) => {
         console.log('debería collapsar los sub menús')
     };
 
+    const { firstName, lastName } = user; 
+    console.log({ firstName, lastName }); 
+
     return (
         <header className="header">
             <button id="toggle-btn" className="toggle-btn" onClick={ onToggleSidebar }>☰</button>
             
             <div className="user-info">
-                <span className="user-text">anibal yañez</span>
+                <span className="user-text">{ `${ firstName } ${ lastName }` }</span>
 
                 <div className="sidebar-footer">
                     <div className="toggle-switch" onClick={toggleDarkMode}>

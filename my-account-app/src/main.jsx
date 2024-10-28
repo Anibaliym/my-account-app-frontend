@@ -4,9 +4,9 @@ import { MiCuentaApp } from './MiCuentaApp';
 import { BrowserRouter } from 'react-router-dom';
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <BrowserRouter>
       <MiCuentaApp />
     </BrowserRouter>
-  </StrictMode>,
+  // </StrictMode>,
 )

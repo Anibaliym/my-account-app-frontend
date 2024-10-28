@@ -7,6 +7,7 @@ import { Header } from '../components/Header';
 import '/src/assets/css/Home.css'; 
 import { AccountPage } from '../pages/AccountPage';
 import { CalculatorPage } from '../pages/CalculatorPage';
+import { SheetPage } from '../pages/SheetPage';
 
 export const MiCuentaRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
@@ -24,6 +25,7 @@ export const MiCuentaRouter = () => {
                         <Route path="home" element={<HomePage />} />
                         <Route path="account" element={<AccountPage />} />
                         <Route path="calculator" element={<CalculatorPage />} />
+                        <Route path="sheet" element={<SheetPage />} />
 
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>

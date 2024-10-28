@@ -1,6 +1,6 @@
 import { MenuItem } from './MenuItem';
 import { menuData } from '../../../assets/data/menuData';
-import { SheetsMenuList } from './SheetsMenuList';
+import { AccountMenuList } from './AccountMenuList';
 import { useState } from 'react';
 import { ToolsItem } from './ToolsItem';
 import { useEffect } from 'react';
@@ -19,7 +19,6 @@ export const Sidebar = ({ toggleSidebar }) => {
         setUserAccount(accountsData); 
     }, [])
     
-
     return (
         <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
             <div className="sidebar-body">
@@ -34,14 +33,15 @@ export const Sidebar = ({ toggleSidebar }) => {
                     ))
                 }
                 <hr />
-                <ToolsItem/>
+
+                {/* <ToolsItem/>
                 <hr />
-                <span className="title-menu">cuentas</span>
+                <span className="title-menu">cuentas</span> */}
 
                 
                 {
                     userAccount.map( ({ account, sheets }) => (
-                        <SheetsMenuList
+                        <AccountMenuList
                             key={ account.id }
                             accountId={ account.id } 
                             activeDropdown={ activeDropdown } 
