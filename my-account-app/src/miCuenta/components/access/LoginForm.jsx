@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../assets/context/AuthContext';
-import { LoginUserApi } from '../../../assets/api/MyAccountAppAPI/User';
+import { LoginUserApi } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 const userInitialState = {
     id: '', 
@@ -12,7 +12,7 @@ const userInitialState = {
     userType: ''
 }
 
-const loginInitialState = { userName: '', password: '' }; 
+const loginInitialState = { userName: 'anibaliym@gmail.com', password: 'admin' }; 
 
 export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const navigate = useNavigate();
@@ -50,6 +50,10 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
         }
 
         const { isError, data } = await LoginUserApi(userName.toUpperCase(), password);
+        const { accounts, user } = data.data; 
+
+        localStorage.setItem('ConnectedUser', JSON.stringify( user )); 
+        localStorage.setItem('UserAccounts', JSON.stringify( accounts )); 
         
         setShowUserMessage({ show: isError, message: 'Ha ocurrido un error en la conexión con el servidor', type : 'danger' });
         
