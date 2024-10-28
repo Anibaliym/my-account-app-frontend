@@ -15,9 +15,8 @@ export const Sidebar = ({ toggleSidebar }) => {
     };
 
     useEffect(() => {
-        // const data = localStorage.getItem( JSON.stringify('UserAccounts') );  
-        const userAccountsData = JSON.parse( localStorage.getItem('UserAccounts') );
-        setUserAccount(userAccountsData); 
+        const accountsData = JSON.parse( localStorage.getItem('accounts') );
+        setUserAccount(accountsData); 
     }, [])
     
 

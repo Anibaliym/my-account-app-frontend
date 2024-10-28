@@ -24,6 +24,7 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const { userName, password } = loginState; 
     const [ accessAllowed, setAccessAllowed] = useState(false); 
     const [ user, setUser ] = useState(userInitialState); 
+    const [ accounts, setAccounts ] = useState([]); 
     const { Login } = useContext(AuthContext); 
 
     const onInputChange = ({ target }) => {
@@ -51,9 +52,6 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
 
         const { isError, data } = await LoginUserApi(userName.toUpperCase(), password);
         const { accounts, user } = data.data; 
-
-        localStorage.setItem('ConnectedUser', JSON.stringify( user )); 
-        localStorage.setItem('UserAccounts', JSON.stringify( accounts )); 
         
         setShowUserMessage({ show: isError, message: 'Ha ocurrido un error en la conexión con el servidor', type : 'danger' });
         
@@ -69,7 +67,8 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
             type : 'danger' 
         });
 
-        setUser(userData); 
+        setUser(user); 
+        setAccounts(accounts); 
     };
 
     const onToggleForm = () => {
@@ -82,7 +81,7 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
 
     useEffect(() => {
         if (accessAllowed) {
-            Login(user);
+            Login(user, accounts);
             navigate('/', { replace: true });
         }
     }, [ accessAllowed ]);
