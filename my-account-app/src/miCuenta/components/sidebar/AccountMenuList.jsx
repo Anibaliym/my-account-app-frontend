@@ -19,10 +19,14 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
             setDescription = description;  
 
         return (
-            // <Link key={ id }><i className="bx bx-right-arrow-alt"></i>  { setDescription }</Link>
-
-            <Link key={id} to="/sheet"><i className="bx bx-right-arrow-alt"></i> { setDescription }</Link>
-
+            // <Link key={id} to="/sheet"><i className="bx bx-right-arrow-alt"></i> { setDescription }</Link>
+            <Link 
+                key={ id } 
+                to={`/sheet/${ id }`}
+            >
+                <i className="bx bx-right-arrow-alt"></i>
+                { setDescription }
+            </Link>            
         )
     }
 

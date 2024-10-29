@@ -25,7 +25,9 @@ export const MiCuentaRouter = () => {
                         <Route path="home" element={<HomePage />} />
                         <Route path="account" element={<AccountPage />} />
                         <Route path="calculator" element={<CalculatorPage />} />
-                        <Route path="sheet" element={<SheetPage />} />
+                        {/* <Route path="sheet" element={<SheetPage />} /> */}
+                        {/* <Route path="sheet:/id" element={<SheetPage />} /> */}
+                        <Route path="sheet/:id" element={<SheetPage />} />
 
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
