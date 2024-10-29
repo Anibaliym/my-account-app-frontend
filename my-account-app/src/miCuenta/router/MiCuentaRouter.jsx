@@ -4,10 +4,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ProfilePage } from '../pages/ProfilePage';
 import { HomePage } from '../pages/HomePage';
 import { Header } from '../components/Header';
-import '/src/assets/css/Home.css'; 
 import { AccountPage } from '../pages/AccountPage';
 import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
+import '/src/assets/css/Home.css'; 
 
 export const MiCuentaRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 

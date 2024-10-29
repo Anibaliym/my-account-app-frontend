@@ -19,16 +19,23 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
             setDescription = description;  
 
         return (
-            <Link key={id} to="/sheet"><i className="bx bx-right-arrow-alt"></i> { setDescription }</Link>
+            <Link 
+                key={ id } 
+            >
+                    <i className="bx bx-right-arrow-alt"></i> 
+                    { setDescription }
+            </Link>
         )
     }
 
-    const handleClick = () => {
+    const handleClick = (e) => {
         toggleDropdown(accountId);
     };
 
     useEffect(() => {
+        // console.log(description)
         navigate('/account', {
+            // state: { accountId, description },
             replace: true,
         });
 
@@ -46,9 +53,7 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
                 style={{ display: !toggleSidebar && activeDropdown === accountId ? 'block' : 'none' }}
             >
                 {
-                    // sheets.map(  ({ id, description }) => ( setSubMenuText(id, description) )) 
                     sheets.map(  ({ sheet }) => ( setSubMenuText(sheet) )) 
-
                 }
             </div>
         </div>

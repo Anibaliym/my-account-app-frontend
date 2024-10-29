@@ -37,11 +37,10 @@ export const Header = ({ setToggleSidebar, toggleSidebar }) => {
 
     const onToggleSidebar = () => {
         setToggleSidebar(!toggleSidebar); 
-        console.log('debería collapsar los sub menús')
+        //ayanez - debería collapsar los sub menús
     };
 
     const { firstName, lastName } = user; 
-    console.log({ firstName, lastName }); 
 
     return (
         <header className="header">
