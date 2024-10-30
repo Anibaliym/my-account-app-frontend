@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom'; 
 import { PublicRoute } from './PublicRoute'; 
-import { AccessPage } from '../miCuenta/pages/AccessPage'; 
+import { AccessPage } from '../MyAccount/pages/AccessPage'; 
 import { PrivateRoute } from './PrivateRoute'; 
-import { MiCuentaRouter } from '../miCuenta/router/MiCuentaRouter';
+import { MyAccountRouter } from '../MyAccount/router/MyAccountRouter';
 
 export const AppRouter = () => {
     return (
@@ -19,7 +19,7 @@ export const AppRouter = () => {
                 
                 <Route path="/*" element={
                     <PrivateRoute>
-                        <MiCuentaRouter />
+                        <MyAccountRouter />
                     </PrivateRoute>
                     } 
                 />

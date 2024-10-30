@@ -9,7 +9,7 @@ import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
 import '/src/assets/css/Home.css'; 
 
-export const MiCuentaRouter = () => {
+export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
 
     return (
