@@ -2,7 +2,6 @@ import { MenuItem } from './MenuItem';
 import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
 import { useState } from 'react';
-import { ToolsItem } from './ToolsItem';
 import { useEffect } from 'react';
 
 export const Sidebar = ({ toggleSidebar }) => {
@@ -34,10 +33,6 @@ export const Sidebar = ({ toggleSidebar }) => {
                 }
                 <hr />
 
-                {/* <ToolsItem/>
-                <hr />
-                <span className="title-menu">cuentas</span> */}
-
                 
                 {
                     userAccount.map( ({ account, sheets }) => (
@@ -55,14 +50,6 @@ export const Sidebar = ({ toggleSidebar }) => {
                 }
 
 
-            <div
-                className="dropdown-container mt-2 mb-2"
-                style={{ display: !toggleSidebar ? 'block' : 'none' }}
-            >
-                <center>
-                    <i className='bx bx-plus icon plus-icon'></i>
-                </center>
-            </div>
 
 
                 <hr />

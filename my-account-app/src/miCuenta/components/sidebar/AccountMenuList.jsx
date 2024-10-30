@@ -10,7 +10,7 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
         const textAdd = ' ...'; 
         let setDescription = ''; 
 
-        if(description.length >= 23){
+        if(description.length >= 23) {
             setDescription = description.substring(0, 23); 
             setDescription = setDescription + textAdd; 
             setDescription = `${ setDescription }${ textAdd }`; 
@@ -19,7 +19,6 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
             setDescription = description;  
 
         return (
-            // <Link key={id} to="/sheet"><i className="bx bx-right-arrow-alt"></i> { setDescription }</Link>
             <Link 
                 key={ id } 
                 to={`/sheet/${ id }`}
@@ -30,17 +29,11 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
         )
     }
 
-    const handleClick = (e) => {
+    const handleClick = () => {
+        navigate(`/account/${ accountId }`, { replace: true });
         toggleDropdown(accountId);
     };
 
-    useEffect(() => {
-        navigate('/account', {
-            replace: true,
-        });
-
-    }, [toggleDropdown])
-    
     return (
         <div className="menu-item ">
             <button className="dropdown-btn" onClick={ handleClick }>
