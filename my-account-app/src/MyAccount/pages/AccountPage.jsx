@@ -1,23 +1,23 @@
-import { formatDate } from '../../assets/utilities/DateFormater';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServices';
+import { PageTitle } from '../components/PageTitle';
+import { Tooltip } from "@nextui-org/react";
 
-export const AccountPage = () => {
+export const AccountPage = ({ isDarkMode }) => {
     const { accountId } = useParams(); 
     const [ account, setAccount ] = useState({ name:'', creationDate: '' })
     const [ sheets, setSheets ] = useState([]); 
-    
+
     useEffect(() => {
         getSheetsAccount();
-    }, [accountId])
+    }, [ accountId ])
     
     const getSheetsAccount  = async () => {
-        const { isError, message, data } = await getSheetsAccountAPI( accountId ); 
-
+        const { isError, data } = await getSheetsAccountAPI( accountId ); 
+        
         if(!isError){
             const { account, sheets: sheetsData } = data; 
-
             setAccount(account);
             setSheets(sheetsData); 
         }
@@ -25,31 +25,54 @@ export const AccountPage = () => {
 
     return (
         <>
-            <p>{ account.name }</p>
+            <PageTitle titleDescription={ account.name } />
 
-            <div className="list-group">
-                {
-                    sheets.map( ({ description, order, cashBalance, currentAccountBalance, creationDate }) => (
-                        // console.log(description, order, cashBalance, currentAccountBalance)
-                        <a href="#" className="list-group-item list-group-item-action">
-                            <div className="d-flex w-100 justify-content-between">
-                                <h5 className="mb-1">{ description }</h5>
-                                <small className="text-body-secondary">{ formatDate(creationDate) }</small>
-                            </div>
-                            <p className="mb-1">Some placeholder content in a paragraph.</p>
-                            <small className="text-body-secondary">And some muted small print.</small>
+            <br />
+            <div className="row">
+                <div className="col-5">
+                    <ul className="list-group">
+                        {
+                            sheets.map(({ accountId ,cashBalance ,creationDate ,currentAccountBalance ,description ,id ,order }) => (
+                                <li key={ id } className={ `list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2 small ${ (isDarkMode) && 'bg-dark text-light' }` }>
+                                    { description }
+                                    <div>
+                                        <Tooltip
+                                            key="left"
+                                            placement="left"
+                                            content="Editar"
+                                            color="secondary"
+                                            closeDelay={ 50 }
+                                        >
+                                            <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm me-2` }><i className='bx bx-edit'></i></button>
+                                        </Tooltip>
 
-                            <br />
-                            <button className='btn btn-sm btn-outline-primary'>
-                                <i className='bx bx-edit-alt'></i>
-                            </button>
-                            <button className='btn btn-sm btn-outline-danger'>
-                                <i className='bx bxs-trash-alt' ></i>
-                            </button>
-                        </a>
-                    ))
+                                        <Tooltip
+                                            key="right"
+                                            placement="right"
+                                            content="Eliminar"
+                                            color="secondary"
+                                            closeDelay={ 50 }
+                                        >
+                                            <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm` }><i className='bx bx-trash' ></i></button>
+                                        </Tooltip>
 
-                }
+                                    </div>
+                                </li>
+                            ))
+                        }
+                    </ul>
+
+                    <br />
+                    <Tooltip
+                        key="right"
+                        placement="right"
+                        content="Agregar una nueva hoja de calculo"
+                        color="secondary"
+                        closeDelay={ 50 }
+                    >
+                        <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm me-2` }><i className='bx bx-plus' ></i></button>
+                    </Tooltip>
+                </div>
             </div>
         </>
     )

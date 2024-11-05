@@ -312,3 +312,8 @@ span.title-menu {
     font-size: 17px; 
     line-height: 20px; 
 }
+
+.no-focus:focus {
+    outline: none;
+    box-shadow: none;
+}

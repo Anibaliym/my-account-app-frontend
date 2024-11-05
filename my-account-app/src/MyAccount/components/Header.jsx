@@ -2,9 +2,8 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../assets/context/AuthContext';
 
-export const Header = ({ setToggleSidebar, toggleSidebar }) => {
+export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsDarkMode }) => {
     const navigate = useNavigate(); 
-    const [isDarkMode, setIsDarkMode] = useState(false);
     const { userAuth, logout } = useContext(AuthContext);
     const [ user, setUser ] = useState({}); 
 
@@ -20,13 +19,6 @@ export const Header = ({ setToggleSidebar, toggleSidebar }) => {
         setUser(connectedUser); 
         
     }, []);
-
-    const toggleDarkMode = () => {
-        const newDarkModeState = !isDarkMode;
-        setIsDarkMode(newDarkModeState);
-        document.body.classList.toggle('dark', newDarkModeState);
-        localStorage.setItem('isDarkMode', JSON.stringify(newDarkModeState));
-    };
 
     const onLogout = () => {
         logout(); 
@@ -50,12 +42,12 @@ export const Header = ({ setToggleSidebar, toggleSidebar }) => {
                 <span className="user-text">{ `${ firstName } ${ lastName }` }</span>
 
                 <div className="sidebar-footer">
-                    <div className="toggle-switch" onClick={toggleDarkMode}>
+                    <div className="toggle-switch" onClick={ toggleDarkMode }>
                         <span className="switch"></span>
                     </div>
                 </div>
 
-                <i className='bx bx-exit icon exit-icon' onClick={onLogout}></i>
+                <i className='bx bx-exit icon exit-icon' onClick={ onLogout }></i>
             </div>
         </header>
     );
