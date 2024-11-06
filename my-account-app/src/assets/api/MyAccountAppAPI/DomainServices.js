@@ -46,20 +46,17 @@ export const getSheetsAccountAPI = async (accountId) => {
 
         const { resolution, data } = await response.json();
 
-        // console.log(resolution, data)
-
         if(resolution){
             return {
                 isError: false, 
-                message: '', 
-                data, 
+                data 
             }
         }
         else {
             return {
                 isError: true, 
                 message: 'Ha ocurrido un error al intentar cargar la información de la cuenta.', 
-                data : null, 
+                data : [], 
             }
         }
     }
@@ -67,7 +64,7 @@ export const getSheetsAccountAPI = async (accountId) => {
         return {
             isError: true, 
             message: `Ha ocurrido un error al intentar cargar la información de la cuenta. Mas información: ${error}`, 
-            data : null, 
+            data : [], 
         }
     }
 }

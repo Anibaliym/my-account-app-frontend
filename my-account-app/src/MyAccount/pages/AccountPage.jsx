@@ -3,19 +3,30 @@ import { useParams } from 'react-router-dom';
 import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { PageTitle } from '../components/PageTitle';
 import { Tooltip } from "@nextui-org/react";
+import { useRef } from 'react';
+import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
+import { SheeListItem } from '../components/account/SheeListItem';
+import { IsLoading } from '../components/IsLoading';
 
 export const AccountPage = ({ isDarkMode }) => {
+    const addSheetInputText = useRef(); 
     const { accountId } = useParams(); 
-    const [ account, setAccount ] = useState({ name:'', creationDate: '' })
+    const [ account, setAccount ] = useState({ name: '', creationDate: '' })
     const [ sheets, setSheets ] = useState([]); 
+    const [ sheetName, setSheetName ] = useState(''); 
+    const [ isLoading, setIsLoading] = useState(false); 
 
     useEffect(() => {
         getSheetsAccount();
     }, [ accountId ])
+
+    useEffect(() => {
+        addSheetInputText.current.select(); 
+    }, [])
     
     const getSheetsAccount  = async () => {
         const { isError, data } = await getSheetsAccountAPI( accountId ); 
-        
+
         if(!isError){
             const { account, sheets: sheetsData } = data; 
             setAccount(account);
@@ -23,55 +34,106 @@ export const AccountPage = ({ isDarkMode }) => {
         }
     }
 
+    const onAddSheet = () => {
+        if(sheetName.length === 0){
+            console.log('nombre de la hoja no valido'); 
+            return; 
+        }
+
+        createSheet(); 
+    }
+    
+    const createSheet = async () => {
+        setIsLoading(true); 
+        const { isError } = await createSheetAPI(accountId, sheetName); 
+
+        if(!isError) {
+            setIsLoading(false); 
+            setSheetName('');
+            const { data: dataSheets } = await GetSheetByAccountIdAPI( accountId ); 
+            setSheets(dataSheets); 
+        }
+    }
+
+    const onChangeSheetName = (e) => {
+        const { value } = e.target; 
+        setSheetName(value); 
+    }
+    
+    const onKeyDownSheetName = (e) => {
+        if(e.keyCode === 13)
+            onAddSheet(); 
+    }
+
+    const handleDeleteSheetRefresh = (sheetId) => {
+        setSheets((prevSheets) => prevSheets.filter(sheet => sheet.id !== sheetId));
+    };    
+
     return (
         <>
             <PageTitle titleDescription={ account.name } />
 
             <br />
             <div className="row">
-                <div className="col-5">
-                    <ul className="list-group">
-                        {
-                            sheets.map(({ accountId ,cashBalance ,creationDate ,currentAccountBalance ,description ,id ,order }) => (
-                                <li key={ id } className={ `list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2 small ${ (isDarkMode) && 'bg-dark text-light' }` }>
-                                    { description }
-                                    <div>
-                                        <Tooltip
-                                            key="left"
-                                            placement="left"
-                                            content="Editar"
-                                            color="secondary"
-                                            closeDelay={ 50 }
-                                        >
-                                            <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm me-2` }><i className='bx bx-edit'></i></button>
-                                        </Tooltip>
+                <div className="col-2">
 
-                                        <Tooltip
-                                            key="right"
-                                            placement="right"
-                                            content="Eliminar"
-                                            color="secondary"
-                                            closeDelay={ 50 }
-                                        >
-                                            <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm` }><i className='bx bx-trash' ></i></button>
-                                        </Tooltip>
+                    <input 
+                        type="text" 
+                        maxLength="300"
+                        ref={ addSheetInputText }
+                        value={ sheetName }
+                        onChange={ onChangeSheetName }
+                        onKeyDown={ onKeyDownSheetName }
+                        className={ `form-control form-control-sm ${ (isDarkMode) ? 'bg-dark text-light' : '' } no-focus` } 
 
-                                    </div>
-                                </li>
-                            ))
-                        }
-                    </ul>
+                        placeholder="Titulo hoja de cálculo" 
+                    />
 
-                    <br />
                     <Tooltip
-                        key="right"
-                        placement="right"
-                        content="Agregar una nueva hoja de calculo"
+                        placement="bottom"
+                        content="Nueva hoja de calculo"
                         color="secondary"
                         closeDelay={ 50 }
                     >
-                        <button className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm me-2` }><i className='bx bx-plus' ></i></button>
+                        <button 
+                            className={ `no-focus form-control mt-2 btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm me-2` }
+                            onClick={ onAddSheet }
+                        >
+                            Crear
+                        </button>
                     </Tooltip>
+
+                    {
+                        (isLoading) && (<IsLoading isDarkMode={ isDarkMode } />)
+                    }
+
+                </div>
+                <div className="col-4">
+                    <ul className="list-group">
+
+                        {
+                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> No hay hojas de calculo disponibles. </small>)
+                        }
+
+                        {
+                            (sheets)
+                                .slice() // Crea una copia del array para no mutar el original
+                                .sort((a, b) => a.order - b.order) // Ordena por el campo "order" en orden ascendente
+                                .map(({ description, id, order, cashBalance, currentAccountBalance }) => (
+                                    <SheeListItem 
+                                        key={id} 
+                                        order={order}
+                                        cashBalance={cashBalance}
+                                        currentAccountBalance={currentAccountBalance}
+                                        sheetId={id}
+                                        accountId={accountId} 
+                                        description={description} 
+                                        isDarkMode={isDarkMode} 
+                                        onDeleteSheetRefresh={ handleDeleteSheetRefresh } // Pasa la función como prop
+                                    />
+                                ))
+                        }                        
+                    </ul>
                 </div>
             </div>
         </>
