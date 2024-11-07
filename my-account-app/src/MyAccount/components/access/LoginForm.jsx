@@ -12,7 +12,7 @@ const userInitialState = {
     userType: ''
 }
 
-const loginInitialState = { userName: 'anibaliym@gmail.com', password: 'admin' }; 
+const loginInitialState = { userName: 'anibaliym@gmail.com', password: '111111' }; 
 
 export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const navigate = useNavigate();

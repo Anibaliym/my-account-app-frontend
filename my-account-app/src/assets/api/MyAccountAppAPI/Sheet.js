@@ -1,4 +1,5 @@
-const url = 'http://localhost:5215/api/Sheet';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export const createSheetAPI = async (accountId, description) => {
 
@@ -8,7 +9,7 @@ export const createSheetAPI = async (accountId, description) => {
     };
 
     try {
-        const response = await fetch(`${ url }/CreateSheet`, {
+        const response = await fetch(`${ API_URL }/api/Sheet/CreateSheet`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -27,8 +28,6 @@ export const createSheetAPI = async (accountId, description) => {
     } 
     catch (error) 
     {
-        console.log(error)
-
         return {
             isError: true, 
             message: `Ocurrio un error al intentar crear la hoja de cálculo. Mas detalles: ${ error }`, 
@@ -41,7 +40,7 @@ export const createSheetAPI = async (accountId, description) => {
 export const deleteSheetAPI = async (sheetId) => {
 
     try {
-        const response = await fetch(`${ url }/DeleteSheet?id=${ sheetId }`, {
+        const response = await fetch(`${ API_URL }/api/Sheet/DeleteSheet?id=${ sheetId }`, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json'
@@ -68,7 +67,7 @@ export const updateSheetAPI = async ( accountId, sheetId, description, cashBalan
 
     try 
     {
-        const response = await fetch(`${ url }/UpdateSheet`, {
+        const response = await fetch(`${ API_URL }/api/Sheet/UpdateSheet`, {
             method: 'put',
             headers: {
                 'Accept': 'application/json',
@@ -103,7 +102,7 @@ export const updateSheetAPI = async ( accountId, sheetId, description, cashBalan
 export const GetSheetByAccountIdAPI = async ( accountId ) => {
     try 
     {
-        const response = await fetch(`${ url }/GetSheetByAccountId/${ accountId }`, {
+        const response = await fetch(`${ API_URL }/api/Sheet/GetSheetByAccountId/${ accountId }`, {
             'Accept': 'application/json'
         }); 
 

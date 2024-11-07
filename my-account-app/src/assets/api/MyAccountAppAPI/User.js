@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:5215/api/User';
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export const RegisterUserApi = async ({ firstName, lastName, email, password }) => {
     let result; 
@@ -14,7 +15,7 @@ export const RegisterUserApi = async ({ firstName, lastName, email, password }) 
 
     try 
     {
-        const response = await fetch(`${ API_URL }/RegisterUser`, {
+        const response = await fetch(`${ API_URL }/api/User/RegisterUser`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),

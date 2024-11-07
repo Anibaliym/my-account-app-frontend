@@ -3,20 +3,44 @@ import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import { useRef } from 'react';
+import { GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
 
-export const Sidebar = ({ toggleSidebar }) => {
+export const Sidebar = ({ toggleSidebar, accountListener }) => {
+    const isInitialRender = useRef(true);
+
     const [ activeDropdown, setActiveDropdown ] = useState(null);
     const [ userAccount, setUserAccount] = useState([]); 
 
     const toggleDropdown = (index) => {
         if (toggleSidebar) return;
-        setActiveDropdown(activeDropdown === index ? null : index);
+            setActiveDropdown(activeDropdown === index ? null : index);
     };
+
+    const reloadAccount = async () => {
+        const userData = JSON.parse( localStorage.getItem('user') );
+        const { id: userId } = userData; 
+
+        const { isError, data: menuData } = await GetUserAccountsWithSheetsAPI(userId);
+
+        if(!isError) {
+            setUserAccount(menuData.data.accounts); 
+        }
+    }
 
     useEffect(() => {
         const accountsData = JSON.parse( localStorage.getItem('accounts') );
         setUserAccount(accountsData); 
     }, [])
+
+    useEffect(() => {
+        
+        if (isInitialRender.current) 
+            isInitialRender.current = false;
+        else 
+            reloadAccount();
+
+    }, [accountListener]);
     
     return (
         <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
@@ -33,7 +57,6 @@ export const Sidebar = ({ toggleSidebar }) => {
                 }
                 <hr />
 
-                
                 {
                     userAccount.map( ({ account, sheets }) => (
                         <AccountMenuList
@@ -49,11 +72,7 @@ export const Sidebar = ({ toggleSidebar }) => {
                     ))
                 }
 
-
-
-
                 <hr />
-                
             </div>
         </nav>
     )

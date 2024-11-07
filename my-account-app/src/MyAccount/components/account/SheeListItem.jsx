@@ -36,7 +36,6 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
         if (event.key === 'Enter') {
 
             if(editNameSheet.trim().length === 0) {
-                console.log('el nombre de la hoja de calculo, es un correcta.')
                 return; 
             }
 

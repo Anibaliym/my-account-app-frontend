@@ -8,7 +8,7 @@ import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccou
 import { SheeListItem } from '../components/account/SheeListItem';
 import { IsLoading } from '../components/IsLoading';
 
-export const AccountPage = ({ isDarkMode }) => {
+export const AccountPage = ({ isDarkMode, setAccountListener, accountListener }) => {
     const addSheetInputText = useRef(); 
     const { accountId } = useParams(); 
     const [ account, setAccount ] = useState({ name: '', creationDate: '' })
@@ -36,7 +36,6 @@ export const AccountPage = ({ isDarkMode }) => {
 
     const onAddSheet = () => {
         if(sheetName.length === 0){
-            console.log('nombre de la hoja no valido'); 
             return; 
         }
 
@@ -52,6 +51,7 @@ export const AccountPage = ({ isDarkMode }) => {
             setSheetName('');
             const { data: dataSheets } = await GetSheetByAccountIdAPI( accountId ); 
             setSheets(dataSheets); 
+            setAccountListener( accountListener + 1 )
         }
     }
 
@@ -67,6 +67,7 @@ export const AccountPage = ({ isDarkMode }) => {
 
     const handleDeleteSheetRefresh = (sheetId) => {
         setSheets((prevSheets) => prevSheets.filter(sheet => sheet.id !== sheetId));
+        setAccountListener( accountListener - 1 )
     };    
 
     return (

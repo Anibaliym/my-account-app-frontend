@@ -1,15 +1,16 @@
-const API_URL = 'http://localhost:5215/api/DomainServices';
+const API_URL = import.meta.env.VITE_API_URL;
 
 export const LoginUserApi = async (email, password) => {
-    
+
     try 
     {
-        const response = await fetch(`${ API_URL }/Login`, {
+        const response = await fetch(`${ API_URL }/api/DomainServices/Login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ email, password })
         });
 
+        
         if(response.status === 200 || response.status === 401){
             const responseDataParse = await response.json();
 
@@ -39,7 +40,7 @@ export const LoginUserApi = async (email, password) => {
 export const getSheetsAccountAPI = async (accountId) => {
     try
     {
-        const response = await fetch(`${ API_URL }/GetSheetsAccount/${ accountId }`, {
+        const response = await fetch(`${ API_URL }/api/DomainServices/GetSheetsAccount/${ accountId }`, {
             method: 'get', 
             headers: { 'Accept' : 'text/plain' }, 
         }); 

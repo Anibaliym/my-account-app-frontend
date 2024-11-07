@@ -13,6 +13,7 @@ import '/src/assets/css/Controls.css';
 export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
     const [ isDarkMode, setIsDarkMode ] = useState(false);
+    const [ accountListener, setAccountListener ] = useState(0); 
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
@@ -23,7 +24,10 @@ export const MyAccountRouter = () => {
 
     return (
         <div className="principal-container">
-            <Sidebar toggleSidebar={ toggleSidebar } />
+            <Sidebar 
+                toggleSidebar={ toggleSidebar } 
+                accountListener={ accountListener }
+            />
             
             <div className="main-content">
                 <Header 
@@ -37,7 +41,7 @@ export const MyAccountRouter = () => {
                     <Routes>
                         <Route path="profile" element={<ProfilePage />} />
                         <Route path="home" element={<HomePage />} />
-                        <Route path="account/:accountId" element={<AccountPage isDarkMode={ isDarkMode } />} />
+                        <Route path="account/:accountId" element={<AccountPage setAccountListener={ setAccountListener } accountListener={ accountListener } isDarkMode={ isDarkMode } />} />
                         <Route path="calculator" element={<CalculatorPage />} />
                         <Route path="sheet/:id" element={<SheetPage />} />
 
