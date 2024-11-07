@@ -1,7 +1,14 @@
-import { PageTitle } from '../components/PageTitle'; 
+import { useEffect } from 'react';
 
-export const HomePage = () => {
+export const HomePage = ({ setPageName }) => {
+
+    useEffect(() => {
+        setPageName('INICIO'); 
+    }, [])
+
     return (
-        <PageTitle titleDescription="home" />
+        <>
+            home page
+        </>
     )
 }

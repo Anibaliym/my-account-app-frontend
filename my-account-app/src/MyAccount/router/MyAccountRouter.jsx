@@ -14,6 +14,7 @@ export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
     const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [ accountListener, setAccountListener ] = useState(0); 
+    const [ pageName, setPageName] = useState('Nombre página'); 
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
@@ -35,20 +36,20 @@ export const MyAccountRouter = () => {
                     setToggleSidebar={ setToggleSidebar } 
                     toggleSidebar={ toggleSidebar }
                     setIsDarkMode={ setIsDarkMode }
+                    pageName={ pageName }
                 />
 
                 <section className="dashboard-content">
                     <Routes>
-                        <Route path="profile" element={<ProfilePage />} />
-                        <Route path="home" element={<HomePage />} />
-                        <Route path="account/:accountId" element={<AccountPage setAccountListener={ setAccountListener } accountListener={ accountListener } isDarkMode={ isDarkMode } />} />
-                        <Route path="calculator" element={<CalculatorPage />} />
-                        <Route path="sheet/:id" element={<SheetPage />} />
+                        <Route path="profile" element={<ProfilePage setPageName={ setPageName }/>} />
+                        <Route path="home" element={<HomePage setPageName={ setPageName }/>} />
+                        <Route path="account/:accountId" element={<AccountPage setAccountListener={ setAccountListener } accountListener={ accountListener } isDarkMode={ isDarkMode } setPageName={ setPageName } />} />
+                        <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
+                        <Route path="sheet/:id" element={<SheetPage setPageName={ setPageName }/>} />
 
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
                 </section>
-                
             </div>
         </div>    
     )

@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
 import { GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { Tooltip } from '@nextui-org/react';
 
 export const Sidebar = ({ toggleSidebar, accountListener }) => {
     const isInitialRender = useRef(true);
@@ -68,9 +69,19 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
                             sheets={ sheets }
                             toggleSidebar = { toggleSidebar }
                         />
-
                     ))
                 }
+
+                <Tooltip
+                    placement="bottom"
+                    content="Crea una cuenta"
+                    color="secondary"
+                    closeDelay={ 50 }
+                >
+                    <button className="dropdown-btn d-flex justify-content-center align-items-center mt-1" onClick={() => {}}>
+                        <i className='bx bx-plus-medical' ></i>
+                    </button>
+                </Tooltip>
 
                 <hr />
             </div>

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../assets/context/AuthContext';
 
-export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsDarkMode }) => {
+export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsDarkMode, pageName }) => {
     const navigate = useNavigate(); 
     const { userAuth, logout } = useContext(AuthContext);
     const [ user, setUser ] = useState({}); 
@@ -36,8 +36,11 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
 
     return (
         <header className="header">
-            <button id="toggle-btn" className="toggle-btn" onClick={ onToggleSidebar }>☰</button>
-            
+            <button id="toggle-btn" className="toggle-btn" onClick={ onToggleSidebar }>
+                ☰
+                <span className="title-menu animate__animated animate__fadeIn animate__faster">{ pageName }</span>
+            </button>
+
             <div className="user-info">
                 <span className="user-text">{ `${ firstName } ${ lastName }` }</span>
 

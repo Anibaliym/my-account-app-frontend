@@ -1,12 +1,15 @@
 import { useParams } from 'react-router-dom';
-import { PageTitle } from '../components/PageTitle'; 
+import { useEffect } from 'react';
 
-export const SheetPage = () => {
+export const SheetPage = ({ setPageName }) => {
     const { id } = useParams();
+
+    useEffect(() => {
+        setPageName('HOJA DE CALCULO'); 
+    }, [])
 
     return (
         <>
-            <PageTitle titleDescription="Hoja de calculo" />
             <p>{ `sheetId: ${ id }` }</p>
        </>
     )

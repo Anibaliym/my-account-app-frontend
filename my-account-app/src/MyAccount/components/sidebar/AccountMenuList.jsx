@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, description, sheets, toggleSidebar }) => {

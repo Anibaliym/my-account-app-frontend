@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServices';
-import { PageTitle } from '../components/PageTitle';
 import { Tooltip } from "@nextui-org/react";
 import { useRef } from 'react';
 import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { SheeListItem } from '../components/account/SheeListItem';
 import { IsLoading } from '../components/IsLoading';
 
-export const AccountPage = ({ isDarkMode, setAccountListener, accountListener }) => {
+export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, setPageName }) => {
     const addSheetInputText = useRef(); 
     const { accountId } = useParams(); 
-    const [ account, setAccount ] = useState({ name: '', creationDate: '' })
     const [ sheets, setSheets ] = useState([]); 
     const [ sheetName, setSheetName ] = useState(''); 
     const [ isLoading, setIsLoading] = useState(false); 
@@ -29,7 +27,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener })
 
         if(!isError){
             const { account, sheets: sheetsData } = data; 
-            setAccount(account);
+            setPageName(account.name); 
             setSheets(sheetsData); 
         }
     }
@@ -72,9 +70,6 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener })
 
     return (
         <>
-            <PageTitle titleDescription={ account.name } />
-
-            <br />
             <div className="row">
                 <div className="col-2">
 

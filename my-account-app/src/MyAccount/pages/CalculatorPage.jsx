@@ -1,7 +1,14 @@
-import { PageTitle } from '../components/PageTitle'; 
+import { useEffect } from 'react';
 
-export const CalculatorPage = () => {
+export const CalculatorPage = ({ setPageName }) => {
+
+    useEffect(() => {
+        setPageName('CALCULADORA'); 
+    }, [])
+
     return (
-        <PageTitle titleDescription="calculadora" />
+        <>
+            <p>Calculadora</p>
+        </>
     )
 }
