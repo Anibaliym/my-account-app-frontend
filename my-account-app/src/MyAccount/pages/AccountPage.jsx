@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { SheeListItem } from '../components/account/SheeListItem';
 import { IsLoading } from '../components/IsLoading';
+import { UserMessage } from '../components/UserMessage';
 
 export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, setPageName }) => {
     const addSheetInputText = useRef(); 
@@ -14,6 +15,9 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
     const [ sheetName, setSheetName ] = useState(''); 
     const [ isLoading, setIsLoading] = useState(false); 
 
+    const [ message, setMessage ] = useState('mensaje'); 
+    const [ showMessage, setShowMessage] = useState(false); 
+    
     useEffect(() => {
         getSheetsAccount();
     }, [ accountId ])
@@ -32,8 +36,14 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
         }
     }
 
+    const showUserMessage = (message) => {
+        setMessage(message);
+        setShowMessage(true);            
+    }
+    
     const onAddSheet = () => {
         if(sheetName.length === 0){
+            showUserMessage('El nombre de la hoja de cálculo, es invalida!');
             return; 
         }
 
@@ -50,7 +60,11 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
             const { data: dataSheets } = await GetSheetByAccountIdAPI( accountId ); 
             setSheets(dataSheets); 
             setAccountListener( accountListener + 1 )
+
+            showUserMessage('Hoja de calculo creada correctamente');
         }
+        else 
+            showUserMessage('Ocurrió un error al intentar crear la hoja de cálculo.');
     }
 
     const onChangeSheetName = (e) => {
@@ -68,11 +82,20 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
         setAccountListener( accountListener - 1 )
     };    
 
+    const handleUpdateSheetRefresh = () => {
+        setAccountListener( accountListener - 1 )
+    };
+
     return (
         <>
+            <div className="container-fluid">
+                <div className="row" style={ { height: "30px" } }>
+                    <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
+                </div>
+            </div>
+
             <div className="row">
                 <div className="col-2">
-
                     <input 
                         type="text" 
                         maxLength="300"
@@ -87,7 +110,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
 
                     <Tooltip
                         placement="bottom"
-                        content="Nueva hoja de calculo"
+                        content="Nueva hoja de cálculo"
                         color="secondary"
                         closeDelay={ 50 }
                     >
@@ -108,7 +131,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                     <ul className="list-group">
 
                         {
-                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> No hay hojas de calculo disponibles. </small>)
+                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> No hay hojas de cálculo disponibles. </small>)
                         }
 
                         {
@@ -126,6 +149,9 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                                         description={description} 
                                         isDarkMode={isDarkMode} 
                                         onDeleteSheetRefresh={ handleDeleteSheetRefresh } // Pasa la función como prop
+                                        onUpdateSheetRefresh={ handleUpdateSheetRefresh }
+                                        setMessage={ setMessage }
+                                        setShowMessage={ setShowMessage }                                        
                                     />
                                 ))
                         }                        

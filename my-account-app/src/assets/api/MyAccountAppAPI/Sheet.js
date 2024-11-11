@@ -58,7 +58,7 @@ export const deleteSheetAPI = async (sheetId) => {
     catch (error) {
         return {
             isError: true, 
-            message: 'Ocurrió un error al intentare eliminar la hoja de calculo' 
+            message: 'Ocurrió un error al intentare eliminar la hoja de cálculo' 
         };
     }
 }
@@ -88,14 +88,10 @@ export const updateSheetAPI = async ( accountId, sheetId, description, cashBalan
         
         return {
             isError: !resolution, 
-            message: 'Hoja actualizada correctamente'
         };
     } 
     catch (error) {
-        return {
-            isError: true, 
-            message: 'Ocurrió un error al intentar actualizar el nombre de la Hoja de cálculo.'
-        };
+        return { isError: true, };
     }
 }
 

@@ -28,7 +28,6 @@ export const getActiveAccountByIdAPI = async ( accountId ) => {
 
 export const GetUserAccountsWithSheetsAPI = async ( userId ) => {
 
-
     try
     {
         const response = await fetch(`${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`, {

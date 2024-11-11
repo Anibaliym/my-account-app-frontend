@@ -2,7 +2,7 @@ import { Tooltip } from '@nextui-org/react';
 import { deleteSheetAPI, updateSheetAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { useState, useRef } from 'react';
 
-export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, order, cashBalance, currentAccountBalance, onDeleteSheetRefresh }) => {
+export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, order, cashBalance, currentAccountBalance, onDeleteSheetRefresh, onUpdateSheetRefresh, setMessage, setShowMessage }) => {
     const [ editSheet, setEditSheet ] = useState(false); 
     const [ editNameSheet, setEditNameSheet ] = useState( description ); 
     const [ nameDescription, setNameDescription] = useState(description); 
@@ -15,7 +15,11 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
     }
 
     const updateSheet = async () => {
-        const response = await updateSheetAPI(accountId, sheetId, editNameSheet, cashBalance, currentAccountBalance, order);
+        const { isError} = await updateSheetAPI(accountId, sheetId, editNameSheet, cashBalance, currentAccountBalance, order);
+
+        onUpdateSheetRefresh();
+        setMessage( (isError === false) ? 'Hoja de calculo actualizada correctamente' : 'Ocurrió un error al intentar actualizar la hoja de calculo' );
+        setShowMessage(!isError);
     }
 
     const onDeleteSheet = () => {
@@ -25,6 +29,10 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
     const deleteSheet = async () => {
         const { isError, message } = await deleteSheetAPI(sheetId);
         onDeleteSheetRefresh(sheetId);
+        console.log({ isError, message })
+
+        setMessage( message );
+        setShowMessage(!isError);
     }
 
     const onchangeSheetName = (e) => {
@@ -56,6 +64,7 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
                                 onKeyDown={ onchangeSheetNameKeyDown }
                                 className="form-control-sm no-focus animate__animated animate__fadeIn" 
                                 type="text" 
+                                maxLength="25"
                                 value={ editNameSheet } 
                             /> 
                         )
@@ -66,7 +75,7 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
                 <Tooltip
                     key="right"
                     placement="right"
-                    content="Eliminar"
+                    content="Eliminar hoja de cálculo"
                     color="secondary"
                     closeDelay={ 50 }
                 >

@@ -5,7 +5,7 @@ export const SheetPage = ({ setPageName }) => {
     const { id } = useParams();
 
     useEffect(() => {
-        setPageName('HOJA DE CALCULO'); 
+        setPageName('HOJA DE CÁLCULO'); 
     }, [])
 
     return (

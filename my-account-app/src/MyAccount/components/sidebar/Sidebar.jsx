@@ -24,9 +24,8 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
 
         const { isError, data: menuData } = await GetUserAccountsWithSheetsAPI(userId);
 
-        if(!isError) {
+        if(!isError)
             setUserAccount(menuData.data.accounts); 
-        }
     }
 
     useEffect(() => {
@@ -42,7 +41,7 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
             reloadAccount();
 
     }, [accountListener]);
-    
+
     return (
         <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
             <div className="sidebar-body">
@@ -70,7 +69,7 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
                             toggleSidebar = { toggleSidebar }
                         />
                     ))
-                }
+                } 
 
                 <Tooltip
                     placement="bottom"
