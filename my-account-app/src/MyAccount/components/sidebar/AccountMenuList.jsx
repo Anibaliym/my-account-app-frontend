@@ -34,7 +34,7 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
     };
 
     return (
-        <div className="menu-item ">
+        <div className="menu-item">
             <button className="dropdown-btn" onClick={ handleClick }>
                 <i className={`bx bx-chevron-right icon ${activeDropdown === accountId ? 'arrow_open' : 'arrow_close'}`}></i>
                 <span className="animate__animated animate__fadeIn">{ description }</span>

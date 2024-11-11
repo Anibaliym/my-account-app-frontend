@@ -15,7 +15,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
     const [ sheetName, setSheetName ] = useState(''); 
     const [ isLoading, setIsLoading] = useState(false); 
 
-    const [ message, setMessage ] = useState('mensaje'); 
+    const [ message, setMessage ] = useState(''); 
     const [ showMessage, setShowMessage] = useState(false); 
     
     useEffect(() => {

@@ -13,12 +13,25 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
     const [ activeDropdown, setActiveDropdown ] = useState(null);
     const [ userAccount, setUserAccount] = useState([]); 
 
+    useEffect(() => {
+        reloadAccount();
+    }, [])
+
+    useEffect(() => {
+        if (isInitialRender.current) 
+            isInitialRender.current = false;
+        else 
+            reloadAccount();
+
+    }, [accountListener]);
+
     const toggleDropdown = (index) => {
         if (toggleSidebar) return;
             setActiveDropdown(activeDropdown === index ? null : index);
     };
 
     const reloadAccount = async () => {
+
         const userData = JSON.parse( localStorage.getItem('user') );
         const { id: userId } = userData; 
 
@@ -27,20 +40,6 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
         if(!isError)
             setUserAccount(menuData.data.accounts); 
     }
-
-    useEffect(() => {
-        const accountsData = JSON.parse( localStorage.getItem('accounts') );
-        setUserAccount(accountsData); 
-    }, [])
-
-    useEffect(() => {
-        
-        if (isInitialRender.current) 
-            isInitialRender.current = false;
-        else 
-            reloadAccount();
-
-    }, [accountListener]);
 
     return (
         <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
