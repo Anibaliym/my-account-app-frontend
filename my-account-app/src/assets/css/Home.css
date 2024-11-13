@@ -303,8 +303,6 @@ body.dark .switch::before {
 
 span.title-menu {
     color: var(--primary-color); 
-    /* color:red;  */
-    /* font-size:13px;  */
     margin-left: 10px;
 }
 
@@ -313,7 +311,6 @@ span.title-menu {
     font-size: 20px; 
     background-color: red;
     padding: 5px;
-    /* line-height: 10px;  */
 }
 
 .no-focus:focus {
@@ -330,4 +327,9 @@ span.title-menu {
     padding-left: 5px;
     font-size: 13px;
     color:white; 
+}
+
+
+span.sheet-list {
+    color: var(--primary-color); 
 }

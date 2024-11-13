@@ -95,7 +95,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
             </div>
 
             <div className="row">
-                <div className="col-2">
+                <div className="col-3">
                     <input 
                         type="text" 
                         maxLength="300"
@@ -127,11 +127,14 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                     }
 
                 </div>
-                <div className="col-4">
-                    <ul className="list-group">
+            </div>
+            <div className="row">
+                <div className="col-3">
+
+                    <ul className="list-group mt-3">
 
                         {
-                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> No hay hojas de cálculo disponibles. </small>)
+                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">No hay hojas de cálculo disponibles.</span> </small>)
                         }
 
                         {
@@ -156,6 +159,8 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                                 ))
                         }                        
                     </ul>
+
+
                 </div>
             </div>
         </>
