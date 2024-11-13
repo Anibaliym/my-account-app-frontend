@@ -52,7 +52,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
     
     const createSheet = async () => {
         setIsLoading(true); 
-        const { isError } = await createSheetAPI(accountId, sheetName); 
+        const { isError, message } = await createSheetAPI(accountId, sheetName); 
 
         if(!isError) {
             setIsLoading(false); 
@@ -64,7 +64,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
             showUserMessage('Hoja de calculo creada correctamente');
         }
         else 
-            showUserMessage('Ocurrió un error al intentar crear la hoja de cálculo.');
+            showUserMessage(message);
     }
 
     const onChangeSheetName = (e) => {
@@ -119,12 +119,13 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                             onClick={ onAddSheet }
                         >
                             Crear
+                            {/* {
+                                (isLoading) && (<IsLoading isDarkMode={ isDarkMode } />)
+                            } */}
+                            
                         </button>
                     </Tooltip>
 
-                    {
-                        (isLoading) && (<IsLoading isDarkMode={ isDarkMode } />)
-                    }
 
                 </div>
             </div>
@@ -134,7 +135,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                     <ul className="list-group mt-3">
 
                         {
-                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">No hay hojas de cálculo disponibles.</span> </small>)
+                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small>)
                         }
 
                         {

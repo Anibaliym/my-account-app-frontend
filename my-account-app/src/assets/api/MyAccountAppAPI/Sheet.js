@@ -2,6 +2,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 
 
 export const createSheetAPI = async (accountId, description) => {
+    let responseMessage = '';
 
     const payload = {
         accountId: accountId,
@@ -20,9 +21,14 @@ export const createSheetAPI = async (accountId, description) => {
 
         const { data, errors, message, resolution } = await response.json();
 
+        if(!resolution) {
+            if(errors[0].includes('al menos 3 caracteres')) 
+                responseMessage = 'El nombre de la hoja de cálculo, debe contener al menos 3 carácteres!'; 
+        }
+
         return {
-            isError: false, 
-            message: '' 
+            isError: !resolution, 
+            message: responseMessage
         };
 
     } 

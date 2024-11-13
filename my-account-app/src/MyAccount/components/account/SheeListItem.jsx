@@ -54,7 +54,7 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
     }
 
     return (
-        <li key={ sheetId } className={ `list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2 small animate__animated animate__fadeInDown animate__faster ${ (isDarkMode) && 'bg-dark text-light' }` }>
+        <li key={ sheetId } className={ `list-group-item list-group-item-action d-flex justify-content-between align-items-center p-1 small animate__animated animate__fadeInDown animate__faster ${ (isDarkMode) && 'bg-dark text-light' }` }>
             {
                 (editSheet)
                     ? 
