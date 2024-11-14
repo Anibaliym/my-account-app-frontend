@@ -4,20 +4,19 @@ import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServ
 import { Tooltip } from "@nextui-org/react";
 import { useRef } from 'react';
 import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
-import { SheeListItem } from '../components/account/SheeListItem';
-import { IsLoading } from '../components/IsLoading';
 import { UserMessage } from '../components/UserMessage';
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { SheetDragableListItem } from '../components/account/SheetDragableListItem';
 
 export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, setPageName }) => {
     const addSheetInputText = useRef(); 
     const { accountId } = useParams(); 
     const [ sheets, setSheets ] = useState([]); 
     const [ sheetName, setSheetName ] = useState(''); 
-    const [ isLoading, setIsLoading] = useState(false); 
-
     const [ message, setMessage ] = useState(''); 
     const [ showMessage, setShowMessage] = useState(false); 
-    
+
     useEffect(() => {
         getSheetsAccount();
     }, [ accountId ])
@@ -51,11 +50,9 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
     }
     
     const createSheet = async () => {
-        setIsLoading(true); 
         const { isError, message } = await createSheetAPI(accountId, sheetName); 
 
         if(!isError) {
-            setIsLoading(false); 
             setSheetName('');
             const { data: dataSheets } = await GetSheetByAccountIdAPI( accountId ); 
             setSheets(dataSheets); 
@@ -77,14 +74,34 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
             onAddSheet(); 
     }
 
-    const handleDeleteSheetRefresh = (sheetId) => {
+    const onDeleteItem = (sheetId) => {
         setSheets((prevSheets) => prevSheets.filter(sheet => sheet.id !== sheetId));
         setAccountListener( accountListener - 1 )
     };    
 
-    const handleUpdateSheetRefresh = () => {
+    const onUpdateSheetRefresh = () => {
         setAccountListener( accountListener - 1 )
     };
+
+    const onDrawEnd = (event) => {
+        const { active, over } = event;
+    
+        // Encuentra los índices antiguos y nuevos
+        const oldIndex = sheets.findIndex(s => s.id === active.id);
+        const newIndex = sheets.findIndex(s => s.id === over.id);
+    
+        // Mueve el elemento dentro del array
+        const newOrder = arrayMove(sheets, oldIndex, newIndex);
+    
+        // Actualiza la propiedad "order" en base al nuevo índice
+        const updatedOrder = newOrder.map((item, index) => ({
+            ...item,
+            order: index + 1, // Ajusta el orden basado en la nueva posición
+        }));
+    
+        setSheets(updatedOrder);
+    };
+    
 
     return (
         <>
@@ -109,7 +126,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                     />
 
                     <Tooltip
-                        placement="bottom"
+                        placement="right"
                         content="Nueva hoja de cálculo"
                         color="secondary"
                         closeDelay={ 50 }
@@ -119,48 +136,43 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                             onClick={ onAddSheet }
                         >
                             Crear
-                            {/* {
-                                (isLoading) && (<IsLoading isDarkMode={ isDarkMode } />)
-                            } */}
-                            
                         </button>
                     </Tooltip>
-
-
                 </div>
             </div>
             <div className="row">
                 <div className="col-3">
 
-                    <ul className="list-group mt-3">
+                    <DndContext
+                        collisionDetection={ closestCenter }
+                        onDragEnd={ onDrawEnd }
+                    >
+                        <ul className="list-group mt-3">
+                            <SortableContext items={ sheets } strategy={ verticalListSortingStrategy }> 
+                                {
+                                    (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small>)
+                                }
 
-                        {
-                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small>)
-                        }
+                                {
 
-                        {
-                            (sheets)
-                                .slice() // Crea una copia del array para no mutar el original
-                                .sort((a, b) => a.order - b.order) // Ordena por el campo "order" en orden ascendente
-                                .map(({ description, id, order, cashBalance, currentAccountBalance }) => (
-                                    <SheeListItem 
-                                        key={id} 
-                                        order={order}
-                                        cashBalance={cashBalance}
-                                        currentAccountBalance={currentAccountBalance}
-                                        sheetId={id}
-                                        accountId={accountId} 
-                                        description={description} 
-                                        isDarkMode={isDarkMode} 
-                                        onDeleteSheetRefresh={ handleDeleteSheetRefresh } // Pasa la función como prop
-                                        onUpdateSheetRefresh={ handleUpdateSheetRefresh }
-                                        setMessage={ setMessage }
-                                        setShowMessage={ setShowMessage }                                        
-                                    />
-                                ))
-                        }                        
-                    </ul>
-
+                                    (sheets)
+                                        .slice() // Crea una copia del array para no mutar el original
+                                        .sort((a, b) => a.order - b.order) // Ordena por el campo "order" en orden ascendente
+                                        .map(({ description, id, order, cashBalance, currentAccountBalance }) => (
+                                            <SheetDragableListItem
+                                                key={ id }
+                                                id={ id }
+                                                description={ description }
+                                                isDarkMode={ isDarkMode }
+                                                onDeleteItem={ onDeleteItem }
+                                                onUpdateSheetRefresh={ onUpdateSheetRefresh }
+            
+                                            />
+                                    ))
+                                }                                
+                            </SortableContext>
+                        </ul>
+                    </DndContext>
 
                 </div>
             </div>

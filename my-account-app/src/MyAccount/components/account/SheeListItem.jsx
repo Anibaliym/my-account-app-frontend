@@ -81,7 +81,7 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
                 >
                     <button 
                         className={ `btn btn-outline-${ (isDarkMode) ? 'light' : 'dark' } btn-sm` }
-                        onClick={ onDeleteSheet }
+                        onClick={ ()=>( console.log('eliminar') ) }
                     >
                         <i className='bx bx-trash' ></i>
                     </button>
