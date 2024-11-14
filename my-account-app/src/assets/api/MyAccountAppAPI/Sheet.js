@@ -1,6 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-
 export const createSheetAPI = async (accountId, description) => {
     let responseMessage = '';
 
@@ -121,5 +120,54 @@ export const GetSheetByAccountIdAPI = async ( accountId ) => {
             isError: true, 
             data: []
         }
+    }
+}
+
+// export const updateSheetOrderItemsAPI = async (sheetsNewOrder) => {
+//     try 
+//     {
+//         const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems`, {
+//             method: 'put', 
+//             headers: {
+//                 'Accept': 'application/json', 
+//                 'Content-Type': 'application/json',
+//             }, 
+//             body: JSON.stringify(sheetsNewOrder)
+//         }); 
+
+//         console.log(response)
+
+//         return { isError: false }
+        
+//     } 
+//     catch (error) 
+//     {
+//         return { isError: true }
+//     }    
+// }
+
+
+export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems` , {
+            method: "PUT", // Método HTTP PUT
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(sheetOrderItems) // Convertir el cuerpo de la solicitud a JSON
+        });
+
+        if (!response.ok)
+            throw new Error(`HTTP error! Status: ${response.status}`);
+
+        const { resolution } = await response.json(); // Parsear el JSON de la respuesta
+        return { isError: !resolution }
+    } 
+    catch (error) 
+    {
+        return { isError: true }
+        
     }
 }

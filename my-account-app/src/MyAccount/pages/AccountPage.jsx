@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { Tooltip } from "@nextui-org/react";
 import { useRef } from 'react';
-import { GetSheetByAccountIdAPI, createSheetAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
+import { GetSheetByAccountIdAPI, createSheetAPI, updateSheetOrderItemsAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { UserMessage } from '../components/UserMessage';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -48,6 +48,17 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
 
         createSheet(); 
     }
+
+    const updateOrder = async (sheetsNewOrder) => {
+        const { isError } = await updateSheetOrderItemsAPI(sheetsNewOrder);
+
+        if(isError) {
+            showUserMessage('Ocurrió un error al intentar actualizar el orden de la hojas de cálculo.');
+            return; 
+        }
+
+        setAccountListener( accountListener + 1 ); 
+    }
     
     const createSheet = async () => {
         const { isError, message } = await createSheetAPI(accountId, sheetName); 
@@ -74,7 +85,7 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
             onAddSheet(); 
     }
 
-    const onDeleteItem = (sheetId) => {
+    const onDeleteSheetRefresh = (sheetId) => {
         setSheets((prevSheets) => prevSheets.filter(sheet => sheet.id !== sheetId));
         setAccountListener( accountListener - 1 )
     };    
@@ -100,8 +111,8 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
         }));
     
         setSheets(updatedOrder);
+        updateOrder(updatedOrder); 
     };
-    
 
     return (
         <>
@@ -162,11 +173,16 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                                             <SheetDragableListItem
                                                 key={ id }
                                                 id={ id }
+                                                accountId={ accountId }
                                                 description={ description }
+                                                cashBalance={ cashBalance }
+                                                currentAccountBalance={ currentAccountBalance }
+                                                order={ order }
                                                 isDarkMode={ isDarkMode }
-                                                onDeleteItem={ onDeleteItem }
+                                                onDeleteSheetRefresh={ onDeleteSheetRefresh }
                                                 onUpdateSheetRefresh={ onUpdateSheetRefresh }
-            
+                                                setMessage={ setMessage }
+                                                setShowMessage={ setShowMessage }            
                                             />
                                     ))
                                 }                                
