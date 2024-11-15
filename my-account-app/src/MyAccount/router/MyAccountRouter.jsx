@@ -28,6 +28,7 @@ export const MyAccountRouter = () => {
             <Sidebar 
                 toggleSidebar={ toggleSidebar } 
                 accountListener={ accountListener }
+                isDarkMode={ isDarkMode }
             />
             
             <div className="main-content">

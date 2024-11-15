@@ -50,3 +50,26 @@ export const GetUserAccountsWithSheetsAPI = async ( userId ) => {
         };
     }
 }
+
+export const CreateAccountAPI = async ( userId, description ) => {
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Account/CreateAccount`, {
+            method: 'post', 
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json"
+            }, 
+            body: JSON.stringify({ userId, description })
+        });     
+
+        const { resolution } = await response.json();
+
+        return { isError: !resolution }; 
+    } 
+    catch (error) 
+    {
+        console.log('Ocurrió un error al intentar crear una cuenta.'); 
+        return { isError: true }; 
+    }
+}

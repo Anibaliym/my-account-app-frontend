@@ -22,7 +22,7 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
                 key={ id } 
                 to={`/sheet/${ id }`}
             >
-                <i className="bx bx-right-arrow-alt"></i>
+                {/* <i className="bx bx-right-arrow-alt"></i> */}
                 { setDescription }
             </Link>            
         )

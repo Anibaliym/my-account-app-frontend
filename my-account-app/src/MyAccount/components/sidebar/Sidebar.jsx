@@ -4,15 +4,18 @@ import { AccountMenuList } from './AccountMenuList';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRef } from 'react';
-import { GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { CreateAccountAPI, GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
 import { Tooltip } from '@nextui-org/react';
 
-export const Sidebar = ({ toggleSidebar, accountListener }) => {
+export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
     const isInitialRender = useRef(true);
 
     const [ activeDropdown, setActiveDropdown ] = useState(null);
     const [ userAccount, setUserAccount] = useState([]); 
-
+    const [ newAccount, setNewAccount] = useState(false); 
+    const [ newAccountName, setNewAccountName ] = useState(''); 
+    const [ userId, setUserId ] = useState(''); 
+    
     useEffect(() => {
         reloadAccount();
     }, [])
@@ -33,12 +36,37 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
     const reloadAccount = async () => {
 
         const userData = JSON.parse( localStorage.getItem('user') );
-        const { id: userId } = userData; 
+        const { id } = userData; 
 
-        const { isError, data: menuData } = await GetUserAccountsWithSheetsAPI(userId);
+        setUserId(id); 
+
+        const { isError, data: menuData } = await GetUserAccountsWithSheetsAPI(id);
 
         if(!isError)
             setUserAccount(menuData.data.accounts); 
+    }
+
+    const onChangeAccountName = (e) => {
+        setNewAccountName(e.target.value); 
+    }
+
+    const onKeyDownAccountName = (e) => {
+        if(e.which === 13){
+            
+            if(newAccountName.length > 0){
+                onCreateAccount();
+            }
+
+            setNewAccount(false);
+            setNewAccountName('');
+        }
+    }
+
+    const onCreateAccount = async () => {
+        const { isError } = await CreateAccountAPI(userId, newAccountName); 
+        
+        if(!isError)
+            reloadAccount();
     }
 
     return (
@@ -71,16 +99,29 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
                 } 
 
                 <Tooltip
-                    placement="bottom"
+                    placement="right"
                     content="Crea una cuenta"
                     color="secondary"
                     closeDelay={ 50 }
                 >
-                    <button className="dropdown-btn d-flex justify-content-center align-items-center mt-1" onClick={() => {}}>
+                    <button className="dropdown-btn d-flex justify-content-center align-items-center mt-1" onClick={() => ( setNewAccount(!newAccount) )}>
                         <i className='bx bx-plus-medical' ></i>
                     </button>
+                    
                 </Tooltip>
-
+                {
+                    (newAccount) && (
+                        <input 
+                            type="text" 
+                            className={ `d-flex justify-content-center align-items-center mt-1 text-center no-focus form-control form-control-sm animate__animated animate__fadeInDown animate__faster ${ (isDarkMode) ? 'bg-dark text-light' : '' }` }
+                            placeholder="nombre cuenta"
+                            value={ newAccountName }
+                            onChange={ onChangeAccountName }
+                            onKeyDown={ onKeyDownAccountName }
+                            maxLength="30"
+                        />
+                    )
+                }
                 <hr />
             </div>
         </nav>
