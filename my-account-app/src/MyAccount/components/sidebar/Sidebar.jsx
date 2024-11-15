@@ -26,7 +26,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
         else 
             reloadAccount();
 
-    }, [accountListener]);
+    }, [ accountListener ]);
 
     const toggleDropdown = (index) => {
         if (toggleSidebar) return;
