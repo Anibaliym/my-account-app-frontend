@@ -14,7 +14,7 @@ export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
     const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [ accountListener, setAccountListener ] = useState(0); 
-    const [ pageName, setPageName] = useState('Nombre página'); 
+    const [ pageName, setPageName ] = useState('Nombre página'); 
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
@@ -44,7 +44,15 @@ export const MyAccountRouter = () => {
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={ setPageName }/>} />
                         <Route path="home" element={<HomePage setPageName={ setPageName }/>} />
-                        <Route path="account/:accountId" element={<AccountPage setAccountListener={ setAccountListener } accountListener={ accountListener } isDarkMode={ isDarkMode } setPageName={ setPageName } />} />
+
+                        <Route path="account/:accountId" element={
+                            <AccountPage 
+                                setAccountListener={ setAccountListener } 
+                                accountListener={ accountListener } 
+                                isDarkMode={ isDarkMode } 
+                                setPageName={ setPageName } />} 
+                            />
+
                         <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
                         <Route path="sheet/:id" element={<SheetPage setPageName={ setPageName }/>} />
 

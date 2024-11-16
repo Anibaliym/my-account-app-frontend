@@ -29,7 +29,6 @@ export const SheeListItem = ({ sheetId, accountId, description, isDarkMode, orde
     const deleteSheet = async () => {
         const { isError, message } = await deleteSheetAPI(sheetId);
         onDeleteSheetRefresh(sheetId);
-        console.log({ isError, message })
 
         setMessage( message );
         setShowMessage(!isError);

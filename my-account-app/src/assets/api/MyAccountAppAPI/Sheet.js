@@ -123,30 +123,6 @@ export const GetSheetByAccountIdAPI = async ( accountId ) => {
     }
 }
 
-// export const updateSheetOrderItemsAPI = async (sheetsNewOrder) => {
-//     try 
-//     {
-//         const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems`, {
-//             method: 'put', 
-//             headers: {
-//                 'Accept': 'application/json', 
-//                 'Content-Type': 'application/json',
-//             }, 
-//             body: JSON.stringify(sheetsNewOrder)
-//         }); 
-
-//         console.log(response)
-
-//         return { isError: false }
-        
-//     } 
-//     catch (error) 
-//     {
-//         return { isError: true }
-//     }    
-// }
-
-
 export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
     try 
     {

@@ -7,6 +7,7 @@ body {
     margin-left: 9px;
     transition: margin 0.3s;
     font-size: 20px;
+    cursor:pointer; 
 }
 
 .plus-icon {
@@ -384,3 +385,49 @@ span.sheet-list {
     color: var(--primary-color); 
 }
 
+
+.account-container {
+    /* background-color: var(--sidebar-color);  */
+    width:500px; 
+    /* height:100px;  */
+    padding:20px;
+    border-radius:2px; 
+    float:left; 
+    box-shadow: 0px 0px 3px lightgray; 
+    margin: 0px 10px 10px 20px;
+}
+
+
+
+
+
+
+
+.card {
+    max-width: 450px;
+    background-color: #ffffff;
+    overflow: hidden;
+    margin-bottom:15px; 
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 4px;
+    font-size: 15px;
+    /* text-align: center; */
+}
+
+.card-body {
+    padding: 15px;
+    font-size: 15px;
+    color: #333;
+}
+
+/* Footer */
+.card-footer {
+    background-color: #f1f1f1;
+    padding: 10px 15px;
+    text-align: right;
+    border-top: 1px solid #e0e0e0;
+}

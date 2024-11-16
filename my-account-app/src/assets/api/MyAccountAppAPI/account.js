@@ -57,8 +57,8 @@ export const CreateAccountAPI = async ( userId, description ) => {
         const response = await fetch( `${ API_URL }/api/Account/CreateAccount`, {
             method: 'post', 
             headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json"
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
             }, 
             body: JSON.stringify({ userId, description })
         });     
@@ -69,7 +69,29 @@ export const CreateAccountAPI = async ( userId, description ) => {
     } 
     catch (error) 
     {
-        console.log('Ocurrió un error al intentar crear una cuenta.'); 
         return { isError: true }; 
+    }
+}
+
+
+export const UpdateAccountAPI = async (accountId, description) => {
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Account/UpdateAccount`, {
+            method: 'put', 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify({ id: accountId, description })
+        } ); 
+
+        const data = await response.json()
+
+        return { isError: false }
+    } 
+    catch (error) 
+    {
+        return { isError: true }
     }
 }
