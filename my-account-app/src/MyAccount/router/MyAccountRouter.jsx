@@ -7,6 +7,7 @@ import { Header } from '../components/Header';
 import { AccountPage } from '../pages/AccountPage';
 import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
+import { UserMessage } from '../components/UserMessage';
 import '/src/assets/css/Home.css';
 import '/src/assets/css/Controls.css';
 
@@ -15,13 +16,20 @@ export const MyAccountRouter = () => {
     const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [ accountListener, setAccountListener ] = useState(0); 
     const [ pageName, setPageName ] = useState('Nombre página'); 
+    const [ message, setMessage ] = useState(''); 
+    const [ showMessage, setShowMessage] = useState(false); 
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
-        setIsDarkMode(newDarkModeState);
+        setIsDarkMode( newDarkModeState );
         document.body.classList.toggle('dark', newDarkModeState);
         localStorage.setItem('isDarkMode', JSON.stringify(newDarkModeState));
     };
+
+    const showUserMessage = (message) => {
+        setMessage(message);
+        setShowMessage(true);            
+    }
 
     return (
         <div className="principal-container">
@@ -41,6 +49,10 @@ export const MyAccountRouter = () => {
                 />
 
                 <section className="dashboard-content">
+                    <div className="row" style={ { height: "30px" } }>
+                        <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
+                    </div>
+
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={ setPageName }/>} />
                         <Route path="home" element={<HomePage setPageName={ setPageName }/>} />
@@ -50,8 +62,11 @@ export const MyAccountRouter = () => {
                                 setAccountListener={ setAccountListener } 
                                 accountListener={ accountListener } 
                                 isDarkMode={ isDarkMode } 
-                                setPageName={ setPageName } />} 
+                                setPageName={ setPageName } 
+                                showUserMessage={ showUserMessage }
                             />
+                            } 
+                        />
 
                         <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
                         <Route path="sheet/:id" element={<SheetPage setPageName={ setPageName }/>} />

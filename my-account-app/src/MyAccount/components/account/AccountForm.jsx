@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageName, setAccountListener, accountListener }) => {
     const navigate = useNavigate(); 
     const accountNameRef = useRef(false); 
+
     const [ nameAccount, setNameAccount ] = useState(''); 
     const [ newNameAccount, setNewNameAccount ] = useState(''); 
     const [ creationDate, setCreationDate ] = useState('Fecha de creación')
     const [ showSaveButtom, setShowSaveButtom] = useState(false); 
-
 
     useEffect(() => {
         getAccountData(); 
