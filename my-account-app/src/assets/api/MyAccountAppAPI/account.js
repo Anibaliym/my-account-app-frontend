@@ -74,7 +74,7 @@ export const CreateAccountAPI = async ( userId, description ) => {
 }
 
 
-export const UpdateAccountAPI = async (accountId, description) => {
+export const UpdateAccountAPI = async ( accountId, description ) => {
     try 
     {
         const response = await fetch( `${ API_URL }/api/Account/UpdateAccount`, {
@@ -93,5 +93,50 @@ export const UpdateAccountAPI = async (accountId, description) => {
     catch (error) 
     {
         return { isError: true }
+    }
+}
+
+// export const DeleteAccountAPI = async ( accountId ) => {
+//     try 
+//     {
+//         const response = await fetch( `${ API_URL }/api/Account/DeleteAccount?id=${ accountId }`, {
+//             method: 'delete', 
+//             headers: {
+//                 'Accept': 'application/json',
+//             }
+//         });   
+
+//         console.log(response); 
+
+//         return { isError : false }
+//     } 
+//     catch (error) 
+//     {
+//         console.log(error); 
+//         return { isError : true }
+//     }
+// }
+
+export const DeleteAccountAPI = async ( accountId ) => {
+
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/Account/DeleteAccount?id=${ accountId }`, {
+            method: 'DELETE',
+            headers: { 'Accept': '*/*', },
+        });
+  
+        const { resolution, message } = await response.json(); // Si hay un cuerpo JSON en la respuesta
+         
+        console.log({ resolution, message }); 
+        return { 
+            isError : !resolution, 
+            message
+        }
+    } 
+    catch (error) 
+    {
+        console.error('Error al eliminar la cuenta:', error);
+        return { isError : true }
     }
 }

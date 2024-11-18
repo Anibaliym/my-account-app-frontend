@@ -60,7 +60,7 @@ export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, 
         <li
             ref={ setNodeRef }
             style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
-            className={`list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2 small ${ isDarkMode ? 'bg-dark text-light' : '' }`}
+            className={`list-group-item  d-flex justify-content-between align-items-center p-2 small ${ isDarkMode ? 'bg-dark text-light' : '' }`}
         >
             {
                 (editSheet)

@@ -86,44 +86,40 @@ export const SheetsForm = ({ accountId, isDarkMode, setSheets, setAccountListene
 
     return (
         <>
-
-            <div className="card">
-                <div className="card-header">
+            <div className="cardd cardd-size-sheets-list">
+                <div className="cardd-header">
                     Hojas de cálculo
                 </div>
-                <div className="card-body">
+                <div className="cardd-body">
 
                     <input 
                         type="text" 
-                        maxLength="300"
-                        ref={ addSheetInputText }
-                        value={ sheetName }
+                        placeholder="descripción hoja de cálculo"
+                        className={ `form-control-sm mb-3 no-focus ${ (isDarkMode) && 'bg-dark text-light' }` }
                         onChange={ onChangeSheetName }
                         onKeyDown={ onKeyDownSheetName }
-                        className={ `form-control form-control-sm ${ (isDarkMode) ? 'bg-dark text-light' : '' } no-focus` } 
-
-                        placeholder="Titulo hoja de cálculo" 
+                        value={ sheetName }
+                        style={{ width:'100%' }}
+                        maxLength="30"
                     />
 
                     <Tooltip
-                        placement="right"
+                        placement="bottom"
                         content="Nueva hoja de cálculo"
                         color="secondary"
                         closeDelay={ 50 }
                     >
-                        <button 
-                            className={ `no-focus form-control mt-2 btn btn-sm btn-outline-${ (isDarkMode) ? 'light' : 'dark' } me-2` }
-                            onClick={ onAddSheet }
-                        >
-                            Crear
-                        </button>
+                        <center>
+                            <i className='bx bx-plus icon ' onClick={ onAddSheet }></i>
+                        </center>
+
                     </Tooltip>
                     
                     <DndContext
                         collisionDetection={ closestCenter }
                         onDragEnd={ onDrawEnd }
                     >
-                        <ul className="list-group mt-5">
+                        <ul className="list-group list-group-flush mt-3">
                             <SortableContext items={ sheets } strategy={ verticalListSortingStrategy }> 
                                 {
                                     (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small>)
@@ -154,14 +150,10 @@ export const SheetsForm = ({ accountId, isDarkMode, setSheets, setAccountListene
                             </SortableContext>
                         </ul>
                     </DndContext> 
-                {/* 
 
-
-                    
-                    */}
-
-                    <br />
-                    <p className="card-text"><small className="text-body-secondary">Hojas de cálculo asociadas a la cuenta.</small></p>
+                </div>
+                <div className="cardd-footer">
+                    <p className="cardd-text"><small>Hojas de cálculo asociadas a la cuenta.</small></p>
                 </div>
             </div>
         </>

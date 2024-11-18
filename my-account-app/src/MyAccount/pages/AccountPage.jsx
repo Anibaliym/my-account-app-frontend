@@ -36,13 +36,6 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                 <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
             </div>
 
-            <AccountForm 
-                isDarkMode={ isDarkMode } 
-                accountId={ accountId }
-                showUserMessage={ showUserMessage } 
-                setPageName={ setPageName }
-            />
-
             <SheetsForm
                 accountId={ accountId }
                 isDarkMode={ isDarkMode } 
@@ -53,6 +46,14 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
                 setMessage={ setMessage }
                 setShowMessage={ setShowMessage }
                 showUserMessage={ showUserMessage }
+            />
+            <AccountForm 
+                isDarkMode={ isDarkMode } 
+                accountId={ accountId }
+                showUserMessage={ showUserMessage } 
+                setPageName={ setPageName }
+                setAccountListener={ setAccountListener }
+                accountListener={ accountListener }
             />
         </>
     )

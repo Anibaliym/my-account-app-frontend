@@ -398,36 +398,42 @@ span.sheet-list {
 }
 
 
-
-
-
-
-
-.card {
-    max-width: 450px;
-    background-color: #ffffff;
+.cardd {
+    max-width: 750px;
+    width:400px; 
     overflow: hidden;
+    border-radius:3px; 
     margin-bottom:15px; 
+    float:left;  
+    margin-left: 10px; 
+    box-shadow: 0px 0px 2px var(--toggle-color);
 }
 
-.card-header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 4px;
+.cardd {
+    max-width: 750px;
+    width:400px; 
+    overflow: hidden;
+    border-radius:3px; 
+    margin-bottom:15px; 
+    float:left;  
+    margin-left: 10px; 
+    box-shadow: 0px 0px 2px var(--toggle-color);
+}
+.cardd-header {
+    background-color: var(--sidebar-color);
+    padding: 10px;
     font-size: 15px;
-    /* text-align: center; */
 }
 
-.card-body {
+.cardd-body {
     padding: 15px;
     font-size: 15px;
-    color: #333;
-}
+    max-height: 680px; 
+    overflow-y: auto; 
+    overflow-x: hidden; 
+  }
 
-/* Footer */
-.card-footer {
-    background-color: #f1f1f1;
+.cardd-footer {
     padding: 10px 15px;
     text-align: right;
-    border-top: 1px solid #e0e0e0;
 }
