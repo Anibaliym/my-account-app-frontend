@@ -1,0 +1,154 @@
+/******************************************************************************************************************************************************************/
+/******************************************************************************************************************************************************************/
+
+.card-test {
+    background-color: var(--primary-color); 
+    border-radius: 0px; 
+    color: white; 
+    padding: 15px;
+    max-width: 400px;
+    box-shadow: 0 0px 3px var(--primary-color); 
+    float:left; 
+    margin: 10px;  
+}
+
+.card-test-header {
+    font-size: 12px; 
+}
+
+.card-test-title {
+    /* font-size: 1.25rem; */
+    /* font-weight: bold; */
+    /* margin-top: 0px;  */
+}
+
+.card-test-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.card-test-footer {
+    display: flex;
+    justify-content: flex-end;
+    font-size:13px; 
+}
+
+
+/******************************************************************************************************************************************************************/
+/******************************************************************************************************************************************************************/
+
+
+.card-account {
+    float:left; 
+    background-color: var(--primary-color); 
+    border-radius: 0px; 
+    color: white; 
+    padding: 15px;
+    max-width: 400px;
+    /* height:200px;  */
+    box-shadow: 0 0px 3px var(--primary-color); 
+    margin: 10px;  
+}
+
+
+.card-account-header {
+    font-size: 12px; 
+}
+
+.card-account-title {
+    /* font-size: 1.25rem; */
+    /* font-weight: bold; */
+    /* margin-top: 0px;  */
+}
+
+.card-account-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.card-account-footer {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.card-input-text {
+    width: 100%;
+    border: none;
+    font-size: 40px; 
+    background-color: var(--primary-color);
+    outline: none;
+    
+}
+
+.card-input-text {
+    width: 100%;
+    border: none;
+    font-size: 40px;
+    background-color: var(--primary-color);
+    color: white;
+    outline: none;
+}
+
+.card-input-text::selection {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+input:focus::placeholder {
+    font-size: 10px;
+}
+
+input::placeholder {
+    color: lightgray;
+    font-size: 15px;
+    transition: font-size 0.3s ease, color 0.3s ease;
+}
+
+/******************************************************************************************************************************************************************/
+/******************************************************************************************************************************************************************/
+
+.card-sheet {
+    background-color: var(--primary-color); 
+    border-radius: 0px; 
+    color: white; 
+    padding: 15px;
+    max-width: 400px;
+    box-shadow: 0 0px 3px var(--primary-color); 
+    float:left; 
+    margin: 10px;  
+}
+
+.card-sheet-header {
+    font-size: 12px; 
+}
+
+.card-sheet-title {
+    /* font-size: 1.25rem; */
+    /* font-weight: bold; */
+    /* margin-top: 0px;  */
+}
+
+.card-sheet-text {
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.card-sheet-footer {
+    display: flex;
+    justify-content: flex-end;
+    font-size:13px; 
+}
+
+/******************************************************************************************************************************************************************/
+/******************************************************************************************************************************************************************/
+
+.card-list-sheet {
+    /* background-color: red;  */
+    /* border-radius: 0px;  */
+    /* color: white;  */
+    padding: 2px;
+    max-width: 400px;
+    /* box-shadow: 0 0px 3px var(--primary-color);  */
+    float:left; 
+    margin: 10px;  
+}

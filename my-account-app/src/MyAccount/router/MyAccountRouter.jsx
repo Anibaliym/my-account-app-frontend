@@ -8,8 +8,10 @@ import { AccountPage } from '../pages/AccountPage';
 import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
 import { UserMessage } from '../components/UserMessage';
+import { ModalInfo } from '../components/modal/ModalInfo';
 import '/src/assets/css/Home.css';
 import '/src/assets/css/Controls.css';
+import '/src/assets/css/Cards.css';
 
 export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 
@@ -18,6 +20,9 @@ export const MyAccountRouter = () => {
     const [ pageName, setPageName ] = useState('Nombre página'); 
     const [ message, setMessage ] = useState(''); 
     const [ showMessage, setShowMessage] = useState(false); 
+    
+    const [ show, setShow ] = useState(false);
+    const [ modalMessage, setModalMessage ] = useState('test');
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
@@ -53,6 +58,12 @@ export const MyAccountRouter = () => {
                         <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
                     </div>
 
+                    <ModalInfo
+                        show={ show }
+                        setShow={ setShow }
+                        message={ modalMessage }
+                    />
+
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={ setPageName }/>} />
                         <Route path="home" element={<HomePage setPageName={ setPageName }/>} />
@@ -64,6 +75,8 @@ export const MyAccountRouter = () => {
                                 isDarkMode={ isDarkMode } 
                                 setPageName={ setPageName } 
                                 showUserMessage={ showUserMessage }
+                                setShow={ setShow }
+                                setModalMessage={ setModalMessage }
                             />
                             } 
                         />

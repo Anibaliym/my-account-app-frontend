@@ -1,41 +1,25 @@
+import { useState } from 'react';
 import { Tooltip } from '@nextui-org/react';
 import { useSortable } from "@dnd-kit/sortable"; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { deleteSheetAPI, updateSheetAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
-import { useState } from 'react';
 
-export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, cashBalance, currentAccountBalance, order, onDeleteSheetRefresh, setMessage, setShowMessage, onUpdateSheetRefresh }) => {
+export const SheetDragableListItem = ({ id, accountId, description, cashBalance, currentAccountBalance, order, isDarkMode, onDeleteSheetRefresh, onUpdateSheetRefresh, showUserMessage }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
-    const [ nameDescription, setNameDescription] = useState(description); 
     const [ editNameSheet, setEditNameSheet ] = useState( description ); 
-    const [ editSheet, setEditSheet ] = useState(false); 
-
-    const onEditSheet = (e) => {
-        setEditSheet(!editSheet);
-
-        if(editSheet)
-            updateSheet();
-    }
-
-    const onDeleteSheet = () => {
-        deleteSheet(); 
-    }
+    
+    const onDeleteSheet = () => deleteSheet(); 
 
     const updateSheet = async () => {
         const { isError} = await updateSheetAPI(accountId, id, editNameSheet, cashBalance, currentAccountBalance, order);
-
         onUpdateSheetRefresh();
-        setMessage( (isError === false) ? 'Hoja de calculo actualizada correctamente' : 'Ocurrió un error al intentar actualizar la hoja de calculo' );
-        setShowMessage(!isError);
+        showUserMessage((isError === false) ? 'Hoja de calculo actualizada correctamente' : 'Ocurrió un error al intentar actualizar la hoja de calculo'); 
     }
-
 
     const deleteSheet = async () => {
         const { isError, message } = await deleteSheetAPI(id);
         onDeleteSheetRefresh(id);
-
-        setMessage( message );
-        setShowMessage(!isError);
+        showUserMessage( message );
     }
 
     const onchangeSheetName = (e) => {
@@ -51,8 +35,6 @@ export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, 
             }
 
             updateSheet();
-            setEditSheet(!editSheet); 
-            setNameDescription(editNameSheet); 
         }
     }
 
@@ -60,23 +42,17 @@ export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, 
         <li
             ref={ setNodeRef }
             style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
-            className={`list-group-item  d-flex justify-content-between align-items-center p-2 small ${ isDarkMode ? 'bg-dark text-light' : '' }`}
+            className={`list-group-item d-flex justify-content-between align-items-center p-1 small ${ isDarkMode ? 'bg-dark text-light' : '' }`}
         >
-            {
-                (editSheet)
-                    ? 
-                        ( 
-                            <input 
-                                onChange={ onchangeSheetName } 
-                                onKeyDown={ onchangeSheetNameKeyDown }
-                                className="form-control-sm no-focus animate__animated animate__fadeIn" 
-                                type="text" 
-                                maxLength="25"
-                                value={ editNameSheet } 
-                            /> 
-                        )
-                    : ( <span style={ { padding: '5px', cursor:'pointer' } } onClick={ onEditSheet }> { nameDescription } </span> )
-            }
+            <input 
+                onChange={ onchangeSheetName } 
+                onKeyDown={ onchangeSheetNameKeyDown }
+                className="form-control-sm no-focus animate__animated animate__fadeIn" 
+                type="text" 
+                maxLength="20"
+                style={{ width:'400px' }}
+                value={ editNameSheet } 
+            /> 
 
             <div className="d-flex gap-2">
                 <Tooltip
@@ -89,6 +65,7 @@ export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, 
                         className="bx bx-trash icon"
                         onClick={onDeleteSheet}
                         style={{ cursor: 'pointer' }}
+                        tabIndex="-1"
                     ></i>
                 </Tooltip>
 
@@ -100,9 +77,10 @@ export const SheetDragableListItem = ({ id, description, isDarkMode, accountId, 
                 >
                     <i
                         className="bx bx-sort-alt-2 icon"
+                        style={{ cursor: 'move' }}
+                        tabIndex="-1"
                         {...listeners}
                         {...attributes}
-                        style={{ cursor: 'move' }}
                     ></i>
                 </Tooltip>
             </div>

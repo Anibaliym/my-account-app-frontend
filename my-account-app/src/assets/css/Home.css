@@ -7,26 +7,26 @@ body {
     margin-left: 9px;
     transition: margin 0.3s;
     font-size: 20px;
-    cursor:pointer; 
+    cursor:pointer;
 }
 
 .plus-icon {
-    width:70px; 
-    line-height:28px; 
-    border-radius: 3px; 
-    color: var(--primary-color); 
+    width:70px;
+    line-height:28px;
+    border-radius: 3px;
+    color: var(--primary-color);
 }
 
 .plus-icon:hover {
-    cursor:pointer; 
-    color: var(--success-color); 
-    border: 1px solid var(--success-color); 
+    cursor:pointer;
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
 }
 
 .principal-container {
     display: flex;
     height: 100vh;
-    padding: 5px 10px 100px 10px; 
+    padding: 5px 10px 100px 10px;
 }
 
 .sidebar {
@@ -38,7 +38,7 @@ body {
     left: 0;
     bottom: 0;
     transition: all 0.3s ease;
-    padding: 10px; 
+    padding: 10px;
 }
 
 .sidebar.active {
@@ -51,7 +51,7 @@ body {
     display: flex;
     flex-direction: column;
     transition: all 0.3s ease;
-    color: var(--text-color); 
+    color: var(--text-color);
 }
 
 .main-content .header {
@@ -64,7 +64,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 1000;
-    border-bottom: 1px solid var(--primary-color); 
+    border-bottom: 1px solid var(--primary-color);
 }
 
 .sidebar.active + .main-content {
@@ -163,7 +163,7 @@ body {
     flex: 1;
     overflow-y: auto;
     scrollbar-width: none;
-    -ms-overflow-style: none; 
+    -ms-overflow-style: none;
 }
 
 .sidebar-body::-webkit-scrollbar {
@@ -189,8 +189,8 @@ body {
     font-size: 13px;
     transition: var(--tran-05);
     align-items: center;
-    display: flex; 
-    height: 35px;  
+    display: flex;
+    height: 35px;
     transition: var(--tran-03);
     border-radius: 3px;
 }
@@ -206,7 +206,7 @@ body {
 
 .dropdown-btn:hover {
     background-color: var(--primary-color);
-    color: var(--text-hover-color); 
+    color: var(--text-hover-color);
 }
 
 
@@ -248,7 +248,7 @@ body {
 }
 .dropdown-btn-accounts:hover {
     background-color: var(--primary-color);
-    color: var(--text-hover-color); 
+    color: var(--text-hover-color);
 }
 
 
@@ -288,15 +288,15 @@ body {
     /* background-color:red;  */
     text-decoration: none;
     display: block;
-    padding: 0px 0px 0px 10px; 
+    padding: 0px 0px 0px 10px;
     font-size: 14px;
-    border-radius:5px; 
+    border-radius:5px;
     /* margin-top: 3px;  */
-    line-height:30px;  
-    margin-left:15px; 
+    line-height:30px;
+    margin-left:15px;
 }
 
-.dropdown-container a:hover 
+.dropdown-container a:hover
 {
     background-color: var(--primary-color);
     color: var(--text-hover-color);
@@ -344,23 +344,23 @@ body.dark .switch::before {
 
 .user-text {
     font-family: 'Poppins', sans-serif;
-    font-size: 11px; 
-    color: var(--primary-color); 
+    font-size: 11px;
+    color: var(--primary-color);
 }
 
 .exit-icon:hover {
-    color:red; 
-    cursor:pointer; 
+    color:red;
+    cursor:pointer;
 }
 
 span.title-menu {
-    color: var(--primary-color); 
+    color: var(--primary-color);
     margin-left: 10px;
 }
 
 .page-title {
-    color: var(--primary-color); 
-    font-size: 20px; 
+    color: var(--primary-color);
+    font-size: 20px;
     background-color: red;
     padding: 5px;
 }
@@ -374,66 +374,27 @@ span.title-menu {
     width: 100%;
     border-radius: 2px;
     margin-bottom: 10px;
-    background-color: var(--primary-color); 
+    background-color: var(--primary-color);
     padding-left: 5px;
     font-size: 13px;
-    color:white; 
+    color:white;
 }
 
 
 span.sheet-list {
-    color: var(--primary-color); 
+    color: var(--primary-color);
 }
 
 
 .account-container {
     /* background-color: var(--sidebar-color);  */
-    width:500px; 
+    width:500px;
     /* height:100px;  */
     padding:20px;
-    border-radius:2px; 
-    float:left; 
-    box-shadow: 0px 0px 3px lightgray; 
+    border-radius:2px;
+    float:left;
+    box-shadow: 0px 0px 3px lightgray;
     margin: 0px 10px 10px 20px;
 }
 
 
-.cardd {
-    max-width: 750px;
-    width:400px; 
-    overflow: hidden;
-    border-radius:3px; 
-    margin-bottom:15px; 
-    float:left;  
-    margin-left: 10px; 
-    box-shadow: 0px 0px 2px var(--toggle-color);
-}
-
-.cardd {
-    max-width: 750px;
-    width:400px; 
-    overflow: hidden;
-    border-radius:3px; 
-    margin-bottom:15px; 
-    float:left;  
-    margin-left: 10px; 
-    box-shadow: 0px 0px 2px var(--toggle-color);
-}
-.cardd-header {
-    background-color: var(--sidebar-color);
-    padding: 10px;
-    font-size: 15px;
-}
-
-.cardd-body {
-    padding: 15px;
-    font-size: 15px;
-    max-height: 680px; 
-    overflow-y: auto; 
-    overflow-x: hidden; 
-  }
-
-.cardd-footer {
-    padding: 10px 15px;
-    text-align: right;
-}

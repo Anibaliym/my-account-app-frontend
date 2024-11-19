@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getSheetsAccountAPI } from '../../assets/api/MyAccountAppAPI/DomainServices';
-import { AccountForm } from '../components/account/AccountForm';
-import { SheetsForm } from '../components/account/SheetsForm';
+import { CardAccount } from '../components/account/CardAccount';
+import { CardSheetAdd } from '../components/account/CardSheetAdd';
+import { CardListSheet } from '../components/account/CardListSheet';
 
-export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, setPageName, setMessage, setShowMessage, showUserMessage }) => {
+export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, setPageName, showUserMessage, setShow, setModalMessage }) => {
     const { accountId } = useParams(); 
     const [ sheets, setSheets ] = useState([]); 
 
@@ -24,23 +25,32 @@ export const AccountPage = ({ isDarkMode, setAccountListener, accountListener, s
 
     return (
         <>
-            <SheetsForm
-                accountId={ accountId }
-                isDarkMode={ isDarkMode } 
-                setSheets={ setSheets }
-                accountListener={ accountListener }
-                setAccountListener={ setAccountListener }
-                sheets={ sheets }
-                showUserMessage={ showUserMessage }
-            />
-            
-            <AccountForm 
-                isDarkMode={ isDarkMode } 
+            <CardAccount
                 accountId={ accountId }
                 setPageName={ setPageName }
                 setAccountListener={ setAccountListener }
                 accountListener={ accountListener }
                 showUserMessage={ showUserMessage } 
+                setShow={ setShow }
+                setModalMessage={ setModalMessage }
+            />
+
+            <CardSheetAdd
+                accountId={ accountId }
+                setSheets={ setSheets }
+                accountListener={ accountListener }
+                setAccountListener={ setAccountListener }
+                showUserMessage={ showUserMessage }            
+            />
+
+            <CardListSheet
+                sheets={ sheets }
+                setSheets={ setSheets }
+                accountId={ accountId }
+                isDarkMode={ isDarkMode }   
+                showUserMessage={ showUserMessage }        
+                setAccountListener={ setAccountListener }
+                accountListener={ accountListener }
             />
         </>
     )

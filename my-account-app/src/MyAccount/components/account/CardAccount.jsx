@@ -5,10 +5,10 @@ import { useRef } from 'react';
 import { Tooltip } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 
-export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageName, setAccountListener, accountListener }) => {
+
+export const CardAccount = ({ accountId, setPageName, setAccountListener, accountListener, showUserMessage, setShow, setModalMessage }) => {
     const navigate = useNavigate(); 
     const accountNameRef = useRef(false); 
-
     const [ nameAccount, setNameAccount ] = useState(''); 
     const [ newNameAccount, setNewNameAccount ] = useState(''); 
     const [ creationDate, setCreationDate ] = useState('Fecha de creación')
@@ -19,25 +19,10 @@ export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageNam
     }, [ accountId ])
 
     useEffect(() => {
-
-        if(newNameAccount === nameAccount){
-            setShowSaveButtom(false); 
-            return; 
-        }
-
-        if(newNameAccount.length === 0) {
-            setShowSaveButtom(false); 
-            return; 
-        }
-
-        if(newNameAccount.length > 0){
-            setShowSaveButtom(true); 
-            return; 
-        }
-
-    }, [ newNameAccount ])
-
-
+        const shouldShowSaveButton = newNameAccount.length > 0 && newNameAccount !== nameAccount;
+    
+        setShowSaveButtom(shouldShowSaveButton);
+    }, [ newNameAccount, nameAccount ]);
 
     const getAccountData = () => {
         getActiveAccountById(); 
@@ -51,11 +36,17 @@ export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageNam
     }
 
     const updateDescriptionAccount = async  () => {
+        if(newNameAccount.length === 0){
+            showUserMessage('Debe ingresar un nombre de cuenta válido'); 
+            return; 
+        }
+
         const { isError } = await UpdateAccountAPI(accountId, newNameAccount); 
 
         if(isError)
             showUserMessage('Ocurrió un error al intentar actualizar el nombre la cuenta.'); 
         else {
+            setShowSaveButtom(false); 
             setPageName(newNameAccount);
             setAccountListener( accountListener - 1 )
             showUserMessage('Cuenta actualizada correctamente'); 
@@ -81,10 +72,11 @@ export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageNam
     const DeleteAccount = async () => {
         const { isError, message } = await DeleteAccountAPI(accountId);
 
-        if(isError)
-            showUserMessage(message); 
-        else 
-        {
+        if(isError) {
+            setShow(true); 
+            setModalMessage(message);
+        }
+        else {
             showUserMessage(message); 
             setAccountListener( accountListener - 1 )
             navigate('/');
@@ -92,37 +84,36 @@ export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageNam
     }
 
     return (
-
-        <div className="cardd">
-            <div className="cardd-header">
-                Cuenta
+        <div className="card-account animate__animated animate__fadeIn animate__faster">
+            <div className="card-account-header">
+                cuenta
             </div>
-            <div className="cardd-body" onClick={ () => ( accountNameRef.current.select() ) }>
+            <div className="card-account-title">
                 <input 
                     ref={ accountNameRef }
+                    className="card-input-text display-6" 
+                    placeholder="ingrese el nombre de la cuenta" 
                     type="text" 
-                    placeholder="nombre cuenta"
-                    className={ `form-control-sm mb-3 no-focus ${ (isDarkMode) && 'bg-dark text-light' }` }
                     onChange={ onChangeDescriptionAccount }
                     onKeyDown={ onKeyDownDescriptionAccount }
                     value={ newNameAccount }
-                    style={{ width:'100%' }}
-
-                    maxLength="20"
+                    maxLength={20}
                 />
-
-                <br />
             </div>
-            <div className="cardd-footer">
-                <p className="cardd-text"><small>{ creationDate }</small></p>
-
+            <div className="card-account-text mt-3">
+                <p className="text-right">
+                    <small>
+                        { creationDate }
+                    </small>
+                </p>
+            </div>
+            <div className="card-account-footer">
                 <Tooltip
                     placement="bottom"
                     content="Guardar"
                     color="secondary"
                     closeDelay={ 50 }
                 >
-                    
                     <i className={ `bx bx-save icon animate__animated animate__faster ${ (showSaveButtom) ? 'animate__fadeIn' : 'animate__fadeOut' }` } onClick={ updateDescriptionAccount }></i>
                 </Tooltip>
                 <Tooltip
@@ -134,6 +125,6 @@ export const AccountForm = ({ isDarkMode, accountId, showUserMessage, setPageNam
                     <i className='bx bx-trash icon text-danger' onClick={ onDeleteAccount }></i>
                 </Tooltip>
             </div>
-        </div>
+        </div>        
     )
 }
