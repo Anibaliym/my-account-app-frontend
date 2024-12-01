@@ -7,7 +7,7 @@ import { CardListSheet } from '../components/account/CardListSheet';
 
 export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, setPageName, showUserMessage, setShow, setModalMessage }) => {
     const { accountId } = useParams(); 
-    const [ sheets, setSheets ] = useState([]); 
+    const [ sheets, setSheets ] = useState([]);
 
     useEffect(() => {
         getSheetsAccount();

@@ -152,3 +152,30 @@ input::placeholder {
     float:left; 
     margin: 10px;  
 }
+
+/******************************************************************************************************************************************************************/
+/******************************************************************************************************************************************************************/
+
+.card-amount {
+    background-color: var(--primary-color); 
+    border-radius: 0px; 
+    color: white; 
+    padding: 5px 5px 5px 10px;
+    max-width: 250px;
+    box-shadow: 0 0px 3px var(--primary-color); 
+    float:left; 
+    margin: 10px;  
+    cursor:pointer; 
+}
+
+.card-amount-header {
+    font-size: 12px; 
+}
+
+.card-amount-footer {
+    /* display: flex;
+    justify-content: flex-center; */
+    font-size:13px; 
+    height:23px; 
+
+}

@@ -144,6 +144,77 @@ export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
     catch (error) 
     {
         return { isError: true }
-        
     }
 }
+
+export const GetSheetByIdAsync = async ( sheetId ) => {
+
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Sheet/GetSheetById/${ sheetId }`, {
+            method: 'get', 
+            headers: { 'accept': 'text/plain' }
+        });     
+        
+        const data = await response.json();
+
+        return { isError: false, data: data }
+
+    } 
+    catch (error) 
+    {
+        return { isError: true, data: { } }
+        
+    }
+
+}
+
+
+export const UpdateCashBalanceAPI = async ( sheetId, cashBalance ) => {
+
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Sheet/UpdateCashBalance/${ sheetId }`, {
+            method: 'patch', 
+            headers: {
+                'accept': '*/*', 
+                'content-type': 'application/json',
+            }, 
+            body: JSON.stringify( cashBalance )
+        });     
+
+        const { resolution } = await response.json();
+
+        return { isError: !resolution }; 
+    } 
+    catch (error) 
+    {
+        return { isError: true }; 
+    }
+}
+
+
+export const UpdateCurrentAccountBalanceAPI = async ( sheetId, currentAccountBalance ) => {
+
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Sheet/UpdateCurrenteAccountBalance/${ sheetId }`, {
+            method: 'patch', 
+            headers: {
+                'accept': '*/*', 
+                'content-type': 'application/json',
+            }, 
+            body: JSON.stringify( currentAccountBalance )
+        });     
+
+        const { resolution } = await response.json();
+
+        return { isError: !resolution }; 
+    } 
+    catch (error) 
+    {
+        return { isError: true }; 
+    }
+}
+
+

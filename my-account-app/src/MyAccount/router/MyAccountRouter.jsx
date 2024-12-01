@@ -32,7 +32,7 @@ export const MyAccountRouter = () => {
     };
 
     const showUserMessage = (message) => {
-        setMessage(message);
+        setMessage( message );
         setShowMessage(true);            
     }
 
@@ -82,8 +82,8 @@ export const MyAccountRouter = () => {
                         />
 
                         <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
-                        <Route path="sheet/:id" element={<SheetPage setPageName={ setPageName }/>} />
-
+                        <Route path="sheet/:sheetId" element={<SheetPage setPageName={ setPageName }/>} />
+                        
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
                 </section>
