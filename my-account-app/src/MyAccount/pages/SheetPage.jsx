@@ -4,9 +4,14 @@ import { GetSheetByIdAsync, UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../assets/utilities/BalanceFormater';
 import { Tooltip } from '@nextui-org/react';
 import '/src/assets/css/sheet.css'; 
+import { useRef } from 'react';
 
 export const SheetPage = ({ showUserMessage }) => {
     const { sheetId } = useParams();
+
+    const cashBalanceRef = useRef(); 
+    const currentAccountBalanceRef = useRef(); 
+
     const [ sheet, setSheet ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(true);
     const [ balances, setBalances ] = useState({ cashBalance: '', currentAccountBalance: '' });
@@ -32,6 +37,12 @@ export const SheetPage = ({ showUserMessage }) => {
         setShowSaveIconCurrentAccountBalance(formatNumber(balances.currentAccountBalance) != oldCurrentAccountBalance); 
     }, [ balances.currentAccountBalance ])
 
+    useEffect(() => {
+        const firstAmount = Number(formatNumber(balances.cashBalance)); 
+        const secondAmount = Number(formatNumber(balances.currentAccountBalance)); 
+        setTotalAviable( formatNumberWithThousandsSeparator( firstAmount + secondAmount ) )
+    }, [ balances ])
+    
     useEffect(() => {
         if(showOkIconCashBalance) {
             setTimeout(() => {
@@ -66,8 +77,6 @@ export const SheetPage = ({ showUserMessage }) => {
 
             setOldCashBalance(cashBalance);
             setCurrentAccountBalance(currentAccountBalance); 
-            setTotalAviable( formatNumberWithThousandsSeparator( Number(formatNumber(balances.cashBalance)) + Number(formatNumber(balances.currentAccountBalance)) ) ); 
-            
             setSheet(data);
         } 
         catch (error) 
@@ -108,9 +117,10 @@ export const SheetPage = ({ showUserMessage }) => {
             }
 
             fetchSheet(); 
+            e.target.blur();
         }
     }
-    
+
     return (
         <>
             <div className="containerr">
@@ -127,11 +137,14 @@ export const SheetPage = ({ showUserMessage }) => {
                                 <div>
                                     <small>Efectivo</small>
                                     <input
+                                        ref={ cashBalanceRef }
+                                        name="cashBalance"
                                         type="text"
                                         className="no-focus balance-input-text display-6 mb-1  animate__animated animate__fadeInDown animate__faster"
                                         maxLength={11}
                                         onChange={ ( e ) => handleChange( e, 'cashBalance')}
                                         onKeyDown={ ( e ) => handleKeyDown( e, 'cashBalance', balances.cashBalance) }
+                                        onClick={ () => ( cashBalanceRef.current.select() ) }
                                         value={ balances.cashBalance }
                                     />
 
@@ -140,15 +153,17 @@ export const SheetPage = ({ showUserMessage }) => {
                                         { ( showOkIconCashBalance ) && (<i className={ `bx bx-check-circle icon animate__animated animate__${ (showOkIconCashBalance) ? 'fadeInUp' : 'fadeOutDown' } animate__faster` }></i>) }
                                     </div>
 
-
                                     <hr />
                                     <small>cuenta corriente</small>
                                     <input
+                                        ref={ currentAccountBalanceRef }
+                                        name="currentAccountBalance"
                                         type="text"
                                         className="no-focus balance-input-text display-6  animate__animated animate__fadeInDown animate__faster"
                                         maxLength={ 11 }
                                         onChange={  ( e ) => handleChange( e, 'currentAccountBalance')}
                                         onKeyDown={  ( e ) => handleKeyDown( e, 'currentAccountBalance', balances.currentAccountBalance)}
+                                        onClick={ () => ( currentAccountBalanceRef.current.select() ) }
                                         value={balances.currentAccountBalance}
                                     />
 
