@@ -88,7 +88,6 @@ export const CardCashBalance = React.memo(({ sheet }) => {
                     { showSaveIcon && <i className="bx bx-save icon  animate__animated animate__fadeIn animate__faster"></i> }
                     { showOkIcon && <i className="bx bx-check-circle icon"></i> }
                 </center>
-
             </div>
         </div>        
     )

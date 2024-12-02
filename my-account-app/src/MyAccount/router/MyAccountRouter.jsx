@@ -82,7 +82,7 @@ export const MyAccountRouter = () => {
                         />
 
                         <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
-                        <Route path="sheet/:sheetId" element={<SheetPage setPageName={ setPageName }/>} />
+                        <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={ showUserMessage }/>} />
                         
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>

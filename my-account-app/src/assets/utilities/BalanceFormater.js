@@ -23,4 +23,3 @@ export const formatNumberWithThousandsSeparator = (value) => {
     // Usar Intl.NumberFormat con el locale 'de-DE' para separador de miles como punto
     return new Intl.NumberFormat('de-DE').format(integerValue);
 }
-

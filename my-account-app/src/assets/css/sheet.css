@@ -1,0 +1,73 @@
+.containerr {
+    display: flex;
+    height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */    
+    gap: 10px;
+    
+}
+
+.section-1 {
+    width: 350px; /* Ancho fijo */
+    height: 470px; /* Altura fija */
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.section-2 {
+    flex: 1; /* Toma el ancho restante */
+    height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
+    background-color: var(--sidebar-color);
+    overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+
+.balance-input-text {
+    width: 100%;
+    border: none;
+    font-size: 30px;
+    background-color: var(--primary-color);
+    color: white;
+    outline: none;
+    margin-left:10px; 
+}
+
+.balance-input-text::selection {
+    background-color: white;
+    color: var(--primary-color);
+}
+
+.icon-save {
+    display: flex;
+    justify-content: flex-end; /* Alinea los iconos a la derecha */
+    font-size: 13px;
+    height: 23px;
+}
+
+@media (max-width: 1000px) {
+    .containerr {
+        flex-direction: column; /* Cambiar de horizontal a vertical */
+        height: auto; /* Ajustar altura para diseño vertical */
+    }
+
+    .section-1 {
+        width: 350px; /* Ancho fijo */
+        height: 470px; /* Mantiene la altura fija */
+    }
+
+    .section-2 {
+        width: 100%; /* Ocupa el ancho completo */
+        height: calc(100vh - 460px); 
+        /* height: calc(100vh - 110px);  */
+    }
+}
+
+
+
+
+
+
+
+

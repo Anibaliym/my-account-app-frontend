@@ -83,10 +83,11 @@
 .card-input-text {
     width: 100%;
     border: none;
-    font-size: 40px;
+    font-size: 30px;
     background-color: var(--primary-color);
     color: white;
     outline: none;
+    margin-left:10px; 
 }
 
 .card-input-text::selection {
