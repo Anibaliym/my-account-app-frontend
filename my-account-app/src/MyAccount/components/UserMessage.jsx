@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 export const UserMessage = ({ message, show, setShowMessage }) => {
-    const [isVisible, setIsVisible] = useState(show);
+    const [ isVisible, setIsVisible ] = useState(show);
 
     const getMessageTime = (length) => {
         if (length >= 100) return 10000;

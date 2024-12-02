@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react';
 import { GetSheetByIdAsync, UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../assets/utilities/BalanceFormater';
 import { Tooltip } from '@nextui-org/react';
-import '/src/assets/css/sheet.css'; 
 import { useRef } from 'react';
+import '/src/assets/css/sheet.css'; 
+import { CreateCardModal } from '../components/card/CreateCardModal';
 
 export const SheetPage = ({ showUserMessage }) => {
     const { sheetId } = useParams();
@@ -24,6 +25,7 @@ export const SheetPage = ({ showUserMessage }) => {
     const [ showOkIconCashBalance, setShowOkIconCashBalance ] = useState(false); 
     const [ showSaveIconCurrentAccountBalance, setShowSaveIconCurrentAccountBalance ] = useState(false); 
     const [ showOkIconCurrentAccountBalance, setShowOkIconCurrentAccountBalance ] = useState(false); 
+    const [ createCardModal, setCreateCardModal ] = useState(false); 
 
     useEffect(() => {
         fetchSheet();
@@ -182,7 +184,7 @@ export const SheetPage = ({ showUserMessage }) => {
                                         <div className="col icon-save">
 
                                             <Tooltip placement="bottom" content="crear carta" color="secondary" closeDelay={ 50 }>
-                                                <i className="bx bx-add-to-queue icon" ></i>
+                                                <i className="bx bx-add-to-queue icon" onClick={ () => ( setCreateCardModal(!createCardModal) ) } ></i>
                                             </Tooltip>
 
                                             <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
@@ -209,6 +211,7 @@ export const SheetPage = ({ showUserMessage }) => {
                 </div>
                 <div className="section section-2">
                     <small>acordion</small>
+                    <CreateCardModal createCardModal={ createCardModal } setCreateCardModal={ setCreateCardModal } showUserMessage={ showUserMessage } />
                 </div>
             </div>
         </>

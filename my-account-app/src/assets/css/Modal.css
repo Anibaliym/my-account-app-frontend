@@ -1,0 +1,16 @@
+.modal-blur {
+    backdrop-filter: blur(5px);
+    background: linear-gradient(
+        10deg,
+        rgba(105, 92, 254, 0.5),
+        rgba(105, 92, 254, 0.1)
+    );
+}
+
+
+.modal-content {
+    font-size:15px; 
+    background-color: var(--body-color);
+    color: var(--text-color);
+    border-radius: 3px;
+}
