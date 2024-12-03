@@ -4,8 +4,9 @@ import { GetSheetByIdAsync, UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../assets/utilities/BalanceFormater';
 import { Tooltip } from '@nextui-org/react';
 import { useRef } from 'react';
+import { getCardBySheetIdFetch } from '../../assets/api/MyAccountAppAPI/Card';
+import { SheetCards } from '../components/card/SheetCards';
 import '/src/assets/css/sheet.css'; 
-import { CreateCardModal } from '../components/card/CreateCardModal';
 
 export const SheetPage = ({ showUserMessage }) => {
     const { sheetId } = useParams();
@@ -14,6 +15,7 @@ export const SheetPage = ({ showUserMessage }) => {
     const currentAccountBalanceRef = useRef(); 
 
     const [ sheet, setSheet ] = useState(null);
+    const [ sheetCards, setSheetCards ] = useState([]); 
     const [ isLoading, setIsLoading ] = useState(true);
     const [ balances, setBalances ] = useState({ cashBalance: '', currentAccountBalance: '' });
     const [ oldCashBalance, setOldCashBalance ] = useState(0); 
@@ -25,10 +27,10 @@ export const SheetPage = ({ showUserMessage }) => {
     const [ showOkIconCashBalance, setShowOkIconCashBalance ] = useState(false); 
     const [ showSaveIconCurrentAccountBalance, setShowSaveIconCurrentAccountBalance ] = useState(false); 
     const [ showOkIconCurrentAccountBalance, setShowOkIconCurrentAccountBalance ] = useState(false); 
-    const [ createCardModal, setCreateCardModal ] = useState(false); 
 
     useEffect(() => {
         fetchSheet();
+        fetchCard();
     }, [ sheetId ]);
 
     useEffect(() => {
@@ -59,6 +61,14 @@ export const SheetPage = ({ showUserMessage }) => {
         }
 
     }, [ showOkIconCashBalance, showOkIconCurrentAccountBalance ])
+
+
+    const fetchCard = async () => {
+        const { isError, data } = await getCardBySheetIdFetch(sheetId);
+        
+        if(!isError)
+            setSheetCards(data); 
+    }
 
     const fetchSheet = async () => {
         try {
@@ -129,8 +139,29 @@ export const SheetPage = ({ showUserMessage }) => {
                 <div className="section section-1">
                     <h1 className="display-6">{ sheetName }</h1>
 
-                    <hr />
+                    <div className="row">
+                        <div className="col icon-save">
 
+                            <Tooltip placement="bottom" content="crear carta" color="secondary" closeDelay={ 50 }>
+                                <i className="bx bx-add-to-queue icon" onClick={ () => ( setCreateCardModal(!createCardModal) ) } ></i>
+                            </Tooltip>
+
+                            <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
+                                <i className="bx bx-duplicate icon" ></i>
+                            </Tooltip>
+                            <Tooltip placement="bottom" content="eliminar" color="secondary" closeDelay={ 50 }>
+                                <i className="bx bx-trash icon" ></i>
+                            </Tooltip>
+                            <Tooltip placement="bottom" content="exportar" color="secondary" closeDelay={ 50 }>
+                                <i className='bx bx-export icon'></i>
+                            </Tooltip>
+                            <Tooltip placement="bottom" content="calendario" color="secondary" closeDelay={ 50 }>
+                                <i className='bx bxs-calendar icon' ></i>
+                            </Tooltip>
+                        </div>
+                    </div>
+
+                    <hr />
                     { 
                         isLoading 
                             ? ( <p>Loading...</p>) 
@@ -179,39 +210,12 @@ export const SheetPage = ({ showUserMessage }) => {
 
                                     <small>total disponible: ${ totalAviable }</small><br />
                                     <small>total restante: ${ leftBalance }</small>
-
-                                    <div className="row mt-5">
-                                        <div className="col icon-save">
-
-                                            <Tooltip placement="bottom" content="crear carta" color="secondary" closeDelay={ 50 }>
-                                                <i className="bx bx-add-to-queue icon" onClick={ () => ( setCreateCardModal(!createCardModal) ) } ></i>
-                                            </Tooltip>
-
-                                            <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
-                                                <i className="bx bx-duplicate icon" ></i>
-                                            </Tooltip>
-                                            <Tooltip placement="bottom" content="eliminar" color="secondary" closeDelay={ 50 }>
-                                                <i className="bx bx-trash icon" ></i>
-                                            </Tooltip>
-                                            <Tooltip placement="bottom" content="exportar" color="secondary" closeDelay={ 50 }>
-                                                <i className='bx bx-export icon'></i>
-                                            </Tooltip>
-                                            <Tooltip placement="bottom" content="calendario" color="secondary" closeDelay={ 50 }>
-                                                <i className='bx bxs-calendar icon' ></i>
-                                            </Tooltip>
-
-
-                                        </div>
-                                    </div>
-
                                 </div>
-
                             )
                         }                    
                 </div>
                 <div className="section section-2">
-                    <small>acordion</small>
-                    <CreateCardModal createCardModal={ createCardModal } setCreateCardModal={ setCreateCardModal } showUserMessage={ showUserMessage } />
+                    <SheetCards sheetCards={ sheetCards } showUserMessage={ showUserMessage } fetchCard={ fetchCard } />
                 </div>
             </div>
         </>

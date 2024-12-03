@@ -1,27 +1,38 @@
 import Modal from 'react-bootstrap/Modal';
-import '/src/assets/css/Modal.css'; 
 import { useParams } from 'react-router-dom';
 import { createCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import '/src/assets/css/Modal.css'; 
 
-export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserMessage }) => {
+export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserMessage, fetchCard }) => {
     const RefTitle = useRef(); 
     const RefDescription = useRef(); 
-
     const { sheetId } = useParams();
     const [ title, setTitle ] = useState(''); 
     const [ description, setDescription ] = useState(''); 
-    const [ modalMessage, setmodalMessage ] = useState(''); 
-
-
+    const [ modalMessage, setModalMessage ] = useState(' '); 
+    const [ animationClass, setAnimationClass ] = useState('');
 
     useEffect(() => {
         if(createCardModal)
             RefTitle.current.select(); 
     }, [createCardModal])
     
+    useEffect(() => {
+        // Añade la clase de animación
+        if (modalMessage) {
+            setAnimationClass('animate__animated animate__shakeX');
+        
+            // Elimina la clase de animación después de que termine
+            const timeout = setTimeout(() => {
+                setAnimationClass(''); // Limpia la clase para reutilizar
+            }, 1000); // Duración de la animación (coincide con animate.css)
+        
+            return () => clearTimeout(timeout); // Limpia el timeout si el componente se desmonta
+        }
+    }, [ modalMessage ]);
 
     const handleClick = () => {
         createCard(); 
@@ -47,14 +58,14 @@ export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserM
 
     const createCard = async  () => {
         
-        if(title.length === 0){
-            setmodalMessage('el titulo es invalido');
+        if(title.trim().length === 0){
+            setModalMessage('Debe ingresar un titulo válido.');
             RefTitle.current.select(); 
             return; 
         }
 
-        if(description.length === 0){
-            setmodalMessage('La descripción es invalida');
+        if(description.trim().length === 0){
+            setModalMessage('Debe ingresar una descripción válida.');
             RefDescription.current.select(); 
             return; 
         }
@@ -64,50 +75,59 @@ export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserM
         showUserMessage(message);
         setTitle('');
         setDescription('');
-        setmodalMessage('');
+        setModalMessage('');
         setCreateCardModal(false);
+        fetchCard(); 
     }
 
     return (
         <Modal show={ createCardModal } onHide={ setCreateCardModal } className="modal-blur">
-
             <Modal.Body className="modal-content">
-            <h5>Crear Carta</h5>
+                <div className="container-fluid">
+                    <div className="row">
+                        <input 
+                            ref={ RefTitle }
+                            type="text" 
+                            className="no-focus modal-input-text display-6"
+                            placeholder="TITULO"  
+                            onChange={ ( e ) => handleChange( e, 'title') }
+                            onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
+                            value={ title }
+                            maxLength={ 30 }
+                        />
 
-                <input 
-                    ref={ RefTitle }
-                    type="text" 
-                    className="form-control form-control-sm no-focus" 
-                    placeholder="Titulo .."  
-                    onChange={ ( e ) => handleChange( e, 'title') }
-                    onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
-                    value={ title }
-                    maxLength={ 30 }
-                />
+                    </div>
 
-                <div className="form-floating mt-3">
-                    <textarea 
-                        ref={ RefDescription }
-                        className="form-control no-focus" 
-                        id="floatingTextarea" 
-                        maxLength={ 300 }
-                        onChange={ ( e ) => handleChange( e, 'description') }
-                        onKeyDown={ handleKeyDown }
-                        value={ description }
-                    ></textarea>
-                    <label htmlFor="floatingTextarea">Descripción opcional ...</label>
-                </div>     
+                    <div className="row">
+                        <div className="form-floating mt-3">
+                            <textarea 
+                                ref={ RefDescription }
+                                className="no-focus modal-input-text-area display-6" 
+                                placeholder="Descripción"
+                                id="floatingTextarea" 
+                                maxLength={ 300 }
+                                onChange={ ( e ) => handleChange( e, 'description') }
+                                onKeyDown={ handleKeyDown }
+                                value={ description }
+                            ></textarea>
+                        </div>     
 
-                <small className="mt-2"> { modalMessage } </small>
-                
-                <button
-                    className="btn btn-primary btn-sm form-control button-color mt-5"
-                    onClick={ handleClick }
-                >
-                    Guardar
-                    
-                </button>
+                    </div>
 
+                    <div className="row">
+                        <small className={ `mt-5 text-right text-light ${ animationClass }` }> { modalMessage } </small>
+                    </div>
+  
+                    <div className="row">
+                        <button
+                            className=" modal-button"
+                            onClick={ handleClick }
+                        >
+                            Guardar
+                        </button>
+
+                    </div>
+                </div>
            </Modal.Body>
         </Modal>
     );
