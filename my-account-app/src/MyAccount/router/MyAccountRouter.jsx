@@ -12,6 +12,7 @@ import { ModalInfo } from '../components/modal/ModalInfo';
 import '/src/assets/css/Home.css';
 import '/src/assets/css/Controls.css';
 import '/src/assets/css/Cards.css';
+import '/src/assets/css/sheet.css';
 
 export const MyAccountRouter = () => {
     const [ toggleSidebar, setToggleSidebar ] = useState(false); 

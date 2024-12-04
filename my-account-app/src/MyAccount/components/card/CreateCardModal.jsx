@@ -6,7 +6,7 @@ import { useRef } from 'react';
 import { useEffect } from 'react';
 import '/src/assets/css/Modal.css'; 
 
-export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserMessage, fetchCard }) => {
+export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard }) => {
     const RefTitle = useRef(); 
     const RefDescription = useRef(); 
     const { sheetId } = useParams();
@@ -16,9 +16,9 @@ export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserM
     const [ animationClass, setAnimationClass ] = useState('');
 
     useEffect(() => {
-        if(createCardModal)
+        if(showModalCreateCard)
             RefTitle.current.select(); 
-    }, [createCardModal])
+    }, [showModalCreateCard])
     
     useEffect(() => {
         // Añade la clase de animación
@@ -76,12 +76,12 @@ export const CreateCardModal = ({ createCardModal, setCreateCardModal, showUserM
         setTitle('');
         setDescription('');
         setModalMessage('');
-        setCreateCardModal(false);
+        setShowModalCreateCard(false);
         fetchCard(); 
     }
 
     return (
-        <Modal show={ createCardModal } onHide={ setCreateCardModal } className="modal-blur">
+        <Modal show={ showModalCreateCard } onHide={ setShowModalCreateCard } className="modal-blur">
             <Modal.Body className="modal-content">
                 <div className="container-fluid">
                     <div className="row">

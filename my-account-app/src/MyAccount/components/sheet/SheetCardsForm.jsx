@@ -3,20 +3,26 @@ import { CreateCardModal } from '../card/CreateCardModal';
 
 export const SheetCardsForm = (
     { 
-        createCardModal,
-        setCreateCardModal,
+        showModalCreateCard,
+        setShowModalCreateCard,
         showUserMessage,
         fetchCard, 
         sheetCards
     }) => {
 
     return (
-        <>
-            <CreateCardModal createCardModal={ createCardModal } setCreateCardModal={ setCreateCardModal } showUserMessage={ showUserMessage } fetchCard={ fetchCard } />
+
+        <div className="sheet-cards-form">
+            <CreateCardModal 
+                showModalCreateCard={ showModalCreateCard } 
+                setShowModalCreateCard={ setShowModalCreateCard } 
+                showUserMessage={ showUserMessage } 
+                fetchCard={ fetchCard } 
+            />
 
                 <div className="card-control-navbar mb-2">
                     <Tooltip placement="bottom" content="crear carta" color="secondary" closeDelay={ 50 }>
-                        <i className="bx bx-add-to-queue text-light r" onClick={ () => ( setCreateCardModal(!createCardModal) ) } ></i>
+                        <i className="bx bx-add-to-queue text-light r" onClick={ () => ( setShowModalCreateCard(!showModalCreateCard) ) } ></i>
                     </Tooltip>
                 </div>
 
@@ -76,6 +82,6 @@ export const SheetCardsForm = (
                 }
 
 
-        </>
+        </div>
     )
 }
