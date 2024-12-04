@@ -48,48 +48,44 @@
 
 
 
-
-
-/* .excel-card {
+.excel-card {
     border: 1px solid var(--primary-color);
     font-size: 14px;
     float:left;
     margin:10px; 
     border-radius:3px;     
     width: 600px;
-}  */
+} 
 
-
-/* .excel-card-header {
-    background-color: var(--sidebar-color);
-    color: var(--primary-color);
-    padding: 10px 0px 1px 10px;
-    border-radius:3px;     
-} */
-  
 .excel-card-header {
     display: flex;
-    justify-content: space-between; /* Título a la izquierda y ícono a la derecha */
+    justify-content: space-between; /* Distribuye el espacio entre los elementos */
     align-items: center; /* Centra verticalmente */
     background-color: var(--sidebar-color);
     color: var(--primary-color);
-    padding: 10px 10px; /* Ajusta el espaciado según sea necesario */
+    padding: 10px; /* Ajusta el espaciado según sea necesario */
     border-radius: 3px;
-  }
-  
+}
+
+.excel-card-header small {
+    margin-right: auto; /* Empuja el texto hacia la izquierda */
+}
+
+.excel-card-header .icons-container {
+    display: flex;
+}
 
 .excel-icon {
-    cursor: pointer; /* Opcional, para mostrar que el ícono es interactivo */
-    font-size: 16px; /* Ajusta el tamaño del ícono */
+    cursor: pointer;
+    font-size: 16px;
 }
 
 
-.excel-card-row {
+.excel-card-vignette {
     display: flex;
     justify-content: space-between;
     padding: 5px 5px;
     border-bottom: 1px solid gray; 
-    /* background-color: green;  */
 }
   
 .excel-card-cell {
@@ -102,12 +98,13 @@
 }
 
 .excel-card-cell.value {
-    text-align: right;
+    text-align:right;
     /* background-color:blue;  */
 }
 
 .excel-card-cell.action {
     text-align: right;
+    width:90px; 
     /* background-color:red;  */
 }
 
@@ -126,14 +123,13 @@
     background-color: var(--primary-color); 
 }
 
-/* @media (max-width: 500px) {
- 
-    .excel-card {
-        width: 300px;
-    }
-
-} */
-
+.card-icon {
+    margin-right: 0px;
+    
+    transition: margin 0.3s;
+    font-size: 17px;
+    cursor:pointer;
+}
 
 @media (max-width: 1000px) {
     .sheet-form-container {
@@ -146,15 +142,6 @@
         height: 470px; /* Mantiene la altura fija */
     }
 }
-
-.excel-card {
-    border: 1px solid var(--primary-color);
-    font-size: 14px;
-    float:left;
-    margin:10px; 
-    border-radius:3px;     
-    width: 600px;
-} 
 
 @media (max-width: 2000px) {
     .excel-card {
@@ -182,4 +169,6 @@
         width: 350px;
     }
 }
+
+
 
