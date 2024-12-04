@@ -120,7 +120,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
   
                     <div className="row">
                         <button
-                            className=" modal-button"
+                            className="modal-button"
                             onClick={ handleClick }
                         >
                             Guardar

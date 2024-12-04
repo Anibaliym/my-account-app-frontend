@@ -1,5 +1,5 @@
 import { Tooltip } from '@nextui-org/react';
-import { CreateCardModal } from '../card/CreateCardModal'; 
+import { CreateCardModal } from './CreateCardModal';
 
 export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard, sheetCards }) => {
 

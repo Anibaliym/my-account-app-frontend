@@ -9,7 +9,7 @@ export const ModalInfo = ({ show, setShow, message }) => {
             <Modal.Body className="modal-content">
                 <center>{message}</center>
                 <button
-                    className="btn btn-primary btn-sm form-control button-color mt-4"
+                    className="modal-button mt-4"
                     onClick={onClose}
                 >
                     entiendo
