@@ -1,10 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const createCardFetch = async ( sheetId, title, description ) => {
-
-
-    console.log({ sheetId, title, description })
-
     const body = {
         sheetId,
         title,
@@ -23,12 +19,7 @@ export const createCardFetch = async ( sheetId, title, description ) => {
             body: JSON.stringify( body )
         }); 
 
-
         const data = await response.json(); 
-        
-        console.log(response)
-        console.log(data)
-
         return { isError: false, message: 'Carta creada correctamente.' }
 
     } 
@@ -40,8 +31,6 @@ export const createCardFetch = async ( sheetId, title, description ) => {
 }
 
 export const getCardBySheetIdFetch = async (sheetId) => {
-
-    console.log(sheetId)
     try 
     {
         const response = await fetch(`${ API_URL }/api/Card/GetCardBySheetId/${ sheetId }`, {

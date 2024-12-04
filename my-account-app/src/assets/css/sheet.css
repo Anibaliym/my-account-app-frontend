@@ -1,11 +1,11 @@
-.containerr {
+.sheet-form-container {
     display: flex;
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */    
     gap: 10px;
     
 }
 
-.section-1 {
+.sheet-balances-form {
     width: 350px; /* Ancho fijo */
     height: 470px; /* Altura fija */
     background-color: var(--primary-color);
@@ -15,7 +15,7 @@
     color: white;
 }
 
-.section-2 {
+.sheet-cards-form {
     flex: 1; /* Toma el ancho restante */
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
     background-color: var(--sidebar-color);
@@ -47,17 +47,17 @@
 }
 
 @media (max-width: 1000px) {
-    .containerr {
+    .sheet-form-container {
         flex-direction: column; /* Cambiar de horizontal a vertical */
         height: auto; /* Ajustar altura para diseño vertical */
     }
 
-    .section-1 {
+    .sheet-balances-form {
         width: 350px; /* Ancho fijo */
         height: 470px; /* Mantiene la altura fija */
     }
 
-    .section-2 {
+    .sheet-cards-form {
         width: 100%; /* Ocupa el ancho completo */
         height: calc(100vh - 460px); 
         /* height: calc(100vh - 110px);  */
