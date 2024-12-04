@@ -39,9 +39,13 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
         }
     };
 
+
+
     return (
         <div className="sheet-balances-form">
+
             <h1 className="display-6">{sheetName}</h1>
+
             <div className="row">
                 <div className="col icon-save">
                     <Tooltip placement="bottom" content="Crear respaldo" color="secondary" closeDelay={ 50 }>
@@ -93,11 +97,11 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     {icons.save.currentAccountBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i>}
                     {icons.ok.currentAccountBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i>}
                 </div>
+
                 <hr />
                 <small>Total Disponible: ${totalAvailable}</small><br />
                 <small>Total Restante: $1,000</small>
             </div>        
-        
         </div>
     )
 }
