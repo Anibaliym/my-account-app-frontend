@@ -39,8 +39,6 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
         }
     };
 
-
-
     return (
         <div className="sheet-balances-form">
 
@@ -48,16 +46,16 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
 
             <div className="row">
                 <div className="col icon-save">
-                    <Tooltip placement="bottom" content="Crear respaldo" color="secondary" closeDelay={ 50 }>
-                            <i className="bx bx-duplicate icon" ></i>
+                    <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
+                        <i className='bx bxs-backpack icon' ></i>
                     </Tooltip>
-                    <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="secondary" closeDelay={ 50 }>
+                    <Tooltip placement="bottom" content="eliminar hoja de cálculo" color="secondary" closeDelay={ 50 }>
                         <i className="bx bx-trash icon" ></i>
                     </Tooltip>
-                    <Tooltip placement="bottom" content="Exportar a excel" color="secondary" closeDelay={ 50 }>
+                    <Tooltip placement="bottom" content="exportar a excel" color="secondary" closeDelay={ 50 }>
                         <i className='bx bx-export icon'></i>
                     </Tooltip>
-                    <Tooltip placement="bottom" content="Calendario" color="secondary" closeDelay={ 50 }>
+                    <Tooltip placement="bottom" content="calendario" color="secondary" closeDelay={ 50 }>
                         <i className='bx bxs-calendar icon' ></i>
                     </Tooltip>
                 </div>
@@ -94,8 +92,8 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     value={balances.currentAccountBalance}
                 />
                 <div className="icon-save mt-1">
-                    {icons.save.currentAccountBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i>}
-                    {icons.ok.currentAccountBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i>}
+                    { icons.save.currentAccountBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i> }
+                    { icons.ok.currentAccountBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i> }
                 </div>
 
                 <hr />

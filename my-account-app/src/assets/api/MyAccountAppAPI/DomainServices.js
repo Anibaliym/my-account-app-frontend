@@ -70,3 +70,19 @@ export const getSheetsAccountAPI = async (accountId) => {
     }
 }
 
+export const getSheetCardsWithVignettesFetch = async ( sheetId ) => {
+
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/DomainServices/GetSheetCardsWithVignettes/${ sheetId }`, {
+            headers: { 'accept': 'text/plain' }, 
+        });    
+
+        const { data } = await response.json();
+        return { isError: false, data: data.cards }; 
+    } 
+    catch (error) 
+    {
+        return { isError: true }
+    }
+}

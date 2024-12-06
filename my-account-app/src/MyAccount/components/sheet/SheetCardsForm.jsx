@@ -6,13 +6,6 @@ import { useEffect } from 'react';
 
 export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard, sheetCards }) => {
 
-    
-    // useEffect(() => {
-
-    //     console.log(vinetasCarta); 
-    // }, [])
-    
-
     return (
 
         <div className="sheet-cards-form">
@@ -34,7 +27,7 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
             }
 
             {
-                vinetasCarta.map( ({ id, title, description, Vignettes}, index) => (
+                sheetCards.map( ({ id, title, description, vignettes}, index) => (
                     <div key={ id } className={ `excel-card animate__animated animate__fadeInDown animate__faster` }>
                         <div className="excel-card-header">
                             <small className="lead">
@@ -53,7 +46,7 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
 
                         <div className="excel-card-body">
                             {  
-                                Vignettes?.map( ( vignette, index ) => (
+                                vignettes?.map( ( vignette, index ) => (
                                     <CardVignette key={ index} Vignettes={vignette} />
                                 ))
                             }

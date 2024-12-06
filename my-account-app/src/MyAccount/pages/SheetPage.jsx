@@ -5,6 +5,7 @@ import { formatNumber, formatNumberWithThousandsSeparator } from '../../assets/u
 import { getCardBySheetIdFetch } from '../../assets/api/MyAccountAppAPI/Card';
 import { SheetCardsForm } from '../components/sheet/SheetCardsForm';
 import { SheetBalanceForm } from '../components/sheet/SheetBalanceForm';
+import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const SheetPage = ({ showUserMessage }) => {
     const { sheetId } = useParams();
@@ -83,7 +84,7 @@ export const SheetPage = ({ showUserMessage }) => {
     }, [icons.ok]);
 
     const fetchCard = async () => {
-        const { isError, data } = await getCardBySheetIdFetch(sheetId);
+        const { isError, data } = await getSheetCardsWithVignettesFetch(sheetId); 
         if (!isError) setSheetCards(data);
     };
 

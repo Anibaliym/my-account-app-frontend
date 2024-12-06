@@ -64,11 +64,11 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
             return; 
         }
 
-        if(description.trim().length === 0){
-            setModalMessage('Debe ingresar una descripción válida.');
-            RefDescription.current.select(); 
-            return; 
-        }
+        // if(description.trim().length === 0){
+        //     setModalMessage('Debe ingresar una descripción válida.');
+        //     RefDescription.current.select(); 
+        //     return; 
+        // }
 
         const { isError, message } = await createCardFetch(sheetId, title, description); 
 
@@ -89,7 +89,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
                             ref={ RefTitle }
                             type="text" 
                             className="no-focus modal-input-text display-6"
-                            placeholder="TITULO"  
+                            placeholder="Titulo de la descripción"  
                             onChange={ ( e ) => handleChange( e, 'title') }
                             onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
                             value={ title }
@@ -98,7 +98,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
 
                     </div>
 
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="form-floating mt-3">
                             <textarea 
                                 ref={ RefDescription }
@@ -111,8 +111,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
                                 value={ description }
                             ></textarea>
                         </div>     
-
-                    </div>
+                    </div> */}
 
                     <div className="row">
                         <small className={ `mt-5 text-right text-light ${ animationClass }` }> { modalMessage } </small>
