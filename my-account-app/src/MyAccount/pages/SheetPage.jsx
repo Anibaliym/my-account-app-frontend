@@ -129,11 +129,11 @@ export const SheetPage = ({ showUserMessage }) => {
                 />
 
                 <SheetCardsForm
-                    showModalCreateCard={showModalCreateCard}
-                    setShowModalCreateCard={setShowModalCreateCard}
-                    showUserMessage={showUserMessage}
-                    fetchCard={fetchCard}
-                    sheetCards={sheetCards}
+                    showModalCreateCard={ showModalCreateCard }
+                    setShowModalCreateCard={ setShowModalCreateCard }
+                    showUserMessage={ showUserMessage }
+                    fetchCard={ fetchCard }
+                    sheetCards={ sheetCards }
                 />
         </div>
     );

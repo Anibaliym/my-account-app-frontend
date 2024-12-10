@@ -1,52 +1,119 @@
-import { useEffect } from 'react'; 
-import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { Tooltip } from '@nextui-org/react';
-import { CreateVignetteFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
+import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
+import { useState } from 'react';
+import { DeleteVignetteFetch, UpdateVignatteFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 
-export const CardVignette = ({ Vignettes }) => {
-    const { id, description, amount } = Vignettes; 
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes }) => {
+    const { id: vignetteId, description, amount, order } = vignette; 
+
+
+    const refDesription = useRef(); 
+    const refAmount = useRef(); 
+
+    const [ showSuccessIcon, setShowSuccessIcon ] = useState(false); 
+    const [ newDescription, setNewDescription ] = useState(description); 
+    const [ newAmount, setNewAmount ] = useState(amount); 
+    const [ newVignette, setNewVignette] = useState({}); 
+    const [ showSaveIcon, setShowSaveIcon ] = useState(false);
 
     useEffect(() => {
-        // console.log({ id, description, amount })
-    }, [])
+        if(showSuccessIcon) {
+            setTimeout(() => {
+                setShowSuccessIcon(false); 
+            }, 1500);
+        }
+    
+    }, [ showSuccessIcon ])
+    
 
-    const onCreateVignette = async () => {
-        const algo = await CreateVignetteFetch(); 
+    useEffect(() => {
+        setShowSaveIcon(newDescription !== description); 
+    }, [ newDescription, newAmount ])
+    
+    const onKeyDownDescription = (e) => {
+        
+        if(e.which === 13) {
+            setNewVignette({ id: vignetteId, cardId, description: newDescription, amount: newAmount, color: 'WHITE', order, })
+            updateVignette(); 
+        }
+    }
+
+    const updateVignette = async () => {
+
+        const newData = { 
+            id: vignetteId, 
+            cardId, 
+            description: newDescription, 
+            amount: newAmount, 
+            color: 'WHITE', 
+            order 
+        }
+
+        const { isError } = await UpdateVignatteFetch( newData ); 
+        
+        if(!isError){
+            setShowSaveIcon(false); 
+            setShowSuccessIcon(true); 
+        }
+        else 
+            showUserMessage('Ocurrió un error al intentar actualizar la viñata'); 
+
+    }
+
+    const onChangeDescription = (e) => {
+        setNewDescription(e.target.value); 
+    }
+
+    const deleteVignette = async () => {
+        const { isError } = await DeleteVignetteFetch( vignette.id ); 
+
+        showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
+        if(!isError)
+            setVignettes(vignettes.filter(item => item.id !== vignette.id));
     }
 
     return (
         <>
-            <div  className="excel-card-vignette animate__animated animate__fadeInDown">
+            <div className="excel-card-vignette animate__animated animate__fadeInDown animate__faster">
                 <div className="excel-card-row">
                     <div className="excel-card-cell description">
                         <input 
                             type="text" 
                             className="vignette-input-text-description no-focus"
+                            ref={ refDesription }
                             maxLength={ 60 }
-                            value={ description } 
-                            onChange={ () => {} }
+                            value={ newDescription } 
+                            onChange={ onChangeDescription }
+                            onKeyDown={ onKeyDownDescription }
+                            onClick={ () => ( refDesription.current.select() ) }
                         />
                     </div>
                     <div className="excel-card-cell value">
                         <input 
                             type="text" 
+                            ref={ refAmount }
                             className="vignette-input-text-amount no-focus"
                             maxLength={ 12 }
-                            value={ `$${ formatNumberWithThousandsSeparator(amount) }` }
-                            onChange={ () => {} }
+                            value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
+                            onChange={ (e) => setNewAmount(  formatNumberWithThousandsSeparator(e.target.value) ) }
+                            onClick={ () => ( refAmount.current.select() ) }
                         />
                     </div>
                     <div className="excel-card-cell action">
 
-                        {/* <i className='bx bx-save card-icon text-success'></i> */}
-                        {/* <i className='bx bx-check-circle card-icon text-success'></i>  */}
+                        { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                        
+
+                        { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
 
                         <Tooltip placement="bottom" content="eliminar" color="secondary" closeDelay={50}>
-                            <i className='bx bx-trash card-icon'></i>
+                            <i className='bx bx-trash card-icon' onClick={ deleteVignette } ></i>
                         </Tooltip>
-                        <Tooltip placement="bottom" content="color" color="secondary" closeDelay={50}>
+                        {/* <Tooltip placement="bottom" content="color" color="secondary" closeDelay={50}>
                             <i className='bx bxs-palette card-icon' ></i>
-                        </Tooltip>
+                        </Tooltip> */}
                         <Tooltip placement="bottom" content="orden" color="secondary" closeDelay={50}>
                             <i className='bx bx-sort-alt-2 card-icon' ></i>
                         </Tooltip>

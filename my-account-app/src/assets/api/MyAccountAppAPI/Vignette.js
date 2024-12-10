@@ -15,14 +15,54 @@ export const CreateVignetteFetch = async ( cardId, order ) => {
         const response = await fetch(`${ API_URL }/api/Vignette/CreateVignette`, {
             method: 'post', 
             headers: {
-                'accept': '*/*', 
-                'constent-type': 'application/json', 
+                "accept": "*/*", 
+                "content-type": "application/json",
             }, 
             body: JSON.stringify( body )
         });     
 
-        const data = await response.json();
+        const { data, resolution, message} = await response.json();
+        return { isError: !resolution, message, data}
+    } 
+    catch (error) 
+    {
+        console.warn(error)
+        return { isError: true }
+    }
+}
+export const DeleteVignetteFetch = async ( vignetteId ) => {
 
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Vignette/DeleteVignette?id=${ vignetteId }`, {
+            headers: { 'accept' : '*/*' }, 
+            method: 'delete'
+        });         
+
+        const data = await response.json(); 
+        return { isError: false }
+    } 
+    catch (error) 
+    {
+        return { isError: true }
+    }
+}
+
+export const UpdateVignatteFetch = async ( vignatte ) => {
+
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/Vignette/UpdateVignette`, {
+
+            method: 'put', 
+            headers: {
+                'accept' : '*/*',
+                'content-type' : 'application/json'
+            }, 
+            body: JSON.stringify( vignatte )
+        });
+        
+        const data = await response.json(); 
         return { isError: false }
     } 
     catch (error) 

@@ -6,7 +6,7 @@ import { Tooltip } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 
 
-export const CardAccount = ({ accountId, setPageName, setAccountListener, accountListener, showUserMessage, setShow, setModalMessage }) => {
+export const CardAccount = ({ accountId, setPageName, setAccountListener, accountListener, showUserMessage, setModalMessage }) => {
     const navigate = useNavigate(); 
     const accountNameRef = useRef(false); 
     const [ nameAccount, setNameAccount ] = useState(''); 
@@ -72,10 +72,8 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
     const DeleteAccount = async () => {
         const { isError, message } = await DeleteAccountAPI(accountId);
 
-        if(isError) {
-            setShow(true); 
+        if(isError) 
             setModalMessage(message);
-        }
         else {
             showUserMessage(message); 
             setAccountListener( accountListener - 1 )

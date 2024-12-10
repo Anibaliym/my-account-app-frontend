@@ -22,8 +22,7 @@ export const MyAccountRouter = () => {
     const [ message, setMessage ] = useState(''); 
     const [ showMessage, setShowMessage] = useState(false); 
     
-    const [ show, setShow ] = useState(false);
-    const [ modalMessage, setModalMessage ] = useState('test');
+    const [ modalMessage, setModalMessage ] = useState('');
 
     const toggleDarkMode = () => {
         const newDarkModeState = !isDarkMode;
@@ -59,11 +58,7 @@ export const MyAccountRouter = () => {
                         <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
                     </div>
 
-                    <ModalInfo
-                        show={ show }
-                        setShow={ setShow }
-                        message={ modalMessage }
-                    />
+                    <ModalInfo message={ modalMessage }/>
 
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={ setPageName }/>} />
@@ -76,7 +71,6 @@ export const MyAccountRouter = () => {
                                 isDarkMode={ isDarkMode } 
                                 setPageName={ setPageName } 
                                 showUserMessage={ showUserMessage }
-                                setShow={ setShow }
                                 setModalMessage={ setModalMessage }
                             />
                             } 

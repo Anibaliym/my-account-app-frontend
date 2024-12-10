@@ -18,7 +18,7 @@
 .sheet-cards-form {
     flex: 1; /* Toma el ancho restante */
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
-    background-color: var(--sidebar-color);
+    /* background-color: var(--sidebar-color); */
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
 }
@@ -209,12 +209,12 @@
 
 .vignette-input-text-description {
     width:100%; 
-    background-color: var(--sidebar-color)
+    /* background-color: var(--sidebar-color) */
 }
 
 .vignette-input-text-amount {
     width:100%; 
     text-align:right; 
     border-left:1px solid lightgray;
-    background-color: var(--sidebar-color)
+    /* background-color: var(--sidebar-color) */
 }

@@ -5,7 +5,7 @@ import { CardAccount } from '../components/account/CardAccount';
 import { CardSheetAdd } from '../components/account/CardSheetAdd';
 import { CardListSheet } from '../components/account/CardListSheet';
 
-export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, setPageName, showUserMessage, setShow, setModalMessage }) => {
+export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, setPageName, showUserMessage, setModalMessage }) => {
     const { accountId } = useParams(); 
     const [ sheets, setSheets ] = useState([]);
 
@@ -31,7 +31,6 @@ export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, s
                 setAccountListener={ setAccountListener }
                 accountListener={ accountListener }
                 showUserMessage={ showUserMessage } 
-                setShow={ setShow }
                 setModalMessage={ setModalMessage }
             />
 
