@@ -27,7 +27,7 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
 
             {
                 sheetCards.map( ({ id, title, description, vignettes}) => (
-                    <CardForm 
+                    <CardForm
                         key={ id }
                         cardId={ id }
                         title={ title }

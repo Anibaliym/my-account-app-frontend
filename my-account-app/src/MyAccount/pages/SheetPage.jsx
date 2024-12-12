@@ -53,7 +53,7 @@ export const SheetPage = ({ showUserMessage }) => {
     useEffect(() => {
         const total = Number(formatNumber(balances.cashBalance)) + Number(formatNumber(balances.currentAccountBalance));
         setTotalAvailable(formatNumberWithThousandsSeparator(total));
-    }, [balances]);
+    }, [ balances ]);
 
     useEffect(() => {
         const timeoutIds = [];

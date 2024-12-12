@@ -1,5 +1,5 @@
 import { Tooltip } from '@nextui-org/react';
-import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
+import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { useState } from 'react';
 import { DeleteVignetteFetch, UpdateVignatteFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { useRef } from 'react';
@@ -7,8 +7,7 @@ import { useEffect } from 'react';
 
 export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes }) => {
     const { id: vignetteId, description, amount, order } = vignette; 
-
-
+    
     const refDesription = useRef(); 
     const refAmount = useRef(); 
 
@@ -24,7 +23,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                 setShowSuccessIcon(false); 
             }, 1500);
         }
-    
     }, [ showSuccessIcon ])
     
 
@@ -32,14 +30,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         setShowSaveIcon(newDescription !== description); 
     }, [ newDescription, newAmount ])
     
-    const onKeyDownDescription = (e) => {
-        
-        if(e.which === 13) {
-            setNewVignette({ id: vignetteId, cardId, description: newDescription, amount: newAmount, color: 'WHITE', order, })
-            updateVignette(); 
-        }
-    }
-
     const updateVignette = async () => {
 
         const newData = { 
@@ -62,9 +52,12 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
     }
 
-    const onChangeDescription = (e) => {
-        setNewDescription(e.target.value); 
-    }
+    const onChangeDescription = (e) =>  setNewDescription(e.target.value);
+
+    const onChangeAmount = (e) => {
+        const value = e.target.value.replace(/\D/g, '');
+        setNewAmount(  formatNumber(value)); 
+    };
 
     const deleteVignette = async () => {
         const { isError } = await DeleteVignetteFetch( vignette.id ); 
@@ -72,6 +65,33 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
         if(!isError)
             setVignettes(vignettes.filter(item => item.id !== vignette.id));
+    }
+
+    const handleBlur = ( controlName ) => {
+
+        switch (controlName) {
+            case 'description':
+                if(description === newDescription.trim()) return; 
+                break;
+            case 'amount':
+                if(amount === newAmount) return; 
+                break;
+        }
+
+        setNewVignette({ id: vignetteId, cardId, description: newDescription, amount: newAmount, color: 'WHITE', order, })
+        updateVignette(); 
+    }
+
+    const handleKeyDown = (e, controlName) => {
+
+        switch (controlName) {
+            case 'description':
+                if(e.which === 13) refAmount.current.select(); 
+                break;
+            case 'amount':
+                if(e.which === 13) e.target.blur();
+                break;
+        }
     }
 
     return (
@@ -86,8 +106,9 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                             maxLength={ 60 }
                             value={ newDescription } 
                             onChange={ onChangeDescription }
-                            onKeyDown={ onKeyDownDescription }
                             onClick={ () => ( refDesription.current.select() ) }
+                            onBlur={ () => ( handleBlur('description') ) }
+                            onKeyDown={ (e) => handleKeyDown(e, 'description') }
                         />
                     </div>
                     <div className="excel-card-cell value">
@@ -95,10 +116,12 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                             type="text" 
                             ref={ refAmount }
                             className="vignette-input-text-amount no-focus"
-                            maxLength={ 12 }
+                            maxLength={ 11 }
                             value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
-                            onChange={ (e) => setNewAmount(  formatNumberWithThousandsSeparator(e.target.value) ) }
+                            onChange={ onChangeAmount }
+                            onBlur={ () => ( handleBlur('amount') ) }
                             onClick={ () => ( refAmount.current.select() ) }
+                            onKeyDown={ (e) => handleKeyDown(e, 'amount') }
                         />
                     </div>
                     <div className="excel-card-cell action">
