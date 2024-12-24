@@ -46,3 +46,22 @@ export const getCardBySheetIdFetch = async (sheetId) => {
         return { isError: false, data: {} }
     }
 }
+
+export const GetVignetteByCardIdFetch = async ( cardId ) => {
+
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/Vignette/GetVignetteByCardId/${ cardId }`, {
+            method: 'get', 
+            headers: { 'accept' : 'text/plain' }
+        });     
+
+        const data = await response.json(); 
+
+        return { isError: false, data }
+    } 
+    catch (error) 
+    {
+        return { isError: false, data: null }
+    }
+}

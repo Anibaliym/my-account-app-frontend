@@ -1,4 +1,3 @@
-
 import { Tooltip } from '@nextui-org/react';
 import { CreateCardModal } from './CreateCardModal';
 import { CardForm } from './CardForm';
@@ -22,18 +21,18 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
             </div>
 
             { 
-                (sheetCards.length === 0) && (<div  className="animate__animated animate__fadeInDown animate__faster"><small> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small></div>)
+                (sheetCards.length === 0) && (<div  className="animate__animated animate__fadeInDown animate__faster"><small> <span className="sheet-list ml-2">No hay cartas creadas para la hoja de cálculo ...</span> </small></div>)
             }
 
             {
-                sheetCards.map( ({ id, title, description, vignettes}) => (
+                sheetCards.map( ({ id, title, vignettes }) => (
                     <CardForm
                         key={ id }
                         cardId={ id }
                         title={ title }
-                        description={ description }
                         vignettesData={ vignettes }
                         showUserMessage={ showUserMessage }
+                        fetchCard={ fetchCard }
                     />
                 ))
             }

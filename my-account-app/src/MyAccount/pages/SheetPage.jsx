@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { GetSheetByIdAsync } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../assets/utilities/BalanceFormater';
-import { getCardBySheetIdFetch } from '../../assets/api/MyAccountAppAPI/Card';
 import { SheetCardsForm } from '../components/sheet/SheetCardsForm';
 import { SheetBalanceForm } from '../components/sheet/SheetBalanceForm';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
@@ -20,7 +19,7 @@ export const SheetPage = ({ showUserMessage }) => {
     const [ showModalCreateCard, setShowModalCreateCard ] = useState(false);
     const [ sheetName, setSheetName ] = useState('hoja de cálculo');
 
-    const [icons, setIcons] = useState({
+    const [ icons, setIcons ] = useState({
         save: { cashBalance: false, currentAccountBalance: false },
         ok: { cashBalance: false, currentAccountBalance: false },
     });
@@ -28,7 +27,7 @@ export const SheetPage = ({ showUserMessage }) => {
     useEffect(() => {
         fetchSheet();
         fetchCard();
-    }, [sheetId]);
+    }, [ sheetId ]);
 
     useEffect(() => {
         setIcons((prev) => ({
@@ -38,7 +37,7 @@ export const SheetPage = ({ showUserMessage }) => {
                 cashBalance: Number(formatNumber(balances.cashBalance)) !== oldBalances.cashBalance,
             },
         }));
-    }, [balances.cashBalance]);
+    }, [ balances.cashBalance ]);
 
     useEffect(() => {
         setIcons((prev) => ({
@@ -48,7 +47,7 @@ export const SheetPage = ({ showUserMessage }) => {
                 currentAccountBalance: Number(formatNumber(balances.currentAccountBalance)) !== oldBalances.currentAccountBalance,
             },
         }));
-    }, [balances.currentAccountBalance]);
+    }, [ balances.currentAccountBalance ]);
 
     useEffect(() => {
         const total = Number(formatNumber(balances.cashBalance)) + Number(formatNumber(balances.currentAccountBalance));

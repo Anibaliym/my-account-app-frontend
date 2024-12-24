@@ -24,7 +24,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             }, 1500);
         }
     }, [ showSuccessIcon ])
-    
 
     useEffect(() => {
         setShowSaveIcon(newDescription !== description); 
@@ -56,7 +55,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
     const onChangeAmount = (e) => {
         const value = e.target.value.replace(/\D/g, '');
-        setNewAmount(  formatNumber(value)); 
+        setNewAmount( formatNumber(value)); 
     };
 
     const deleteVignette = async () => {
@@ -74,7 +73,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                 if(description === newDescription.trim()) return; 
                 break;
             case 'amount':
-                if(amount === newAmount) return; 
+                if(amount === newAmount) { return; }
+                // setAmountChange(!amountChange); 
                 break;
         }
 

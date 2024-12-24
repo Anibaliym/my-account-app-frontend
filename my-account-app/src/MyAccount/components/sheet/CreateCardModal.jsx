@@ -89,7 +89,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
                             ref={ RefTitle }
                             type="text" 
                             className="no-focus modal-input-text display-6"
-                            placeholder="Titulo de la descripción"  
+                            placeholder="Descripción de la carta"  
                             onChange={ ( e ) => handleChange( e, 'title') }
                             onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
                             value={ title }

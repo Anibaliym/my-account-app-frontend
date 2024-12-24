@@ -86,3 +86,24 @@ export const getSheetCardsWithVignettesFetch = async ( sheetId ) => {
         return { isError: true }
     }
 }
+
+export const deleteCardWithVignettesFetch = async ( cardId ) => {
+    try 
+    {
+        const response = await fetch( `${ API_URL }/api/DomainServices/DeleteCardWithVignettes/${ cardId }`, {
+            method: 'delete', 
+            headers: { 'accept' : '*/*' }
+        } );   
+
+        const data = await response.json(); 
+        console.log(response); 
+        console.log(data)
+
+        return { isError: false, data }
+    } catch (error) 
+    {
+        return { isError: true, data: null }
+
+        
+    }
+}
