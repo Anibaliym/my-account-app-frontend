@@ -1,16 +1,26 @@
 import { Tooltip } from '@nextui-org/react';
 import { CardVignette } from './CardVignette';
-import { CreateVignetteFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { useState } from 'react';
-import { GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { CreateVignetteFetch, GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
+import { useEffect } from 'react';
+import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 
 export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard }) => {
-
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
-    
+    const [ totalCardAmount, setTotalCardAmount ] = useState(0); 
+    const [ arrAmountCard, setArrAmountCard ] = useState([]); 
+
+    useEffect(() => {
+        const amounts = vignettesData.map(({ amount }) => amount);
+        setArrAmountCard(amounts);
+
+
+        console.log(arrAmountCard)
+    }, [vignettesData]); // Dependencia para actualizarse si cambia vignettesData
+
     const createVignette = async () => {
         const { isError, message, data: vignette } = await CreateVignetteFetch( cardId, 5 );
 
@@ -51,7 +61,6 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
 
     return (
         <div className={ `excel-card animate__animated animate__fadeInDown animate__faster` }>
-
             <DeleteCardConfirmationModal
                 cardTitle={ title }
                 modalConfirmDeleteCard={ modalConfirmDeleteCard }
@@ -85,6 +94,8 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             showUserMessage={ showUserMessage }
                             setVignettes={ setVignettes }
                             vignettes={ vignettes }
+                            totalCardAmount={ totalCardAmount } 
+                            setTotalCardAmount={ setTotalCardAmount }
                         />
                     ))
                 }
@@ -99,9 +110,9 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             fontSize:'25px', 
                             color:'var(--primary-color)', 
                             fontWeight:'400', 
-                            marginRight: '95px'
+                            // marginRight: '95px'
                         }}>
-                            ${ 10000 }
+                            ${ formatNumberWithThousandsSeparator( totalCardAmount ) }
                     </h1>
                 </div>
             </div>
