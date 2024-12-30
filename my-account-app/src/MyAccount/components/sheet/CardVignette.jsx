@@ -5,7 +5,7 @@ import { DeleteVignetteFetch, UpdateVignatteFetch } from '../../../assets/api/My
 import { useRef } from 'react';
 import { useEffect } from 'react';
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, totalCardAmount, setTotalCardAmount }) => {
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes }) => {
     const { id: vignetteId, description, amount, order } = vignette; 
     
     const refDesription = useRef(); 
@@ -39,11 +39,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             color: 'WHITE', 
             order 
         }
-        
-        //ayanez
-        // totalCardAmount, setTotalCardAmount
+
         const { isError } = await UpdateVignatteFetch( newData ); 
-        console.log(newData)
     
         
         if(!isError){

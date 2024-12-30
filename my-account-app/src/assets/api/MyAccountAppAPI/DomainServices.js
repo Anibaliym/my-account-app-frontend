@@ -96,8 +96,6 @@ export const deleteCardWithVignettesFetch = async ( cardId ) => {
         } );   
 
         const data = await response.json(); 
-        console.log(response); 
-        console.log(data)
 
         return { isError: false, data }
     } catch (error) 

@@ -25,7 +25,6 @@ export const createCardFetch = async ( sheetId, title, description ) => {
     } 
     catch (error) 
     {
-        console.log(error)
         return { isError: true, message: 'Ocurrió un error al intentar crear la carta.' }
     }
 }

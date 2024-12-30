@@ -96,27 +96,6 @@ export const UpdateAccountAPI = async ( accountId, description ) => {
     }
 }
 
-// export const DeleteAccountAPI = async ( accountId ) => {
-//     try 
-//     {
-//         const response = await fetch( `${ API_URL }/api/Account/DeleteAccount?id=${ accountId }`, {
-//             method: 'delete', 
-//             headers: {
-//                 'Accept': 'application/json',
-//             }
-//         });   
-
-//         console.log(response); 
-
-//         return { isError : false }
-//     } 
-//     catch (error) 
-//     {
-//         console.log(error); 
-//         return { isError : true }
-//     }
-// }
-
 export const DeleteAccountAPI = async ( accountId ) => {
 
     try 
@@ -128,7 +107,6 @@ export const DeleteAccountAPI = async ( accountId ) => {
   
         const { resolution, message } = await response.json(); // Si hay un cuerpo JSON en la respuesta
          
-        console.log({ resolution, message }); 
         return { 
             isError : !resolution, 
             message

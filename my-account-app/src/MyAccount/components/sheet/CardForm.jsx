@@ -4,22 +4,11 @@ import { useState } from 'react';
 import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { CreateVignetteFetch, GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
-import { useEffect } from 'react';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 
 export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
-    const [ totalCardAmount, setTotalCardAmount ] = useState(0); 
-    const [ arrAmountCard, setArrAmountCard ] = useState([]); 
-
-    useEffect(() => {
-        const amounts = vignettesData.map(({ amount }) => amount);
-        setArrAmountCard(amounts);
-
-
-        console.log(arrAmountCard)
-    }, [vignettesData]); // Dependencia para actualizarse si cambia vignettesData
 
     const createVignette = async () => {
         const { isError, message, data: vignette } = await CreateVignetteFetch( cardId, 5 );
@@ -94,8 +83,6 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             showUserMessage={ showUserMessage }
                             setVignettes={ setVignettes }
                             vignettes={ vignettes }
-                            totalCardAmount={ totalCardAmount } 
-                            setTotalCardAmount={ setTotalCardAmount }
                         />
                     ))
                 }
@@ -112,7 +99,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             fontWeight:'400', 
                             // marginRight: '95px'
                         }}>
-                            ${ formatNumberWithThousandsSeparator( totalCardAmount ) }
+                            ${ formatNumberWithThousandsSeparator( 1000 ) }
                     </h1>
                 </div>
             </div>
