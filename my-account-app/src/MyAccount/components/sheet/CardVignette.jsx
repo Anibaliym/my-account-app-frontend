@@ -1,11 +1,11 @@
 import { Tooltip } from '@nextui-org/react';
-import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { useState } from 'react';
-import { DeleteVignetteFetch, UpdateVignatteFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { useRef } from 'react';
 import { useEffect } from 'react';
+import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
+import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTotalFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes }) => {
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount }) => {
     const { id: vignetteId, description, amount, order } = vignette; 
     
     const refDesription = useRef(); 
@@ -28,28 +28,27 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     useEffect(() => {
         setShowSaveIcon(newDescription !== description); 
     }, [ newDescription, newAmount ])
-    
+
     const updateVignette = async () => {
 
         const newData = { 
             id: vignetteId, 
             cardId, 
             description: newDescription, 
-            amount: newAmount, 
+            amount: (newAmount.length === 0) ? 0 : newAmount, 
             color: 'WHITE', 
             order 
         }
 
-        const { isError } = await UpdateVignatteFetch( newData ); 
-    
-        
+        const { isError, data } = await updateVignetteAndRecalculateTotalFetch( newData ); 
+
         if(!isError){
             setShowSaveIcon(false); 
             setShowSuccessIcon(true); 
+            setCardTotalAmount(data.totalAmount);
         }
         else 
             showUserMessage('Ocurrió un error al intentar actualizar la viñata'); 
-
     }
 
     const onChangeDescription = (e) =>  setNewDescription(e.target.value);
@@ -59,13 +58,27 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         setNewAmount( formatNumber(value)); 
     };
 
+    // const deleteVignette = async () => {
+    //     const { isError } = await DeleteVignetteFetch( vignette.id ); 
+
+    //     showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
+    //     if(!isError)
+    //         setVignettes(vignettes.filter(item => item.id !== vignette.id));
+    // }
+
+
     const deleteVignette = async () => {
-        const { isError } = await DeleteVignetteFetch( vignette.id ); 
+        const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
+        console.log(data.data)
 
         showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
-        if(!isError)
+        if(!isError){
+            setCardTotalAmount(data.data.totalAmount);
             setVignettes(vignettes.filter(item => item.id !== vignette.id));
+        }
     }
+
+
 
     const handleBlur = ( controlName ) => {
 

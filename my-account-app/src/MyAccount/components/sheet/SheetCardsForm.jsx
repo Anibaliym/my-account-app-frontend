@@ -25,7 +25,7 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
             }
 
             {
-                sheetCards.map( ({ id, title, vignettes }) => (
+                sheetCards.map( ({ id, title, vignettes, totalCardAmount }) => (
                     <CardForm
                         key={ id }
                         cardId={ id }
@@ -33,6 +33,7 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
                         vignettesData={ vignettes }
                         showUserMessage={ showUserMessage }
                         fetchCard={ fetchCard }
+                        totalCardAmount={ totalCardAmount }
                     />
                 ))
             }

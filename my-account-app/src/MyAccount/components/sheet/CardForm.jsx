@@ -6,9 +6,10 @@ import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAP
 import { CreateVignetteFetch, GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 
-export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard }) => {
+export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
+    const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
 
     const createVignette = async () => {
         const { isError, message, data: vignette } = await CreateVignetteFetch( cardId, 5 );
@@ -83,6 +84,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             showUserMessage={ showUserMessage }
                             setVignettes={ setVignettes }
                             vignettes={ vignettes }
+                            setCardTotalAmount={ setCardTotalAmount }
                         />
                     ))
                 }
@@ -99,7 +101,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             fontWeight:'400', 
                             // marginRight: '95px'
                         }}>
-                            ${ formatNumberWithThousandsSeparator( 1000 ) }
+                            ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
                     </h1>
                 </div>
             </div>

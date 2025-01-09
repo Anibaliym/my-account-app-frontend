@@ -98,10 +98,55 @@ export const deleteCardWithVignettesFetch = async ( cardId ) => {
         const data = await response.json(); 
 
         return { isError: false, data }
-    } catch (error) 
+    } 
+    catch (error) 
     {
         return { isError: true, data: null }
-
-        
     }
 }
+
+export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteAndRecalculateTotal`,{
+            method : 'put', 
+            headers: { 
+                'Content-Type': 'application/json', 
+                'accept' : '*/*',
+            },
+            body: JSON.stringify(vignette),
+        });
+
+        const { data } = await response.json();
+
+        
+        return { isError: false, data }
+    } 
+    catch (error) {
+        return { isError: true, data: null }
+    }
+}
+
+export const deleteVignetteAndRecalculateTotalFetch = async ( vignetteId ) => {
+
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/DomainServices/DeleteVignetteAndRecalculateTotal?vignetteId=${ vignetteId }`, {
+            method: 'delete', 
+            headers: { 'accept' : '*/*' }
+        });
+
+        const data = await response.json();
+
+        return { isError: false, data }
+    } 
+    catch (error) {
+        console.log('error ... ' + error)
+        return { isError: true, data: null }
+    }
+}
+
+
+
+
+
