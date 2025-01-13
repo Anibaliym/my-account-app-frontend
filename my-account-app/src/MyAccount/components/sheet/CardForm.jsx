@@ -3,8 +3,12 @@ import { CardVignette } from './CardVignette';
 import { useState } from 'react';
 import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
-import { CreateVignetteFetch, GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
+import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
+
+import { DndContext, closestCenter } from '@dnd-kit/core';
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+
 
 export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
@@ -21,6 +25,36 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
 
         setVignettes([...vignettes, vignette]); 
     }
+
+    const onDrawEnd = (event) => {
+        const { active, over } = event;
+    
+        // Verifica si hay un destino válido
+        if (!over || active.id === over.id) {
+            return; // No hacer nada si no hay un destino o el elemento no se ha movido
+        }
+    
+        // Encuentra los índices antiguos y nuevos en el array de vignettes
+        const oldIndex = vignettes.findIndex(v => v.id === active.id);
+        const newIndex = vignettes.findIndex(v => v.id === over.id);
+    
+        // Mueve el elemento dentro del array
+        const newOrder = arrayMove(vignettes, oldIndex, newIndex);
+    
+        // Actualiza la propiedad "order" en base al nuevo índice
+        const updatedOrder = newOrder.map((item, index) => ({
+            ...item,
+            order: index + 1, // Ajusta el orden basado en la nueva posición
+        }));
+    
+        // Actualiza el estado con el nuevo orden
+        setVignettes(updatedOrder);
+    
+        // Si tienes una función para sincronizar el orden con el backend, descomenta esto:
+        // updateOrder(updatedOrder);
+        const algo = updateVignetteOrderItemsFetch(updatedOrder);
+        console.log(algo)
+    };
 
     const deleteCard = async () => {
         const { isError, data: vignettes } = await GetVignetteByCardIdFetch(cardId); 
@@ -73,20 +107,27 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
             </div>
 
             <div className="excel-card-body">
-                {  
-                    vignettes?.map( ( vignette ) => (
-                        <CardVignette 
-                            key={ vignette.id } 
-                            cardId={ cardId }
-                            vignette={ vignette } 
-                            showUserMessage={ showUserMessage }
-                            setVignettes={ setVignettes }
-                            vignettes={ vignettes }
-                            setCardTotalAmount={ setCardTotalAmount }
-                            getCalculatedCardTotals={ getCalculatedCardTotals }
-                        />
-                    ))
-                }
+                <DndContext
+                    collisionDetection={ closestCenter }
+                    onDragEnd={ onDrawEnd }
+                > 
+                    <SortableContext items={ vignettes.map(v => v.id) } strategy={ verticalListSortingStrategy }>
+                    {  
+                        vignettes?.map( ( vignette ) => (
+                            <CardVignette 
+                                key={ vignette.id } 
+                                cardId={ cardId }
+                                vignette={ vignette } 
+                                showUserMessage={ showUserMessage }
+                                setVignettes={ setVignettes }
+                                vignettes={ vignettes }
+                                setCardTotalAmount={ setCardTotalAmount }
+                                getCalculatedCardTotals={ getCalculatedCardTotals }
+                            />
+                        ))
+                    }
+                    </SortableContext>
+                </DndContext>
             </div>
 
             <div className="excel-card-footer">

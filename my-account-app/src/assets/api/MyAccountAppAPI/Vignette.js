@@ -49,3 +49,23 @@ export const GetVignetteByCardIdFetch = async ( cardId ) => {
         return { isError: false, data: null }
     }
 }
+
+export const updateVignetteOrderItemsFetch = async ( vignettes ) => {
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/Vignette/UpdateVignetteOrderItems`,{
+            method: 'put', 
+            headers: {
+                'accept': '*/*', 
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify( vignettes ),
+        });       
+
+        return { isError: false }; 
+    } 
+    catch (error) {
+        console.log('Ocurrió un error al intentar actualizar el orden de las viñetas.', error);
+        return { isError: true }; 
+    }
+}

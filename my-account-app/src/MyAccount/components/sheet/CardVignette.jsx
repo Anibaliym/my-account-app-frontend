@@ -1,13 +1,17 @@
-import { Tooltip } from '@nextui-org/react';
 import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTotalFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
+import { useSortable } from "@dnd-kit/sortable"; 
+import { CSS } from '@dnd-kit/utilities'; 
+
+
 export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals }) => {
+    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order } = vignette; 
-    
+
     const refDesription = useRef(); 
     const refAmount = useRef(); 
 
@@ -72,8 +76,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         }
     }
 
-
-
     const handleBlur = ( controlName ) => {
 
         switch (controlName) {
@@ -104,7 +106,11 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
     return (
         <>
-            <div className="excel-card-vignette animate__animated animate__fadeInDown animate__faster">
+            <div 
+                ref={ setNodeRef } 
+                style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
+                className="excel-card-vignette"
+            >
                 <div className="excel-card-row">
                     <div className="excel-card-cell description">
                         <input 
@@ -133,21 +139,10 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                         />
                     </div>
                     <div className="excel-card-cell action">
-
                         { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                        
-
                         { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-
-                        <Tooltip placement="bottom" content="eliminar" color="secondary" closeDelay={50}>
-                            <i className='bx bx-trash card-icon' onClick={ deleteVignette } ></i>
-                        </Tooltip>
-                        {/* <Tooltip placement="bottom" content="color" color="secondary" closeDelay={50}>
-                            <i className='bx bxs-palette card-icon' ></i>
-                        </Tooltip> */}
-                        <Tooltip placement="bottom" content="orden" color="secondary" closeDelay={50}>
-                            <i className='bx bx-sort-alt-2 card-icon' ></i>
-                        </Tooltip>
+                        <i className='bx bx-trash card-icon' onClick={ deleteVignette } ></i>
+                        <i className='bx bx-sort-alt-2 card-icon' {...listeners} {...attributes}></i>
                     </div>
                 </div>
             </div>

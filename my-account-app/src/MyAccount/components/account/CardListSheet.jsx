@@ -4,6 +4,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { SheetDragableListItem } from './SheetDragableListItem';
 
 export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUserMessage, setAccountListener, accountListener }) => {
+    
     const onDeleteSheetRefresh = (sheetId) => {
         setSheets((prevSheets) => prevSheets.filter(sheet => sheet.id !== sheetId));
         setAccountListener( accountListener - 1 )
@@ -57,7 +58,6 @@ export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUs
                         }
             
                         {
-            
                             (sheets)
                                 .slice() // Crea una copia del array para no mutar el original
                                 .sort((a, b) => a.order - b.order) // Ordena por el campo "order" en orden ascendente
