@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
 
-export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, totalAvailable, setBalances, setIcons, fetchSheet}) => {
+export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance }) => {
     const { sheetId } = useParams(); 
 
     const handleChange = (e, field) => {
@@ -41,26 +41,30 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
 
     return (
         <div className="sheet-balances-form">
+            <div className="sheet-balances-form-header">
+                <h1 className="display-6 ">{ sheetName }</h1>
 
-            <h1 className="display-6">{sheetName}</h1>
-
-            <div className="row">
-                <div className="col icon-save">
-                    <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
-                        <i className='bx bxs-backpack icon' ></i>
-                    </Tooltip>
-                    <Tooltip placement="bottom" content="eliminar hoja de cálculo" color="secondary" closeDelay={ 50 }>
-                        <i className="bx bx-trash icon" ></i>
-                    </Tooltip>
-                    <Tooltip placement="bottom" content="exportar a excel" color="secondary" closeDelay={ 50 }>
-                        <i className='bx bx-export icon'></i>
-                    </Tooltip>
-                    <Tooltip placement="bottom" content="calendario" color="secondary" closeDelay={ 50 }>
-                        <i className='bx bxs-calendar icon' ></i>
-                    </Tooltip>
+                <div className="row">
+                    <div className="col icon-save">
+                        <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
+                            <i className='bx bxs-backpack icon' ></i>
+                        </Tooltip>
+                        <Tooltip placement="bottom" content="eliminar hoja de cálculo" color="secondary" closeDelay={ 50 }>
+                            <i className="bx bx-trash icon" ></i>
+                        </Tooltip>
+                        <Tooltip placement="bottom" content="exportar a excel" color="secondary" closeDelay={ 50 }>
+                            <i className='bx bx-export icon'></i>
+                        </Tooltip>
+                        <Tooltip placement="bottom" content="calendario" color="secondary" closeDelay={ 50 }>
+                            <i className='bx bxs-calendar icon' ></i>
+                        </Tooltip>
+                    </div>
                 </div>
+
             </div>
+
             <hr />
+
             <div>
                 <small>Efectivo</small>
                 <input
@@ -96,10 +100,34 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     { icons.ok.currentAccountBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i> }
                 </div>
 
-                <hr />
-                <small>Total Disponible: ${totalAvailable}</small><br />
-                <small>Total Restante: $1,000</small>
+
+                <div className="list-group mt-2">
+                    <a className="list-group-item">
+                        <div className="d-flex w-100 justify-content-between">
+                            <small className="text-body-secondary" style={{ color:'var(--text-color)' }}>Total Disponible</small>
+                        </div>
+                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(availableTotalBalance)}</p>
+                    </a>
+                    <a className="list-group-item">
+                        <div className="d-flex w-100 justify-content-between">
+                            <small className="text-body-secondary">Total Gastos Planificados</small>
+                        </div>
+                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(toSpendBalance)}</p>
+                    </a>
+                    <a className={ `list-group-item ${ (inFavorBalance < 0 && 'list-group-item-danger' ) }` } style={{  color: `${ inFavorBalance < 0 ? 'red':'black' }` }}>
+                        <div className="d-flex w-100 justify-content-between">
+                            <small className="text-body-secondary">Saldo Libre</small>
+
+                            {
+                                inFavorBalance < 0 && (<small className="animate__animated animate__fadeInDown animate__faster" style={{ color: 'red' }}>SALDO NEGATIVO</small>)
+                            }
+
+                        </div>
+                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(inFavorBalance)}</p>
+                    </a>
+                </div>
+     
             </div>        
         </div>
-    )
-}
+    );
+};

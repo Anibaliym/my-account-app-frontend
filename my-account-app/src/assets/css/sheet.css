@@ -7,25 +7,29 @@
 
 .sheet-balances-form {
     width: 350px; /* Ancho fijo */
-    height: 470px; /* Altura fija */
+    height: 550px; /* Altura fija */
     background-color: var(--primary-color);
-    border-radius: 5px;
-    padding: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding:5px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     color: white;
 }
 
 .sheet-cards-form {
     flex: 1; /* Toma el ancho restante */
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
-    /* background-color: var(--sidebar-color); */
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
 }
 
+.sheet-balances-form-header {
+    background-color: #5c63d3;
+    border-radius:3px; 
+    padding:5px; 
+}
 
 .balance-input-text {
-    width: 100%;
+    width: 96%;
     border: none;
     font-size: 30px;
     background-color: var(--primary-color);
@@ -178,7 +182,7 @@
 
     .sheet-balances-form {
         width: 350px; /* Ancho fijo */
-        height: 470px; /* Mantiene la altura fija */
+        height: 550px; /* Mantiene la altura fija */
     }
 }
 

@@ -6,7 +6,7 @@ import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAP
 import { CreateVignetteFetch, GetVignetteByCardIdFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 
-export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount }) => {
+export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
     const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
@@ -30,12 +30,10 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
             if(vignettes.length > 0) 
                 setModalConfirmDeleteCard(true); 
             else {
-                
                 const { isError, data } = await deleteCardWithVignettesFetch(cardId);
-                
                 showUserMessage( (!isError) ? `Carta "${ title }" eliminada` : 'Ocurrió un error al intentar eliminar la carta.' )
-
                 fetchCard(); 
+                getCalculatedCardTotals();
             }
         }
         else 
@@ -85,6 +83,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                             setVignettes={ setVignettes }
                             vignettes={ vignettes }
                             setCardTotalAmount={ setCardTotalAmount }
+                            getCalculatedCardTotals={ getCalculatedCardTotals }
                         />
                     ))
                 }

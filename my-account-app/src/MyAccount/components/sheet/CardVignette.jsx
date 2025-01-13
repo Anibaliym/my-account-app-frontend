@@ -5,7 +5,7 @@ import { useEffect } from 'react';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTotalFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount }) => {
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals }) => {
     const { id: vignetteId, description, amount, order } = vignette; 
     
     const refDesription = useRef(); 
@@ -42,7 +42,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
         const { isError, data } = await updateVignetteAndRecalculateTotalFetch( newData ); 
 
-        if(!isError){
+        if(!isError) {
+            getCalculatedCardTotals(); 
             setShowSaveIcon(false); 
             setShowSuccessIcon(true); 
             setCardTotalAmount(data.totalAmount);
@@ -58,21 +59,14 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         setNewAmount( formatNumber(value)); 
     };
 
-    // const deleteVignette = async () => {
-    //     const { isError } = await DeleteVignetteFetch( vignette.id ); 
-
-    //     showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
-    //     if(!isError)
-    //         setVignettes(vignettes.filter(item => item.id !== vignette.id));
-    // }
-
-
     const deleteVignette = async () => {
         const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
-        console.log(data.data)
 
         showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
         if(!isError){
+
+            getCalculatedCardTotals(); 
+
             setCardTotalAmount(data.data.totalAmount);
             setVignettes(vignettes.filter(item => item.id !== vignette.id));
         }

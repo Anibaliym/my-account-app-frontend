@@ -15,7 +15,10 @@ export const SheetPage = ({ showUserMessage }) => {
     const [ sheetCards, setSheetCards ] = useState([]);
     const [ balances, setBalances ] = useState({ cashBalance: '', currentAccountBalance: '' });
     const [ oldBalances, setOldBalances ] = useState({ cashBalance: 0, currentAccountBalance: 0 });
-    const [ totalAvailable, setTotalAvailable ] = useState(0);
+    const [ availableTotalBalance, setAvailableTotalBalance ] = useState(0);
+    const [ toSpendBalance, settoSpendBalance ] = useState(0); 
+    const [ inFavorBalance, setinFavorBalance ] = useState(0); 
+    const [ totalCardsBalances, setTotalCardsBalances ] = useState(0);
     const [ showModalCreateCard, setShowModalCreateCard ] = useState(false);
     const [ sheetName, setSheetName ] = useState('hoja de cálculo');
 
@@ -27,7 +30,7 @@ export const SheetPage = ({ showUserMessage }) => {
     useEffect(() => {
         fetchSheet();
         fetchCard();
-    }, [ sheetId ]);
+    }, [sheetId]);
 
     useEffect(() => {
         setIcons((prev) => ({
@@ -37,9 +40,7 @@ export const SheetPage = ({ showUserMessage }) => {
                 cashBalance: Number(formatNumber(balances.cashBalance)) !== oldBalances.cashBalance,
             },
         }));
-    }, [ balances.cashBalance ]);
 
-    useEffect(() => {
         setIcons((prev) => ({
             ...prev,
             save: {
@@ -47,12 +48,17 @@ export const SheetPage = ({ showUserMessage }) => {
                 currentAccountBalance: Number(formatNumber(balances.currentAccountBalance)) !== oldBalances.currentAccountBalance,
             },
         }));
-    }, [ balances.currentAccountBalance ]);
 
-    useEffect(() => {
         const total = Number(formatNumber(balances.cashBalance)) + Number(formatNumber(balances.currentAccountBalance));
-        setTotalAvailable(formatNumberWithThousandsSeparator(total));
-    }, [ balances ]);
+        setAvailableTotalBalance(total);
+    
+        // "Gastos Planificados"
+        settoSpendBalance(totalCardsBalances);
+    
+        // "Saldo Disponible" (puede ser negativo)
+        const availableBalance = total - totalCardsBalances;
+        setinFavorBalance(availableBalance);
+    }, [balances, totalCardsBalances]);
 
     useEffect(() => {
         const timeoutIds = [];
@@ -83,7 +89,14 @@ export const SheetPage = ({ showUserMessage }) => {
     }, [icons.ok]);
 
     const fetchCard = async () => {
+        let calcTotalCardsAmount = 0; 
         const { isError, data } = await getSheetCardsWithVignettesFetch(sheetId); 
+
+        data.map(({ id, totalCardAmount }) => {
+            calcTotalCardsAmount += totalCardAmount;
+        });
+
+        setTotalCardsBalances(calcTotalCardsAmount);
         if (!isError) setSheetCards(data);
     };
 
@@ -103,37 +116,52 @@ export const SheetPage = ({ showUserMessage }) => {
                 currentAccountBalance: `$${formatNumberWithThousandsSeparator(currentAccountBalance)}`,
             });
 
-            setOldBalances({
-                cashBalance,
-                currentAccountBalance,
-            });
+            setOldBalances({ cashBalance, currentAccountBalance });
         } catch (error) {
             showUserMessage('Error fetching sheet:', error);
         }
     };
 
+    const getCalculatedCardTotals = async () => {
+        let calcTotalCardsAmount = 0; 
+        const { isError, data } = await getSheetCardsWithVignettesFetch(sheetId); 
+
+        if(!isError) {
+            data.map(({ id, totalCardAmount }) => {
+                calcTotalCardsAmount += totalCardAmount;
+            });
+    
+            setTotalCardsBalances(calcTotalCardsAmount);
+        }
+        else 
+            showUserMessage('Ocurrió un error al intentar cargar las cartas de la hoja de cálculo.');
+    }
+
     return (
         <div className="sheet-form-container">
-                <SheetBalanceForm
-                    sheetName={ sheetName }
-                    setSheetName={ setSheetName }
-                    cashBalanceRef={ cashBalanceRef }
-                    balances={ balances }
-                    icons={ icons }
-                    currentAccountBalanceRef={ currentAccountBalanceRef }
-                    totalAvailable={ totalAvailable }
-                    setBalances={ setBalances }
-                    setIcons={ setIcons }
-                    fetchSheet={ fetchSheet }
-                />
+            <SheetBalanceForm
+                sheetName={sheetName}
+                setSheetName={setSheetName}
+                cashBalanceRef={cashBalanceRef}
+                balances={balances}
+                icons={icons}
+                currentAccountBalanceRef={currentAccountBalanceRef}
+                availableTotalBalance={availableTotalBalance}
+                toSpendBalance={toSpendBalance}
+                inFavorBalance={inFavorBalance}
+                setBalances={setBalances}
+                setIcons={setIcons}
+                fetchSheet={fetchSheet}
+            />
 
-                <SheetCardsForm
-                    showModalCreateCard={ showModalCreateCard }
-                    setShowModalCreateCard={ setShowModalCreateCard }
-                    showUserMessage={ showUserMessage }
-                    fetchCard={ fetchCard }
-                    sheetCards={ sheetCards }
-                />
+            <SheetCardsForm
+                showModalCreateCard={showModalCreateCard}
+                setShowModalCreateCard={setShowModalCreateCard}
+                showUserMessage={showUserMessage}
+                fetchCard={fetchCard}
+                sheetCards={sheetCards}
+                getCalculatedCardTotals={ getCalculatedCardTotals }
+            />
         </div>
     );
 };
