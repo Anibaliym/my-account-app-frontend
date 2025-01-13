@@ -57,15 +57,14 @@ export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, des
                 </button>
             </Tooltip>
 
-
-                <div
+            <div
                 className="dropdown-container animate__animated animate__fadeIn animate__faster"
                 style={{ display: !toggleSidebar && activeDropdown === accountId ? 'block' : 'none' }}
-                >
-                    {
-                        sheets.map(  ({ sheet }) => ( setSubMenuText(sheet) )) 
-                    }
-             </div>
+            >
+                {
+                    sheets.map(  ({ sheet }) => ( setSubMenuText(sheet) )) 
+                }
+            </div>
         </div>
     );
 };

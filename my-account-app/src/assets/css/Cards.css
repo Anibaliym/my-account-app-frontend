@@ -96,11 +96,12 @@
 }
 
 input:focus::placeholder {
-    font-size: 10px;
+    font-size: 14px;
+    color: var(--text-color);
 }
 
 input::placeholder {
-    color: lightgray;
+    color: var(--text-color);
     font-size: 15px;
     transition: font-size 0.3s ease, color 0.3s ease;
 }
