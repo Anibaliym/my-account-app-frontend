@@ -102,29 +102,38 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
 
 
                 <div className="list-group mt-2">
-                    <a className="list-group-item">
-                        <div className="d-flex w-100 justify-content-between">
-                            <small className="text-body-secondary" style={{ color:'var(--text-color)' }}>Total Disponible</small>
-                        </div>
-                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(availableTotalBalance)}</p>
-                    </a>
-                    <a className="list-group-item">
-                        <div className="d-flex w-100 justify-content-between">
-                            <small className="text-body-secondary">Total Gastos Planificados</small>
-                        </div>
-                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(toSpendBalance)}</p>
-                    </a>
-                    <a className={ `list-group-item ${ (inFavorBalance < 0 && 'list-group-item-danger' ) }` } style={{  color: `${ inFavorBalance < 0 ? 'red':'black' }` }}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <small className="text-body-secondary">Saldo Libre</small>
 
-                            {
-                                inFavorBalance < 0 && (<small className="animate__animated animate__fadeInDown animate__faster" style={{ color: 'red' }}>SALDO NEGATIVO</small>)
-                            }
+                    <Tooltip placement="right" content="Indica la cantidad total disponible sumando el efectivo y la cuenta corriente." color="secondary" closeDelay={ 50 }>
+                        <a className="list-group-item">
+                            <div className="d-flex w-100 justify-content-between">
+                                <small className="text-body-secondary" style={{ color:'var(--text-color)' }}>Total Disponible</small>
+                            </div>
+                            <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(availableTotalBalance)}</p>
+                        </a>
+                    </Tooltip>
+                    <Tooltip placement="right" content="Muestra el monto total ya asignado o presupuestado para los gastos actuales." color="secondary" closeDelay={ 50 }>
+                        <a className="list-group-item">
+                            <div className="d-flex w-100 justify-content-between">
+                                <small className="text-body-secondary">Total Gastos Planificados</small>
+                            </div>
+                            <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(toSpendBalance)}</p>
+                        </a>
+                    </Tooltip>
+                    <Tooltip placement="right" content="Indica el saldo restante después de descontar los gastos planificados del total disponible." color="secondary" closeDelay={ 50 }>
+                        <a className={ `list-group-item ${ (inFavorBalance < 0 && 'list-group-item-danger' ) }` } style={{  color: `${ inFavorBalance < 0 ? 'red':'black' }` }}>
+                            <div className="d-flex w-100 justify-content-between">
+                                <small className="text-body-secondary">Saldo Libre</small>
 
-                        </div>
-                        <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(inFavorBalance)}</p>
-                    </a>
+                                {
+                                    inFavorBalance < 0 && (<small className="animate__animated animate__fadeInDown animate__faster" style={{ color: 'red' }}>SALDO NEGATIVO</small>)
+                                }
+
+                            </div>
+                            <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(inFavorBalance)}</p>
+                        </a>
+                    </Tooltip>
+
+
                 </div>
      
             </div>        
