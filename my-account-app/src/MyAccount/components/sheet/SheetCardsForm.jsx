@@ -19,7 +19,18 @@ export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, sh
             </div>
 
             { 
-                (sheetCards.length === 0) && (<div  className="animate__animated animate__fadeInDown animate__faster"><small> <span className="sheet-list ml-2">No hay cartas creadas para la hoja de cálculo ...</span> </small></div>)
+                (sheetCards.length === 0) 
+                    && (
+                        <div className="animate__animated animate__fadeInDown animate__faster">
+                            <h4> 
+                                <center>
+                                    <span className="sheet-list ml-2">
+                                        No Hay Cartas De Planificación Creadas Aún
+                                    </span> 
+                                </center>
+                            </h4>
+                        </div>
+                    )
             }
 
             {

@@ -64,9 +64,10 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
             </div>
 
             <hr />
-
+            
             <div>
                 <small>Efectivo</small>
+
                 <input
                     ref={cashBalanceRef}
                     name="cashBalance"
@@ -78,11 +79,10 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     onClick={() => cashBalanceRef.current.select()}
                     value={balances.cashBalance}
                 />
-                <div className="icon-save mt-1">
+                <div className="icon-save">
                     {icons.save.cashBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i>}
                     {icons.ok.cashBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i>}
                 </div>
-                <hr />
                 <small>Cuenta Corriente</small>
                 <input
                     ref={currentAccountBalanceRef}
