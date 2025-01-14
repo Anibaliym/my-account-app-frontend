@@ -10,18 +10,18 @@ export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard,
                         <h5 className="card-title text-color-primary">Eliminar carta</h5>
                         <hr />
 
-                        <p className="card-text text-center">
+                        <p className="text-center modal-text-message">
                             La carta de planificación que intentas eliminar <span className="text-color-primary">"{ cardTitle }"</span>, 
                             aun contiene información que podría ser sensible.
                         </p>
 
-                        <figcaption className="blockquote-footer text-center mt-5">
+                        <figcaption className="blockquote-footer text-center mt-5 modal-text-message">
                             ¿Eliminar?
                         </figcaption>
                     </div>
 
                     <div className="row">
-                        <button className="modal-button" onClick={ deleteCardWithVignettes }>
+                        <button className="modal-button-danger" onClick={ deleteCardWithVignettes }>
                             <i className='bx bx-trash icon'></i>
                         </button>
                     </div>

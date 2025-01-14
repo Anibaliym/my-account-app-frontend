@@ -8,7 +8,6 @@ import '/src/assets/css/Modal.css';
 
 export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard }) => {
     const RefTitle = useRef(); 
-    const RefDescription = useRef(); 
     const { sheetId } = useParams();
     const [ title, setTitle ] = useState(''); 
     const [ description, setDescription ] = useState(''); 
@@ -77,36 +76,33 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
         <Modal show={ showModalCreateCard } onHide={ setShowModalCreateCard } className="modal-blur">
             <Modal.Body className="modal-content">
                 <div className="container-fluid">
-                    <div className="row">
+                    <div className="card-body">
+                        <h5 className="card-title text-color-primary">Crear carta de planificación</h5>
+                        <hr />
+
                         <input 
-                            style={{ textTransform:'uppercase' }}
                             ref={ RefTitle }
                             type="text" 
-                            className="no-focus modal-input-text display-6"
-                            placeholder="Descripción de la carta"  
+                            className=" modal-input-text "
+                            placeholder="Titulo"  
                             onChange={ ( e ) => handleChange( e, 'title') }
                             onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
                             value={ title }
                             maxLength={ 25 }
                         />
 
-                    </div>
+                        <div className="row">
+                            <small className={ `mt-5 mb-1 text-right text-danger ${ animationClass }` }> { modalMessage } </small>
+                        </div>
 
-                    <div className="row">
-                        <small className={ `mt-5 mb-1 text-right text-danger ${ animationClass }` }> { modalMessage } </small>
-                    </div>
-  
-                    <div className="row">
-                        <button
-                            className="modal-button"
-                            onClick={ handleClick }
-                        >
-                            Guardar
-                        </button>
-
+                        <div className="row">
+                            <button className="modal-button" onClick={ handleClick }>
+                                <i className='bx bx-save icon' ></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
-           </Modal.Body>
+          </Modal.Body>
         </Modal>
     );
 };

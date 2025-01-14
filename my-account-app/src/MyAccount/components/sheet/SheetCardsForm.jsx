@@ -7,13 +7,11 @@ export const SheetCardsForm = ({  showUserMessage, fetchCard, sheetCards, getCal
                 (sheetCards.length === 0) 
                     && (
                         <div className="animate__animated animate__fadeInDown animate__faster">
-                            <h4> 
-                                <center>
-                                    <span className="sheet-list ml-2">
-                                        No Hay Cartas De Planificación Creadas Aún
-                                    </span> 
-                                </center>
-                            </h4>
+                            <h6> 
+                                <span className="sheet-list">
+                                    No hay cartas de planificación creadas en la hoja de cálculo.
+                                </span> 
+                            </h6>
                         </div>
                     )
             }

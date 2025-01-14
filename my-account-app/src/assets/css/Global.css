@@ -10,6 +10,7 @@
     --placeholder-color: red; 
     --sidebar-color: #F3F3F0;
     --primary-color: #695CFE;
+    --danger-color: red;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #707070;
@@ -27,6 +28,7 @@ body.dark {
     --body-color: #212121;
     --sidebar-color: #171717;
     --primary-color: #695CFE;
+    --danger-color: red;
     --secondary-color: orange;
     --primary-color-light: #3a3b3c;
     --toggle-color: #696969;

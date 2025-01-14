@@ -66,11 +66,10 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const deleteVignette = async () => {
         const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
 
-        showUserMessage( (isError) ?? 'Ocurrió un error al intentar eliminar la viñeta' ); 
+        showUserMessage( (!isError) ? 'viñeta eliminada' : 'ocurrió un error al intentar eliminar la viñeta' ); 
+
         if(!isError){
-
             getCalculatedCardTotals(); 
-
             setCardTotalAmount(data.data.totalAmount);
             setVignettes(vignettes.filter(item => item.id !== vignette.id));
         }

@@ -7,11 +7,27 @@ import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItems
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { useEffect } from 'react';
 
 export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
     const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
+
+
+    const [ isAnimating, setIsAnimating ] = useState(false);
+
+    useEffect(() => {
+        // Activa la animación cuando cambia el valor de cardTotalAmount
+        setIsAnimating(true);
+
+        // Remueve la clase después de un tiempo (duración de la animación)
+        const timer = setTimeout(() => {
+            setIsAnimating(false);
+        }, 1000); // Ajusta el tiempo según la duración de tu animación CSS
+
+        return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta
+    }, [cardTotalAmount]);    
 
     const createVignette = async () => {
         const { isError, message, data: vignette } = await CreateVignetteFetch( cardId, 5 );
@@ -111,7 +127,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                     <SortableContext items={ vignettes.map(v => v.id) } strategy={ verticalListSortingStrategy }>
                     {  
                         vignettes?.map( ( vignette) => (
-                            <CardVignette 
+                            <CardVignette
                                 key={ vignette.id } 
                                 cardId={ cardId }
                                 vignette={ vignette } 
@@ -127,14 +143,12 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 </DndContext>
             </div>
 
-            <div className="excel-card-footer mt-1">
-                <div className="excel-card-cell"></div>
-                <div className="cell action">
-                    <h3 className="mt-3" style={{ color : 'var(--primary-color)' }}>
-                        ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
-                    </h3>
-                </div>
-            </div>
+            <div className={`excel-card-footer mt-1 animate__animated animate__faster ${isAnimating ? 'animate__flipInX' : ''}`}>
+            <div className="excel-card-cell"></div>
+                <h3 className="mt-3" style={{ color: 'var(--primary-color)' }}>
+                    ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
+                </h3>
+            </div>            
         </div>        
     )
 }
