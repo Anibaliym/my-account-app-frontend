@@ -114,38 +114,25 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     { icons.ok.currentAccountBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i> }
                 </div>
 
-
-                <div className="list-group mt-2">
-
+                <div className="balance-calculate-amount-form mt-3">
                     <Tooltip placement="right" content="Indica la cantidad total disponible sumando el efectivo y la cuenta corriente." color="secondary" closeDelay={ 50 }>
-                        <a className="list-group-item">
-                            <div className="d-flex w-100 justify-content-between">
-                                <small className="text-body-secondary" style={{ color:'var(--text-color)' }}>Total Disponible</small>
-                            </div>
+                        <div className="balance-calculate-amount-item">
+                            <small style={{ fontSize:'12px' }}>Total Disponible</small>
                             <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(availableTotalBalance)}</p>
-                        </a>
+                        </div>
                     </Tooltip>
                     <Tooltip placement="right" content="Muestra el monto total ya asignado o presupuestado para los gastos actuales." color="secondary" closeDelay={ 50 }>
-                        <a className="list-group-item">
-                            <div className="d-flex w-100 justify-content-between">
-                                <small className="text-body-secondary">Total Gastos Planificados</small>
-                            </div>
+                        <div className="balance-calculate-amount-item">
+                            <small style={{ fontSize:'12px' }}>Total Gastos Planificados</small>
                             <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(toSpendBalance)}</p>
-                        </a>
+                        </div>
                     </Tooltip>
                     <Tooltip placement="right" content="Indica el saldo restante después de descontar los gastos planificados del total disponible." color="secondary" closeDelay={ 50 }>
-                        <a className={ `list-group-item ${ (inFavorBalance < 0 && 'list-group-item-danger' ) }` } style={{  color: `${ inFavorBalance < 0 ? 'red':'black' }` }}>
-                            <div className="d-flex w-100 justify-content-between">
-                                <small className="text-body-secondary">Saldo Libre</small>
-
-                                {
-                                    inFavorBalance < 0 && (<small className="animate__animated animate__fadeInDown animate__faster" style={{ color: 'red' }}>SALDO NEGATIVO</small>)
-                                }
-
-                            </div>
-                            <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(inFavorBalance)}</p>
-                        </a>
-                    </Tooltip>
+                        <div className={ `${ inFavorBalance >= 0 ? 'balance-calculate-amount-item' : 'animate__animated animate__flipInX animate__faster balance-calculate-amount-item-danger' }` }>
+                            <small style={{ fontSize:'12px' }}>{ (inFavorBalance >= 0) ? 'Saldo a favor' : 'Saldo negativo' }</small>
+                            <p className="mb-1 ml-3">${ formatNumberWithThousandsSeparator(inFavorBalance) }</p>
+                        </div>
+                    </Tooltip>                    
                 </div>
             </div>        
         </div>

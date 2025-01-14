@@ -44,8 +44,6 @@ li.input-box input{
     color: var(--primary-color);
     border-radius: 4px;
     font-size: 15px;
-    /* font-weight: 500; */
-    /* font-family: arial;  */
     transition: var(--tran-05);
 }
 

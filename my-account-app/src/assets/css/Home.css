@@ -336,7 +336,6 @@ body.dark .switch::before {
 }
 
 .user-text {
-    font-family: 'Poppins', sans-serif;
     font-size: 11px;
     color: var(--primary-color);
 }
