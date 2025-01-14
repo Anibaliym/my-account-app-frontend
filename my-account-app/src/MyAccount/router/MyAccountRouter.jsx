@@ -54,9 +54,9 @@ export const MyAccountRouter = () => {
                 />
 
                 <section className="dashboard-content">
-                    <div className="row" style={ { height: "30px" } }>
+                    {/* <div className="row" style={ { height: "30px", width:'99%' } }>
                         <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
-                    </div>
+                    </div> */}
 
                     <ModalInfo message={ modalMessage }/>
 
@@ -81,6 +81,11 @@ export const MyAccountRouter = () => {
                         
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
+
+                    <div className="row" style={ { height: "30px", width:'100%' } }>
+                        <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
+                    </div>
+
                 </section>
             </div>
         </div>    

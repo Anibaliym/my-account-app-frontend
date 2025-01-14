@@ -10,7 +10,7 @@ export const UserMessage = ({ message, show, setShowMessage }) => {
     };
 
     const messageTime = getMessageTime(message.length);
-    const effect = show ? 'animate__fadeInDown' : 'animate__fadeOutUp';
+    const effect = show ? 'animate__flipInX' : 'animate__flipOutX';
 
     useEffect(() => {
         if (show) {

@@ -8,7 +8,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from '@dnd-kit/utilities'; 
 
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals }) => {
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals}) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order } = vignette; 
 
@@ -66,7 +66,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const deleteVignette = async () => {
         const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
 
-        showUserMessage( (isError) ? 'Ocurrió un error al intentar eliminar la viñeta' : 'Viñeta eliminada' ); 
+        showUserMessage( (isError) ?? 'Ocurrió un error al intentar eliminar la viñeta' ); 
         if(!isError){
 
             getCalculatedCardTotals(); 
@@ -112,6 +112,16 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                 className="excel-card-vignette"
             >
                 <div className="excel-card-row">
+                    
+                    <div className="excel-card-cell action">
+                        <i className='bx bx-sort-alt-2 text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
+                        <i className='bx bx-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
+                        <i className='bx bx-cog text-color-primary card-icon mr-1'></i>
+                        { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                        { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                    </div>
+
+
                     <div className="excel-card-cell description">
                         <input 
                             type="text" 
@@ -137,12 +147,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                             onClick={ () => ( refAmount.current.select() ) }
                             onKeyDown={ (e) => handleKeyDown(e, 'amount') }
                         />
-                    </div>
-                    <div className="excel-card-cell action">
-                        { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                        { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                        <i className='bx bx-trash card-icon' onClick={ deleteVignette } ></i>
-                        <i className='bx bx-sort-alt-2 card-icon' {...listeners} {...attributes}></i>
                     </div>
                 </div>
             </div>

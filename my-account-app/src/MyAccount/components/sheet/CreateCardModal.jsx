@@ -21,7 +21,6 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
     }, [showModalCreateCard])
     
     useEffect(() => {
-        // Añade la clase de animación
         if (modalMessage) {
             setAnimationClass('animate__animated animate__shakeX');
         
@@ -64,13 +63,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
             return; 
         }
 
-        // if(description.trim().length === 0){
-        //     setModalMessage('Debe ingresar una descripción válida.');
-        //     RefDescription.current.select(); 
-        //     return; 
-        // }
-
-        const { isError, message } = await createCardFetch(sheetId, title, description); 
+        const { isError, message } = await createCardFetch(sheetId, title.toUpperCase(), description); 
 
         showUserMessage(message);
         setTitle('');
@@ -86,6 +79,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
                 <div className="container-fluid">
                     <div className="row">
                         <input 
+                            style={{ textTransform:'uppercase' }}
                             ref={ RefTitle }
                             type="text" 
                             className="no-focus modal-input-text display-6"
@@ -93,28 +87,13 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
                             onChange={ ( e ) => handleChange( e, 'title') }
                             onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
                             value={ title }
-                            maxLength={ 30 }
+                            maxLength={ 25 }
                         />
 
                     </div>
 
-                    {/* <div className="row">
-                        <div className="form-floating mt-3">
-                            <textarea 
-                                ref={ RefDescription }
-                                className="no-focus modal-input-text-area display-6" 
-                                placeholder="Descripción"
-                                id="floatingTextarea" 
-                                maxLength={ 300 }
-                                onChange={ ( e ) => handleChange( e, 'description') }
-                                onKeyDown={ handleKeyDown }
-                                value={ description }
-                            ></textarea>
-                        </div>     
-                    </div> */}
-
                     <div className="row">
-                        <small className={ `mt-5 text-right text-light ${ animationClass }` }> { modalMessage } </small>
+                        <small className={ `mt-5 mb-1 text-right text-danger ${ animationClass }` }> { modalMessage } </small>
                     </div>
   
                     <div className="row">

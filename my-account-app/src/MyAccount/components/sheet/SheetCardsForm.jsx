@@ -1,23 +1,8 @@
-import { Tooltip } from '@nextui-org/react';
-import { CreateCardModal } from './CreateCardModal';
 import { CardForm } from './CardForm';
 
-export const SheetCardsForm = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard, sheetCards, getCalculatedCardTotals }) => {
+export const SheetCardsForm = ({  showUserMessage, fetchCard, sheetCards, getCalculatedCardTotals }) => {
     return (
         <div className="sheet-cards-form">
-            <CreateCardModal 
-                showModalCreateCard={ showModalCreateCard } 
-                setShowModalCreateCard={ setShowModalCreateCard } 
-                showUserMessage={ showUserMessage } 
-                fetchCard={ fetchCard } 
-            />
-
-            <div className="card-control-navbar mb-2">
-                <Tooltip placement="bottom" content="crear carta de planificación" color="secondary" closeDelay={ 50 }>
-                    <i className="bx bx-add-to-queue text-light r" onClick={ () => ( setShowModalCreateCard(!showModalCreateCard) ) } ></i>
-                </Tooltip>
-            </div>
-
             { 
                 (sheetCards.length === 0) 
                     && (

@@ -2,8 +2,9 @@ import { Tooltip } from '@nextui-org/react';
 import { useParams } from 'react-router-dom';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
+import { CreateCardModal } from './CreateCardModal';
 
-export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance }) => {
+export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage }) => {
     const { sheetId } = useParams(); 
 
     const handleChange = (e, field) => {
@@ -41,11 +42,24 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
 
     return (
         <div className="sheet-balances-form">
+
+            <CreateCardModal
+                showModalCreateCard={ showModalCreateCard } 
+                setShowModalCreateCard={ setShowModalCreateCard } 
+                showUserMessage={ showUserMessage } 
+                fetchCard={ fetchCard } 
+            />
+
             <div className="sheet-balances-form-header">
                 <h1 className="display-6 ">{ sheetName }</h1>
 
                 <div className="row">
                     <div className="col icon-save">
+
+                        <Tooltip placement="bottom" content="crear carta de planificación" color="secondary" closeDelay={ 50 }>
+                            <i className="bx bx-add-to-queue icon" onClick={ () => ( setShowModalCreateCard(!showModalCreateCard) ) } ></i>
+                        </Tooltip>
+
                         <Tooltip placement="bottom" content="crear respaldo" color="secondary" closeDelay={ 50 }>
                             <i className='bx bxs-backpack icon' ></i>
                         </Tooltip>
@@ -132,10 +146,7 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                             <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(inFavorBalance)}</p>
                         </a>
                     </Tooltip>
-
-
                 </div>
-     
             </div>        
         </div>
     );

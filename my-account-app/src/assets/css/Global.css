@@ -27,6 +27,7 @@ body.dark {
     --body-color: #212121;
     --sidebar-color: #171717;
     --primary-color: #695CFE;
+    --secondary-color: orange;
     --primary-color-light: #3a3b3c;
     --toggle-color: #696969;
     --text-color: #ccc;
@@ -36,4 +37,16 @@ body.dark {
 ::selection {
     background-color: var(--primary-color); /* Color de fondo de la selección */
     color: white; /* Color del texto seleccionado */
+}
+
+.text-color-primary {
+    color: var(--primary-color);
+}
+
+.text-color-danger {
+    color: var(--primary-color);
+}
+
+.text-color-danger:hover {
+    color: red;
 }

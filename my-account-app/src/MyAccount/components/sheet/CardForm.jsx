@@ -5,10 +5,8 @@ import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
-
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-
 
 export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
@@ -82,7 +80,8 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
     }
 
     return (
-        <div className={ `excel-card animate__animated animate__fadeInDown animate__faster` }>
+        <div className={ `excel-card animate__animated animate__fadeInDown animate__faster mb-4` }>
+        {/* <div className={`excel-card animate__animated animate__fadeInDown animate__faster ${index === vignettes.length - 1 ? '' : 'mb-4'}`}> */}
             <DeleteCardConfirmationModal
                 cardTitle={ title }
                 modalConfirmDeleteCard={ modalConfirmDeleteCard }
@@ -92,9 +91,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
             />
 
             <div className="excel-card-header">
-                <small className="lead">
-                    { title }
-                </small>
+                <h4>{ title }</h4>
 
                 <div className="icons-container">
                     <Tooltip placement="bottom" content="Eliminar la carta" color="secondary" closeDelay={50}>
@@ -106,14 +103,14 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 </div>
             </div>
 
-            <div className="excel-card-body">
+            <div className="excel-card-body mt-2">
                 <DndContext
                     collisionDetection={ closestCenter }
                     onDragEnd={ onDrawEnd }
                 > 
                     <SortableContext items={ vignettes.map(v => v.id) } strategy={ verticalListSortingStrategy }>
                     {  
-                        vignettes?.map( ( vignette ) => (
+                        vignettes?.map( ( vignette) => (
                             <CardVignette 
                                 key={ vignette.id } 
                                 cardId={ cardId }
@@ -130,19 +127,12 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 </DndContext>
             </div>
 
-            <div className="excel-card-footer">
+            <div className="excel-card-footer mt-1">
                 <div className="excel-card-cell"></div>
                 <div className="cell action">
-                    <h1 
-                        className="display-6" 
-                        style={{ 
-                            fontSize:'25px', 
-                            color:'var(--primary-color)', 
-                            fontWeight:'400', 
-                            // marginRight: '95px'
-                        }}>
-                            ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
-                    </h1>
+                    <h3 className="mt-3" style={{ color : 'var(--primary-color)' }}>
+                        ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
+                    </h3>
                 </div>
             </div>
         </div>        
