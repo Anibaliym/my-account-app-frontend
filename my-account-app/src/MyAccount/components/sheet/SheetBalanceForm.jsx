@@ -117,19 +117,19 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                 <div className="balance-calculate-amount-form mt-3">
                     <Tooltip placement="right" content="Indica la cantidad total disponible sumando el efectivo y la cuenta corriente." color="secondary" closeDelay={ 50 }>
                         <div className="balance-calculate-amount-item">
-                            <small style={{ fontSize:'12px' }}>Total Disponible</small>
+                            <small style={{ fontSize:'12px' }}>Total disponible</small>
                             <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(availableTotalBalance)}</p>
                         </div>
                     </Tooltip>
                     <Tooltip placement="right" content="Muestra el monto total ya asignado o presupuestado para los gastos actuales." color="secondary" closeDelay={ 50 }>
                         <div className="balance-calculate-amount-item">
-                            <small style={{ fontSize:'12px' }}>Total Gastos Planificados</small>
+                            <small style={{ fontSize:'12px' }}>Total gastos planificados</small>
                             <p className="mb-1 ml-3">${formatNumberWithThousandsSeparator(toSpendBalance)}</p>
                         </div>
                     </Tooltip>
                     <Tooltip placement="right" content="Indica el saldo restante después de descontar los gastos planificados del total disponible." color="secondary" closeDelay={ 50 }>
                         <div className={ `${ inFavorBalance >= 0 ? 'balance-calculate-amount-item' : 'animate__animated animate__flipInX animate__faster balance-calculate-amount-item-danger' }` }>
-                            <small style={{ fontSize:'12px' }}>{ (inFavorBalance >= 0) ? 'Saldo a favor' : 'Saldo negativo' }</small>
+                            <small style={{ fontSize:'12px' }}>{ (inFavorBalance >= 0) ? 'Saldo a favor' : 'Saldo a favor - [NEGATIVO]' }</small>
                             <p className="mb-1 ml-3">${ formatNumberWithThousandsSeparator(inFavorBalance) }</p>
                         </div>
                     </Tooltip>                    
