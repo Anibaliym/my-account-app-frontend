@@ -83,7 +83,7 @@ export const MyAccountRouter = () => {
                     </Routes>
 
                     <div className="row" style={ { height: "30px", width:'100%' } }>
-                        <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
+                        <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage } isDarkMode={ isDarkMode }/>
                     </div>
 
                 </section>

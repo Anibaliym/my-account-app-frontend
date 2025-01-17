@@ -362,7 +362,7 @@ span.title-menu {
     box-shadow: none;
 }
 
-.alert-box-message {
+.alert-box-info-message {
     border-radius: 3px;
     margin-bottom: 10px;
     background-color: var(--primary-color);
@@ -371,11 +371,74 @@ span.title-menu {
     color:white;
 }
 
+/* .alert-box-info-message {
+    border-radius: 3px;
+    margin-bottom: 10px;
+    background-color: var(--primary-color);
+    padding-left: 5px;
+    font-size: 16px;
+    color:white;
+} */
+
+
+.alert-box-message {
+    border-radius: 3px;
+    margin-bottom: 10px;
+    padding-left: 5px;
+    font-size: 16px;
+}
+
+.message-success {
+    background-color: #E6F4EA; 
+    border: 2px solid #228B22; 
+    color: #155724;
+}
+
+.message-info {
+	background-color: #E0F7FA; 
+	border: 2px solid #007B83; 
+	color: #00474F; 
+}
+
+.message-warning {
+    background-color: #FFF7E6;
+    border: 2px solid #FF9500;
+    color: #854D00;
+}
+
+.message-danger {
+	background-color: #FDE9EB; 
+	border: 2px solid #C4001D; 
+	color: #7A0013; 
+}
+
+.message-success-dark {
+    background-color: #1E442D;
+    border: 2px solid #2ECC71;
+    color: #A3E4D7;
+}
+
+.message-info-dark {
+    background-color: #1B3A4B;
+    border: 2px solid #3498DB;
+    color: #AED6F1;
+}
+
+.message-warning-dark {
+    background-color: #4B3820;
+    border: 2px solid #F39C12;
+    color: #FDE3A7;
+}
+
+.message-danger-dark {
+    background-color: #4B1E20;
+    border: 2px solid #E74C3C;
+    color: #F5B7B1;
+}
 
 span.sheet-list {
     color: var(--primary-color);
 }
-
 
 .account-container {
     /* background-color: var(--sidebar-color);  */
