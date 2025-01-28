@@ -13,13 +13,23 @@ export const SheetDragableListItem = ({ id, accountId, description, cashBalance,
     const updateSheet = async () => {
         const { isError} = await updateSheetAPI(accountId, id, editNameSheet, cashBalance, currentAccountBalance, order);
         onUpdateSheetRefresh();
-        showUserMessage((isError === false) ? 'Hoja de calculo actualizada correctamente' : 'Ocurrió un error al intentar actualizar la hoja de calculo'); 
+
+        if( !isError )
+            showUserMessage('se ha actualizado el nombre de la hoja de cálculo correctamente.', 'success');
+        else 
+            showUserMessage('ocurrió un error al intentar actualizar la hoja de cálculo.', 'error');
     }
 
     const deleteSheet = async () => {
-        const { isError, message } = await deleteSheetAPI(id);
-        onDeleteSheetRefresh(id);
-        showUserMessage( message );
+        const { isError } = await deleteSheetAPI(id);
+        
+        if(!isError) {
+            onDeleteSheetRefresh(id);
+            showUserMessage( 'Hoja de cálculo, eliminada correctamente.', 'success' );
+        }
+        else 
+            showUserMessage( 'Ocurrió un error al intentar eliminar la hoja de cálculo. Por favor, revise que la hoja de cálculo este sin información relevante', 'error' );
+
     }
 
     const onchangeSheetName = (e) => {

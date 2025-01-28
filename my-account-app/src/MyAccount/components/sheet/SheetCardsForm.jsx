@@ -1,6 +1,6 @@
 import { CardForm } from './CardForm';
 
-export const SheetCardsForm = ({  showUserMessage, fetchCard, sheetCards, getCalculatedCardTotals }) => {
+export const SheetCardsForm = ({  showUserMessage, fetchCard, sheetCards, getCalculatedCardTotals, isDarkMode}) => {
     return (
         <div className="sheet-cards-form">
             { 
@@ -27,6 +27,7 @@ export const SheetCardsForm = ({  showUserMessage, fetchCard, sheetCards, getCal
                         fetchCard={ fetchCard }
                         totalCardAmount={ totalCardAmount }
                         getCalculatedCardTotals={ getCalculatedCardTotals }
+                        isDarkMode={ isDarkMode }                        
                     />
                 ))
             }

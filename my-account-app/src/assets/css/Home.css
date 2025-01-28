@@ -54,6 +54,7 @@ body {
     color: var(--text-color);
 }
 
+
 .main-content .header {
     background-color: var(--body-color);
     padding: 0px 10px 5px 10px;
@@ -370,16 +371,6 @@ span.title-menu {
     font-size: 16px;
     color:white;
 }
-
-/* .alert-box-info-message {
-    border-radius: 3px;
-    margin-bottom: 10px;
-    background-color: var(--primary-color);
-    padding-left: 5px;
-    font-size: 16px;
-    color:white;
-} */
-
 
 .alert-box-message {
     border-radius: 3px;

@@ -4,7 +4,7 @@ import { formatNumber, formatNumberWithThousandsSeparator } from '../../../asset
 import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { CreateCardModal } from './CreateCardModal';
 
-export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage }) => {
+export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage }) => {
     const { sheetId } = useParams(); 
 
     const handleChange = (e, field) => {
@@ -14,6 +14,7 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
             [field]: `$${formatNumberWithThousandsSeparator(value)}`,
         }));
     };
+
 
     const handleKeyDown = async (e, field, value) => {
         if (e.key === 'Enter') {
@@ -129,7 +130,7 @@ export const SheetBalanceForm = ({ sheetName, setSheetName, cashBalanceRef, bala
                     </Tooltip>
                     <Tooltip placement="right" content="Indica el saldo restante después de descontar los gastos planificados del total disponible." color="secondary" closeDelay={ 50 }>
                         <div className={ `${ inFavorBalance >= 0 ? 'balance-calculate-amount-item' : 'animate__animated animate__flipInX animate__faster balance-calculate-amount-item-danger' }` }>
-                            <small style={{ fontSize:'12px' }}>{ (inFavorBalance >= 0) ? 'Saldo a favor' : 'Saldo a favor - [NEGATIVO]' }</small>
+                            <small style={{ fontSize:'12px' }}>{ (inFavorBalance >= 0) ? 'Saldo a favor' : 'Diferencia' }</small>
                             <p className="mb-1 ml-3">${ formatNumberWithThousandsSeparator(inFavorBalance) }</p>
                         </div>
                     </Tooltip>                    

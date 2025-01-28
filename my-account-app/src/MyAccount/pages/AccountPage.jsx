@@ -24,7 +24,7 @@ export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, s
     }
 
     return (
-        <>
+        <div className="page-principal-container">
             <CardAccount
                 accountId={ accountId }
                 setPageName={ setPageName }
@@ -40,17 +40,9 @@ export const AccountPage = ({ setAccountListener, accountListener, isDarkMode, s
                 accountListener={ accountListener }
                 setAccountListener={ setAccountListener }
                 showUserMessage={ showUserMessage }            
-            />
-
-            <CardListSheet
                 sheets={ sheets }
-                setSheets={ setSheets }
-                accountId={ accountId }
                 isDarkMode={ isDarkMode }   
-                showUserMessage={ showUserMessage }        
-                setAccountListener={ setAccountListener }
-                accountListener={ accountListener }
             />
-        </>
+       </div>
     )
 }

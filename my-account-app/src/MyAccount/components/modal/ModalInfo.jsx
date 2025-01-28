@@ -21,7 +21,8 @@ export const ModalInfo = ({ message }) => {
     return (
         <Modal show={show} onHide={onClose} className="modal-blur">
             <Modal.Body className="modal-content">
-                <center>{localMessage}</center>
+                {/* <center>{localMessage}</center> */}
+                <p className="text-center modal-text-message">{ localMessage }</p>
                 <button className="modal-button mt-4" onClick={onClose}>
                     Entiendo
                 </button>

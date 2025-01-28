@@ -19,7 +19,7 @@ export const MyAccountRouter = () => {
     const [ isDarkMode, setIsDarkMode ] = useState(false);
     const [ accountListener, setAccountListener ] = useState(0); 
     const [ pageName, setPageName ] = useState('Nombre página'); 
-    const [ message, setMessage ] = useState(''); 
+    const [ message, setMessage ] = useState({ message : '', type: 'info' }); 
     const [ showMessage, setShowMessage] = useState(false); 
     
     const [ modalMessage, setModalMessage ] = useState('');
@@ -31,8 +31,27 @@ export const MyAccountRouter = () => {
         localStorage.setItem('isDarkMode', JSON.stringify(newDarkModeState));
     };
 
-    const showUserMessage = (message) => {
-        setMessage( message );
+    const showUserMessage = ( message, type = 'info' ) => {
+
+        switch (type) {
+            case 'success':
+                type = 'success';
+                break;
+            case 'info':
+                type = 'info';
+                break;
+            case 'warning':
+                type = 'warning';
+                    break;
+            case 'error':
+                type = 'error';
+                break;
+            default:
+                type = 'info';
+                break;
+        }
+
+        setMessage({ message, type });
         setShowMessage(true);            
     }
 
@@ -54,10 +73,6 @@ export const MyAccountRouter = () => {
                 />
 
                 <section className="dashboard-content">
-                    {/* <div className="row" style={ { height: "30px", width:'99%' } }>
-                        <UserMessage message={ message } show={ showMessage } setShowMessage={ setShowMessage }/>
-                    </div> */}
-
                     <ModalInfo message={ modalMessage }/>
 
                     <Routes>
@@ -77,7 +92,7 @@ export const MyAccountRouter = () => {
                         />
 
                         <Route path="calculator" element={<CalculatorPage setPageName={ setPageName }/>} />
-                        <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={ showUserMessage }/>} />
+                        <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={ showUserMessage } isDarkMode={ isDarkMode }/>} />
                         
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>

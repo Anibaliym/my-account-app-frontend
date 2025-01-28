@@ -37,19 +37,19 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
 
     const updateDescriptionAccount = async  () => {
         if(newNameAccount.length === 0){
-            showUserMessage('Debe ingresar un nombre de cuenta válido'); 
+            showUserMessage('debe ingresar un nombre de cuenta válido', 'warning'); 
             return; 
         }
 
         const { isError } = await UpdateAccountAPI(accountId, newNameAccount); 
 
         if(isError)
-            showUserMessage('Ocurrió un error al intentar actualizar el nombre la cuenta.'); 
+            showUserMessage('ocurrió un error al intentar actualizar el nombre la cuenta.', 'error'); 
         else {
             setShowSaveButtom(false); 
             setPageName(newNameAccount);
             setAccountListener( accountListener - 1 )
-            showUserMessage('Cuenta actualizada correctamente'); 
+            showUserMessage('cuenta actualizada correctamente', 'success'); 
             setNameAccount('');
         }
     }
@@ -61,7 +61,7 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
             if(newNameAccount.length > 0) 
                 updateDescriptionAccount();
             else 
-                showUserMessage('Debe ingresar un nombre de cuenta válido'); 
+                showUserMessage('debe ingresar un nombre de cuenta válido', 'warning'); 
         }
     }
 
@@ -73,9 +73,9 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
         const { isError, message } = await DeleteAccountAPI(accountId);
 
         if(isError) 
-            setModalMessage(message);
+            setModalMessage('ocurrió un error al intenta eliminar la cuenta', 'error');
         else {
-            showUserMessage(message); 
+            showUserMessage('cuenta eliminada', 'success'); 
             setAccountListener( accountListener - 1 )
             navigate('/');
         }
@@ -83,28 +83,23 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
 
     return (
         <div className="card-account animate__animated animate__fadeIn animate__faster">
-            <div className="card-account-header">
-                cuenta
-            </div>
-            <div className="card-account-title">
-                <input 
-                    ref={ accountNameRef }
-                    className="card-input-text display-6" 
-                    placeholder="ingrese el nombre de la cuenta" 
-                    type="text" 
-                    onChange={ onChangeDescriptionAccount }
-                    onKeyDown={ onKeyDownDescriptionAccount }
-                    value={ newNameAccount }
-                    maxLength={20}
-                />
-            </div>
-            <div className="card-account-text mt-3">
-                <p className="text-right">
-                    <small>
-                        { creationDate }
-                    </small>
-                </p>
-            </div>
+            <h5 className="text-center">cuenta</h5>
+            <input 
+                ref={ accountNameRef }
+                className="card-input-text display-6 text-center mt-2" 
+                placeholder="nombre de la cuenta" 
+                type="text" 
+                onChange={ onChangeDescriptionAccount }
+                onKeyDown={ onKeyDownDescriptionAccount }
+                value={ newNameAccount }
+                maxLength={20}
+            />
+            <p className="text-right mt-3">
+                <small>
+                    { creationDate }
+                </small>
+            </p>
+
             <div className="card-account-footer">
                 <Tooltip
                     placement="bottom"

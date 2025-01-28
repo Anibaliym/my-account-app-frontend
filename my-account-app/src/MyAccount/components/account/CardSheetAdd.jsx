@@ -1,8 +1,9 @@
 import { Tooltip } from '@nextui-org/react'; 
 import { useState } from 'react';
 import { GetSheetByAccountIdAPI, createSheetAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
+import { CardListSheet } from './CardListSheet';
 
-export const CardSheetAdd = ({ accountId, setSheets, accountListener, setAccountListener, showUserMessage }) => {
+export const CardSheetAdd = ({ accountId, setSheets, accountListener, setAccountListener, showUserMessage, sheets, isDarkMode }) => {
     const [ sheetName, setSheetName ] = useState(''); 
 
     const onChangeSheetName = (e) => {
@@ -17,7 +18,7 @@ export const CardSheetAdd = ({ accountId, setSheets, accountListener, setAccount
 
     const onAddSheet = () => {
         if(sheetName.length === 0){
-            showUserMessage('El nombre de la hoja de cálculo, es invalida!');
+            showUserMessage('el nombre de la hoja de cálculo no es válido.', 'warning');
             return; 
         }
 
@@ -33,45 +34,47 @@ export const CardSheetAdd = ({ accountId, setSheets, accountListener, setAccount
             setSheets(dataSheets); 
             setAccountListener( accountListener + 1 )
 
-            showUserMessage('Hoja de calculo creada correctamente');
+            showUserMessage('hoja de cálculo creada correctamente', 'success');
         }
         else 
-            showUserMessage(message);
+            showUserMessage('ocurrió un error al intentar crear la hoja de cálculo', 'error');
     }        
 
     return (
-        <div className="card-sheet animate__animated animate__fadeIn animate__faster">
-            <div className="card-sheet-header">
-                Hola de cálculo: 
-            </div>
-            <div className="card-sheet-title">
-                <input 
-                    className="card-input-text display-6 text-center" 
-                    placeholder="ingrese el nombre de la hoja de cálculo" 
-                    type="text" 
-                    maxLength={ 20 }
-                    onChange={ onChangeSheetName }
-                    onKeyDown={ onKeyDownSheetName }
-                    value={ sheetName }
-                />
+        <div className="card-account animate__animated animate__fadeIn animate__faster">
+            <h5 className="text-center">hojas de cálculo</h5>
+            
+            <input 
+                className="card-input-text display-6 text-center mt-2" 
+                placeholder="ingrese el nombre de la hoja de cálculo" 
+                type="text" 
+                maxLength={ 20 }
+                onChange={ onChangeSheetName }
+                onKeyDown={ onKeyDownSheetName }
+                value={ sheetName }
+            />
 
-                <Tooltip
-                    placement="bottom"
-                    content="agregar hoja de cálculo"
-                    color="secondary"
-                    closeDelay={ 50 }
-                >
-                    <center>
-                        <i className='bx bx-plus icon mt-3' onClick={ onAddSheet }></i>
-                    </center>
+            <Tooltip
+                placement="bottom"
+                content="agregar hoja de cálculo"
+                color="secondary"
+                closeDelay={ 50 }
+            >
+                <center>
+                    <i className='bx bx-plus icon mt-3' onClick={ onAddSheet }></i>
+                </center>
+            </Tooltip>
+            <hr />
 
-                </Tooltip>
-            </div>
-            <div className="card-sheet-footer mt-3">
-                <small>
-                    Puedes agregar cuantas hojas de cálculo necesites
-                </small>
-            </div>
-        </div>        
+            <CardListSheet
+                sheets={ sheets }
+                setSheets={ setSheets }
+                accountId={ accountId }
+                isDarkMode={ isDarkMode }   
+                showUserMessage={ showUserMessage }        
+                setAccountListener={ setAccountListener }
+                accountListener={ accountListener }
+            />
+        </div>
     )
 }

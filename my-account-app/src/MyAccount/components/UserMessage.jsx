@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const UserMessage = ({ message, show, type, setShowMessage, isDarkMode }) => {
+export const UserMessage = ({ message, show, setShowMessage, isDarkMode }) => {
     const [ isVisible, setIsVisible ] = useState(show);
 
     const getMessageTime = (length) => {
@@ -9,7 +9,7 @@ export const UserMessage = ({ message, show, type, setShowMessage, isDarkMode })
         return 4000;
     };
 
-    const messageTime = getMessageTime(message.length);
+    const messageTime = getMessageTime(message.message.length);
     const effect = show ? 'animate__flipInX' : 'animate__flipOutX';
 
     useEffect(() => {
@@ -28,49 +28,38 @@ export const UserMessage = ({ message, show, type, setShowMessage, isDarkMode })
 
             return () => clearTimeout(hideTimer);
         }
-    }, [show, messageTime, setShowMessage, isVisible]);
+    }, [ show, messageTime, setShowMessage, isVisible ]);
 
     let colorType = ''; 
+    let icon = '';
 
-    switch (type) {
+    switch (message.type) {
         case 'success':
             colorType = 'success';
+            icon = 'bx-check-circle';
             break;
         case 'warning':
             colorType = 'warning';
+            icon = 'bx-error';
             break;
-        case 'danger':
+        case 'error':
             colorType = 'danger';
+            icon = 'bx-error-circle';
             break;
         default:
             colorType = 'info';
-            colorType = 'success';
+            icon = 'bx-message-rounded-error';
             break;
     }
-    if (!isVisible) return null;
-
     
+    if (!isVisible) return null;
 
     const alertClass = `alert-box-message message-${ colorType }${ (isDarkMode) ? '-dark' : '' } animate__animated ${effect} animate__faster`;
 
     return (
-
-        <div className={alertClass}>
-
-            {/* info */}
-            <i className="bx bx-message-rounded-error" ></i>
-
-            {/* success */}
-            <i className="bx bx-check-circle" ></i>
-
-            {/* warning */}
-            <i className="bx bx-error"></i>
-
-            {/* danger */}
-            <i className="bx bx-error-circle"></i>
-
-            <span className="ml-1">{message}</span>
-            
+        <div className={ `${ alertClass }` }>
+            <i className={ `bx ${ icon }` } ></i>
+            <span className="ml-1">{ message.message }</span>
         </div>
     );
 };

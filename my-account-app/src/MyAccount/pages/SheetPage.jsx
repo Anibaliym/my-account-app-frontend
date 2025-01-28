@@ -6,7 +6,7 @@ import { SheetCardsForm } from '../components/sheet/SheetCardsForm';
 import { SheetBalanceForm } from '../components/sheet/SheetBalanceForm';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const SheetPage = ({ showUserMessage }) => {
+export const SheetPage = ({ showUserMessage, isDarkMode }) => {
     const { sheetId } = useParams();
 
     const cashBalanceRef = useRef();
@@ -30,7 +30,7 @@ export const SheetPage = ({ showUserMessage }) => {
     useEffect(() => {
         fetchSheet();
         fetchCard();
-    }, [sheetId]);
+    }, [ sheetId ]);
 
     useEffect(() => {
         setIcons((prev) => ({
@@ -106,7 +106,7 @@ export const SheetPage = ({ showUserMessage }) => {
             const { description, cashBalance, currentAccountBalance } = await data;
 
             if (isError) {
-                showUserMessage('Ocurrió un error al intentar cargar la hoja de cálculo.');
+                showUserMessage('ocurrió un error al intentar cargar la hoja de cálculo.', 'error');
                 return;
             }
 
@@ -118,7 +118,7 @@ export const SheetPage = ({ showUserMessage }) => {
 
             setOldBalances({ cashBalance, currentAccountBalance });
         } catch (error) {
-            showUserMessage('Error fetching sheet:', error);
+            showUserMessage('Ocurrió un error al intentar cargar la hoja de cálculo:', error, 'error');
         }
     };
 
@@ -134,14 +134,13 @@ export const SheetPage = ({ showUserMessage }) => {
             setTotalCardsBalances(calcTotalCardsAmount);
         }
         else 
-            showUserMessage('Ocurrió un error al intentar cargar las cartas de la hoja de cálculo.');
+            showUserMessage('ocurrió un error al intentar cargar las cartas de la hoja de cálculo.', 'error');
     }
 
     return (
-        <div className="sheet-form-container">
+        <div className="page-principal-container">
             <SheetBalanceForm
                 sheetName={sheetName}
-                setSheetName={setSheetName}
                 cashBalanceRef={cashBalanceRef}
                 balances={balances}
                 icons={icons}
@@ -163,6 +162,7 @@ export const SheetPage = ({ showUserMessage }) => {
                 fetchCard={fetchCard}
                 sheetCards={sheetCards}
                 getCalculatedCardTotals={ getCalculatedCardTotals }
+                isDarkMode={ isDarkMode }
             />
         </div>
     );

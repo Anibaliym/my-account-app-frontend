@@ -9,7 +9,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useEffect } from 'react';
 
-export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals }) => {
+export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals, isDarkMode }) => {
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
     const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
@@ -33,7 +33,12 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
         const { isError, message, data: vignette } = await CreateVignetteFetch( cardId, 5 );
 
         if(isError) {
-            showUserMessage(message); 
+            if(message === 'No se pueden crear mas de 20 viñetas en una sola carta.') {
+                showUserMessage('no se pueden crear mas de "20 viñetas" en una sola carta.', 'warning'); 
+                return; 
+            }
+
+            showUserMessage('ocurrió un error al intentar crear la viñeta', 'error'); 
             return; 
         }
 
@@ -64,10 +69,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
         // Actualiza el estado con el nuevo orden
         setVignettes(updatedOrder);
     
-        // Si tienes una función para sincronizar el orden con el backend, descomenta esto:
-        // updateOrder(updatedOrder);
-        const algo = updateVignetteOrderItemsFetch(updatedOrder);
-        console.log(algo)
+        updateVignetteOrderItemsFetch(updatedOrder);
     };
 
     const deleteCard = async () => {
@@ -79,18 +81,28 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 setModalConfirmDeleteCard(true); 
             else {
                 const { isError, data } = await deleteCardWithVignettesFetch(cardId);
-                showUserMessage( (!isError) ? `Carta "${ title }" eliminada` : 'Ocurrió un error al intentar eliminar la carta.' )
+
+                if(!isError)
+                    showUserMessage(`carta "${ title }" eliminada`, 'success');
+                else 
+                    showUserMessage('ocurrió un error al intentar eliminar la carta.', 'error');
+
                 fetchCard(); 
                 getCalculatedCardTotals();
             }
         }
         else 
-            showUserMessage('Ocurrió un error al intentar eliminar la carta.')
+            showUserMessage('ocurrió un error al intentar eliminar la carta.', 'error');
     }
 
     const deleteCardWithVignettes = async () => {
-        const { isError, data } = await deleteCardWithVignettesFetch(cardId);
-        showUserMessage( (!isError) ? 'Carta eliminada exitosamente' : 'Ocurrió un error al intentar eliminar la carta.' )
+        const { isError } = await deleteCardWithVignettesFetch(cardId);
+
+        if(!isError)
+            showUserMessage( 'carta eliminada.', 'success'); 
+        else
+            showUserMessage( 'ocurrió un error al intentar eliminar la carta.', 'error'); 
+
         setModalConfirmDeleteCard( false ); 
         fetchCard(); 
     }
@@ -136,6 +148,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                                 vignettes={ vignettes }
                                 setCardTotalAmount={ setCardTotalAmount }
                                 getCalculatedCardTotals={ getCalculatedCardTotals }
+                                isDarkMode = { isDarkMode }
                             />
                         ))
                     }

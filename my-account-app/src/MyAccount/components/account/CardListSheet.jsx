@@ -38,7 +38,7 @@ export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUs
         const { isError } = await updateSheetOrderItemsAPI(sheetsNewOrder);
 
         if(isError) {
-            showUserMessage('Ocurrió un error al intentar actualizar el orden de la hojas de cálculo.');
+            showUserMessage('Ocurrió un error al intentar actualizar el orden de la hojas de cálculo.', 'error');
             return; 
         }
 
@@ -46,7 +46,7 @@ export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUs
     }
 
     return (
-        <div className="card-list-sheet animate__animated animate__fadeIn animate__faster">
+        <div className="animate__animated animate__fadeIn animate__faster">
             <DndContext
                 collisionDetection={ closestCenter }
                 onDragEnd={ onDrawEnd }
@@ -54,7 +54,7 @@ export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUs
                 <ul className="list-group ">
                     <SortableContext items={ sheets } strategy={ verticalListSortingStrategy }> 
                         {
-                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">no hay hojas de cálculo disponibles ...</span> </small>)
+                            (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">No hay hojas de cálculo creadas en esta cuenta</span> </small>)
                         }
             
                         {
