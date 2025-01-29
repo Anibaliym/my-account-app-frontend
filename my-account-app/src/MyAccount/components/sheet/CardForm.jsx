@@ -122,6 +122,11 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 <h4>{ title }</h4>
 
                 <div className="icons-container">
+                    <Tooltip placement="bottom" content="Resetear colores viñetas" color="secondary" closeDelay={50}>
+                        <i className='bx bx-reset icon excel-icon'></i>
+                    </Tooltip>
+
+
                     <Tooltip placement="bottom" content="Eliminar la carta" color="secondary" closeDelay={50}>
                         <i className="bx bx-trash icon excel-icon" onClick={ deleteCard }></i>
                     </Tooltip>

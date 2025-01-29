@@ -146,7 +146,22 @@ export const deleteVignetteAndRecalculateTotalFetch = async ( vignetteId ) => {
     }
 }
 
+export const updateVignetteColorThemeFetch = async ( vignetteId, color ) => {
+    try 
+    {
+        const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteColorTheme?vignetteId=${ vignetteId }&colorTheme=${ color }`, {
+            method: 'put', 
+            headers: { 'accept' : '*/*' }
+        }); 
 
+        const { resolution } = await response.json();
 
+        return { isError: !resolution }
+    } 
+    catch (error) {
+        return { isError: true }
+    }
+
+} 
 
 

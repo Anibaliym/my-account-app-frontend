@@ -12,7 +12,7 @@ import { SelectColorForm } from './SelectColorForm';
 
 export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals, isDarkMode }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
-    const { id: vignetteId, description, amount, order } = vignette; 
+    const { id: vignetteId, description, amount, order, color } = vignette; 
 
     const refDesription = useRef(); 
     const refAmount = useRef(); 
@@ -22,7 +22,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const [ newAmount, setNewAmount ] = useState(amount); 
     const [ newVignette, setNewVignette] = useState({}); 
     const [ showSaveIcon, setShowSaveIcon ] = useState(false);
-
+    const [ vignetteColorTheme, setVignetteColorTheme ] = useState(color); 
+    
     useEffect(() => {
         if(showSuccessIcon) {
             setTimeout(() => {
@@ -109,14 +110,14 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         }
     }
 
-      const [isVisible, setIsVisible] = useState(false);
-
     return (
         <>
             <div 
                 ref={ setNodeRef } 
                 style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
-                className="excel-card-vignette"
+                className={ `excel-card-vignette color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
+
+                
             >
                 <div className="excel-card-row">
                     
@@ -124,7 +125,14 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                         <i className='bx bx-sort-alt-2 text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
                         <i className='bx bx-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
 
-                        <Tooltip content={<SelectColorForm isDarkMode={ isDarkMode }/>} >
+
+
+                        {/* <Tooltip placement="right" content="Indica el saldo restante después de descontar los gastos planificados del total disponible." color="secondary" closeDelay={ 50 }> */}
+                        <Tooltip 
+                            content={<SelectColorForm isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
+                            placement="right"
+                            closeDelay={ 10 }
+                        >
                             <i className='bx bx-palette text-color-primary card-icon mr-1'></i>
                         </Tooltip> 
 
@@ -135,7 +143,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                     <div className="excel-card-cell description">
                         <input 
                             type="text" 
-                            className="vignette-input-text-description no-focus"
+                            className={ `vignette-input-text-description no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
                             ref={ refDesription }
                             maxLength={ 60 }
                             value={ newDescription } 
@@ -149,7 +157,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                         <input 
                             type="text" 
                             ref={ refAmount }
-                            className="vignette-input-text-amount no-focus"
+                            className={ `vignette-input-text-amount no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
                             maxLength={ 11 }
                             value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
                             onChange={ onChangeAmount }

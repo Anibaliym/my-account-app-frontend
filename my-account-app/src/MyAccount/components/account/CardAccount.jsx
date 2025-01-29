@@ -5,7 +5,6 @@ import { useRef } from 'react';
 import { Tooltip } from '@nextui-org/react';
 import { useNavigate } from 'react-router-dom';
 
-
 export const CardAccount = ({ accountId, setPageName, setAccountListener, accountListener, showUserMessage, setModalMessage }) => {
     const navigate = useNavigate(); 
     const accountNameRef = useRef(false); 

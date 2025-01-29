@@ -225,7 +225,7 @@
 }
 
 /* Light Theme */
-.color-selector-lightTheme-WHITE { background-color: white; color: black; }
+.color-selector-lightTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
 .color-selector-lightTheme-GREEN { background-color: #4CAF50; color: white; }
 .color-selector-lightTheme-YELLOW { background-color: #FFEB3B; color: black; }
 .color-selector-lightTheme-ORANGE { background-color: #FF9800; color: white; }
