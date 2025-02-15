@@ -250,7 +250,7 @@
 .color-selector-lightTheme-STRONG_PURPLE { background-color: #7B1FA2; color: white; }
 
 /* Dark Theme */
-.color-selector-darkTheme-WHITE { background-color: #E0E0E0; color: black; }
+.color-selector-darkTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
 .color-selector-darkTheme-GREEN { background-color: #388E3C; color: white; }
 .color-selector-darkTheme-YELLOW { background-color: #FBC02D; color: black; }
 .color-selector-darkTheme-ORANGE { background-color: #F57C00; color: white; }
