@@ -226,51 +226,56 @@
 
 /* Light Theme */
 .color-selector-lightTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
-.color-selector-lightTheme-GREEN { background-color: #4CAF50; color: white; }
-.color-selector-lightTheme-YELLOW { background-color: #FFEB3B; color: black; }
-.color-selector-lightTheme-ORANGE { background-color: #FF9800; color: white; }
-.color-selector-lightTheme-RED { background-color: #F44336; color: white; }
-.color-selector-lightTheme-BLUE { background-color: #2196F3; color: white; }
-.color-selector-lightTheme-GRAY { background-color: #9E9E9E; color: white; }
-.color-selector-lightTheme-PURPLE { background-color: #9C27B0; color: white; }
+.color-selector-lightTheme-GREEN { background-color: #A2D9A1; color: black; }
+.color-selector-lightTheme-YELLOW { background-color: #FFEE9A; color: black; }
+.color-selector-lightTheme-ORANGE { background-color: #FFCC80; color: black; }
+.color-selector-lightTheme-RED { background-color: #FFA6A6; color: black; }
+.color-selector-lightTheme-BLUE { background-color: #91C9F7; color: black; }
+.color-selector-lightTheme-GRAY { background-color: #D6D6D6; color: black; }
+.color-selector-lightTheme-PURPLE { background-color: #D1A8E4; color: black; }
 
-.color-selector-lightTheme-SOFT_GREEN { background-color: #A5D6A7; color: black; }
-.color-selector-lightTheme-SOFT_YELLOW { background-color: #FFF59D; color: black; }
-.color-selector-lightTheme-SOFT_ORANGE { background-color: #FFCC80; color: black; }
-.color-selector-lightTheme-SOFT_RED { background-color: #EF9A9A; color: black; }
-.color-selector-lightTheme-SOFT_BLUE { background-color: #90CAF9; color: black; }
-.color-selector-lightTheme-SOFT_GRAY { background-color: #E0E0E0; color: black; }
-.color-selector-lightTheme-SOFT_PURPLE { background-color: #CE93D8; color: black; }
-.color-selector-lightTheme-STRONG_GREEN { background-color: #388E3C; color: white; }
-.color-selector-lightTheme-STRONG_YELLOW { background-color: #FBC02D; color: black; }
-.color-selector-lightTheme-STRONG_ORANGE { background-color: #F57C00; color: white; }
-.color-selector-lightTheme-STRONG_RED { background-color: #D32F2F; color: white; }
-.color-selector-lightTheme-STRONG_BLUE { background-color: #1976D2; color: white; }
-.color-selector-lightTheme-STRONG_GRAY { background-color: #616161; color: white; }
-.color-selector-lightTheme-STRONG_PURPLE { background-color: #7B1FA2; color: white; }
+/* Soft (Menos marcado) */
+.color-selector-lightTheme-SOFT_GREEN { background-color: #D9F2DA; color: black; }
+.color-selector-lightTheme-SOFT_YELLOW { background-color: #FFF7C7; color: black; }
+.color-selector-lightTheme-SOFT_ORANGE { background-color: #FFE0B2; color: black; }
+.color-selector-lightTheme-SOFT_RED { background-color: #FFD6D6; color: black; }
+.color-selector-lightTheme-SOFT_BLUE { background-color: #BBDFF9; color: black; }
+.color-selector-lightTheme-SOFT_GRAY { background-color: #EDEDED; color: black; }
+.color-selector-lightTheme-SOFT_PURPLE { background-color: #E8CFFA; color: black; }
+
+/* Strong (Más marcado) */
+.color-selector-lightTheme-STRONG_GREEN { background-color: #6FBF73; color: white; }
+.color-selector-lightTheme-STRONG_YELLOW { background-color: #FFDB58; color: black; }
+.color-selector-lightTheme-STRONG_ORANGE { background-color: #FFA54D; color: black; }
+.color-selector-lightTheme-STRONG_RED { background-color: #E57373; color: white; }
+.color-selector-lightTheme-STRONG_BLUE { background-color: #5297E0; color: white; }
+.color-selector-lightTheme-STRONG_GRAY { background-color: #9E9E9E; color: black; }
+.color-selector-lightTheme-STRONG_PURPLE { background-color: #A362C9; color: white; }
 
 /* Dark Theme */
 .color-selector-darkTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
-.color-selector-darkTheme-GREEN { background-color: #388E3C; color: white; }
-.color-selector-darkTheme-YELLOW { background-color: #FBC02D; color: black; }
-.color-selector-darkTheme-ORANGE { background-color: #F57C00; color: white; }
-.color-selector-darkTheme-RED { background-color: #D32F2F; color: white; }
-.color-selector-darkTheme-BLUE { background-color: #1976D2; color: white; }
-.color-selector-darkTheme-GRAY { background-color: #424242; color: white; }
-.color-selector-darkTheme-PURPLE { background-color: #7B1FA2; color: white; }
+.color-selector-darkTheme-GREEN { background-color: #67A867; color: white; }
+.color-selector-darkTheme-YELLOW { background-color: #FFC93C; color: black; }
+.color-selector-darkTheme-ORANGE { background-color: #FF9B4E; color: white; }
+.color-selector-darkTheme-RED { background-color: #D55A5A; color: white; }
+.color-selector-darkTheme-BLUE { background-color: #4A90E2; color: white; }
+.color-selector-darkTheme-GRAY { background-color: #7D7D7D; color: white; }
+.color-selector-darkTheme-PURPLE { background-color: #9158A9; color: white; }
 
-.color-selector-darkTheme-SOFT_GREEN { background-color: #81C784; color: black; }
-.color-selector-darkTheme-SOFT_YELLOW { background-color: #FFF176; color: black; }
-.color-selector-darkTheme-SOFT_ORANGE { background-color: #FFB74D; color: black; }
-.color-selector-darkTheme-SOFT_RED { background-color: #E57373; color: black; }
-.color-selector-darkTheme-SOFT_BLUE { background-color: #64B5F6; color: black; }
-.color-selector-darkTheme-SOFT_GRAY { background-color: #BDBDBD; color: black; }
-.color-selector-darkTheme-SOFT_PURPLE { background-color: #BA68C8; color: black; }
+/* Soft (Menos marcado) */
+.color-selector-darkTheme-SOFT_GREEN { background-color: #A5D6A7; color: black; }
+.color-selector-darkTheme-SOFT_YELLOW { background-color: #FFEB99; color: black; }
+.color-selector-darkTheme-SOFT_ORANGE { background-color: #FFCC80; color: black; }
+.color-selector-darkTheme-SOFT_RED { background-color: #EF9A9A; color: black; }
+.color-selector-darkTheme-SOFT_BLUE { background-color: #90CAF9; color: black; }
+.color-selector-darkTheme-SOFT_GRAY { background-color: #CFCFCF; color: black; }
+.color-selector-darkTheme-SOFT_PURPLE { background-color: #C49BD4; color: black; }
 
-.color-selector-darkTheme-STRONG_GREEN { background-color: #2E7D32; color: white; }
-.color-selector-darkTheme-STRONG_YELLOW { background-color: #F9A825; color: black; }
-.color-selector-darkTheme-STRONG_ORANGE { background-color: #EF6C00; color: white; }
+/* Strong (Más marcado) */
+.color-selector-darkTheme-STRONG_GREEN { background-color: #4B8F4B; color: white; }
+.color-selector-darkTheme-STRONG_YELLOW { background-color: #FFB300; color: black; }
+.color-selector-darkTheme-STRONG_ORANGE { background-color: #E68A47; color: white; }
 .color-selector-darkTheme-STRONG_RED { background-color: #C62828; color: white; }
 .color-selector-darkTheme-STRONG_BLUE { background-color: #1565C0; color: white; }
-.color-selector-darkTheme-STRONG_GRAY { background-color: #212121; color: white; }
-.color-selector-darkTheme-STRONG_PURPLE { background-color: #4A148C; color: white; }
+.color-selector-darkTheme-STRONG_GRAY { background-color: #5C5C5C; color: white; }
+.color-selector-darkTheme-STRONG_PURPLE { background-color: #7B1FA2; color: white; }

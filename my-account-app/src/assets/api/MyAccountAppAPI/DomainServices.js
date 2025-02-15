@@ -119,10 +119,11 @@ export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
 
         const { data } = await response.json();
 
-        
-        return { isError: false, data }
+        return { isError: !response.ok, data }
     } 
     catch (error) {
+
+        console.log('error en fetch')
         return { isError: true, data: null }
     }
 }
