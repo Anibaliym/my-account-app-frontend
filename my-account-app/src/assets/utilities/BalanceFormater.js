@@ -6,20 +6,24 @@ export const formatNumber = ( number ) => {
 
 //Toma un valor númerico entero sin formato y formatea con separador de miles
 export const formatNumberWithThousandsSeparator = (value) => {
-    // Convertir el valor a string para procesarlo
-    let stringValue = value.toString();
+    if (value === undefined || value === null) return "0"; // Evitar valores nulos
 
-    // Remover ceros iniciales
-    stringValue = stringValue.replace(/^0+/, '');
+    let stringValue = String(value); // Convertir siempre a string
 
-    // Si después de remover ceros iniciales no queda nada, se considera como "0"
-    if (stringValue === '') {
-        return '0';
-    }
+    if (stringValue === "" || stringValue === "-") return stringValue; // Mantener "-" si el usuario recién lo ingresó
 
-    // Convertir el valor a entero para formatear correctamente
-    const integerValue = parseInt(stringValue, 10);
+    // Verificar si es un número negativo
+    let isNegative = stringValue.startsWith('-');
+    stringValue = stringValue.replace(/[^0-9]/g, ''); // Eliminar cualquier carácter que no sea numérico
 
-    // Usar Intl.NumberFormat con el locale 'de-DE' para separador de miles como punto
-    return new Intl.NumberFormat('de-DE').format(integerValue);
-}
+    if (stringValue === "") return isNegative ? "-" : "0"; // Si solo hay "-", mantenerlo
+
+    // Convertir a número entero sin perder el signo negativo
+    let integerValue = parseInt(stringValue, 10);
+    if (isNaN(integerValue)) return isNegative ? "-" : "0"; // Manejo seguro de NaN
+
+    // Aplicar formato con separadores de miles
+    let formattedValue = new Intl.NumberFormat('de-DE').format(integerValue);
+
+    return isNegative ? `-${formattedValue}` : formattedValue;
+};
