@@ -15,7 +15,6 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
         }));
     };
 
-
     const handleKeyDown = async (e, field, value) => {
         if (e.key === 'Enter') {
             switch (field) {
@@ -40,6 +39,30 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
             e.target.blur();
         }
     };
+
+    const handleBlur = async ( controlName ) => {
+        console.log('onBlur')
+        console.log(controlName)
+
+        switch (controlName) {
+            case 'cashBalance':
+                await UpdateCashBalanceAPI(sheetId, formatNumber(balances.cashBalance));
+                setIcons((prev) => ({
+                    ...prev,
+                    ok: { ...prev.ok, cashBalance: true },
+                    save: { ...prev.save, cashBalance: false },
+                }));
+                break;
+            case 'currentAccountBalance':
+                await UpdateCurrentAccountBalanceAPI(sheetId, formatNumber(balances.currentAccountBalance));
+                setIcons((prev) => ({
+                    ...prev,
+                    ok: { ...prev.ok, currentAccountBalance: true },
+                    save: { ...prev.save, currentAccountBalance: false },
+                }));
+                break;
+        }
+    }
 
     return (
         <div className="sheet-balances-form">
@@ -93,6 +116,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                     onKeyDown={(e) => handleKeyDown(e, 'cashBalance', balances.cashBalance)}
                     onClick={() => cashBalanceRef.current.select()}
                     value={balances.cashBalance}
+                    onBlur={ () => ( handleBlur('cashBalance') ) }
                 />
                 <div className="icon-save">
                     {icons.save.cashBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i>}
@@ -109,6 +133,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                     onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', balances.currentAccountBalance)}
                     onClick={() => currentAccountBalanceRef.current.select()}
                     value={balances.currentAccountBalance}
+                    onBlur={ () => ( handleBlur('currentAccountBalance') ) }
                 />
                 <div className="icon-save mt-1">
                     { icons.save.currentAccountBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i> }

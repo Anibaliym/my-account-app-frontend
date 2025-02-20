@@ -5,8 +5,10 @@ export const createCardFetch = async ( sheetId, title, description ) => {
         sheetId,
         title,
         description,
-        color: 'WHITE'
+        color: 'DEFAULT'
     }
+
+    console.log(body)
 
     try 
     {
