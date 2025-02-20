@@ -2,6 +2,9 @@ import { updateVignetteColorThemeFetch } from '../../../assets/api/MyAccountAppA
 export const SelectColorForm = ({ isDarkMode, vignetteId, setVignetteColorTheme }) => {
 
     const changeColor = async (color) => {
+
+
+        console.log(vignetteId, color)
         const { isError } = await updateVignetteColorThemeFetch(vignetteId, color)
 
         if(!isError)

@@ -118,12 +118,9 @@ export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
         });
 
         const { data } = await response.json();
-
         return { isError: !response.ok, data }
     } 
     catch (error) {
-
-        console.log('error en fetch')
         return { isError: true, data: null }
     }
 }
@@ -142,7 +139,6 @@ export const deleteVignetteAndRecalculateTotalFetch = async ( vignetteId ) => {
         return { isError: false, data }
     } 
     catch (error) {
-        console.log('error ... ' + error)
         return { isError: true, data: null }
     }
 }

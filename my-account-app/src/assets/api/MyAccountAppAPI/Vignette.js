@@ -6,7 +6,7 @@ export const CreateVignetteFetch = async ( cardId, order ) => {
         cardId, 
         description: '', 
         amount: 0, 
-        color: 'WHITE',
+        color: 'DEFAULT',
         order
     };
 
@@ -65,7 +65,6 @@ export const updateVignetteOrderItemsFetch = async ( vignettes ) => {
         return { isError: false }; 
     } 
     catch (error) {
-        console.log('Ocurrió un error al intentar actualizar el orden de las viñetas.', error);
         return { isError: true }; 
     }
 }

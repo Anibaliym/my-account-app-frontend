@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
+import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTotalFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 import { useSortable } from "@dnd-kit/sortable"; 
@@ -7,10 +7,9 @@ import { CSS } from '@dnd-kit/utilities';
 import { Tooltip } from '@nextui-org/react';
 import { SelectColorForm } from './SelectColorForm';
 
-
 export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals, isDarkMode }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
-    const { id: vignetteId, description, amount, order, color } = vignette; 
+    const { id: vignetteId, description, amount, order, color } = vignette;
 
     const refDesription = useRef(); 
     const refAmount = useRef(); 
@@ -20,7 +19,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const [ newAmount, setNewAmount ] = useState(amount); 
     const [ newVignette, setNewVignette] = useState({}); 
     const [ showSaveIcon, setShowSaveIcon ] = useState(false);
-    const [ vignetteColorTheme, setVignetteColorTheme ] = useState(color); 
+    const [ vignetteColorTheme, setVignetteColorTheme ] = useState( (color.length === 0) ? 'DEFAULT' : color ); 
     
     useEffect(() => {
         if(showSuccessIcon) {
@@ -42,7 +41,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             cardId,
             description: newDescription,
             amount: amountString.length === 0 ? 0 : parseInt(amountString.replace(/\./g, ""), 10), // Convertir a número
-            color: "WHITE",
+            color: vignetteColorTheme,
             order,
         };
 
@@ -112,7 +111,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                 break;
         }
 
-        setNewVignette({ id: vignetteId, cardId, description: newDescription, amount: newAmount, color: 'WHITE', order, })
+        setNewVignette({ id: vignetteId, cardId, description: newDescription, amount: newAmount, color: 'DEFAULT', order, })
         updateVignette(); 
     }
 

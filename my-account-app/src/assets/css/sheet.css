@@ -225,7 +225,7 @@
 }
 
 /* Light Theme */
-.color-selector-lightTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
+.color-selector-lightTheme-DEFAULT { background-color: var(--sidebar-color); color: var(--text-color); }
 .color-selector-lightTheme-GREEN { background-color: #A2D9A1; color: black; }
 .color-selector-lightTheme-YELLOW { background-color: #FFEE9A; color: black; }
 .color-selector-lightTheme-ORANGE { background-color: #FFCC80; color: black; }
@@ -253,7 +253,7 @@
 .color-selector-lightTheme-STRONG_PURPLE { background-color: #A362C9; color: white; }
 
 /* Dark Theme */
-.color-selector-darkTheme-WHITE { background-color: var(--sidebar-color); color: var(--text-color); }
+.color-selector-darkTheme-DEFAULT { background-color: var(--sidebar-color); color: var(--text-color); }
 .color-selector-darkTheme-GREEN { background-color: #67A867; color: white; }
 .color-selector-darkTheme-YELLOW { background-color: #FFC93C; color: black; }
 .color-selector-darkTheme-ORANGE { background-color: #FF9B4E; color: white; }
