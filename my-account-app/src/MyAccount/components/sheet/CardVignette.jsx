@@ -45,6 +45,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             order,
         };
 
+        setNewAmount( (newData.amount === 0) ? 0: newData.amount ); 
+
         const { isError, data } = await updateVignetteAndRecalculateTotalFetch(newData);
 
         if (!isError) {
