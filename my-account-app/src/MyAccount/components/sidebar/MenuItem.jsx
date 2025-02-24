@@ -10,7 +10,9 @@ export const MenuItem = ({ navigateTo = '/error', description = 'menú name', ic
                 onClick={() => navigate(navigateTo)}
             >
                 <i className={ `${ icon } icon` }></i>
+                {/* <span className="animate__animated animate__fadeIn">{description}</span> */}
                 <span className="animate__animated animate__fadeIn">{description}</span>
+
             </button>
         </div>
     );

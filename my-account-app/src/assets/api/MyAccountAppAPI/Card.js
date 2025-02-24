@@ -8,8 +8,6 @@ export const createCardFetch = async ( sheetId, title, description ) => {
         color: 'DEFAULT'
     }
 
-    console.log(body)
-
     try 
     {
         const response = await fetch(`${ API_URL }/api/Card/CreateCard`, {

@@ -94,6 +94,7 @@
     justify-content: space-between;
     padding: 5px 5px;
     border-bottom: 1px solid gray; 
+    border-radius: 3px; 
 }
 
 .excel-card-row {
@@ -252,30 +253,33 @@
 .color-selector-lightTheme-STRONG_GRAY { background-color: #9E9E9E; color: black; }
 .color-selector-lightTheme-STRONG_PURPLE { background-color: #A362C9; color: white; }
 
-/* Dark Theme */
+
+/* Dark Theme - Adaptado con fondo oscuro y texto en colores más claros */
 .color-selector-darkTheme-DEFAULT { background-color: var(--sidebar-color); color: var(--text-color); }
-.color-selector-darkTheme-GREEN { background-color: #67A867; color: white; }
-.color-selector-darkTheme-YELLOW { background-color: #FFC93C; color: black; }
-.color-selector-darkTheme-ORANGE { background-color: #FF9B4E; color: white; }
-.color-selector-darkTheme-RED { background-color: #D55A5A; color: white; }
-.color-selector-darkTheme-BLUE { background-color: #4A90E2; color: white; }
-.color-selector-darkTheme-GRAY { background-color: #7D7D7D; color: white; }
-.color-selector-darkTheme-PURPLE { background-color: #9158A9; color: white; }
 
-/* Soft (Menos marcado) */
-.color-selector-darkTheme-SOFT_GREEN { background-color: #A5D6A7; color: black; }
-.color-selector-darkTheme-SOFT_YELLOW { background-color: #FFEB99; color: black; }
-.color-selector-darkTheme-SOFT_ORANGE { background-color: #FFCC80; color: black; }
-.color-selector-darkTheme-SOFT_RED { background-color: #EF9A9A; color: black; }
-.color-selector-darkTheme-SOFT_BLUE { background-color: #90CAF9; color: black; }
-.color-selector-darkTheme-SOFT_GRAY { background-color: #CFCFCF; color: black; }
-.color-selector-darkTheme-SOFT_PURPLE { background-color: #C49BD4; color: black; }
+/* Colores principales */
+.color-selector-darkTheme-GREEN { background-color: #1E442D; color: #A3E4D7; }
+.color-selector-darkTheme-YELLOW { background-color: #5A4600; color: #FFD54F; }
+.color-selector-darkTheme-ORANGE { background-color: #663A1F; color: #FFB074; }
+.color-selector-darkTheme-RED { background-color: #551E1E; color: #FF6F61; }
+.color-selector-darkTheme-BLUE { background-color: #12233D; color: #6FA8DC; }
+.color-selector-darkTheme-GRAY { background-color: #2F2F2F; color: #D3D3D3; }
+.color-selector-darkTheme-PURPLE { background-color: #3B224D; color: #C39BD3; }
 
-/* Strong (Más marcado) */
-.color-selector-darkTheme-STRONG_GREEN { background-color: #4B8F4B; color: white; }
-.color-selector-darkTheme-STRONG_YELLOW { background-color: #FFB300; color: black; }
-.color-selector-darkTheme-STRONG_ORANGE { background-color: #E68A47; color: white; }
-.color-selector-darkTheme-STRONG_RED { background-color: #C62828; color: white; }
-.color-selector-darkTheme-STRONG_BLUE { background-color: #1565C0; color: white; }
-.color-selector-darkTheme-STRONG_GRAY { background-color: #5C5C5C; color: white; }
-.color-selector-darkTheme-STRONG_PURPLE { background-color: #7B1FA2; color: white; }
+/* Soft Colors (Menos marcado) */
+.color-selector-darkTheme-SOFT_GREEN { background-color: #2A5C3A; color: #B7E8D6; }
+.color-selector-darkTheme-SOFT_YELLOW { background-color: #4E3B00; color: #FFE082; }
+.color-selector-darkTheme-SOFT_ORANGE { background-color: #5C3312; color: #FFCC80; }
+.color-selector-darkTheme-SOFT_RED { background-color: #4B1C1C; color: #EF9A9A; }
+.color-selector-darkTheme-SOFT_BLUE { background-color: #1C3047; color: #90CAF9; }
+.color-selector-darkTheme-SOFT_GRAY { background-color: #3D3D3D; color: #BDBDBD; }
+.color-selector-darkTheme-SOFT_PURPLE { background-color: #4A2C5F; color: #D1A3E8; }
+
+/* Strong Colors (Más marcado) */
+.color-selector-darkTheme-STRONG_GREEN { background-color: #0C2614;     color: #DFFFE0; }
+.color-selector-darkTheme-STRONG_YELLOW { background-color: #3E2E00;    color: var(--text-color); }
+.color-selector-darkTheme-STRONG_ORANGE { background-color: #522A10;    color: var(--text-color); }
+.color-selector-darkTheme-STRONG_RED { background-color: #3B1414;       color: var(--text-color); }
+.color-selector-darkTheme-STRONG_BLUE { background-color: #0D1B2A;      color: var(--text-color); }
+.color-selector-darkTheme-STRONG_GRAY { background-color: #242424;      color: var(--text-color); }
+.color-selector-darkTheme-STRONG_PURPLE { background-color: #321A44;    color: var(--text-color); }

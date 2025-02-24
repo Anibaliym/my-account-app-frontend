@@ -1,69 +1,100 @@
 import { Tooltip } from '@nextui-org/react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-export const AccountMenuList = ({ accountId, activeDropdown, toggleDropdown, description, sheets, toggleSidebar }) => {
+export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description, sheets, toggleSidebar }) => {
     const navigate = useNavigate();
 
-    const setSubMenuText = (sheet) => {
-        const { id, description } = sheet; 
+    // Estado interno para controlar si el menú está abierto
+    const [isItemMenuOpen, setIsItemMenuOpen] = useState(isOpen);
 
-        const textAdd = ' ...'; 
-        let setDescription = ''; 
+    // Sincronizar el estado interno con la prop `isOpen` cuando cambie
+    useEffect(() => {
+        setIsItemMenuOpen(isOpen);
+    }, [isOpen]);
 
-        if(description.length >= 23) {
-            setDescription = description.substring(0, 23); 
-            setDescription = setDescription + textAdd; 
-            setDescription = `${ setDescription }${ textAdd }`; 
+    // Efecto para cerrar el menú si `toggleSidebar` es `true`
+    useEffect(() => {
+        if (toggleSidebar) {
+            setIsItemMenuOpen(false);
         }
-        else
-            setDescription = description;  
+    }, [toggleSidebar]);
 
+    // Función para manejar la apertura/cierre del menú
+    const handleToggleMenu = () => {
+        if (!toggleSidebar) { // Solo permite alternar si el sidebar no está colapsado
+            setIsItemMenuOpen((prev) => !prev);
+            toggleDropdown(accountId); // Mantiene sincronizado el estado global
+        }
+    };
+
+    const setSubMenuText = (sheet) => {
+        const { id, description } = sheet;
+        let setDescription = description.length >= 23 ? `${description.substring(0, 23)} ...` : description;
+        
         return (
-            <Link 
-                key={ id } 
-                to={`/sheet/${ id }`}
-            >
-                <i className="bx bx-right-arrow-alt"></i>
-                { setDescription }
-            </Link>            
-        )
-    }
+            <Link key={id} to={`/sheet/${id}`}>
+                <i className="bx bx-right-arrow-alt"></i> {setDescription}
+            </Link>
+        );
+    };
 
-    const onClickMenu = () => ( navigate(`/account/${ accountId }`, { replace: true }) );
-    
-    const onDownItems = () => ( toggleDropdown(accountId) ); 
+    const onClickMenu = () => navigate(`/account/${accountId}`, { replace: true });
 
     return (
         <div className="menu-item">
-            <Tooltip
-                placement="right"
-                content={ description }
-                color="secondary"
-                closeDelay={ 50 }
-            >
-                <button className="dropdown-btn-accounts" onClick={ onClickMenu }>
+            {!toggleSidebar ? (
+                <button className="dropdown-btn-accounts" onClick={onClickMenu}>
                     <i className="bx bx-spreadsheet icon"></i>
-                    <span className="menu-description animate__animated animate__fadeIn">{ description }</span>
-                    {
-                        (sheets.length > 0) && 
-                        ( 
-                            <i 
-                                className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${activeDropdown === accountId ? 'arrow_open' : 'arrow_close'}`}
-                                onClick={ onDownItems }
-                            ></i> 
-                        )
-                    }
-                    
+                    <span className="menu-description animate__animated animate__fadeIn">{description}</span>
+                    {sheets.length > 0 && (
+                        <i
+                            className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
+                            onClick={handleToggleMenu} // Aquí se usa la función corregida
+                        ></i>
+                    )}
                 </button>
-            </Tooltip>
+            ) : (
+                <Tooltip
+                    placement="right"
+                    closeDelay={50}
+                    content={
+                        <div className="px-1 py-2">
+                            <div className="text-tiny">
+                                {sheets.map(({ sheet }) => (
+                                    <Link
+                                        key={sheet.id}
+                                        to={`/sheet/${sheet.id}`}
+                                        className="dropdown-btn-accounts"
+                                        style={{ width: '200px', textDecoration: 'none' }}
+                                    >
+                                        <span className="menu-description animate__animated animate__fadeIn">
+                                            <i className="bx bxs-right-arrow"></i> {sheet.description}
+                                        </span>
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    }
+                >
+                    <button className="dropdown-btn-accounts" onClick={onClickMenu}>
+                        <i className="bx bx-spreadsheet icon"></i>
+                        <span className="menu-description animate__animated animate__fadeIn">{description}</span>
+                        {sheets.length > 0 && (
+                            <i
+                                className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
+                                onClick={ handleToggleMenu }
+                            ></i>
+                        )}
+                    </button>
+                </Tooltip>
+            )}
 
             <div
                 className="dropdown-container animate__animated animate__fadeIn animate__faster"
-                style={{ display: !toggleSidebar && activeDropdown === accountId ? 'block' : 'none' }}
+                style={{ display: isItemMenuOpen ? 'block' : 'none' }}
             >
-                {
-                    sheets.map(  ({ sheet }) => ( setSubMenuText(sheet) )) 
-                }
+                {sheets.map(({ sheet }) => setSubMenuText(sheet))}
             </div>
         </div>
     );

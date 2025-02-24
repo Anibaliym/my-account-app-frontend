@@ -41,9 +41,6 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
     };
 
     const handleBlur = async ( controlName ) => {
-        console.log('onBlur')
-        console.log(controlName)
-
         switch (controlName) {
             case 'cashBalance':
                 await UpdateCashBalanceAPI(sheetId, formatNumber(balances.cashBalance));

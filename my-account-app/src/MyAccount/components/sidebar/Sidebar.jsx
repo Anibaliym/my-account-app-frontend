@@ -1,16 +1,19 @@
 import { MenuItem } from './MenuItem';
 import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
-import { useState } from 'react';
-import { useEffect } from 'react';
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { CreateAccountAPI, GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
-import { Tooltip } from '@nextui-org/react';
+import { AddAccountForm } from './AddAccountForm';
 
 export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
     const isInitialRender = useRef(true);
 
-    const [ activeDropdown, setActiveDropdown ] = useState(null);
+    // Estado para los dropdowns abiertos
+    const [activeDropdowns, setActiveDropdowns] = useState(() => {
+        // Carga el estado desde localStorage o inicializa un objeto vacío
+        return JSON.parse(localStorage.getItem('activeDropdowns')) || {};
+    });
+
     const [ userAccount, setUserAccount] = useState([]); 
     const [ newAccount, setNewAccount] = useState(false); 
     const [ newAccountName, setNewAccountName ] = useState(''); 
@@ -28,13 +31,18 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
 
     }, [ accountListener ]);
 
-    const toggleDropdown = (index) => {
+    // Función para manejar el estado de cada dropdown
+    const toggleDropdown = (accountId) => {
         if (toggleSidebar) return;
-            setActiveDropdown(activeDropdown === index ? null : index);
+
+        setActiveDropdowns(prevState => {
+            const newState = { ...prevState, [accountId]: !prevState[accountId] };
+            localStorage.setItem("activeDropdowns", JSON.stringify(newState)); // Guardar en localStorage
+            return newState;
+        });
     };
 
     const reloadAccount = async () => {
-
         const userData = JSON.parse( localStorage.getItem('user') );
         const { id } = userData; 
 
@@ -82,6 +90,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                         />
                     ))
                 }
+
                 <hr />
 
                 {
@@ -89,7 +98,8 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                         <AccountMenuList
                             key={ account.id }
                             accountId={ account.id } 
-                            activeDropdown={ activeDropdown } 
+                            isOpen={!!activeDropdowns[account.id]} // Verifica si está abierto
+                            activeDropdowns={ activeDropdowns } 
                             toggleDropdown={ toggleDropdown } 
                             description={ account.description }
                             sheets={ sheets }
@@ -98,31 +108,21 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                     ))
                 } 
 
-                <Tooltip
-                    placement="right"
-                    content="Crea una cuenta"
-                    color="secondary"
-                    closeDelay={ 50 }
-                >
-                    <button className="dropdown-btn d-flex justify-content-center align-items-center mt-1" onClick={() => ( setNewAccount(!newAccount) )}>
-                        <i className='bx bx-plus-medical' ></i>
-                    </button>
-                    
-                </Tooltip>
                 {
-                    (newAccount) && (
-                        <input 
-                            type="text" 
-                            className={ `d-flex justify-content-center align-items-center mt-1 text-center no-focus form-control form-control-sm animate__animated animate__fadeInDown animate__faster ${ (isDarkMode) ? 'bg-dark text-light' : '' }` }
-                            placeholder="nombre cuenta"
-                            value={ newAccountName }
-                            onChange={ onChangeAccountName }
-                            onKeyDown={ onKeyDownAccountName }
-                            maxLength="30"
+                    (!toggleSidebar) && (
+                        <AddAccountForm
+                            newAccount={ newAccount }
+                            newAccountName={ newAccountName }
+                            onChangeAccountName={ onChangeAccountName }
+                            onKeyDownAccountName={ onKeyDownAccountName }
+                            setNewAccount={ setNewAccount }
+                            isDarkMode={ isDarkMode }
                         />
+
                     )
                 }
-                <hr />
+
+                
             </div>
         </nav>
     )
