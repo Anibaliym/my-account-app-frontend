@@ -11,6 +11,8 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order, color } = vignette;
 
+    console.log(vignette)
+
     const refDesription = useRef(); 
     const refAmount = useRef(); 
 

@@ -106,6 +106,7 @@ export const deleteCardWithVignettesFetch = async ( cardId ) => {
 }
 
 export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
+    console.log(vignette)
     try 
     {
         const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteAndRecalculateTotal`,{
@@ -161,4 +162,27 @@ export const updateVignetteColorThemeFetch = async ( vignetteId, color ) => {
 
 } 
 
+export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
 
+    try
+    {
+        const response = await fetch(`${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }            
+        });
+
+        const data = await response.json();
+
+        return {
+            isError: false, 
+            data
+        };
+    }
+    catch (error)
+    {
+        return {
+            isError: true, 
+            data: {}
+        };
+    }
+}

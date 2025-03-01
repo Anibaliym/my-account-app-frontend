@@ -2,8 +2,10 @@ import { MenuItem } from './MenuItem';
 import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
 import { useState, useEffect, useRef } from 'react';
-import { CreateAccountAPI, GetUserAccountsWithSheetsAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { CreateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
 import { AddAccountForm } from './AddAccountForm';
+import { GetUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { Link } from 'react-router-dom';
 
 export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
     const isInitialRender = useRef(true);
@@ -48,7 +50,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
 
         setUserId(id); 
 
-        const { isError, data: menuData } = await GetUserAccountsWithSheetsAPI(id);
+        const { isError, data: menuData } = await GetUserAccountsWithSheetsFetch(id);
 
         if(!isError)
             setUserAccount(menuData.data.accounts); 
@@ -107,7 +109,6 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                         />
                     ))
                 } 
-
                 {
                     (!toggleSidebar) && (
                         <AddAccountForm
@@ -118,12 +119,24 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                             setNewAccount={ setNewAccount }
                             isDarkMode={ isDarkMode }
                         />
-
                     )
                 }
 
                 
-            </div>
+
+                <Link
+                    
+                    to={`/account/6db21202-c37f-414b-9510-49894515b860`}
+                    className="dropdown-btn-accounts"
+                    style={{ width: '200px', textDecoration: 'none' }}
+                >
+                    <span className="menu-description animate__animated animate__fadeIn">
+                        <i className="bx bxs-right-arrow"></i> test account
+                    </span>
+                </Link>
+
+
+           </div>
         </nav>
     )
 }

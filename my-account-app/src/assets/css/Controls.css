@@ -17,3 +17,22 @@
     transform: scale(1.02); /* Agranda ligeramente el botón */
 }
 
+
+.button-primary {
+    background-color: var(--primary-color);
+    color: white;
+    border: 1px solid var(--danger-color); 
+    font-size: 15px; 
+    padding: 3px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.button-primary:hover {
+    background-color: var(--danger-color); /* Cambia el color al pasar el mouse */
+    color: white;
+    border: 1px solid var(--danger-color); 
+    transform: scale(1.05); /* Agranda ligeramente el botón */
+}

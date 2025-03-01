@@ -6,14 +6,12 @@ export const SelectColorForm = ({ isDarkMode, vignetteId, setVignetteColorTheme 
 
         if(!isError)
             setVignetteColorTheme(color);
-        // else
-            // console.log('Ocurrió un error al intentar actualizar el color de la viñeta')
-            // showUserMessage('Ocurrió un error al intentar actualizar el color de la viñeta.', 'error');  
     }
 
     return (
         <>
-            <div onClick={ () => { changeColor('WHITE') } } className={ `color-selector-item color-selector-${ (isDarkMode ? 'darkTheme' : 'lightTheme' ) }-WHITE` }></div>
+            {/* <div onClick={ () => { changeColor('WHITE') } } className={ `color-selector-item color-selector-${ (isDarkMode ? 'darkTheme' : 'lightTheme' ) }-WHITE` }></div> */}
+            <div onClick={ () => { changeColor('DEFAULT') } } className={ `color-selector-item color-selector-${ (isDarkMode ? 'darkTheme' : 'lightTheme' ) }-WHITE` }></div>
 
             <table>
                 <tbody>

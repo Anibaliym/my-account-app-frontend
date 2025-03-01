@@ -26,31 +26,6 @@ export const getActiveAccountByIdAPI = async ( accountId ) => {
     }
 }
 
-export const GetUserAccountsWithSheetsAPI = async ( userId ) => {
-
-    try
-    {
-        const response = await fetch(`${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`, {
-            method: 'GET',
-            headers: { 'Accept': 'application/json' }            
-        });
-
-        const data = await response.json();
-         
-        return {
-            isError: false, 
-            data
-        };
-    }
-    catch (error)
-    {
-        return {
-            isError: true, 
-            data: {}
-        };
-    }
-}
-
 export const CreateAccountAPI = async ( userId, description ) => {
     try 
     {

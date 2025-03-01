@@ -9,10 +9,12 @@ import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
 import { UserMessage } from '../components/UserMessage';
 import { ModalInfo } from '../components/modal/ModalInfo';
+import { AccountsPage } from '../pages/AccountsPage';
 import '/src/assets/css/Home.css';
 import '/src/assets/css/Controls.css';
 import '/src/assets/css/Cards.css';
 import '/src/assets/css/sheet.css';
+import '/src/assets/css/Accounts.css';
 
 export const MyAccountRouter = () => {
 
@@ -22,12 +24,12 @@ export const MyAccountRouter = () => {
         return storedValue !== null ? JSON.parse(storedValue) : false;
     });
 
-    const [isDarkMode, setIsDarkMode] = useState(false);
-    const [accountListener, setAccountListener] = useState(0);
-    const [pageName, setPageName] = useState('Nombre página');
-    const [message, setMessage] = useState({ message: '', type: 'info' });
-    const [showMessage, setShowMessage] = useState(false);
-    const [modalMessage, setModalMessage] = useState('');
+    const [ isDarkMode, setIsDarkMode ] = useState(false);
+    const [ accountListener, setAccountListener ] = useState(0);
+    const [ pageName, setPageName ] = useState('Nombre página');
+    const [ message, setMessage ] = useState({ message: '', type: 'info' });
+    const [ showMessage, setShowMessage ] = useState(false);
+    const [ modalMessage, setModalMessage ] = useState('');
 
     // Guarda el estado de toggleSidebar en localStorage cuando cambia
     useEffect(() => {
@@ -80,6 +82,8 @@ export const MyAccountRouter = () => {
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
+                        <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode}/>} />
+
                         <Route path="account/:accountId" element={
                             <AccountPage 
                                 setAccountListener={setAccountListener} 

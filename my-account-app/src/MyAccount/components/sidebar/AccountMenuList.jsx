@@ -44,23 +44,25 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
     return (
         <div className="menu-item">
             {!toggleSidebar ? (
-                <button className="dropdown-btn-accounts" onClick={onClickMenu}>
+                <button className="dropdown-btn-accounts" onClick={handleToggleMenu}>
                     <i className="bx bx-spreadsheet icon"></i>
                     <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                     {sheets.length > 0 && (
                         <i
                             className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
-                            onClick={handleToggleMenu} // Aquí se usa la función corregida
+                            // onClick={handleToggleMenu} // Aquí se usa la función corregida
                         ></i>
                     )}
                 </button>
             ) : (
                 <Tooltip
                     placement="right"
-                    closeDelay={50}
+                    closeDelay={0}
                     content={
                         <div className="px-1 py-2">
                             <div className="text-tiny">
+                                <p style={{fontSize:'20px', color:'var(--primary-color)'}}>{ description }</p>
+                                <hr />
                                 {sheets.map(({ sheet }) => (
                                     <Link
                                         key={sheet.id}
@@ -77,13 +79,13 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                         </div>
                     }
                 >
-                    <button className="dropdown-btn-accounts" onClick={onClickMenu}>
+                    <button className="dropdown-btn-accounts">
                         <i className="bx bx-spreadsheet icon"></i>
                         <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                         {sheets.length > 0 && (
                             <i
                                 className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
-                                onClick={ handleToggleMenu }
+                                onClick={ handleToggleMenu}
                             ></i>
                         )}
                     </button>

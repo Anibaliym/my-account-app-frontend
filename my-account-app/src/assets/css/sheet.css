@@ -118,6 +118,12 @@
     flex: 0 0 120px;
 }
 
+
+.excel-card-account-cell.action {
+    flex: 0 0 120px;
+    text-align: right;
+}
+
 .excel-card-footer {
     display: flex;
     justify-content: space-between;
