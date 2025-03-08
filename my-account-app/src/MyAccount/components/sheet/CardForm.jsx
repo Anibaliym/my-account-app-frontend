@@ -109,7 +109,6 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
 
     return (
         <div className={ `excel-card animate__animated animate__fadeInDown animate__faster mb-4` }>
-        {/* <div className={`excel-card animate__animated animate__fadeInDown animate__faster ${index === vignettes.length - 1 ? '' : 'mb-4'}`}> */}
             <DeleteCardConfirmationModal
                 cardTitle={ title }
                 modalConfirmDeleteCard={ modalConfirmDeleteCard }
@@ -122,15 +121,15 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 <h4>{ title }</h4>
 
                 <div className="icons-container">
-                    <Tooltip placement="bottom" content="Resetear colores viñetas" color="secondary" closeDelay={50}>
+                    <Tooltip placement="bottom" content="Resetear colores viñetas" color="foreground" closeDelay={50}>
                         <i className='bx bx-reset icon excel-icon'></i>
                     </Tooltip>
 
 
-                    <Tooltip placement="bottom" content="Eliminar la carta" color="secondary" closeDelay={50}>
+                    <Tooltip placement="bottom" content="eliminar la carta" color="danger" closeDelay={50}>
                         <i className="bx bx-trash icon excel-icon" onClick={ deleteCard }></i>
                     </Tooltip>
-                    <Tooltip placement="bottom" content="Agregar una viñeta" color="secondary" closeDelay={50}>
+                    <Tooltip placement="bottom" content="Agregar una viñeta" color="success" closeDelay={50}>
                         <i className="bx bx-plus icon excel-icon" onClick={ createVignette } ></i>
                     </Tooltip>
                 </div>

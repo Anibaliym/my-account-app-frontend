@@ -49,7 +49,6 @@
 }
 
 .excel-card {
-    /* ayanez */
     padding:10px; 
     font-size: 15px;
     float:left;
@@ -159,7 +158,6 @@
 
 @media (max-width: 2000px) {
     .excel-card {
-        /* ayanez */
         width: 48%;
     }
 }

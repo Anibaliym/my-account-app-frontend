@@ -27,10 +27,7 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
         });
     };
 
-    const onToggleSidebar = () => {
-        setToggleSidebar(!toggleSidebar); 
-        //ayanez - debería collapsar los sub menús
-    };
+    const onToggleSidebar = () => setToggleSidebar(!toggleSidebar); 
 
     const { firstName, lastName } = user; 
 

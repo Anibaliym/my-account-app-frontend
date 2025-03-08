@@ -88,11 +88,13 @@ export const updateSheetAPI = async ( accountId, sheetId, description, cashBalan
             })
         
         });
-
-        const { resolution } = await response.json();
+        const { resolution, message, data } = await response.json();
         
-        return {
-            isError: !resolution, 
+        return { 
+            isError: false, 
+            resolution, 
+            message, 
+            data 
         };
     } 
     catch (error) {
@@ -124,6 +126,8 @@ export const GetSheetByAccountIdAPI = async ( accountId ) => {
 }
 
 export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
+
+    console.log(sheetOrderItems)
     try 
     {
         const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems` , {
@@ -138,11 +142,13 @@ export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
         if (!response.ok)
             throw new Error(`HTTP error! Status: ${response.status}`);
 
+
         const { resolution } = await response.json(); // Parsear el JSON de la respuesta
         return { isError: !resolution }
     } 
     catch (error) 
     {
+
         return { isError: true }
     }
 }

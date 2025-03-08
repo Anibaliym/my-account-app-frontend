@@ -18,21 +18,68 @@
 }
 
 
-.button-primary {
-    background-color: var(--primary-color);
-    color: white;
-    border: 1px solid var(--danger-color); 
-    font-size: 15px; 
-    padding: 3px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+/* Contenedor para mostrar varios badges */
+.badge-container {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
 }
 
-.button-primary:hover {
-    background-color: var(--danger-color); /* Cambia el color al pasar el mouse */
+/* Contenedor de los badges */
+.badge-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    font-size: 24px; /* Tamaño de los iconos */
+}
+
+/* Estilo del icono con badge */
+.icon {
+    position: relative;
+    display: inline-block;
+}
+
+/* Diseño del badge de notificación */
+.badge {
+    background: #b63509;
     color: white;
-    border: 1px solid var(--danger-color); 
-    transform: scale(1.05); /* Agranda ligeramente el botón */
+    font-size: 10px;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    position: relative; /* Permite colocarlo encima de otros elementos si es necesario */
+}
+
+/* Estilos generales del input */
+.custom-input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--input-border);
+    background: var(--input-bg);
+    color: var(--text-color);
+    transition: all 0.1s ease-in-out;
+    outline: none;
+}
+
+/* Efecto cuando el input está en foco */
+.custom-input:focus {
+    border-color: var(--primary-color);
+}
+
+/* Tema Claro */
+.light-mode {
+    --input-bg: #fff;
+    --input-border: #ccc;
+}
+
+/* Tema Oscuro */
+.dark-mode {
+    --input-bg: #2a2a2a;
+    --input-border: #555;
 }

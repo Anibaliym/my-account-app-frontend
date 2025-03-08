@@ -106,7 +106,6 @@ export const deleteCardWithVignettesFetch = async ( cardId ) => {
 }
 
 export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
-    console.log(vignette)
     try 
     {
         const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteAndRecalculateTotal`,{
@@ -163,7 +162,6 @@ export const updateVignetteColorThemeFetch = async ( vignetteId, color ) => {
 } 
 
 export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
-
     try
     {
         const response = await fetch(`${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`, {

@@ -57,7 +57,7 @@ export const CardSheetAdd = ({ accountId, setSheets, accountListener, setAccount
             <Tooltip
                 placement="bottom"
                 content="agregar hoja de cálculo"
-                color="secondary"
+                color="foreground"
                 closeDelay={ 50 }
             >
                 <center>

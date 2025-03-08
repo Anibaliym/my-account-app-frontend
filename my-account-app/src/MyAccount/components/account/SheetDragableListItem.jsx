@@ -67,8 +67,8 @@ export const SheetDragableListItem = ({ id, accountId, description, cashBalance,
             <div className="d-flex gap-2">
                 <Tooltip
                     placement="bottom"
-                    content="Eliminar hoja de cálculo"
-                    color="secondary"
+                    content="eliminar hoja de cálculo"
+                    color="danger"
                     closeDelay={50}
                 >
                     <i
@@ -82,7 +82,7 @@ export const SheetDragableListItem = ({ id, accountId, description, cashBalance,
                 <Tooltip
                     placement="right"
                     content="Ordenar item"
-                    color="secondary"
+                    color="foreground"
                     closeDelay={50}
                 >
                     <i

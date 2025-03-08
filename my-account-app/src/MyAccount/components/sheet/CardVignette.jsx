@@ -11,8 +11,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order, color } = vignette;
 
-    console.log(vignette)
-
     const refDesription = useRef(); 
     const refAmount = useRef(); 
 
@@ -146,10 +144,11 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                         <Tooltip 
                             content={<SelectColorForm isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
                             placement="right"
-                            closeDelay={ 10 }
+                            closeDelay={ 200 }
                         >
                             <i className='bx bx-palette text-color-primary card-icon mr-1'></i>
                         </Tooltip> 
+
 
                         { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
                         { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }

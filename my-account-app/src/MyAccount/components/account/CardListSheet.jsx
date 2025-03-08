@@ -51,7 +51,7 @@ export const CardListSheet = ({ sheets, setSheets, accountId, isDarkMode, showUs
                 collisionDetection={ closestCenter }
                 onDragEnd={ onDrawEnd }
             >
-                <ul className="list-group ">
+                <ul className="list-group">
                     <SortableContext items={ sheets } strategy={ verticalListSortingStrategy }> 
                         {
                             (sheets.length === 0) && (<small className="animate__animated animate__fadeInDown animate__faster"> <span className="sheet-list">No hay hojas de cálculo creadas en esta cuenta</span> </small>)

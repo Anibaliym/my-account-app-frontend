@@ -8,7 +8,7 @@ export const MenuItem = ({ navigateTo = '/error', description = 'menú name', ic
         <Tooltip
             placement="right"
             content={ description }
-            color="secondary"
+            color="foreground"
             closeDelay={ 50 }
         >
             <div className="menu-item">

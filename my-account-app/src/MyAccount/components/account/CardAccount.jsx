@@ -103,15 +103,15 @@ export const CardAccount = ({ accountId, setPageName, setAccountListener, accoun
                 <Tooltip
                     placement="bottom"
                     content="Guardar"
-                    color="secondary"
+                    color="foreground"
                     closeDelay={ 50 }
                 >
                     <i className={ `bx bx-save icon animate__animated animate__faster ${ (showSaveButtom) ? 'animate__fadeIn' : 'animate__fadeOut' }` } onClick={ updateDescriptionAccount }></i>
                 </Tooltip>
                 <Tooltip
                     placement="bottom"
-                    content="Eliminar cuenta"
-                    color="secondary"
+                    content="eliminar cuenta"
+                    color="danger"
                     closeDelay={ 50 }
                 >
                     <i className='bx bx-trash icon text-danger' onClick={ onDeleteAccount }></i>

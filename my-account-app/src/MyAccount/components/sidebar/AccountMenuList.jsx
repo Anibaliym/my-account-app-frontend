@@ -39,8 +39,6 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
         );
     };
 
-    const onClickMenu = () => navigate(`/account/${accountId}`, { replace: true });
-
     return (
         <div className="menu-item">
             {!toggleSidebar ? (
@@ -57,7 +55,7 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
             ) : (
                 <Tooltip
                     placement="right"
-                    closeDelay={0}
+                    closeDelay={200}
                     content={
                         <div className="px-1 py-2">
                             <div className="text-tiny">

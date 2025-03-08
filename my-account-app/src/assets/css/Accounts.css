@@ -14,6 +14,55 @@
     color: white;
 }
 
+.accounts-balances-form {
+    width: 300px; /* Ancho fijo */
+    height: 99%; /* Altura fija */
+    background-color: var(--sub-menu-container);
+    border-radius: 3px;
+    padding:8px; 
+    color: white;
+}
+
+.accounts-form {
+    width: 400px; /* Ancho fijo */
+    background-color: var(--sub-menu-container);
+    border-radius: 3px;
+    padding:5px; 
+    color: white;
+}
+
+/*********/
+.div-test {
+    width: 100%;
+    height: 90%;
+    overflow: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+.div-test::-webkit-scrollbar {
+    width: 8px;
+    opacity: 0; /* Inicialmente invisible */
+    transition: opacity 0.5s ease-in-out;
+}
+
+.div-test:hover::-webkit-scrollbar {
+    opacity: 1; /* Se muestra en hover */
+}
+
+.div-test::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+}
+
+.div-test::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+/*********/
+
+
+
+
 .account-cards-form {
     flex: 1; /* Toma el ancho restante */
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
@@ -31,7 +80,75 @@
         width: 350px; /* Ancho fijo */
         height: 200px; /* Mantiene la altura fija */
     }
+
+    .accounts-balances-form {
+        width: 350px; /* Ancho fijo */
+        height: 200px; /* Mantiene la altura fija */
+    }
+
     .account-cards-form{
         
     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.custom-list {
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+}
+
+.custom-list li {
+    background: #fff;
+    margin-top: 2px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--text-color); 
+}
+
+.custom-list-focus {
+    background: #fff;
+    margin-top:5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 5px;
+    border-radius: 3px;
+    cursor:pointer;
+}
+
+.custom-list li:hover {
+    background: var(--primary-color-light);
+}
+
+.input-list {
+    border: none; /* Elimina el borde */
+    outline: none; /* Elimina el contorno azul */
+    width: 100%;
+    color: var(--primary-color);
+    cursor: pointer; /* Hace que el cursor sea de tipo puntero */
+}
+
+.input-list:focus {
+    border: none;
+    outline: none;
+    cursor: pointer; /* Asegura que mantenga el cursor en focus */
 }

@@ -19,7 +19,7 @@ import '/src/assets/css/Accounts.css';
 export const MyAccountRouter = () => {
 
     // Estado inicial de toggleSidebar obteniendo el valor de localStorage
-    const [toggleSidebar, setToggleSidebar] = useState(() => {
+    const [ toggleSidebar, setToggleSidebar ] = useState(() => {
         const storedValue = localStorage.getItem('isSidebarToggleCollapsed');
         return storedValue !== null ? JSON.parse(storedValue) : false;
     });
@@ -82,7 +82,7 @@ export const MyAccountRouter = () => {
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
-                        <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode}/>} />
+                        <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
 
                         <Route path="account/:accountId" element={
                             <AccountPage 

@@ -29,7 +29,7 @@
 
 input:focus::placeholder {
     font-size: 14px;
-    color: var(--primary-color);
+    color: var(--text-color);
 }
 
 input::placeholder {
