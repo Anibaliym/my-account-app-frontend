@@ -4,8 +4,6 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ProfilePage } from '../pages/ProfilePage';
 import { HomePage } from '../pages/HomePage';
 import { Header } from '../components/Header';
-import { AccountPage } from '../pages/AccountPage';
-import { CalculatorPage } from '../pages/CalculatorPage';
 import { SheetPage } from '../pages/SheetPage';
 import { UserMessage } from '../components/UserMessage';
 import { ModalInfo } from '../components/modal/ModalInfo';
@@ -83,18 +81,6 @@ export const MyAccountRouter = () => {
                         <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
                         <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
-
-                        <Route path="account/:accountId" element={
-                            <AccountPage 
-                                setAccountListener={setAccountListener} 
-                                accountListener={accountListener} 
-                                isDarkMode={isDarkMode} 
-                                setPageName={setPageName} 
-                                showUserMessage={showUserMessage}
-                                setModalMessage={setModalMessage}
-                            />
-                        } />
-                        <Route path="calculator" element={<CalculatorPage setPageName={setPageName} />} />
                         <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={showUserMessage} isDarkMode={isDarkMode} />} />
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>

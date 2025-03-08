@@ -1,10 +1,9 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { DeleteAccountAPI, UpdateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
-import { useState } from 'react';
-import { useRef } from 'react';
+import { useState, useRef } from 'react';
 
-export const ItemTest = ({ accountId, isDarkMode, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
+export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: accountId });
     const [ newAccountUpdate, setNewAccountUpdate ] = useState(accountDescription); 
 
@@ -64,13 +63,7 @@ export const ItemTest = ({ accountId, isDarkMode, accountDescription, showUserMe
         >
             <input
                 type="text"
-                style={{
-                    border: 'none',
-                    width: '100%',
-                    outline: 'none',   // Elimina el borde al hacer foco
-                    background: 'inherit',  // Hereda el fondo del div padre
-                    cursor:'pointer' 
-                }}
+                style={{ border: 'none', width: '100%', outline: 'none', background: 'inherit', cursor:'pointer' }}
                 value={ newAccountUpdate } 
                 ref={ accountDescriptionRef }
                 onChange={ onInputChange } 
@@ -92,7 +85,6 @@ export const ItemTest = ({ accountId, isDarkMode, accountDescription, showUserMe
                     {...attributes}
                 ></i>
             </div>
-
         </li>
     )
 }

@@ -1,13 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { LoginForm } from '../components/access/LoginForm';
 import { RegisterForm } from '../components/access/RegisterForm';
 import { AccessUserMessage } from '../components/access/AccessUserMessage';
-
 import '/src/assets/css/Access.css'; 
-import { useEffect } from 'react';
 
 export const AccessPage = () => {
-    
     const [ toggleLoginRegister, setToggleLoginRegister ] = useState(true); 
     const [ showUserMessage, setShowUserMessage ] = useState({ show: false, message: '' });
     const [ isDarkMode, setIsDarkMode ] = useState(false);
@@ -19,8 +16,6 @@ export const AccessPage = () => {
             document.body.classList.toggle('dark', savedDarkMode);
         }
     }, [])
-    
-
     
     return (
         <div className="access-page-container">

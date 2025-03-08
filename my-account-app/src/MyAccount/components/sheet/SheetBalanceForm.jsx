@@ -101,7 +101,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
             <hr />
             
             <div>
-                <small>efectivo</small>
+                <small>saldo efectivo</small>
 
                 <input
                     ref={cashBalanceRef}
@@ -119,7 +119,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                     {icons.save.cashBalance && <i className="bx bx-save icon animate__animated animate__fadeInUp animate__faster"></i>}
                     {icons.ok.cashBalance && <i className="bx bx-check-circle icon animate__animated animate__fadeInUp animate__faster"></i>}
                 </div>
-                <small>cuenta bancaria</small>
+                <small>saldo cuenta bancaria</small>
                 <input
                     ref={currentAccountBalanceRef}
                     name="currentAccountBalance"
