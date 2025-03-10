@@ -7,7 +7,7 @@
 
 :root {
     --body-color: #fff;
-    --placeholder-color: red; 
+    --placeholder-color: #c0c0c0; 
     --sidebar-color: #F3F3F0;
     --primary-color: #695CFE;
     --danger-color: red;
@@ -24,7 +24,7 @@
 }
 
 body.dark {
-    --placeholder: white; 
+    --placeholder-color: #8e8e8e; 
     --body-color: #212121;
     --sidebar-color: #171717;
     --primary-color: #695CFE;

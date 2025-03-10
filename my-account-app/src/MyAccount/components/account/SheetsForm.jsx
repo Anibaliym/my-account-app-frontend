@@ -121,16 +121,8 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
         getSheetsAccount();
     }, [ accountId ]);
 
-    // useEffect(() => {
-
-    //     setSheetsArr(prevSheets => prevSheets.filter(sheet => sheet.accountId !== accountId));
-    // }, [ accountListener ])
-
     return (
-        <div 
-            style={{ padding: '5px',  width: '400px',  height: '99%' }}
-            className="ml-5"
-        >
+        <div style={{ padding: '5px',  width: '400px',  height: '99%' }} className="ml-5">
             <div style={{
                 width: '100%',
                 display: 'flex',
@@ -138,8 +130,8 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                 alignItems: 'center',
                 padding: '5px' 
             }}>
-                <span className={`text-color-primary ${ animationClass }`}>
-                    {accountDescription}
+                <span className={`text-color-primary mb-2 ${ animationClass }`}>
+                    {accountDescription.toUpperCase()}
                 </span>
                 
                 <Tooltip
@@ -148,7 +140,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                     color="danger"
                     closeDelay={ 50 }
                 >
-                    <i className="bx bx-trash text-danger" style={{ cursor:'pointer' }} onClick={ deleteAccount }></i>
+                    <i className="bx bx-trash text-danger mb-2" style={{ cursor:'pointer' }} onClick={ deleteAccount }></i>
                 </Tooltip>
             </div>            
             {

@@ -54,11 +54,7 @@ export const deleteSheetAPI = async (sheetId) => {
 
         const { resolution, message, errors } = await response.json();
 
-        return {
-            isError: !resolution, 
-            message, 
-            errors
-        };
+        return { isError: false,  resolution,  message,  errors };
     } 
     catch (error) {
         return {

@@ -29,11 +29,11 @@
 
 input:focus::placeholder {
     font-size: 14px;
-    color: var(--text-color);
+    /* color: var(--text-color); */
 }
 
 input::placeholder {
-    color: var(--text-color);
+    color: var(--placeholder-color);
     font-size: 15px;
     transition: font-size 0.3s ease, color 0.3s ease;
 }

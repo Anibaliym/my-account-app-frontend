@@ -1,4 +1,3 @@
-
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { useState } from 'react';
@@ -22,17 +21,18 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
     }
 
     const deleteSheet = async () => {
-        const { isError } = await deleteSheetAPI( sheetId ); 
-        
-        if(isError) {
-            showUserMessage('ocurrió un error al intentar eliminar la hoja de cálculo' ,'danger');
+        const { isError, resolution } = await deleteSheetAPI( sheetId ); 
+
+        if(isError || !resolution) {
+            showUserMessage('no se puede eliminar la hoja de cálculo, por que tiene movimientos o información en su contenido' ,'warning');
             return; 
         }
 
-        setSheetsArr(prevSheets => prevSheets.filter(sheet => sheet.id !== sheetId));
-        setAccountListener(accountListener - 1); 
-        showUserMessage(`se ha eliminado la hoja de cálculo "${ sheetDescriptionUpdate }"`,'success');
-
+        if(resolution){
+            setSheetsArr(prevSheets => prevSheets.filter(sheet => sheet.id !== sheetId));
+            setAccountListener(accountListener - 1); 
+            showUserMessage(`se ha eliminado la hoja de cálculo "${ sheetDescriptionUpdate }"`,'success');
+        }
     }
 
     const updateSheet = async () => {
@@ -57,7 +57,7 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
             ref={ setNodeRef }
             key={ sheetId }
             style={ { border: `1px solid ${ isDarkMode ? 'gray' : 'lightgray' }`, transform: CSS.Transform.toString(transform), transition }} 
-            className={` d-flex justify-content-between  p-1 small ${ isDarkMode ? 'bg-dark' : '' }`}
+            className={`animate__animated animate__fadeIn animate__faster d-flex justify-content-between p-1 small ${ isDarkMode ? 'bg-dark' : '' }`}
         >
             <input
                 type="text"
