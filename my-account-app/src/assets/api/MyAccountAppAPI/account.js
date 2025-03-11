@@ -83,7 +83,6 @@ export const DeleteAccountAPI = async ( accountId ) => {
     } 
     catch (error) 
     {
-        console.error('Error al eliminar la cuenta:', error);
         return { isError : true }
     }
 }

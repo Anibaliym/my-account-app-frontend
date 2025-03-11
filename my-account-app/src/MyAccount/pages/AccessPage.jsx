@@ -24,8 +24,8 @@ export const AccessPage = () => {
                 <div className="container">
                     <div className="row">
                         <div className="loginPresentation col p-5">
-                            <h1>mi cuenta</h1>
-                            <h5 className="mt-3">
+                            <h1 className="display-4">MI CUENTA</h1>
+                            <h5 className="mt-5">
                                 { 'Registrate de forma gratuita! :)' }
                             </h5>
                             <br />

@@ -81,7 +81,7 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
             <Modal.Body className="modal-content">
                 <div className="container-fluid">
                     <div className="card-body">
-                        <h5 className="card-title text-color-primary">Crear carta de planificación</h5>
+                        <h5 className="card-title text-color-primary">CREAR CARTA DE PLANIFICACIÓN</h5>
                         <hr />
 
                         <input 

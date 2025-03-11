@@ -111,7 +111,6 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 cardTitle={ title }
                 modalConfirmDeleteCard={ modalConfirmDeleteCard }
                 setModalConfirmDeleteCard={ setModalConfirmDeleteCard }
-                showUserMessage={ showUserMessage }
                 deleteCardWithVignettes={ deleteCardWithVignettes }
             />
 

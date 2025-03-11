@@ -1,13 +1,13 @@
 import Modal from 'react-bootstrap/Modal';
 
-export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard, setModalConfirmDeleteCard, showUserMessage, deleteCardWithVignettes }) => {
+export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard, setModalConfirmDeleteCard, deleteCardWithVignettes }) => {
     
     return (
         <Modal show={ modalConfirmDeleteCard } onHide={ setModalConfirmDeleteCard } className="modal-blur">
             <Modal.Body className="modal-content">
                 <div className="container-fluid">
                     <div className="card-body">
-                        <h5 className="card-title text-color-primary">Eliminar carta</h5>
+                        <h5 className="card-title text-color-primary">ELIMINAR CARTA</h5>
                         <hr />
 
                         <p className="text-center modal-text-message">

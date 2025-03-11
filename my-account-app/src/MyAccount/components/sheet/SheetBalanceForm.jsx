@@ -1,14 +1,17 @@
 import { Tooltip } from '@nextui-org/react'; 
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { CreateCardModal } from './CreateCardModal';
 import { useState, useEffect } from 'react';
-import { CreateSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { CreateSheetBackupFetch, deleteSheetWithContentsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { DeleteSheetConfirmationModal } from './DeleteSheetConfirmationModal';
 
 export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage, accountListener, setAccountListener }) => {
     const { sheetId } = useParams(); 
     const [ animationClass, setAnimationClass ] = useState(''); 
+    const [ modalConfirmDeleteSheet, setModalConfirmDeleteSheet ] = useState(false); 
+    const navigate = useNavigate(); 
 
     useEffect(() => {
         // Activar la animación cuando sheetName cambia
@@ -40,6 +43,20 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
             setAccountListener(accountListener - 1);
             showUserMessage(`Se ha creado un respaldo de la hoja de cálculo "${ sheetName }" correctamente.`,'success');
         }
+    }
+
+    const deleteSheetWithContents = async () => {
+        const { isError } = await deleteSheetWithContentsFetch(sheetId); 
+
+        if(isError)
+            showUserMessage('Ocurrió un error al intentar eliminar la hoja de cálculo.','error');
+        else
+        {
+            setAccountListener(accountListener - 1);
+            showUserMessage(`Se ha eliminado la hoja de cálculo "${ sheetName }" correctamente.`,'success');
+            navigate('/home', );
+        }
+
     }
 
     const handleKeyDown = async (e, field, value) => {
@@ -97,6 +114,13 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                 fetchCard={ fetchCard } 
             />
 
+            <DeleteSheetConfirmationModal
+                sheetDescription = { sheetName }
+                modalConfirmDeleteSheet = { modalConfirmDeleteSheet }
+                setModalConfirmDeleteSheet = { setModalConfirmDeleteSheet }
+                deleteSheet = { deleteSheetWithContents }
+            />
+
             <div className="sheet-balances-form-header">
                 <h1 className={`display-6 animate__animated ${animationClass} animate__faster`}>{sheetName}</h1>
 
@@ -110,7 +134,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                             <i className='bx bxs-backpack icon' onClick={ createSheetBackup } ></i>
                         </Tooltip>
                         <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
-                            <i className="bx bx-trash icon" ></i>
+                            <i className="bx bx-trash icon" onClick={ () => setModalConfirmDeleteSheet(true) }></i>
                         </Tooltip>
                         <Tooltip placement="bottom" content="Exportar a excel" color="foreground" closeDelay={ 50 }>
                             <i className='bx bx-export icon'></i>

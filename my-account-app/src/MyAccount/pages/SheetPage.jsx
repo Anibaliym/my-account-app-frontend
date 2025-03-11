@@ -8,7 +8,6 @@ import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAP
 
 export const SheetPage = ({ showUserMessage, isDarkMode, accountListener, setAccountListener }) => {
     const { sheetId } = useParams();
-    console.log(sheetId); 
 
     const cashBalanceRef = useRef();
     const currentAccountBalanceRef = useRef();

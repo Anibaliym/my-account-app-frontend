@@ -26,7 +26,6 @@ export const CreateVignetteFetch = async ( cardId, order ) => {
     } 
     catch (error) 
     {
-        console.warn(error)
         return { isError: true }
     }
 }

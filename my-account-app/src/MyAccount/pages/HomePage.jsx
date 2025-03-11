@@ -7,9 +7,18 @@ export const HomePage = ({ setPageName }) => {
     }, []);
 
     return (
-        <div className="container-fluid ">
-            <h1 className="animate__animated animate__fadeInDown animate__faster display-1 title-color-text ">MI CUENTA</h1>
-            <small className="animate__animated animate__fadeIn">Anibal Yañez</small>
+        
+        <div className="page-principal-container">
+            <div className="container-fluid">
+                <h1 className="animate__animated animate__fadeInDown animate__faster display-1 title-color-text ">MI CUENTA</h1>
+                {/* <small className="animate__animated animate__fadeIn">Anibal Yañez</small> */}
+                <div className="card-body animate__animated animate__fadeIn">
+                    <blockquote className="blockquote mb-0">
+                    <p>Gestión de cuentas y planificación personal.</p>
+                    <footer className="blockquote-footer">Anibal Yañez</footer>
+                    </blockquote>
+                </div>
+            </div>
         </div>
         // <>
         //     <div className="container ">
