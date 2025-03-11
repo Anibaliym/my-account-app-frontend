@@ -106,7 +106,7 @@ export const SheetPage = ({ showUserMessage, isDarkMode }) => {
             const { description, cashBalance, currentAccountBalance } = await data;
 
             if (isError) {
-                showUserMessage('ocurrió un error al intentar cargar la hoja de cálculo.', 'error');
+                showUserMessage('Ocurrió un error al intentar cargar la hoja de cálculo.', 'error');
                 return;
             }
 
@@ -134,7 +134,7 @@ export const SheetPage = ({ showUserMessage, isDarkMode }) => {
             setTotalCardsBalances(calcTotalCardsAmount);
         }
         else 
-            showUserMessage('ocurrió un error al intentar cargar las cartas de la hoja de cálculo.', 'error');
+            showUserMessage('Ocurrió un error al intentar cargar las cartas de la hoja de cálculo.', 'error');
     }
 
     return (

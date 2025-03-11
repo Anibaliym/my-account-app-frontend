@@ -122,8 +122,6 @@ export const GetSheetByAccountIdAPI = async ( accountId ) => {
 }
 
 export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
-
-    console.log(sheetOrderItems)
     try 
     {
         const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems` , {

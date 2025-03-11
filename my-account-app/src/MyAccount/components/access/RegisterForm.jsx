@@ -204,14 +204,10 @@ export const RegisterForm = ({ activeForm, toggleForm, setShowUserMessage }) => 
 
             <div className="row mt-4">
                 <button
-                    className="btn btn-outline-primary"
+                    className="button-primary"
                     onClick={onRegisterUser}
                 >
                     Registrarse
-                </button>
-
-                <button className="btn btn-outline-primary mt-2">
-                    <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
                 </button>
             </div>
         </div>

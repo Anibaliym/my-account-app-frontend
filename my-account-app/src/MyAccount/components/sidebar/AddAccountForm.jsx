@@ -1,13 +1,36 @@
 import { Tooltip } from '@nextui-org/react';
 import { CustomInputText } from '../controls/CustomInputText';
+import { useState } from 'react';
+import { CreateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
 
-export const AddAccountForm = ({ newAccount, newAccountName, onChangeAccountName, onKeyDownAccountName, setNewAccount, isDarkMode }) => {
+export const AddAccountForm = ({ userId, isDarkMode, reloadAccount }) => {
+    const [ newAccount, setNewAccount] = useState(false); 
+    const [ newAccountName, setNewAccountName ] = useState(''); 
+
+    const onKeyDownAccountName = (e) => {
+        if(e.which === 13){
+            
+            if(newAccountName.length > 0){
+                createAccount();
+            }
+
+            setNewAccount(false);
+            setNewAccountName('');
+        }
+    }
+
+    const createAccount = async () => {
+        const { isError } = await CreateAccountAPI(userId, newAccountName); 
+        
+        if(!isError)
+            reloadAccount();
+    }
 
     return (
         <>
             <Tooltip
                 placement="right"
-                content="crea una cuenta"
+                content="Crea una cuenta"
                 color="foreground"
                 closeDelay={ 50 }
             >
@@ -17,32 +40,17 @@ export const AddAccountForm = ({ newAccount, newAccountName, onChangeAccountName
             </Tooltip>
             {
                 (newAccount) && (
-
-                    <CustomInputText
-                        isDarkMode = { isDarkMode }
-                        // inputRef = { newSheetDescriptionRef }
-                        value = { newAccountName }
-                        onChangeEvent = { onChangeAccountName }
-                        onKeyDownEvent = { onKeyDownAccountName }
-                        placeHolder={ 'nombre cuenta' }
-                    />
-    
-/*
-<input 
-    type="text" 
-    className={ `animate__animated animate__fadeIn d-flex justify-content-center align-items-center mt-1 text-center no-focus form-control form-control-sm animate__animated animate__fadeInDown animate__faster ${ (isDarkMode) ? 'bg-dark text-light' : '' }` }
-    placeholder="nombre cuenta"
-    value={ newAccountName }
-    onChange={ onChangeAccountName }
-    onKeyDown={ onKeyDownAccountName }
-    maxLength="30"
-/>
-
-*/
+                    <div className="mt-2 animate__animated  animate__fadeInDown animate__faster">
+                        <CustomInputText
+                            isDarkMode = { isDarkMode }
+                            value = { newAccountName }
+                            onChangeEvent = { (e) => setNewAccountName(e) }
+                            onKeyDownEvent = { onKeyDownAccountName }
+                            placeHolder={ 'agregar cuenta' }
+                        />
+                    </div>
                 )
             }        
-
-            <hr />
         </>        
     )
 }

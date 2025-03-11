@@ -62,7 +62,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
 
     const createSheet = async () => {
         if(newSheetDescription.length === 0){
-            showUserMessage('el nombre de la hoja de cálculo es inválido.','warning');
+            showUserMessage('El nombre de la "hoja de cálculo", es inválido.','warning');
             newSheetDescriptionRef.current.select(); 
             return; 
         }
@@ -70,9 +70,9 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
         const { isError } = await createSheetAPI( accountId, newSheetDescription ); 
         
         if(isError)
-            showUserMessage('ocurrió un error al intentar crear la hoja de cálculo dlksldksl','danger');
+            showUserMessage(`Ocurrió un error al intentar crear la "hoja de cálculo" ${ newSheetDescription }`,'danger');
         else {
-            showUserMessage('hoja de cálculo creada', 'success');
+            showUserMessage(`Se ha creado la hoja de cálculo con el nombre "${ newSheetDescription }" correctamente.`, 'success');
             setNewSheetDescription('');
             setAccountListener(accountListener + 1); 
 
@@ -84,14 +84,14 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
         const { isError, message, resolution } = await DeleteAccountAPI(accountId); 
 
         if(isError) {
-            showUserMessage('ocurrió un error al intentar eliminar la cuenta', 'danger');
+            showUserMessage('Ocurrió un error al intentar eliminar la cuenta.', 'danger');
             return; 
         }
 
         if(resolution) {
             setAccountListener(accountListener - 1); 
             setAccountIdOnView(''); 
-            showUserMessage('cuenta eliminada', 'success');
+            showUserMessage(`La cuenta con el nombre "${ accountDescription }", ha sido eliminada correctamente.`, 'success');
         }
         else 
             showUserMessage(message, 'info');
@@ -136,7 +136,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                 
                 <Tooltip
                     placement="right"
-                    content="eliminar cuenta"
+                    content="Eliminar Cuenta"
                     color="danger"
                     closeDelay={ 50 }
                 >

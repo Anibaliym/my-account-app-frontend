@@ -21,7 +21,7 @@ export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard,
                     </div>
 
                     <div className="row">
-                        <button className="modal-button-danger" onClick={ deleteCardWithVignettes }>
+                        <button className="button-danger" onClick={ deleteCardWithVignettes }>
                             <i className='bx bx-trash icon'></i>
                         </button>
                     </div>

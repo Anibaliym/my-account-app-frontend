@@ -14,7 +14,7 @@ export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription,
     const onKeyDown = (event) => {
         if (event.key === 'Enter') {
             if(newAccountUpdate.trim().length === 0){
-                showUserMessage('debe ingresar un nombre de cuenta válido', 'warning');
+                showUserMessage('Debe ingresar un nombre de cuenta válido', 'warning');
                 setNewAccountUpdate(accountDescription);
                 return;  
             }
@@ -27,29 +27,16 @@ export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription,
         const { isError } = await UpdateAccountAPI( accountId, newAccountUpdate.trim() );
         
         if(isError){
-            showUserMessage('ocurrió un error al intentar actualizar la cuenta', 'error');
+            showUserMessage('Ocurrió un error al intentar actualizar la cuenta', 'error');
             setNewAccountUpdate(accountDescription); 
             return; 
         }
         else {
-            showUserMessage('cuenta actualizada', 'success');
+            showUserMessage('Se ha actualizado el nombre de la cuenta.', 'success');
             setAccountListener( accountListener + 1 );
         }
     }
     
-    const DeleteAccount = async () => {
-        const { isError } = await DeleteAccountAPI( accountId ); 
-        
-        if( !isError ) {
-            showUserMessage('cuenta eliminada','success')
-            setAccountListener( accountListener + 1 );
-
-            setAccountsArr(prevAccounts => prevAccounts.filter(account => account.id !== accountId));
-        }
-        else
-            showUserMessage('ocurrió un error al intentar eliminar la cuenta seleccionada.','danger')
-    }
-
     return (
         <li 
             ref={ setNodeRef }

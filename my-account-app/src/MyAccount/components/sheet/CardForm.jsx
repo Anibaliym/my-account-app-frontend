@@ -13,8 +13,6 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
     const [ vignettes, setVignettes ] = useState(vignettesData); 
     const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
     const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
-
-
     const [ isAnimating, setIsAnimating ] = useState(false);
 
     useEffect(() => {
@@ -34,11 +32,11 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
 
         if(isError) {
             if(message === 'No se pueden crear mas de 20 viñetas en una sola carta.') {
-                showUserMessage('no se pueden crear mas de "20 viñetas" en una sola carta.', 'warning'); 
+                showUserMessage('No se pueden crear mas de "20 viñetas" en una sola carta.', 'warning'); 
                 return; 
             }
 
-            showUserMessage('ocurrió un error al intentar crear la viñeta', 'error'); 
+            showUserMessage('Ocurrió un error al intentar crear la viñeta', 'error'); 
             return; 
         }
 
@@ -83,25 +81,25 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 const { isError, data } = await deleteCardWithVignettesFetch(cardId);
 
                 if(!isError)
-                    showUserMessage(`carta "${ title }" eliminada`, 'success');
+                    showUserMessage(`La carta con el nombre "${ title }", ha sido eliminada.`, 'success');
                 else 
-                    showUserMessage('ocurrió un error al intentar eliminar la carta.', 'error');
+                    showUserMessage('Ocurrió un error al intentar eliminar la carta.', 'error');
 
                 fetchCard(); 
                 getCalculatedCardTotals();
             }
         }
         else 
-            showUserMessage('ocurrió un error al intentar eliminar la carta.', 'error');
+            showUserMessage('Ocurrió un error al intentar eliminar la carta.', 'error');
     }
 
     const deleteCardWithVignettes = async () => {
         const { isError } = await deleteCardWithVignettesFetch(cardId);
 
         if(!isError)
-            showUserMessage( 'carta eliminada.', 'success'); 
+            showUserMessage( 'Carta eliminada correctamente.', 'success'); 
         else
-            showUserMessage( 'ocurrió un error al intentar eliminar la carta.', 'error'); 
+            showUserMessage( 'Ocurrió un error al intentar eliminar la carta.', 'error'); 
 
         setModalConfirmDeleteCard( false ); 
         fetchCard(); 
@@ -126,10 +124,10 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                     </Tooltip>
 
 
-                    <Tooltip placement="bottom" content="eliminar la carta" color="danger" closeDelay={50}>
+                    <Tooltip placement="bottom" content="Eliminar la carta" color="danger" closeDelay={50}>
                         <i className="bx bx-trash icon excel-icon" onClick={ deleteCard }></i>
                     </Tooltip>
-                    <Tooltip placement="bottom" content="Agregar una viñeta" color="success" closeDelay={50}>
+                    <Tooltip placement="bottom" content="Agregar Viñeta" color="foreground" closeDelay={50}>
                         <i className="bx bx-plus icon excel-icon" onClick={ createVignette } ></i>
                     </Tooltip>
                 </div>

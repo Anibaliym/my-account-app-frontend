@@ -65,11 +65,9 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
         const { isError, message } = await createCardFetch(sheetId, title.toUpperCase(), description); 
 
         if(isError) 
-            showUserMessage('ocurrió un error al intentar crear la carta de planificación.', 'error');
+            showUserMessage('Ocurrió un error al intentar crear la carta de planificación.', 'error');
         else 
-            showUserMessage('carta de planificación creada correctamente.', 'success');
-
-
+            showUserMessage(`Se ha creado la carta de planificación "${ title }" correctamente.`, 'success');//ayanez
 
         setTitle('');
         setDescription('');

@@ -7,7 +7,10 @@ export const HomePage = ({ setPageName }) => {
     }, []);
 
     return (
-        <h1 className="display-1 title-color-text text-right">Mi Cuenta</h1>
+        <div className="container-fluid ">
+            <h1 className="animate__animated animate__fadeInDown animate__faster display-1 title-color-text ">MI CUENTA</h1>
+            <small className="animate__animated animate__fadeIn">Anibal Yañez</small>
+        </div>
         // <>
         //     <div className="container ">
         //         <div className="row">

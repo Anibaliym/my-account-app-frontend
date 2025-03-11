@@ -12,7 +12,7 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             if(sheetDescriptionUpdate.length === 0) {
-                showUserMessage('descripción de la hoja de cálculo, inválido' ,'warning');
+                showUserMessage('La descripción de la "hoja de cálculo", es inválida.' ,'warning');
                 return;
             }
 
@@ -24,14 +24,14 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
         const { isError, resolution } = await deleteSheetAPI( sheetId ); 
 
         if(isError || !resolution) {
-            showUserMessage('no se puede eliminar la hoja de cálculo, por que tiene movimientos o información en su contenido' ,'warning');
+            showUserMessage('No se puede eliminar la hoja de cálculo, por que tiene movimientos o información en su contenido' ,'warning');
             return; 
         }
 
         if(resolution){
             setSheetsArr(prevSheets => prevSheets.filter(sheet => sheet.id !== sheetId));
             setAccountListener(accountListener - 1); 
-            showUserMessage(`se ha eliminado la hoja de cálculo "${ sheetDescriptionUpdate }"`,'success');
+            showUserMessage(`La hoja de cálculo con el nombre "${ sheetDescriptionUpdate }", ha sido eliminada`,'success');
         }
     }
 
@@ -48,7 +48,7 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
             return; 
         }
         
-        showUserMessage(`se ha actualizado el nombre de la hoja de cálculo "${ description }" a "${ sheetDescriptionUpdate }"`,'success');
+        showUserMessage(`Se ha actualizado el nombre de la hoja de cálculo "${ description }" a "${ sheetDescriptionUpdate }"`,'success');
         setAccountListener(accountListener + 1);
     }
 
@@ -72,7 +72,7 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
             <div className="d-flex gap-2">
                 <Tooltip
                     placement="bottom"
-                    content="eliminar hoja de cálculo"
+                    content="Eliminar hoja de cálculo"
                     color="danger"
                     closeDelay={ 50 }
                 >

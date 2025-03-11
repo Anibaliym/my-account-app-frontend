@@ -56,7 +56,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             setCardTotalAmount(data.totalAmount);
         } 
         else 
-            showUserMessage("Ocurrió un error al intentar actualizar la viñeta", "error");
+            showUserMessage("Ocurrió un error al intentar actualizar la viñeta.", "error");
     };
 
     const onChangeDescription = (e) =>  setNewDescription(e.target.value);
@@ -89,9 +89,9 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
 
         if(!isError)
-            showUserMessage('viñeta eliminada', 'success'); 
+            showUserMessage('La "viñeta", ha sido eliminada.', 'success'); 
         else 
-            showUserMessage('ocurrió un error al intentar eliminar la viñeta.', 'error'); 
+            showUserMessage('Ocurrió un error al intentar eliminar la viñeta.', 'error'); 
 
 
         if(!isError){

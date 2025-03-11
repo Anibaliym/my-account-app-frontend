@@ -3,6 +3,7 @@ import { Sidebar } from '../components/sidebar/Sidebar';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { ProfilePage } from '../pages/ProfilePage';
 import { HomePage } from '../pages/HomePage';
+import { AdminPage } from '../pages/AdminPage';
 import { Header } from '../components/Header';
 import { SheetPage } from '../pages/SheetPage';
 import { UserMessage } from '../components/UserMessage';
@@ -81,6 +82,7 @@ export const MyAccountRouter = () => {
                         <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
                         <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
+                        <Route path="admin" element={<AdminPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
                         <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={showUserMessage} isDarkMode={isDarkMode} />} />
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
@@ -88,7 +90,6 @@ export const MyAccountRouter = () => {
                     <div className="row" style={{ height: "30px", width: '100%' }}>
                         <UserMessage message={message} show={showMessage} setShowMessage={setShowMessage} isDarkMode={isDarkMode} />
                     </div>
-
                 </section>
             </div>
         </div>    

@@ -32,25 +32,6 @@
     color: var(--text-color);
 }
 
-.modal-button-danger {
-    background-color: var(--body-color);
-    color: var(--danger-color);
-    border: 1px solid var(--danger-color); 
-    
-    padding: 5px 0px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
-}
-
-.modal-button-danger:hover {
-    background-color: var(--danger-color); /* Cambia el color al pasar el mouse */
-    color: white;
-    border: 1px solid var(--danger-color); 
-    transform: scale(1.05); /* Agranda ligeramente el botón */
-}
-
 .modal-input-text {
     width: 100%;
     border: none;

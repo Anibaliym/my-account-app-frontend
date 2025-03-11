@@ -23,7 +23,7 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     const [ loginState, setLoginState ] = useState(loginInitialState); 
     const { userName, password } = loginState; 
     const [ accessAllowed, setAccessAllowed] = useState(false); 
-    const [ user, setUser ] = useState(userInitialState); 
+    const [ user, setUser ] = useState({}); 
     const [ accounts, setAccounts ] = useState([]); 
     const { Login } = useContext(AuthContext); 
 
@@ -76,10 +76,6 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
     };
 
     useEffect(() => {
-        userRef.current.select();
-    }, []);
-
-    useEffect(() => {
         if (accessAllowed) {
             Login(user, accounts);
             navigate('/', { replace: true });
@@ -129,11 +125,8 @@ export const LoginForm = ({ activeForm, toggleForm, setShowUserMessage }) => {
             </div>
 
             <div className="row mt-4">
-                <button className="btn btn-outline-primary" onClick={ onLogin }>
+                <button className="button-primary mt-1" onClick={ onLogin }>
                     Entrar
-                </button>
-                <button className="btn btn-outline-primary mt-2" onClick={ onLogin }>
-                    <i className='bx bxl-google icon' style={{ lineHeight: '20px' }}></i>
                 </button>
             </div>
         </div>

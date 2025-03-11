@@ -17,7 +17,6 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
         }
 
         setUser(connectedUser); 
-        
     }, []);
 
     const onLogout = () => {

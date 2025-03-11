@@ -83,3 +83,43 @@
     --input-bg: #2a2a2a;
     --input-border: #555;
 }
+
+.button-primary {
+    background-color: var(--body-color);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color); 
+    
+    padding: 5px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.button-primary:hover {
+    /* box-shadow: 0px 0px 5px var(--primary-color);  */
+    background-color: var(--primary-color); /* Cambia el color al pasar el mouse */
+    color: white;
+    border: 1px solid var(--primary-color); 
+    transform: scale(1.05); /* Agranda ligeramente el botón */
+}
+
+
+.button-danger {
+    background-color: var(--body-color);
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color); 
+    
+    padding: 5px 0px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.button-danger:hover {
+    background-color: var(--danger-color); /* Cambia el color al pasar el mouse */
+    color: white;
+    border: 1px solid var(--danger-color); 
+    transform: scale(1.05); /* Agranda ligeramente el botón */
+}

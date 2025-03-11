@@ -31,7 +31,7 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
     const onKeyDown = (event) => {
         if (event.key === 'Enter') {
             if(newAccountDescription.trim().length === 0){
-                showUserMessage('debe ingresar un nombre de cuenta válido', 'warning');
+                showUserMessage('Debe ingresar un nombre de cuenta válido.', 'warning');
                 accountDescriptionRef.current.select();
             }
 
@@ -41,7 +41,7 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
 
     const createAccount = async () => {
         if(newAccountDescription.trim().length === 0){
-            showUserMessage('debe ingresar un nombre de cuenta válido', 'warning');
+            showUserMessage('Debe ingresar un nombre de cuenta válido.', 'warning');
             accountDescriptionRef.current.select();
             return; 
         }
@@ -49,19 +49,19 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
         const { isError, resolution, message, data } = await CreateAccountAPI( userId, newAccountDescription.trim() );
 
         if(isError) {
-            showUserMessage('ocurrió un error al intentar crear la cuenta', 'error');
+            showUserMessage('Ocurrió un error al intentar crear la cuenta.', 'error');
             return; 
         }
         
         if(resolution) {
-            showUserMessage('cuenta creada', 'success');
+            showUserMessage(`Se ha creado una cuenta con el siguiente nombre "${ newAccountDescription }".`, 'success');
             setNewAccountDescription('');
             setAccountListener( accountListener => accountListener + 1 );
             setAccountsArr( accountsArr => [ ...accountsArr, { id: data.id, description: newAccountDescription.trim() } ] );
         }
         else {
             if(message.includes('No se pueden crear mas de 20'))
-                showUserMessage(`No se puede crear la cuenta "${newAccountDescription}" porque cada usuario puede tener hasta un máximo de 20 cuentas`, 'info');
+                showUserMessage(`No se puede crear la cuenta "${newAccountDescription}" porque cada usuario puede tener hasta un máximo de 20 cuentas.`, 'warning');
                 accountDescriptionRef.current.select(); 
         }
     }
