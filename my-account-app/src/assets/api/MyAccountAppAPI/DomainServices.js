@@ -184,3 +184,20 @@ export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
         };
     }
 }
+
+
+export const CreateSheetBackupFetch = async ( sheetId ) => {
+    const url = `${ API_URL }/api/DomainServices/CreateSheetBackup?sheetId=${sheetId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'post',
+            headers: { 'Accept': "*/*" }
+        });
+
+        const data = await response.json();
+        return { isError: false }; 
+    } catch (error) {
+        return { isError: true }; 
+    }
+}

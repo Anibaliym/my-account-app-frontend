@@ -1,11 +1,12 @@
-import { Switch, Tooltip } from '@nextui-org/react'; 
+import { Tooltip } from '@nextui-org/react'; 
 import { useParams } from 'react-router-dom';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { CreateCardModal } from './CreateCardModal';
 import { useState, useEffect } from 'react';
+import { CreateSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage }) => {
+export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, currentAccountBalanceRef, availableTotalBalance, setBalances, setIcons, fetchSheet, toSpendBalance, inFavorBalance, showModalCreateCard, setShowModalCreateCard, fetchCard, showUserMessage, accountListener, setAccountListener }) => {
     const { sheetId } = useParams(); 
     const [ animationClass, setAnimationClass ] = useState(''); 
 
@@ -28,6 +29,18 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
             [field]: `$${formatNumberWithThousandsSeparator(value)}`,
         }));
     };
+
+    const createSheetBackup = async () => {
+        const { isError } = await CreateSheetBackupFetch(sheetId);
+        
+        if(isError)
+            showUserMessage('Ocurrió un error al intentar crear el respaldo de la "Hoja de cálculo"','error');
+        else
+        {
+            setAccountListener(accountListener - 1);
+            showUserMessage(`Se ha creado un respaldo de la hoja de cálculo "${ sheetName }" correctamente.`,'success');
+        }
+    }
 
     const handleKeyDown = async (e, field, value) => {
         if (e.key === 'Enter') {
@@ -94,7 +107,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                         </Tooltip>
 
                         <Tooltip placement="bottom" content="Crear Respaldo" color="foreground" closeDelay={ 50 }>
-                            <i className='bx bxs-backpack icon' ></i>
+                            <i className='bx bxs-backpack icon' onClick={ createSheetBackup } ></i>
                         </Tooltip>
                         <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
                             <i className="bx bx-trash icon" ></i>

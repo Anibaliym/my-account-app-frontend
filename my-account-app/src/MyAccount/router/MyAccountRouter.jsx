@@ -83,7 +83,7 @@ export const MyAccountRouter = () => {
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
                         <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
                         <Route path="admin" element={<AdminPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
-                        <Route path="sheet/:sheetId" element={<SheetPage showUserMessage={showUserMessage} isDarkMode={isDarkMode} />} />
+                        <Route path="sheet/:sheetId" element={ <SheetPage showUserMessage={ showUserMessage } isDarkMode = { isDarkMode } accountListener = { accountListener } setAccountListener = { setAccountListener }/> } />
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
 

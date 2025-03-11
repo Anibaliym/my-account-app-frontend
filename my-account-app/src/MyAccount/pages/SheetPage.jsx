@@ -6,8 +6,9 @@ import { SheetCardsForm } from '../components/sheet/SheetCardsForm';
 import { SheetBalanceForm } from '../components/sheet/SheetBalanceForm';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const SheetPage = ({ showUserMessage, isDarkMode }) => {
+export const SheetPage = ({ showUserMessage, isDarkMode, accountListener, setAccountListener }) => {
     const { sheetId } = useParams();
+    console.log(sheetId); 
 
     const cashBalanceRef = useRef();
     const currentAccountBalanceRef = useRef();
@@ -155,6 +156,8 @@ export const SheetPage = ({ showUserMessage, isDarkMode }) => {
                 setShowModalCreateCard={setShowModalCreateCard}
                 fetchCard={fetchCard}
                 showUserMessage={showUserMessage}
+                accountListener={ accountListener }
+                setAccountListener={ setAccountListener }
             />
 
             <SheetCardsForm
