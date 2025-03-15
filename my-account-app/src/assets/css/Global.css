@@ -9,7 +9,13 @@
     --body-color: #fff;
     --placeholder-color: #c0c0c0; 
     --sidebar-color: #F3F3F0;
-    --primary-color: #695CFE;
+
+    --primary-color: #C75C1C; /* Naranja Quemado - Un tono mÃ¡s oscuro y sofisticado. */
+    --primary-color: #D97904; /* Naranja Dorado - Un naranja mÃ¡s elegante y cercano al dorado. */
+    --primary-color: #FF9F45; /* Naranja Suave - Un tono mÃ¡s cÃ¡lido y menos agresivo. */
+    --primary-color: #FF7F11; /* Naranja Vibrante - Un naranja fuerte y llamativo. */
+    --primary-color: #695CFE; /* Purple */
+    
     --danger-color: red;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
@@ -27,7 +33,14 @@ body.dark {
     --placeholder-color: #8e8e8e; 
     --body-color: #212121;
     --sidebar-color: #171717;
-    --primary-color: #695CFE;
+    
+    --primary-color: #FF7F11; /* Naranja Vibrante - Un naranja fuerte y llamativo. */
+    --primary-color: #FF9F45; /* Naranja Suave - Un tono mÃ¡s cÃ¡lido y menos agresivo. */
+    --primary-color: #D97904; /* Naranja Dorado - Un naranja mÃ¡s elegante y cercano al dorado. */
+    --primary-color: #C75C1C; /* Naranja Quemado - Un tono mÃ¡s oscuro y sofisticado. */
+    --primary-color: #2ECC71; /* Verde Esmeralda */
+    --primary-color: #695CFE; /* Purple */
+
     --danger-color: red;
     --secondary-color: orange;
     --primary-color-light: #3a3b3c;
@@ -39,6 +52,10 @@ body.dark {
 ::selection {
     background-color: var(--primary-color); /* Color de fondo de la selección */
     color: white; /* Color del texto seleccionado */
+}
+
+.text-color-default {
+    color: var(--text-color);
 }
 
 .text-color-primary {

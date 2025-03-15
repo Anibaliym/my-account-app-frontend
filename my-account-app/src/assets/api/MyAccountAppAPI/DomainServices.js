@@ -185,9 +185,7 @@ export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
     }
 }
 
-
 export const CreateSheetBackupFetch = async ( sheetId ) => {
-    console.log(sheetId)
     const url = `${ API_URL }/api/DomainServices/CreateSheetBackup?sheetId=${sheetId}`;
 
     try {
@@ -197,7 +195,7 @@ export const CreateSheetBackupFetch = async ( sheetId ) => {
         });
 
         const data = await response.json();
-        console.log(data)
+
         return { isError: false }; 
     } catch (error) {
         return { isError: true }; 

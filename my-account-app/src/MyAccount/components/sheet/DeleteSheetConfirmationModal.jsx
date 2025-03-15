@@ -1,7 +1,23 @@
 import Modal from 'react-bootstrap/Modal';
+import { deleteSheetWithContentsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { useNavigate } from 'react-router-dom';
 
-export const DeleteSheetConfirmationModal = ({ sheetDescription, modalConfirmDeleteSheet, setModalConfirmDeleteSheet, deleteSheet }) => {
-    
+export const DeleteSheetConfirmationModal = ({ sheetId, sheetDescription, modalConfirmDeleteSheet, setModalConfirmDeleteSheet, setAccountListener, accountListener, showUserMessage }) => {
+    const navigate = useNavigate(); 
+
+    const deleteSheetWithContents = async () => {
+        const { isError } = await deleteSheetWithContentsFetch(sheetId); 
+
+        if(isError)
+            showUserMessage('Ocurrió un error al intentar eliminar la hoja de cálculo.','error');
+        else
+        {
+            setAccountListener(accountListener - 1);
+            showUserMessage(`Se ha eliminado la hoja de cálculo "${ sheetDescription }" correctamente.`,'success');
+            navigate('/home', );
+        }
+    }
+
     return (
         <Modal show={ modalConfirmDeleteSheet } onHide={ setModalConfirmDeleteSheet } className="modal-blur">
             <Modal.Body className="modal-content">
@@ -21,7 +37,7 @@ export const DeleteSheetConfirmationModal = ({ sheetDescription, modalConfirmDel
                     </div>
 
                     <div className="row">
-                        <button className="button-danger" onClick={ deleteSheet }>
+                        <button className="button-danger" onClick={ deleteSheetWithContents }>
                             <i className='bx bx-trash icon'></i>
                         </button>
                         <button className="button-primary mt-2" onClick={ () => setModalConfirmDeleteSheet(false) }>

@@ -1,9 +1,8 @@
 import { Tooltip } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description, sheets, toggleSidebar }) => {
-    const navigate = useNavigate();
 
     // Estado interno para controlar si el menú está abierto
     const [isItemMenuOpen, setIsItemMenuOpen] = useState(isOpen);
@@ -34,7 +33,8 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
         
         return (
             <Link key={id} to={`/sheet/${id}`}>
-                <i className="bx bx-right-arrow-alt"></i> {setDescription}
+                <i className='bx bx-caret-right'></i>
+                {setDescription}
             </Link>
         );
     };
@@ -43,14 +43,12 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
         <div className="menu-item">
             {!toggleSidebar ? (
                 <button className="dropdown-btn-accounts" onClick={handleToggleMenu}>
-                    <i className="bx bx-spreadsheet icon"></i>
+                    <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon` }></i>
                     <span className="menu-description animate__animated animate__fadeIn">{description}</span>
-                    {sheets.length > 0 && (
-                        <i
-                            className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
-                            // onClick={handleToggleMenu} // Aquí se usa la función corregida
-                        ></i>
-                    )}
+                    {
+                        (sheets.length > 0) && 
+                            (<i className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}></i>)
+                    }
                 </button>
             ) : (
                 <Tooltip
@@ -61,18 +59,20 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                             <div className="text-tiny">
                                 <p style={{fontSize:'20px', color:'var(--primary-color)'}}>{ description }</p>
                                 <hr />
-                                {sheets.map(({ sheet }) => (
-                                    <Link
-                                        key={sheet.id}
-                                        to={`/sheet/${sheet.id}`}
-                                        className="dropdown-btn-accounts"
-                                        style={{ width: '200px', textDecoration: 'none' }}
-                                    >
-                                        <span className="menu-description animate__animated animate__fadeIn">
-                                            <i className="bx bxs-right-arrow"></i> {sheet.description}
-                                        </span>
-                                    </Link>
-                                ))}
+                                {
+                                    sheets.map(({ sheet }) => (
+                                        <Link
+                                            key={sheet.id}
+                                            to={`/sheet/${sheet.id}`}
+                                            className="dropdown-btn-accounts"
+                                            style={{ width: '200px', textDecoration: 'none' }}
+                                        >
+                                            <span className="menu-description animate__animated animate__fadeIn">
+                                                <i className="bx bxs-right-arrow"></i> { sheet.description }
+                                            </span>
+                                        </Link>
+                                    ))
+                                }
                             </div>
                         </div>
                     }
@@ -80,12 +80,14 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                     <button className="dropdown-btn-accounts">
                         <i className="bx bx-spreadsheet icon"></i>
                         <span className="menu-description animate__animated animate__fadeIn">{description}</span>
-                        {sheets.length > 0 && (
-                            <i
-                                className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
-                                onClick={ handleToggleMenu}
-                            ></i>
-                        )}
+                            {
+                                (sheets.length > 0) 
+                                    && 
+                                (<i
+                                    className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
+                                    onClick={ handleToggleMenu}
+                                ></i>)
+                            }
                     </button>
                 </Tooltip>
             )}

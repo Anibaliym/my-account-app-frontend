@@ -1,19 +1,25 @@
 import { Tooltip } from '@nextui-org/react';
 import { CardVignette } from './CardVignette';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { updateCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 
-export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchCard, totalCardAmount, getCalculatedCardTotals, isDarkMode }) => {
-    const [ vignettes, setVignettes ] = useState(vignettesData); 
-    const [ modalConfirmDeleteCard, setModalConfirmDeleteCard ] = useState(false); 
-    const [ cardTotalAmount, setCardTotalAmount ] = useState(totalCardAmount); 
-    const [ isAnimating, setIsAnimating ] = useState(false);
+export const FormCard = ({ cardId, title, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData, isDarkMode }) => {
+    const { sheetId } = useParams()
+    const cardTitleRef = useRef(null); 
+
+    const [cardTitle, setCardTitle ] = useState(title); 
+    const [cardTitleOld, setCardTitleOld] = useState(title); 
+    const [vignettes, setVignettes] = useState(vignettesData); 
+    const [modalConfirmDeleteCard, setModalConfirmDeleteCard] = useState(false); 
+    const [cardTotalAmount, setCardTotalAmount] = useState(totalCardAmount); 
+    const [isAnimating, setIsAnimating] = useState(false);
 
     useEffect(() => {
         // Activa la animación cuando cambia el valor de cardTotalAmount
@@ -85,8 +91,8 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 else 
                     showUserMessage('Ocurrió un error al intentar eliminar la carta.', 'error');
 
-                fetchCard(); 
-                getCalculatedCardTotals();
+                getSheetCardsWithVignettes(); 
+                refreshData();
             }
         }
         else 
@@ -102,7 +108,47 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
             showUserMessage( 'Ocurrió un error al intentar eliminar la carta.', 'error'); 
 
         setModalConfirmDeleteCard( false ); 
-        fetchCard(); 
+        getSheetCardsWithVignettes(); 
+    }
+
+    const updateCard = async () => {
+        const { isError } = await updateCardFetch(cardId, sheetId, cardTitle); 
+
+        if(isError){
+            showUserMessage('Ocurrió un error al intentar actualizar el nombre de la carta.', 'error');
+            setCardTitle(title); 
+        }
+        else {
+            showUserMessage(`La carta "${ title }", ha actualizado su nombre a "${ cardTitle }".`,'success'); 
+            setCardTitleOld( cardTitle )
+        }
+
+    }
+
+    const handleKeyDown = async (e) => {
+        if (e.key === 'Enter') {
+
+            if(cardTitle === cardTitleOld) return; 
+
+            if( cardTitle.length === 0 ) {
+                showUserMessage('El nombre de la carta es inválido.','warning'); 
+                return; 
+            }
+            
+            updateCard();
+        }
+    }
+
+    const handleBlur = async (e) => {
+        if(cardTitle === cardTitleOld) return; 
+
+        if( cardTitle.length === 0 ) {
+            showUserMessage('El nombre de la carta es inválido.','warning'); 
+            setCardTitle(title); 
+            return; 
+        }
+        
+        updateCard();
     }
 
     return (
@@ -114,15 +160,27 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 deleteCardWithVignettes={ deleteCardWithVignettes }
             />
 
-            <div className="excel-card-header">
-                <h4>{ title }</h4>
+            <div className="excel-card-header border-white">
+                {/* ayanez */}
+
+                <input
+                    ref={ cardTitleRef }
+                    name = "cardDescription"
+                    type = "text"
+                    className = { `no-focus card-title-input-text display-6` }
+                    maxLength = { 40 }
+                    value = { cardTitle.toUpperCase() }
+                    onChange = { (e) => ( setCardTitle(e.target.value) ) }
+                    onClick = { () => ( cardTitleRef.current.select() ) }
+                    onKeyDown = { handleKeyDown }
+                    onBlur = { handleBlur }
+                    autoComplete="off"
+                />
 
                 <div className="icons-container">
                     <Tooltip placement="bottom" content="Resetear colores viñetas" color="foreground" closeDelay={50}>
                         <i className='bx bx-reset icon excel-icon'></i>
                     </Tooltip>
-
-
                     <Tooltip placement="bottom" content="Eliminar la carta" color="danger" closeDelay={50}>
                         <i className="bx bx-trash icon excel-icon" onClick={ deleteCard }></i>
                     </Tooltip>
@@ -132,7 +190,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                 </div>
             </div>
 
-            <div className="excel-card-body mt-2">
+            <div className="excel-card-body mt-3">
                 <DndContext
                     collisionDetection={ closestCenter }
                     onDragEnd={ onDrawEnd }
@@ -148,7 +206,7 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
                                 setVignettes={ setVignettes }
                                 vignettes={ vignettes }
                                 setCardTotalAmount={ setCardTotalAmount }
-                                getCalculatedCardTotals={ getCalculatedCardTotals }
+                                refreshData={ refreshData }
                                 isDarkMode = { isDarkMode }
                             />
                         ))
@@ -159,9 +217,9 @@ export const CardForm = ({ cardId, title, vignettesData, showUserMessage, fetchC
 
             <div className={`excel-card-footer mt-1 animate__animated animate__faster ${isAnimating ? 'animate__flipInX' : ''}`}>
             <div className="excel-card-cell"></div>
-                <h3 className="mt-3" style={{ color: 'var(--primary-color)' }}>
+                <h2 className="mt-2 dispplay-2" >
                     ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
-                </h3>
+                </h2>
             </div>            
         </div>        
     )

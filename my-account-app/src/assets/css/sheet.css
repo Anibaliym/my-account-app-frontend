@@ -5,12 +5,12 @@
 }
 
 .sheet-balances-form {
-    width: 350px; /* Ancho fijo */
-    height: 515px; /* Altura fija */
+    width: 300px; 
+    height: 540px; 
     background-color: var(--primary-color);
-    border-radius: 8px;
-    padding:5px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    /* background-color: red; */
+    border-radius: 3px;
+    padding:7px; 
     color: white;
 }
 
@@ -27,13 +27,18 @@
 }
 
 .balance-input-text {
-    width: 96%;
+    width: 100%;
     border: none;
-    font-size: 30px;
     background-color: var(--primary-color);
     color: white;
     outline: none;
-    margin-left:10px; 
+    padding:2px; 
+    border-radius: 2px; 
+}
+
+.balance-input-text:hover {
+    background-color: var(--primary-color);
+    filter: brightness(1.1); /* Hace el color un 20% más brillante */
 }
 
 .balance-input-text::selection {
@@ -44,8 +49,6 @@
 .icon-save {
     display: flex;
     justify-content: flex-end; /* Alinea los iconos a la derecha */
-    font-size: 13px;
-    height: 23px;
 }
 
 .excel-card {
@@ -196,28 +199,23 @@
 .balance-calculate-amount-form {
     width: 100%;
     border-radius: 5px;
-    background-color: var(--body-color);
     color: var(--text-color); 
 }
 
 .balance-calculate-amount-item {
     width: 100%;
-    border-radius: 3px;
-    padding: 5px;   
-    background-color: var(--body-color);
-    border-bottom: 1px solid var(--primary-color);
+    background-Color: var(--body-color);
+    margin-Bottom: 5px;
+    padding: 7px;
+    border-Radius: 5px;
+    font-Size: 15px;
+    font-weight: bolder; 
 }
 
 .balance-calculate-amount-item-danger {
-    width: 100%;
-    margin:auto; 
-    border-radius: 3px;
-    padding: 5px;   
     background-color: red;
     color:white; 
-    border-bottom: 1px solid var(--primary-color);
 }
-
 
 .color-selector-item {
     width: 25px;

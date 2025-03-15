@@ -5,8 +5,9 @@ import { useState } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import '/src/assets/css/Modal.css'; 
+import { CustomInputText } from '../controls/CustomInputText';
 
-export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, fetchCard }) => {
+export const CreateCardModal = ({ isDarkMode = false, showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
     const RefTitle = useRef(); 
     const { sheetId } = useParams();
     const [ title, setTitle ] = useState(''); 
@@ -55,9 +56,8 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
     }
 
     const createCard = async  () => {
-        
         if(title.trim().length === 0){
-            setModalMessage('Debe ingresar un titulo válido.');
+            setModalMessage('El nombre de la "Carta", es inválido.');
             RefTitle.current.select(); 
             return; 
         }
@@ -67,45 +67,36 @@ export const CreateCardModal = ({ showModalCreateCard, setShowModalCreateCard, s
         if(isError) 
             showUserMessage('Ocurrió un error al intentar crear la carta de planificación.', 'error');
         else 
-            showUserMessage(`Se ha creado la carta de planificación "${ title }" correctamente.`, 'success');//ayanez
+            showUserMessage(`Se ha creado la carta de planificación "${ title }" correctamente.`, 'success');
 
         setTitle('');
         setDescription('');
         setModalMessage('');
         setShowModalCreateCard(false);
-        fetchCard(); 
+        refreshData(); 
     }
 
     return (
         <Modal show={ showModalCreateCard } onHide={ setShowModalCreateCard } className="modal-blur">
             <Modal.Body className="modal-content">
-                <div className="container-fluid">
-                    <div className="card-body">
-                        <h5 className="card-title text-color-primary">CREAR CARTA DE PLANIFICACIÓN</h5>
-                        <hr />
+                
+                <h5 className="card-title text-color-default mb-3">CREAR CARTA DE PLANIFICACIÓN</h5>
 
-                        <input 
-                            ref={ RefTitle }
-                            type="text" 
-                            className=" modal-input-text "
-                            placeholder="Titulo"  
-                            onChange={ ( e ) => handleChange( e, 'title') }
-                            onKeyDown={ ( e ) => handleKeyDown(e, 'title') }
-                            value={ title }
-                            maxLength={ 25 }
-                        />
+                <CustomInputText
+                    isDarkMode = { isDarkMode }
+                    inputRef = { RefTitle }
+                    value = { title.toUpperCase() }
+                    onChangeEvent = { setTitle }
+                    onKeyDownEvent = { ( e ) => handleKeyDown(e, 'title') }
+                    placeHolder={ 'Nombre Carta' }
+                />
 
-                        <div className="row">
-                            <small className={ `mt-5 mb-1 text-right text-danger ${ animationClass }` }> { modalMessage } </small>
-                        </div>
+                <button className="modal-button mt-3" onClick={ handleClick }>
+                    <i className='bx bx-save icon' ></i>
+                </button>
 
-                        <div className="row">
-                            <button className="modal-button" onClick={ handleClick }>
-                                <i className='bx bx-save icon' ></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <small className={ `text-center text-danger mt-3 animate__fast ${ animationClass }` }> { modalMessage } </small>
+
           </Modal.Body>
         </Modal>
     );

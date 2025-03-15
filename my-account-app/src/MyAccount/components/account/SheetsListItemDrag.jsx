@@ -56,8 +56,12 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
         <li 
             ref={ setNodeRef }
             key={ sheetId }
-            style={ { border: `1px solid ${ isDarkMode ? 'gray' : 'lightgray' }`, transform: CSS.Transform.toString(transform), transition }} 
-            className={`animate__animated animate__fadeIn animate__faster d-flex justify-content-between p-1 small ${ isDarkMode ? 'bg-dark' : '' }`}
+            style={{ 
+                transform: CSS.Transform.toString(transform), 
+                transition,
+                borderBottom: `2px solid ${ isDarkMode ? 'gray' : 'lightgray' }`, 
+            }} 
+            className={`animate__animated animate__fadeIn animate__faster d-flex justify-content-between p-1 mb-2 small ${ isDarkMode ? 'bg-dark' : '' }`}
         >
             <input
                 type="text"

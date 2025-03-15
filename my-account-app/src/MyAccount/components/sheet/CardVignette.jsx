@@ -7,7 +7,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { Tooltip } from '@nextui-org/react';
 import { SelectColorForm } from './SelectColorForm';
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, getCalculatedCardTotals, isDarkMode }) => {
+export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, refreshData, isDarkMode }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order, color } = vignette;
 
@@ -50,7 +50,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         const { isError, data } = await updateVignetteAndRecalculateTotalFetch(newData);
 
         if (!isError) {
-            getCalculatedCardTotals();
+            refreshData();
             setShowSaveIcon(false);
             setShowSuccessIcon(true);
             setCardTotalAmount(data.totalAmount);
@@ -88,14 +88,16 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     const deleteVignette = async () => {
         const { isError, data } = await deleteVignetteAndRecalculateTotalFetch( vignette.id ); 
 
-        if(!isError)
-            showUserMessage('La "viñeta", ha sido eliminada.', 'success'); 
+        if(!isError){
+            if(newDescription.length > 0)
+                showUserMessage(`La viñeta con la descripción "${ newDescription }", ha sido eliminada.`, 'success'); 
+        }
         else 
             showUserMessage('Ocurrió un error al intentar eliminar la viñeta.', 'error'); 
 
 
         if(!isError){
-            getCalculatedCardTotals(); 
+            refreshData(); 
             setCardTotalAmount(data.data.totalAmount);
             setVignettes(vignettes.filter(item => item.id !== vignette.id));
         }

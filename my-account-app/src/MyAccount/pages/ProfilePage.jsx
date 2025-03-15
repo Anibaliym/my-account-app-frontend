@@ -22,7 +22,7 @@ export const ProfilePage = ({ setPageName }) => {
     }, []);
 
     return (
-        <>
+        <div className="page-principal-container">
             <div className="container">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -39,7 +39,7 @@ export const ProfilePage = ({ setPageName }) => {
                         {
                             (user === 'ADMIN') && (
                                 <small className="text-color-primary" style={{ fontSize: '14px' }}>
-                                    Administrador
+                                    ADMINISTRADOR
                                 </small>
                             )
                         }
@@ -54,6 +54,6 @@ export const ProfilePage = ({ setPageName }) => {
                     </h6>
                 </div>
             </div>
-        </>
+        </div>
     );
 };

@@ -43,9 +43,8 @@ export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription,
             style={ {
                 transform: CSS.Transform.toString(transform), 
                 transition, 
-                border: `1px solid ${ isDarkMode ? 'gray' : 'lightgray' }`, 
             }} 
-            className={` d-flex justify-content-between  p-1 small ${ isDarkMode ? 'bg-dark' : '' }`}
+            className={` d-flex justify-content-between mb-1 p-2 small ${ isDarkMode ? 'bg-dark' : '' }`}
             onClick={ ()=>{ setAccountIdOnView(accountId) } }
         >
             <input

@@ -128,7 +128,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                padding: '5px' 
+                padding: '5px', 
             }}>
                 <span className={`text-color-primary mb-2 ${ animationClass }`}>
                     {accountDescription.toUpperCase()}

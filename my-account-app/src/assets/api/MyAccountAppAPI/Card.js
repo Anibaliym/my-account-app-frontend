@@ -45,3 +45,30 @@ export const getCardBySheetIdFetch = async (sheetId) => {
         return { isError: false, data: {} }
     }
 }
+
+
+export const updateCardFetch = async ( cardId, sheetId, title ) => {
+    const url = `${ API_URL }/api/Card/UpdateCard`;
+    
+    try 
+    {
+        const response = await fetch(url, {
+            method: 'put', 
+            headers: { 'Accept': '*/*', 'Content-Type': 'Application/json' },
+            body: JSON.stringify({
+                id: cardId, 
+                sheetId, 
+                title, 
+                description:'', 
+                color: 'DEFAULT'
+            })
+        }); 
+
+        const { resolution } = await response.json();
+
+        return { isError: !resolution }
+    } 
+    catch (error) {
+        return { isError: false }
+    } 
+}
