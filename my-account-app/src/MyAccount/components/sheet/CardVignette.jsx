@@ -140,15 +140,15 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             >
                 <div className="excel-card-row">
                     <div className="excel-card-cell action">
-                        <i className='bx bx-sort-alt-2 text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
-                        <i className='bx bx-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
+                        <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
+                        <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
 
                         <Tooltip 
                             content={<SelectColorForm isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
                             placement="right"
                             closeDelay={ 200 }
                         >
-                            <i className='bx bx-palette text-color-primary card-icon mr-1'></i>
+                            <i className='bx bx-palette icon text-color-primary card-icon mr-1'></i>
                         </Tooltip> 
 
 

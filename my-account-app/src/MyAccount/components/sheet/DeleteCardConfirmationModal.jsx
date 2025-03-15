@@ -22,7 +22,7 @@ export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard,
 
                     <div className="row">
                         <button className="button-danger" onClick={ deleteCardWithVignettes }>
-                            <i className='bx bx-trash icon'></i>
+                            Eliminar
                         </button>
                     </div>
                 </div>

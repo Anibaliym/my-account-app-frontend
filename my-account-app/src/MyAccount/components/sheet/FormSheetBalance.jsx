@@ -217,7 +217,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
             <div className="icon-save">
                 <li 
                     style={{ marginTop: '-35px' }}
-                    className={`animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
+                    className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} animate__faster`}>
                 </li>
             </div>
 
@@ -241,7 +241,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
             <div className="icon-save">
                 <li 
                     style={{ marginTop: '-35px' }}
-                    className={`animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
+                    className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} animate__faster`}>
                 </li>
             </div>
 

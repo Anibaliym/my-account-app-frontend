@@ -43,7 +43,7 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
         <div className="menu-item">
             {!toggleSidebar ? (
                 <button className="dropdown-btn-accounts" onClick={handleToggleMenu}>
-                    <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon` }></i>
+                    <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon ml-2` }></i>
                     <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                     {
                         (sheets.length > 0) && 
@@ -78,7 +78,7 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                     }
                 >
                     <button className="dropdown-btn-accounts">
-                        <i className="bx bx-spreadsheet icon"></i>
+                        <i className="bx bx-spreadsheet icon ml-2"></i>
                         <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                             {
                                 (sheets.length > 0) 

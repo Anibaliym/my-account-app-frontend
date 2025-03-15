@@ -6,7 +6,7 @@ import { DeleteSheetConfirmationModal } from './DeleteSheetConfirmationModal';
 import { CreateSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAccountListener, accountListener, showUserMessage }) => {
-    const { sheetId } = useParams();
+    const {sheetId} = useParams();
 
     const [showModalCreateCard, setshowModalCreateCard] = useState(false); 
     const [modalConfirmDeleteSheet, setModalConfirmDeleteSheet] = useState(false); 
@@ -22,7 +22,6 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
             showUserMessage(`Se ha creado un respaldo de la hoja de cálculo "${ sheetDescription }" correctamente.`,'success');
         }
     }
-
 
     return (
         <div className="row mt-2">
@@ -47,19 +46,19 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
 
             <div className="col icon-save">
                 <Tooltip placement="bottom" content="Crear carta de planificación" color="foreground" closeDelay={ 50 }>
-                    <i className="bx bx-add-to-queue icon" onClick={ () => ( setshowModalCreateCard(!showModalCreateCard) ) } ></i>
+                    <i className="bx bx-add-to-queue icon cursor-pointer text-white ml-2" onClick={ () => ( setshowModalCreateCard(!showModalCreateCard) ) } ></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Crear Respaldo" color="foreground" closeDelay={ 50 }>
-                    <i className='bx bxs-backpack icon' onClick={ createSheetBackup } ></i>
+                    <i className='bx bxs-backpack icon cursor-pointer text-white ml-2' onClick={ createSheetBackup } ></i>
                 </Tooltip>
-                <Tooltip placement="bottom" content="Exportar a excel" color="foreground" closeDelay={ 50 }>
-                    <i className='bx bx-export icon'></i>
+                <Tooltip placement="bottom" content="Exportar a excel" color="success" closeDelay={ 50 }>
+                    <i className='bx bx-export icon cursor-pointer text-white ml-2'></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Calendario" color="foreground" closeDelay={ 50 }>
-                    <i className='bx bxs-calendar icon' ></i>
+                    <i className='bx bxs-calendar icon cursor-pointer text-white ml-2' ></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
-                    <i className="bx bx-trash icon" onClick={ () => setModalConfirmDeleteSheet(true) }></i>
+                    <i className="bx bx-trash icon icon-trash cursor-pointer text-white icon-trash ml-2" onClick={ () => setModalConfirmDeleteSheet(true) }></i>
                 </Tooltip>
             </div>
         </div>

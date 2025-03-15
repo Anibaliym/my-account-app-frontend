@@ -134,7 +134,7 @@ export const SheetBalanceForm = ({ sheetName, cashBalanceRef, balances, icons, c
                             <i className='bx bxs-backpack icon' onClick={ createSheetBackup } ></i>
                         </Tooltip>
                         <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
-                            <i className="bx bx-trash icon" onClick={ () => setModalConfirmDeleteSheet(true) }></i>
+                            <i className="bx bx-trash icon-trash icon" onClick={ () => setModalConfirmDeleteSheet(true) }></i>
                         </Tooltip>
                         <Tooltip placement="bottom" content="Exportar a excel" color="foreground" closeDelay={ 50 }>
                             <i className='bx bx-export icon'></i>

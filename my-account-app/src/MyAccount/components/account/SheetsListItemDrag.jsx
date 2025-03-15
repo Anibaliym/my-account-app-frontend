@@ -75,12 +75,12 @@ export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAcco
 
             <div className="d-flex gap-2">
                 <Tooltip
-                    placement="bottom"
+                    placement="left"
                     content="Eliminar hoja de cálculo"
-                    color="danger"
+                    color="danger"  
                     closeDelay={ 50 }
                 >
-                    <i className="bx bx-trash card-icon text-danger" style={{ cursor:'pointer' }} onClick={ deleteSheet }></i>
+                    <i className="bx bx-trash icon icon-trash card-icon" style={{ cursor:'pointer' }} onClick={ deleteSheet }></i>
                 </Tooltip>
 
                 <i

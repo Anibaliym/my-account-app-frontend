@@ -33,11 +33,27 @@
     font-size: 24px; /* Tamaño de los iconos */
 }
 
-/* Estilo del icono con badge */
 .icon {
     position: relative;
     display: inline-block;
+    transition: all 0.3s ease-in-out;
+    font-size: 20px;
+    color: var(--text-color);
 }
+
+.icon-trash {
+    color: var(--text-color);
+}
+
+.icon-trash:hover {
+    color: red;
+}
+
+
+.icon:hover {
+    transform: translateY(-3px) scale(1.2); /* Se levanta y agranda */
+}
+
 
 /* Diseño del badge de notificación */
 .badge {

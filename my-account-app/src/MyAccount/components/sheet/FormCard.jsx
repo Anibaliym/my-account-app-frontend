@@ -161,8 +161,6 @@ export const FormCard = ({ cardId, title, vignettesData, showUserMessage, getShe
             />
 
             <div className="excel-card-header border-white">
-                {/* ayanez */}
-
                 <input
                     ref={ cardTitleRef }
                     name = "cardDescription"
@@ -178,14 +176,11 @@ export const FormCard = ({ cardId, title, vignettesData, showUserMessage, getShe
                 />
 
                 <div className="icons-container">
-                    <Tooltip placement="bottom" content="Resetear colores viñetas" color="foreground" closeDelay={50}>
-                        <i className='bx bx-reset icon excel-icon'></i>
+                    <Tooltip placement="bottom" content="Agregar Viñeta" color="foreground" closeDelay={50}>
+                        <i className="bx bx-plus icon cursor-pointer" onClick={ createVignette } ></i>
                     </Tooltip>
                     <Tooltip placement="bottom" content="Eliminar la carta" color="danger" closeDelay={50}>
-                        <i className="bx bx-trash icon excel-icon" onClick={ deleteCard }></i>
-                    </Tooltip>
-                    <Tooltip placement="bottom" content="Agregar Viñeta" color="foreground" closeDelay={50}>
-                        <i className="bx bx-plus icon excel-icon" onClick={ createVignette } ></i>
+                        <i className="bx bx-trash icon ml-1 icon-trash cursor-pointer" onClick={ deleteCard }></i>
                     </Tooltip>
                 </div>
             </div>

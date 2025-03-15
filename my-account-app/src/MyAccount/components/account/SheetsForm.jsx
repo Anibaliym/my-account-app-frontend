@@ -135,12 +135,12 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                 </span>
                 
                 <Tooltip
-                    placement="right"
+                    placement="left"
                     content="Eliminar Cuenta"
                     color="danger"
                     closeDelay={ 50 }
                 >
-                    <i className="bx bx-trash text-danger mb-2" style={{ cursor:'pointer' }} onClick={ deleteAccount }></i>
+                    <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor:'pointer' }} onClick={ deleteAccount }></i>
                 </Tooltip>
             </div>            
             {

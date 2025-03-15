@@ -23,7 +23,7 @@ export const DeleteSheetConfirmationModal = ({ sheetId, sheetDescription, modalC
             <Modal.Body className="modal-content">
                 <div className="container-fluid">
                     <div className="card-body">
-                        <h5 className="card-title text-color-primary">ELIMINAR HOJA DE CÁLCULO</h5>
+                        <h5 className="card-title text-color-default">ELIMINAR HOJA DE CÁLCULO</h5>
                         <hr />
 
                         <p className="text-center modal-text-message">
@@ -38,7 +38,7 @@ export const DeleteSheetConfirmationModal = ({ sheetId, sheetDescription, modalC
 
                     <div className="row">
                         <button className="button-danger" onClick={ deleteSheetWithContents }>
-                            <i className='bx bx-trash icon'></i>
+                            Eliminar
                         </button>
                         <button className="button-primary mt-2" onClick={ () => setModalConfirmDeleteSheet(false) }>
                             Cancelar
