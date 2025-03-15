@@ -92,7 +92,7 @@ export const CreateCardModal = ({ isDarkMode = false, showModalCreateCard, setSh
                 />
 
                 <button className="modal-button mt-3" onClick={ handleClick }>
-                    <i className='bx bx-save icon' ></i>
+                    CREAR CARTA
                 </button>
 
                 <small className={ `text-center text-danger mt-3 animate__fast ${ animationClass }` }> { modalMessage } </small>
