@@ -73,20 +73,20 @@ const [sheetData, setSheetData] = useState(null);
         <div className="page-principal-container">
             <FormSheetBalance 
                 isDarkMode={ isDarkMode }
-                sheetData={sheetData}
-                showUserMessage={showUserMessage}
-                setAccountListener={setAccountListener}
-                accountListener={accountListener}
-                calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }}
-                refreshData={refreshData} 
+                sheetData={ sheetData }
+                showUserMessage={ showUserMessage }
+                setAccountListener={ setAccountListener }
+                accountListener={ accountListener }
+                calculatedBalances={ { availableTotalBalance, toSpendBalance, inFavorBalance }}
+                refreshData={ refreshData} 
             />
 
             <FormCardsSheet
-                cardsSheetData={cardsSheetData}
-                showUserMessage={showUserMessage}
-                isDarkMode={isDarkMode}
-                getSheetCardsWithVignettes={getSheetCardsWithVignettes}
-                refreshData={refreshData} 
+                cardsSheetData={ cardsSheetData }
+                showUserMessage={ showUserMessage }
+                isDarkMode={ isDarkMode }
+                getSheetCardsWithVignettes={ getSheetCardsWithVignettes }
+                refreshData={ refreshData } 
             />
         </div>
     );
