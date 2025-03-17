@@ -54,7 +54,6 @@
     transform: translateY(-3px) scale(1.2); /* Se levanta y agranda */
 }
 
-
 /* Diseño del badge de notificación */
 .badge {
     background: #b63509;
@@ -76,8 +75,8 @@
     padding: 5px;
     font-size: 14px;
     border-radius: 3px;
-    border: 1px solid var(--input-border);
-    background: var(--input-bg);
+    border: 1px solid var(--border-input-text-color);
+    background: var(--background-input-text-color);
     color: var(--text-color);
     transition: all 0.1s ease-in-out;
     outline: none;
@@ -86,18 +85,6 @@
 /* Efecto cuando el input está en foco */
 .custom-input:focus {
     border-color: var(--primary-color);
-}
-
-/* Tema Claro */
-.light-mode {
-    --input-bg: #fff;
-    --input-border: #ccc;
-}
-
-/* Tema Oscuro */
-.dark-mode {
-    --input-bg: #2a2a2a;
-    --input-border: #555;
 }
 
 .button-primary {
@@ -139,3 +126,5 @@
     border: 1px solid var(--danger-color); 
     transform: scale(1.05); /* Agranda ligeramente el botón */
 }
+
+

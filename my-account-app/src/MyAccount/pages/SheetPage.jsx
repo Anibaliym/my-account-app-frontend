@@ -20,7 +20,7 @@ const [sheetData, setSheetData] = useState(null);
             const { isError, data } = await GetSheetByIdAsync(sheetId);
             if (!isError && data) setSheetData(data);
         } catch (error) {
-            console.error("Error al obtener la hoja de cálculo:", error);
+            showUserMessage("Error al obtener la hoja de cálculo:", error);
         }
     };
     
@@ -34,7 +34,7 @@ const [sheetData, setSheetData] = useState(null);
             }
             setCardsSheetData(data || []);
         } catch (error) {
-            console.error("Error al obtener las cartas:", error);
+            showUserMessage("Error al obtener las cartas:", error);
         }
     };
 

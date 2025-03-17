@@ -56,10 +56,13 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
 
     return (
         <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
+
+
             <div className="sidebar-body">
                 { 
                     menuData.map(({ id, name, description, icon }) => {
-                        if(retrievedUserType !== 'ADMIN' && description === 'administrador') 
+
+                        if(retrievedUserType === 'ADMIN' && description === 'Administrador') 
                             return; 
                         
                         return (
@@ -79,7 +82,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                         <AccountMenuList
                             key={ account.id }
                             accountId={ account.id } 
-                            isOpen={!!activeDropdowns[account.id]} // Verifica si está abierto
+                            isOpen={!!activeDropdowns[account.id]}
                             activeDropdowns={ activeDropdowns } 
                             toggleDropdown={ toggleDropdown } 
                             description={ account.description }

@@ -31,24 +31,19 @@ export const UserMessage = ({ message, show, setShowMessage, isDarkMode }) => {
     }, [ show, messageTime, setShowMessage, isVisible ]);
 
     let colorType = ''; 
-    let icon = '';
 
     switch (message.type) {
         case 'success':
             colorType = 'success';
-            icon = 'bx-check-circle';
             break;
         case 'warning':
             colorType = 'warning';
-            icon = 'bx-error';
             break;
         case 'error':
             colorType = 'danger';
-            icon = 'bx-error-circle';
             break;
         default:
             colorType = 'info';
-            icon = 'bx-message-rounded-error';
             break;
     }
     
@@ -58,7 +53,6 @@ export const UserMessage = ({ message, show, setShowMessage, isDarkMode }) => {
 
     return (
         <div className={ `${ alertClass }` }>
-            <i className={ `bx ${ icon }` } ></i>
             <span className="ml-1">{ message.message }</span>
         </div>
     );

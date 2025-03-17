@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
-import { DeleteAccountAPI, UpdateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { UpdateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
 import { useState, useRef } from 'react';
 
 export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {

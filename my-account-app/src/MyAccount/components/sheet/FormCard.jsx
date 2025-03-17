@@ -10,7 +10,7 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import { useParams } from 'react-router-dom';
 import { updateCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 
-export const FormCard = ({ cardId, title, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData, isDarkMode }) => {
+export const FormCard = ({ cardId, title,  order, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData, isDarkMode }) => {
     const { sheetId } = useParams()
     const cardTitleRef = useRef(null); 
 
@@ -112,7 +112,7 @@ export const FormCard = ({ cardId, title, vignettesData, showUserMessage, getShe
     }
 
     const updateCard = async () => {
-        const { isError } = await updateCardFetch(cardId, sheetId, cardTitle); 
+        const { isError } = await updateCardFetch(cardId, sheetId, cardTitle, order); 
 
         if(isError){
             showUserMessage('Ocurrió un error al intentar actualizar el nombre de la carta.', 'error');

@@ -78,7 +78,7 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                     }
                 >
                     <button className="dropdown-btn-accounts">
-                        <i className="bx bx-spreadsheet icon ml-2"></i>
+                        <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon ml-2` }></i>
                         <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                             {
                                 (sheets.length > 0) 

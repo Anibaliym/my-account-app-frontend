@@ -11,15 +11,18 @@
     --sidebar-color: #F3F3F0;
 
     --primary-color: #C75C1C; /* Naranja Quemado - Un tono mÃ¡s oscuro y sofisticado. */
-    --primary-color: #D97904; /* Naranja Dorado - Un naranja mÃ¡s elegante y cercano al dorado. */
-    --primary-color: #FF9F45; /* Naranja Suave - Un tono mÃ¡s cÃ¡lido y menos agresivo. */
     --primary-color: #FF7F11; /* Naranja Vibrante - Un naranja fuerte y llamativo. */
+    --primary-color: #FF9F45; /* Naranja Suave - Un tono mÃ¡s cÃ¡lido y menos agresivo. */
+    --primary-color: #D97904; /* Naranja Dorado - Un naranja mÃ¡s elegante y cercano al dorado. */
     --primary-color: #695CFE; /* Purple */
-    
+
     --danger-color: red;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #707070;
+    --border-input-text-color: #bbbbbb;
+    --background-input-text-color: white;
+
     --text-hover-color: white;
     --sub-menu-container: #F5F5F1; 
     --success-color: #2cb72c; 
@@ -46,6 +49,8 @@ body.dark {
     --primary-color-light: #3a3b3c;
     --toggle-color: #696969;
     --text-color: #ccc;
+    --border-input-text-color: #686868;
+    --background-input-text-color: #3e3e3e;
     --sub-menu-container: #303030; 
 }
 

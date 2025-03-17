@@ -47,7 +47,7 @@ export const getCardBySheetIdFetch = async (sheetId) => {
 }
 
 
-export const updateCardFetch = async ( cardId, sheetId, title ) => {
+export const updateCardFetch = async ( cardId, sheetId, title, order ) => {
     const url = `${ API_URL }/api/Card/UpdateCard`;
     
     try 
@@ -59,8 +59,8 @@ export const updateCardFetch = async ( cardId, sheetId, title ) => {
                 id: cardId, 
                 sheetId, 
                 title, 
-                description:'', 
-                color: 'DEFAULT'
+                description: '', 
+                order
             })
         }); 
 

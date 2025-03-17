@@ -1,57 +1,103 @@
-.access-page-container {
-    background-color: var(--body-color); 
-    width:100%; 
-    height:100vh; 
+* {
+    margin: 0;
+    padding: 0;
+    transition: background 0.1s, color 0.1s;
 }
 
 .access-container {
-    background-color: var(--body-color); 
-    width:900px; 
-    margin:auto; 
-    margin-top: 100px; 
-    padding: 5px; 
-    box-shadow: 0px 0px 2px lightgray; 
-}
-
-.loginPresentation {
-    background: var(--primary-color);
-    color: white; 
-    padding-left: 50px;
-    border-radius: 3px; 
-    box-shadow: 0px 0px 3px var(--primary-color); 
-}
-
-.title-color-text {
-    color: var(--primary-color); 
-}
-
-li.input-box {
-    list-style: none;  
-    border-radius: 3px;
-    background-color: var(--primary-color-light);
-    transition: var(--tran-05);
     display: flex;
-    align-items: center;
+    height: 100vh;
 }
 
-li.input-box input{
-    /* height: 100%; */
-    padding:10px; 
-    width: 90%;
-    outline: none;
-    border: none;
-    background-color: var(--primary-color-light);
-    color: var(--primary-color);
-    border-radius: 4px;
-    font-size: 15px;
-    transition: var(--tran-05);
+.access-login-form {
+    width: 30%; 
+    max-width: 350px;
+    min-width: 350px;
+    background-color: var(--body-color); /* Color de fondo */
+    color: gray;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
 }
 
-select {
-    background-color: #3498db;
+.access-presentation {
+    flex: 1; 
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    padding: 0px 0px 0px 30px;
     color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
 }
+
+.access-input-text {
+    border: 1px solid var(--border-input-text-color); 
+    width: 100%; 
+    padding: 7px; 
+    border-Radius: 3px;
+    outline: none;
+    color: var(--text-color);  
+    /* margin-top: 10px;  */
+    background-color: var(--background-input-text-color); 
+}
+
+.access-input-text:focus {
+    border-color: var(--primary-color);
+}
+
+.access-label {
+    color: var(--text-color);
+    font-size: 14px; 
+}
+
+.login-button {
+    background-color: var(--background-color);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color); 
+    padding: 5px 0px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+    transition: color 0.3s ease, transform 0.2s ease; /* Transiciones suaves */
+}
+
+.login-button:hover {
+    /* box-shadow: 0px 0px 5px var(--primary-color);  */
+    background-color: var(--primary-color); /* Cambia el color al pasar el mouse */
+    color: white;
+    border: 2px solid var(--primary-color); 
+    transform: scale(1.05); /* Agranda ligeramente el botón */
+}
+
+.register-link {
+    margin-top: 15px;
+    font-size: 14px;
+    text-align: center; 
+}
+
+.register-link a {
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive: ajusta en pantallas pequeñas */
+@media (max-width: 768px) {
+    .access-container {
+        flex-direction: column;
+    }
+
+    .access-forms {
+        width: 100%;
+        max-width: 350px; /* Mantiene el ancho */
+        min-width: 350px; /* No se hace más pequeño */
+        box-shadow: none;
+        margin: auto; /* Centra el formulario */
+    }
+
+    .access-presentation {
+        display: none; /* Se oculta en pantallas pequeñas */
+    }
+}
+

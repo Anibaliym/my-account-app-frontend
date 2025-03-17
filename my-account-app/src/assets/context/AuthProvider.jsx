@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
         localStorage.setItem('user', JSON.stringify( user ) );
         localStorage.setItem('accounts', JSON.stringify( accounts ) );
-
+        localStorage.setItem('activeDropdowns', JSON.stringify( accounts ) );
         dispatch(action);
     }
 
@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
 
         dispatch(action);
     }
-
 
     return (
         <AuthContext.Provider value={{

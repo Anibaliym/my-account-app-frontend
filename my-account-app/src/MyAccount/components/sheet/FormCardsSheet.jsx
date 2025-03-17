@@ -21,11 +21,12 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage,  isDarkMo
             }
             
             {
-                cardsSheetData.map( ({ id: cardId, title, vignettes, totalCardAmount }) => (
+                cardsSheetData.map( ({ id: cardId, title, vignettes, totalCardAmount, order }) => (
                     <FormCard
                         key = { cardId }
                         cardId = { cardId }
                         title = { title }
+                        order={ order }
                         vignettesData = { vignettes }
                         showUserMessage = { showUserMessage }
                         totalCardAmount = { totalCardAmount }
