@@ -1,7 +1,5 @@
 import { Tooltip } from '@nextui-org/react';
-import { CardVignette } from './CardVignette';
 import { useState, useEffect, useRef } from 'react';
-import { DeleteCardConfirmationModal } from './DeleteCardConfirmationModal';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
@@ -9,6 +7,8 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { useParams } from 'react-router-dom';
 import { updateCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
+import { Vignette } from './Vignette';
+import { ModalDeleteCardConfirmation } from './ModalDeleteCardConfirmation';
 
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
@@ -165,7 +165,7 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
             style={style} 
             {...attributes}
         >
-            <DeleteCardConfirmationModal
+            <ModalDeleteCardConfirmation
                 cardTitle={ title }
                 modalConfirmDeleteCard={ modalConfirmDeleteCard }
                 setModalConfirmDeleteCard={ setModalConfirmDeleteCard }
@@ -205,7 +205,7 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
                     <SortableContext items={ vignettes.map(v => v.id) } strategy={ verticalListSortingStrategy }>
                     {  
                         vignettes?.map( ( vignette) => (
-                            <CardVignette
+                            <Vignette
                                 key={ vignette.id } 
                                 cardId={ id }
                                 vignette={ vignette } 

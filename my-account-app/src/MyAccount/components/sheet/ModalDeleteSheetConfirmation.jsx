@@ -2,7 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import { deleteSheetWithContentsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { useNavigate } from 'react-router-dom';
 
-export const DeleteSheetConfirmationModal = ({ sheetId, sheetDescription, modalConfirmDeleteSheet, setModalConfirmDeleteSheet, setAccountListener, accountListener, showUserMessage }) => {
+export const ModalDeleteSheetConfirmation = ({ sheetId, sheetDescription, modalConfirmDeleteSheet, setModalConfirmDeleteSheet, setAccountListener, accountListener, showUserMessage }) => {
     const navigate = useNavigate(); 
 
     const deleteSheetWithContents = async () => {

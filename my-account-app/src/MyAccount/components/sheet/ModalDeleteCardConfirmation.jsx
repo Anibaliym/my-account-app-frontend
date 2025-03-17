@@ -1,6 +1,6 @@
 import Modal from 'react-bootstrap/Modal';
 
-export const DeleteCardConfirmationModal = ({ cardTitle, modalConfirmDeleteCard, setModalConfirmDeleteCard, deleteCardWithVignettes }) => {
+export const ModalDeleteCardConfirmation = ({ cardTitle, modalConfirmDeleteCard, setModalConfirmDeleteCard, deleteCardWithVignettes }) => {
     
     return (
         <Modal show={ modalConfirmDeleteCard } onHide={ setModalConfirmDeleteCard } className="modal-blur">

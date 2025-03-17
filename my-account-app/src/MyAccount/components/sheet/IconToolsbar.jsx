@@ -1,8 +1,8 @@
 import { Tooltip } from '@nextui-org/react'; 
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { CreateCardModal } from './CreateCardModal';
-import { DeleteSheetConfirmationModal } from './DeleteSheetConfirmationModal';
+import { ModalCreateCard } from './ModalCreateCard';
+import { ModalDeleteSheetConfirmation } from './ModalDeleteSheetConfirmation';
 import { CreateSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAccountListener, accountListener, showUserMessage }) => {
@@ -25,8 +25,7 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
 
     return (
         <div className="row mt-2">
-
-            <CreateCardModal
+            <ModalCreateCard
                 isDarkMode={ isDarkMode }
                 showModalCreateCard={ showModalCreateCard } 
                 setShowModalCreateCard={ setshowModalCreateCard } 
@@ -34,7 +33,7 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
                 refreshData={ refreshData } 
             />
 
-            <DeleteSheetConfirmationModal
+            <ModalDeleteSheetConfirmation
                 sheetId={ sheetId }
                 sheetDescription = { sheetDescription }
                 modalConfirmDeleteSheet = { modalConfirmDeleteSheet }
@@ -53,9 +52,6 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
                 </Tooltip>
                 <Tooltip placement="bottom" content="Exportar a excel" color="success" closeDelay={ 50 }>
                     <i className='bx bx-export icon cursor-pointer text-white ml-2'></i>
-                </Tooltip>
-                <Tooltip placement="bottom" content="Calendario" color="foreground" closeDelay={ 50 }>
-                    <i className='bx bxs-calendar icon cursor-pointer text-white ml-2' ></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
                     <i className="bx bx-trash icon icon-trash cursor-pointer text-white icon-trash ml-2" onClick={ () => setModalConfirmDeleteSheet(true) }></i>

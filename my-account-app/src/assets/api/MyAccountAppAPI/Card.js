@@ -74,8 +74,6 @@ export const updateCardFetch = async ( cardId, sheetId, title, order ) => {
 }
 
 export const UpdateCardOrderItemsFetch = async ( newCardsOrderArr ) => {
-
-    console.log(newCardsOrderArr)
     const url = `${ API_URL }/api/Card/UpdateCardOrderItems`; 
 
     try 
@@ -87,13 +85,10 @@ export const UpdateCardOrderItemsFetch = async ( newCardsOrderArr ) => {
         })
 
         const data = await response.json();
-        console.log(data)
 
         return { isError: false }
     } 
     catch (error) {
-        console.log(error)
-        console.log('error order')
         return { isError: true }
     }
 

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { CreateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
 import { useNavigate } from 'react-router-dom';
 
-export const AddAccountForm = ({ userId, isDarkMode, reloadAccount }) => {
+export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
     const navigate = useNavigate(); 
     const [ newAccount, setNewAccount] = useState(false); 
     const [ newAccountName, setNewAccountName ] = useState(''); 

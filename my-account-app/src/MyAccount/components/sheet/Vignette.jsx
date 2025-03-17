@@ -5,9 +5,9 @@ import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTot
 import { useSortable } from "@dnd-kit/sortable"; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { Tooltip } from '@nextui-org/react';
-import { SelectColorForm } from './SelectColorForm';
+import { FormSelectColor } from './FormSelectColor';
 
-export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, refreshData, isDarkMode }) => {
+export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, refreshData, isDarkMode }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
     const { id: vignetteId, description, amount, order, color } = vignette;
 
@@ -143,7 +143,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                         <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
 
                         <Tooltip 
-                            content={<SelectColorForm isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
+                            content={<FormSelectColor isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
                             placement="right"
                             closeDelay={ 200 }
                         >

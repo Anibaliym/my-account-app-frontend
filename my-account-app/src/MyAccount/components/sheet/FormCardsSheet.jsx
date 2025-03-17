@@ -1,9 +1,7 @@
 import { memo, useState } from 'react';
-import { FormCard } from './FormCard';
 
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { SortableItem } from './SortableItem';
 import { useEffect } from 'react';
 import { FormCardDragable } from './FormCardDragable';
 import { UpdateCardOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Card';
@@ -24,19 +22,6 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMod
             activationConstraint: { distance: 5 },
         })
     );
-
-    // Manejo del evento de arrastre
-    // const handleDragEnd = (event) => {
-    //     const { active, over } = event;
-    //     if (active.id !== over.id) {
-    //         setCards((prevCards) => {
-    //             const oldIndex = prevCards.findIndex((item) => item.id === active.id);
-    //             const newIndex = prevCards.findIndex((item) => item.id === over.id);
-
-    //             return arrayMove(prevCards, oldIndex, newIndex);
-    //         });
-    //     }
-    // };
 
     const handleDragEnd = async (event) => {
         const { active, over } = event;
@@ -80,10 +65,6 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMod
                             </h6>
                         </div>
                     )}
-
-                    {/* {cards.map(({ id: cardId, title }) => (
-                        <SortableItem key={ cardId } id={ cardId } title={ title } />
-                    ))} */}
 
                     {
                         cards.map( ({ id, title, vignettes, totalCardAmount, order }) => (

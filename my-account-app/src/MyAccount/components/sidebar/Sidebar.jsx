@@ -2,7 +2,7 @@ import { MenuItem } from './MenuItem';
 import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
 import { useState, useEffect, useRef } from 'react';
-import { AddAccountForm } from './AddAccountForm';
+import { FormAddAccount } from './FormAddAccount';
 import { GetUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
@@ -93,7 +93,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                 } 
                 {
                     (!toggleSidebar) && (
-                        <AddAccountForm
+                        <FormAddAccount
                             isDarkMode={ isDarkMode }
                             userId={ userId }
                             reloadAccount={ reloadAccount }

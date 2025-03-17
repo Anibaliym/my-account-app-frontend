@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 import '/src/assets/css/Modal.css'; 
 import { CustomInputText } from '../controls/CustomInputText';
 
-export const CreateCardModal = ({ isDarkMode = false, showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
+export const ModalCreateCard = ({ isDarkMode = false, showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
     const RefTitle = useRef(); 
     const { sheetId } = useParams();
     const [ title, setTitle ] = useState(''); 

@@ -1,16 +1,16 @@
 import { updateVignetteColorThemeFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
-export const SelectColorForm = ({ isDarkMode, vignetteId, setVignetteColorTheme }) => {
+
+export const FormSelectColor = ({ isDarkMode, vignetteId, setVignetteColorTheme }) => {
 
     const changeColor = async (color) => {
         const { isError } = await updateVignetteColorThemeFetch(vignetteId, color)
 
         if(!isError)
-            setVignetteColorTheme(color);
+        setVignetteColorTheme(color);
     }
 
     return (
         <>
-            {/* <div onClick={ () => { changeColor('WHITE') } } className={ `color-selector-item color-selector-${ (isDarkMode ? 'darkTheme' : 'lightTheme' ) }-WHITE` }></div> */}
             <div onClick={ () => { changeColor('DEFAULT') } } className={ `color-selector-item color-selector-${ (isDarkMode ? 'darkTheme' : 'lightTheme' ) }-WHITE` }></div>
 
             <table>

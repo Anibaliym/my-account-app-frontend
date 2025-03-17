@@ -7,7 +7,6 @@ import { AdminPage } from '../pages/AdminPage';
 import { Header } from '../components/Header';
 import { SheetPage } from '../pages/SheetPage';
 import { UserMessage } from '../components/UserMessage';
-import { ModalInfo } from '../components/modal/ModalInfo';
 import { AccountsPage } from '../pages/AccountsPage';
 import '/src/assets/css/Home.css';
 import '/src/assets/css/Controls.css';
@@ -76,8 +75,6 @@ export const MyAccountRouter = () => {
                 />
 
                 <section className="dashboard-content">
-                    <ModalInfo message={modalMessage} />
-
                     <Routes>
                         <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
