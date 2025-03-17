@@ -5,7 +5,6 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage,  isDarkMo
     if(cardsSheetData == null) return; 
 
     return (
-
         <div className="sheet-cards-form">
             { 
                 (cardsSheetData.length === 0) 

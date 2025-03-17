@@ -53,6 +53,7 @@ export const AccessPage = () => {
             <div className="access-presentation">
                 <h1 className="display-1">MI CUENTA</h1>
             </div> 
+
         </div>
     );
 };

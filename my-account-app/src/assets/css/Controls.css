@@ -36,9 +36,15 @@
 .icon {
     position: relative;
     display: inline-block;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.2s ease-in-out;
     font-size: 20px;
     color: var(--text-color);
+}
+
+.icon-menu {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
 }
 
 .icon-trash {

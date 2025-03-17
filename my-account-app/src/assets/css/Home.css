@@ -48,17 +48,47 @@ body {
 }
 
 
-.main-content .header {
+/* .header {
     background-color: var(--body-color);
     padding: 0px 10px 5px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
     position: sticky;
     top: 0;
     z-index: 1000;
     border-bottom: 1px solid var(--primary-color);
+} */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 10px 5px 10px;
+  background-color: var(--body-color);
+  border-bottom: 1px solid var(--primary-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.left-header {
+    display: flex;
+    align-items: center;
+}
+  
+.left-header .toggle-btn {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem; /* Ajusta el tamaño del icono si es necesario */
+}
+  
+.title-menu {
+    margin-left: 10px; /* Espaciado entre el icono y el texto */
+    font-size: 20px; /* Ajusta el tamaño si es necesario */
+    display: flex;
+    align-items: center; /* Asegura que el texto esté alineado verticalmente */
+    color: var(--primary-color); 
 }
 
 .sidebar.active + .main-content {
@@ -102,9 +132,9 @@ body {
 }
 
 .toggle-btn:hover {
-    color: #555;
+    color: var(--text-color);
+    transform: scale(1.05); /* Agranda ligeramente el botón */
 }
-
 
 .dashboard-content {
     padding: 10px;
@@ -222,7 +252,7 @@ body {
     box-sizing: border-box;
 }
 
-.dropdown-btn-accounts i.icon {
+.dropdown-btn-accounts i.icon-menu {
     flex-shrink: 0; /* Asegura que los íconos no cambien de tamaño */
     margin-right: 10px; /* Espaciado entre el ícono izquierdo y el texto */
 }
@@ -245,21 +275,6 @@ body {
     color: var(--text-hover-color);
 }
 
-
-
-
-
-
-
-
-
-.sidebar-footer {
-    background-color: var(--sidebar-color);
-}
-
-.sidebar-footer button {
-    width: 100%;
-}
 
 .arrow_open {
     transform: rotate(90deg);
@@ -338,10 +353,6 @@ body.dark .switch::before {
     cursor:pointer;
 }
 
-span.title-menu {
-    color: var(--primary-color);
-    margin-left: 10px;
-}
 
 .page-title {
     color: var(--primary-color);

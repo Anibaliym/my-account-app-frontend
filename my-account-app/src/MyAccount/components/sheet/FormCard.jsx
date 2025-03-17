@@ -184,7 +184,7 @@ export const FormCard = ({ cardId, title,  order, vignettesData, showUserMessage
                     </Tooltip>
                 </div>
             </div>
-
+            
             <div className="excel-card-body mt-3">
                 <DndContext
                     collisionDetection={ closestCenter }

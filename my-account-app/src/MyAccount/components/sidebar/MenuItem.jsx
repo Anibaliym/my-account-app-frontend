@@ -16,7 +16,7 @@ export const MenuItem = ({ navigateTo = '/error', description = 'menú name', ic
                     className="dropdown-btn"
                     onClick={() => navigate(navigateTo)}
                 >
-                    <i className={ `${ icon } icon ml-2` }></i>
+                    <i className={ `${ icon } icon-menu ml-2` }></i>
                     <span className="animate__animated animate__fadeIn">{description}</span>
                 </button>
             </div>

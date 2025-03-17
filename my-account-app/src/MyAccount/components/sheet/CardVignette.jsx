@@ -16,6 +16,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
     const [ showSuccessIcon, setShowSuccessIcon ] = useState(false); 
     const [ newDescription, setNewDescription ] = useState(description); 
+    const [ oldDescription, setOldDescription ] = useState(description); 
     const [ newAmount, setNewAmount ] = useState(amount); 
     const [ newVignette, setNewVignette] = useState({}); 
     const [ showSaveIcon, setShowSaveIcon ] = useState(false);
@@ -30,7 +31,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
     }, [ showSuccessIcon ])
 
     useEffect(() => {
-        setShowSaveIcon(newDescription !== description); 
+        setShowSaveIcon(newDescription !== oldDescription); 
     }, [ newDescription, newAmount ])
 
     const updateVignette = async () => {
@@ -45,6 +46,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
             order,
         };
 
+        setOldDescription(newDescription); 
         setNewAmount( (newData.amount === 0) ? 0: newData.amount ); 
 
         const { isError, data } = await updateVignetteAndRecalculateTotalFetch(newData);
@@ -68,19 +70,16 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
         value = value.replace(/[^0-9-]/g, ''); 
     
         // Asegurar que solo haya un "-" al inicio
-        if (value.includes("-") && value.indexOf("-") !== 0) {
+        if (value.includes("-") && value.indexOf("-") !== 0)
             value = value.replace("-", "");
-        }
     
         // Evitar ceros a la izquierda, excepto si el número es solo "0"
-        if (value.length > 1 && value.startsWith("0") && !value.startsWith("-")) {
+        if (value.length > 1 && value.startsWith("0") && !value.startsWith("-"))
             value = value.substring(1);
-        }
     
         // Si el input es "-0", convertirlo en "-"
-        if (value === "-0") {
+        if (value === "-0")
             value = "-";
-        }
     
         // Aplicar el formato de miles solo si no está en edición activa
         setNewAmount(value);
@@ -107,7 +106,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
 
         switch (controlName) {
             case 'description':
-                if(description === newDescription.trim()) return; 
+                if(oldDescription === newDescription.trim()) return; 
                 break;
             case 'amount':
                 if(amount === newAmount) { return; }
@@ -184,7 +183,6 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                     </div>
                 </div>
             </div>
-
         </>
     )
 }

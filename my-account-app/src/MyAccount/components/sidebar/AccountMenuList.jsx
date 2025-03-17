@@ -43,11 +43,11 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
         <div className="menu-item">
             {!toggleSidebar ? (
                 <button className="dropdown-btn-accounts" onClick={handleToggleMenu}>
-                    <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon ml-2` }></i>
+                    <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon-menu ml-2` }></i>
                     <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                     {
                         (sheets.length > 0) && 
-                            (<i className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}></i>)
+                            (<i className={`bx bx-chevron-right icon-menu animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}></i>)
                     }
                 </button>
             ) : (
@@ -78,13 +78,13 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                     }
                 >
                     <button className="dropdown-btn-accounts">
-                        <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon ml-2` }></i>
+                        <i className={ `bx ${ (sheets.length > 0 ? 'bxs-spreadsheet' : 'bx-spreadsheet') } icon-menu ml-2` }></i>
                         <span className="menu-description animate__animated animate__fadeIn">{description}</span>
                             {
                                 (sheets.length > 0) 
                                     && 
                                 (<i
-                                    className={`bx bx-chevron-right icon animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
+                                    className={`bx bx-chevron-right icon-menu animate__animated animate__fadeIn arrow-icon ${isItemMenuOpen ? 'arrow_open' : 'arrow_close'}`}
                                     onClick={ handleToggleMenu}
                                 ></i>)
                             }
