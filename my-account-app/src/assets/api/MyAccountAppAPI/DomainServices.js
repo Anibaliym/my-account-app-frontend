@@ -71,7 +71,7 @@ export const getSheetsAccountAPI = async (accountId) => {
 }
 
 export const getSheetCardsWithVignettesFetch = async ( sheetId ) => {
-
+console.log(sheetId)
     try 
     {
         const response = await fetch(`${ API_URL }/api/DomainServices/GetSheetCardsWithVignettes/${ sheetId }`, {

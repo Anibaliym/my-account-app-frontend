@@ -137,7 +137,7 @@ export const CardVignette = ({ cardId, vignette, showUserMessage, setVignettes, 
                 style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
                 className={ `excel-card-vignette color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
             >
-                <div className="excel-card-row">
+                <div className="animate__animated animate__fadeIn animate__faster excel-card-row">
                     <div className="excel-card-cell action">
                         <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
                         <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>

@@ -28,6 +28,7 @@ const [sheetData, setSheetData] = useState(null);
         // Obtiene los datos las cartas y calcula los totales.
         try {
             const { isError, data } = await getSheetCardsWithVignettesFetch(sheetId);
+
             if (isError) {
                 showUserMessage('Ocurrió un error al intentar cargar las cartas.', 'error');
                 return;

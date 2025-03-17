@@ -72,3 +72,29 @@ export const updateCardFetch = async ( cardId, sheetId, title, order ) => {
         return { isError: false }
     } 
 }
+
+export const UpdateCardOrderItemsFetch = async ( newCardsOrderArr ) => {
+
+    console.log(newCardsOrderArr)
+    const url = `${ API_URL }/api/Card/UpdateCardOrderItems`; 
+
+    try 
+    {
+        const response = await fetch(url, {
+            method: 'put', 
+            headers: { 'Accept': '*/*', 'Content-Type': 'Application/json' },
+            body: JSON.stringify( newCardsOrderArr )
+        })
+
+        const data = await response.json();
+        console.log(data)
+
+        return { isError: false }
+    } 
+    catch (error) {
+        console.log(error)
+        console.log('error order')
+        return { isError: true }
+    }
+
+}
