@@ -66,11 +66,20 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
             return; 
         }
 
-        const { isError } = await createSheetAPI( accountId, newSheetDescription ); 
+        const { isError, resolution, message } = await createSheetAPI( accountId, newSheetDescription ); 
         
+
         if(isError)
             showUserMessage(`Ocurrió un error al intentar crear la "hoja de cálculo" ${ newSheetDescription }`,'danger');
         else {
+
+            if(!resolution) {
+                showUserMessage(message, 'info');
+                return; 
+            }
+
+
+
             showUserMessage(`Se ha creado la hoja de cálculo con el nombre "${ newSheetDescription }" correctamente.`, 'success');
             setNewSheetDescription('');
             setAccountListener(accountListener + 1); 
@@ -174,7 +183,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                 value = { newSheetDescription }
                 onChangeEvent = { setNewSheetDescription }
                 onKeyDownEvent = { handleKeyDown }
-                placeHolder={ 'agregar hoja de calculo ...' }
+                placeHolder={ 'Agregar hoja de calculo ...' }
             />
 
             <CustomButtom event={ createSheet }/>

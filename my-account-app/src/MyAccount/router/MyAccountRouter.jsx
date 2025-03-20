@@ -76,7 +76,7 @@ export const MyAccountRouter = () => {
 
                 <section className="dashboard-content">
                     <Routes>
-                        <Route path="profile" element={<ProfilePage setPageName={setPageName} />} />
+                        <Route path="profile" element={<ProfilePage setPageName={setPageName} showUserMessage={ showUserMessage } isDarkMode={ isDarkMode }/>} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
                         <Route path="accounts" element={<AccountsPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
                         <Route path="admin" element={<AdminPage setPageName={setPageName} isDarkMode={isDarkMode} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />

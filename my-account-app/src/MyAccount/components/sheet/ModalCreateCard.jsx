@@ -1,11 +1,9 @@
 import Modal from 'react-bootstrap/Modal';
 import { useParams } from 'react-router-dom';
 import { createCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
-import { useState } from 'react';
-import { useRef } from 'react';
-import { useEffect } from 'react';
-import '/src/assets/css/Modal.css'; 
+import { useState, useRef, useEffect } from 'react';
 import { CustomInputText } from '../controls/CustomInputText';
+import '/src/assets/css/Modal.css'; 
 
 export const ModalCreateCard = ({ isDarkMode = false, showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
     const RefTitle = useRef(); 
@@ -37,16 +35,6 @@ export const ModalCreateCard = ({ isDarkMode = false, showModalCreateCard, setSh
         createCard(); 
     }
 
-    const handleChange = (e, controlName) => {
-        const value = e.target.value; 
-
-        if(controlName === 'title')
-            setTitle(value); 
-        
-
-        if(controlName === 'description')
-            setDescription(value); 
-    }
 
     const handleKeyDown = (e) => {
         const aschiiKey = e.which; 

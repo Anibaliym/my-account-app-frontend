@@ -60,8 +60,8 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
             setAccountsArr( accountsArr => [ ...accountsArr, { id: data.id, description: newAccountDescription.trim() } ] );
         }
         else {
-            if(message.includes('No se pueden crear mas de 20'))
-                showUserMessage(`No se puede crear la cuenta "${newAccountDescription}" porque cada usuario puede tener hasta un máximo de 20 cuentas.`, 'warning');
+            if(message.includes('No se pueden crear mas de 15'))
+                showUserMessage(`No se puede crear la cuenta "${newAccountDescription}" porque cada usuario puede tener hasta un máximo de 15 cuentas.`, 'warning');
                 accountDescriptionRef.current.select(); 
         }
     }
@@ -105,7 +105,7 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
                 value = { newAccountDescription }
                 onChangeEvent = { setNewAccountDescription }
                 onKeyDownEvent = { onKeyDown }
-                placeHolder={ 'nombre cuenta' }
+                placeHolder={ 'Crear una nueva cuenta' }
             />
 
             <CustomButtom event={ () => createAccount() }/>
