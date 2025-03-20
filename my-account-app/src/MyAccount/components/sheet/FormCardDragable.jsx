@@ -20,7 +20,6 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
     const { sheetId } = useParams()
     const cardTitleRef = useRef(null); 
     
-
     const [cardTitle, setCardTitle ] = useState(title); 
     const [cardTitleOld, setCardTitleOld] = useState(title); 
     const [vignettes, setVignettes] = useState(vignettesData); 
@@ -228,7 +227,7 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
                     ${ formatNumberWithThousandsSeparator( cardTotalAmount ) }
                 </h2>
             </div>            
-            <i className="bx bx-move icon cursor-pointer mr-2" {...listeners}></i>
+            <i className="bx bx-move cursor-pointer mr-2" {...listeners}></i>
         </div>        
     )
 }

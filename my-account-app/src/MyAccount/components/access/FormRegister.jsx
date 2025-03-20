@@ -48,8 +48,8 @@ export const FormRegister = ({ setUserName, toggleForm, setToggleForm, showUserM
             return; 
         }
     
-        if(password.length < 6) {
-            showUserMessage('La contraseña debe tener al menos 6 caracteres.', 'info');
+        if(password.length < 5) {
+            showUserMessage('La contraseña debe tener al menos 5 caracteres.', 'info');
             passwordRef.current.select(); 
             return;
         }

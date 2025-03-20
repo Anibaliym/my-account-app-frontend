@@ -31,10 +31,7 @@ export const ModalCreateCard = ({ isDarkMode = false, showModalCreateCard, setSh
         }
     }, [ modalMessage ]);
 
-    const handleClick = () => {
-        createCard(); 
-    }
-
+    const handleClick = () => createCard(); 
 
     const handleKeyDown = (e) => {
         const aschiiKey = e.which; 

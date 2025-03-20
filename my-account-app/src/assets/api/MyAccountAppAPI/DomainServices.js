@@ -220,3 +220,27 @@ export const deleteSheetWithContentsFetch = async ( sheetId ) => {
         return { isError: true }
     }
 }
+
+export const deleteUserAccountFetch = async ( userId, password ) => {
+    const url = `${ API_URL }/api/DomainServices/DeleteUserAccount`; 
+
+    try 
+    {
+        const response = await fetch(url, {
+            method: 'delete', 
+            headers: { 
+                'accept' : '*/*',
+                'Content-Type': 'application/json', 
+            },
+            body: JSON.stringify({ userId, password })
+        })
+
+        const { resolution, message, errors } = await response.json();
+
+        return { isError: false, resolution, message, errors }
+    } 
+    catch (error) 
+    {
+        return { isError: true }
+    }
+}

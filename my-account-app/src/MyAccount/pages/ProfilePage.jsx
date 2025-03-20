@@ -6,10 +6,11 @@ import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAcc
 
 export const ProfilePage = ({ setPageName, showUserMessage, isDarkMode }) => {
 
-    const [ userName, setUserName ] = useState(''); 
-    const [ userCreationDate, setUserCreationDate ] = useState(''); 
-    const [ userEmail, setUserEmail ] = useState(''); 
-    const [ user, setUser ] = useState(''); 
+    const [userName, setUserName] = useState(''); 
+    const [userCreationDate, setUserCreationDate] = useState(''); 
+    const [userEmail, setUserEmail] = useState(''); 
+    const [user, setUser] = useState(''); 
+    const [userId, setUserId] = useState(''); 
     const [showModalDeleteUserAccount, setShowModalDeleteUserAccount] = useState(false);
 
     const userData = JSON.parse( localStorage.getItem('user') );
@@ -17,17 +18,16 @@ export const ProfilePage = ({ setPageName, showUserMessage, isDarkMode }) => {
     useEffect(() => {
         setPageName('PERFIL');
         
-        const { creationDate, firstName, lastName, email, userType } = userData; 
+        const { id, creationDate, firstName, lastName, email, userType } = userData; 
 
         setUserName(`${ firstName } ${ lastName }`); 
         setUserCreationDate( formatDate(creationDate) );
         setUserEmail(email); 
+        setUserId(id); 
         setUser(userType); 
     }, []);
 
-    const deleteUserAccount = () => {
-        setShowModalDeleteUserAccount(!showModalDeleteUserAccount); 
-    }
+    const deleteUserAccount = () => setShowModalDeleteUserAccount(!showModalDeleteUserAccount); 
 
     return (
         <div className="page-principal-container">
@@ -35,6 +35,7 @@ export const ProfilePage = ({ setPageName, showUserMessage, isDarkMode }) => {
 
                 <ModalDeleteUserAccount
                     isDarkMode={ isDarkMode }
+                    userId={ userId }
                     showModalDeleteUserAccount={ showModalDeleteUserAccount }
                     setShowModalDeleteUserAccount={ setShowModalDeleteUserAccount }        
                     showUserMessage={ showUserMessage }

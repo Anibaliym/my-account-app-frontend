@@ -1,9 +1,9 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const getActiveAccountByIdAPI = async ( accountId ) => {
+export const getAccountByIdAPI = async ( accountId ) => {
     try 
     { 
-        const response = await fetch(`${ API_URL }/api/Account/GetActiveAccountById/${ accountId }`, {
+        const response = await fetch(`${ API_URL }/api/Account/GetAccountById/${ accountId }`, {
             method: 'get',
             headers: { 'Accept': 'text/plain' }, 
         }); 
