@@ -131,7 +131,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
                         updateSheetDescription(); 
                     break;
                 case 'cashBalance':
-                    const { isError: errorCashBalance } = await UpdateCashBalanceAPI(sheetId, formatNumber( (value === '$' ? '$0' : value ) ));
+                    const { isError: errorCashBalance } = await updateCashBalanceFetch(sheetId, formatNumber( (value === '$' ? '$0' : value ) ));
                     
                     if(errorCashBalance) 
                         showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error'); 
@@ -142,7 +142,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
                     
                     break;
                 case 'currentAccountBalance':
-                    const { isError: errorCurrentAccountBalance } =  await UpdateCurrentAccountBalanceAPI(sheetId, formatNumber(sheetCurrentAccountBalance));
+                    const { isError: errorCurrentAccountBalance } =  await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
     
                     if(errorCurrentAccountBalance) 
                         showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error'); 

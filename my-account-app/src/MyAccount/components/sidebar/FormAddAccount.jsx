@@ -51,7 +51,7 @@ export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
                             value = { newAccountName }
                             onChangeEvent = { (e) => setNewAccountName(e) }
                             onKeyDownEvent = { onKeyDownAccountName }
-                            placeHolder={ 'agregar cuenta' }
+                            placeHolder={ 'Enter para crear cuenta' }
                         />
                     </div>
                 )

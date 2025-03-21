@@ -21,13 +21,26 @@
 }
 
 .access-presentation {
-    flex: 1; 
+    flex: 1;
     background-color: var(--primary-color);
-    display: flex;
-    flex-direction: column;
+    height: 100vh;
     padding: 0px 0px 0px 30px;
     color: white;
 }
+
+.promo-text {
+    bottom: 20px;
+    right: 30px;
+    color: white;
+}
+
+.link-white {
+    color: white !important;
+    background-color: var(--primary-color) !important; 
+    border-radius: 100px; 
+    padding:10px; 
+}
+
 
 .access-input-text {
     border: 1px solid var(--border-input-text-color); 
