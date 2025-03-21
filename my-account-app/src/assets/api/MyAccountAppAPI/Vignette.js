@@ -1,6 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const CreateVignetteFetch = async ( cardId, order ) => {
+export const createVignetteFetch = async ( cardId, order ) => {
+    const url = `${ API_URL }/api/Vignette/CreateVignette`;
 
     const body = {
         cardId, 
@@ -12,7 +13,7 @@ export const CreateVignetteFetch = async ( cardId, order ) => {
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Vignette/CreateVignette`, {
+        const response = await fetch(url, {
             method: 'post', 
             headers: {
                 "accept": "*/*", 
@@ -30,11 +31,12 @@ export const CreateVignetteFetch = async ( cardId, order ) => {
     }
 }
 
-export const GetVignetteByCardIdFetch = async ( cardId ) => {
+export const getVignetteByCardIdFetch = async ( cardId ) => {
+    const url = `${ API_URL }/api/Vignette/GetVignetteByCardId/${ cardId }`;
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Vignette/GetVignetteByCardId/${ cardId }`, {
+        const response = await fetch(url, {
             method: 'get', 
             headers: { 'accept' : 'text/plain' }
         });     
@@ -50,9 +52,11 @@ export const GetVignetteByCardIdFetch = async ( cardId ) => {
 }
 
 export const updateVignetteOrderItemsFetch = async ( vignettes ) => {
+    const url = `${ API_URL }/api/Vignette/UpdateVignetteOrderItems`;
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Vignette/UpdateVignetteOrderItems`,{
+        const response = await fetch(url,{
             method: 'put', 
             headers: {
                 'accept': '*/*', 

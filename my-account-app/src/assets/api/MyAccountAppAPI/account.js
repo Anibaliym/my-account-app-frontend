@@ -1,35 +1,11 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const getAccountByIdAPI = async ( accountId ) => {
-    try 
-    { 
-        const response = await fetch(`${ API_URL }/api/Account/GetAccountById/${ accountId }`, {
-            method: 'get',
-            headers: { 'Accept': 'text/plain' }, 
-        }); 
+export const createAccountFetch = async ( userId, description ) => {
+    const url = `${ API_URL }/api/Account/CreateAccount`; 
 
-        const data = await response.json();
-
-        return {
-            isError: false, 
-            description: data.description, 
-            creationDate: data.creationDate
-        }
-    }
-    catch(error)
-    {
-        return {
-            isError: true, 
-            description: '', 
-            creationDate: ''
-        }
-    }
-}
-
-export const CreateAccountAPI = async ( userId, description ) => {
     try 
     {
-        const response = await fetch( `${ API_URL }/api/Account/CreateAccount`, {
+        const response = await fetch(url, {
             method: 'post', 
             headers: {
                 'Accept': 'application/json',
@@ -47,10 +23,12 @@ export const CreateAccountAPI = async ( userId, description ) => {
     }
 }
 
-export const UpdateAccountAPI = async ( accountId, description ) => {
+export const updateAccountFetch = async ( accountId, description ) => {
+    const url = `${ API_URL }/api/Account/UpdateAccount`;    
+
     try 
     {
-        const response = await fetch( `${ API_URL }/api/Account/UpdateAccount`, {
+        const response = await fetch(url, {
             method: 'put', 
             headers: {
                 'Accept': 'application/json',
@@ -69,10 +47,12 @@ export const UpdateAccountAPI = async ( accountId, description ) => {
     }
 }
 
-export const DeleteAccountAPI = async ( accountId ) => {
+export const deleteAccountFetch = async ( accountId ) => {
+    const url = `${ API_URL }/api/Account/DeleteAccount?id=${ accountId }`;
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Account/DeleteAccount?id=${ accountId }`, {
+        const response = await fetch(url, {
             method: 'DELETE',
             headers: { 'Accept': '*/*', },
         });
@@ -87,11 +67,12 @@ export const DeleteAccountAPI = async ( accountId ) => {
     }
 }
 
-export const UpdateAccountOrderItemsFetch = async ( accountsNewOrder ) => {
+export const updateAccountOrderItemsFetch = async ( accountsNewOrder ) => {
+    const url = `${ API_URL }/api/Account/UpdateAccountOrderItems`;
 
     try 
     {
-        const responde = await fetch(`${ API_URL }/api/Account/UpdateAccountOrderItems`, {
+        const responde = await fetch(url, {
             method: 'put',
             headers: {
                 'Accept': 'application/json',

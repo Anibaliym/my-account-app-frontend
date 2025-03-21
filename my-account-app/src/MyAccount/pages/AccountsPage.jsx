@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { GetUserAccountsWithSheetsFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
+import { getUserAccountsWithSheetsFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { AccountsForm } from '../components/account/AccountsForm';
 import { SheetsForm } from '../components/account/SheetsForm';
 
@@ -16,7 +16,7 @@ export const AccountsPage = ({ setPageName, isDarkMode, showUserMessage, setAcco
     }, [ setPageName, accountListener ]); 
     
     const GetUserAccountsWithSheets = async () => {
-        const { isError, data } = await GetUserAccountsWithSheetsFetch(userId);
+        const { isError, data } = await getUserAccountsWithSheetsFetch(userId);
 
         if(!isError)
             setUserAccountsWithSheets(data.data.accounts);

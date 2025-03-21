@@ -1,6 +1,6 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
-import { UpdateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { updateAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { useState, useRef } from 'react';
 
 export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
@@ -24,7 +24,7 @@ export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription,
     };
 
     const updateAccountDescription = async () => {
-        const { isError } = await UpdateAccountAPI( accountId, newAccountUpdate.trim() );
+        const { isError } = await updateAccountFetch( accountId, newAccountUpdate.trim() );
         
         if(isError){
             showUserMessage('Ocurrió un error al intentar actualizar la cuenta', 'error');

@@ -1,6 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const RegisterUserApi = async ({ firstName, lastName, email, password }) => {
+export const registerUserFetch = async ({ firstName, lastName, email, password }) => {
+    const url = `${ API_URL }/api/User/RegisterUser`;
+
     let result; 
 
     const userData = {
@@ -14,7 +16,7 @@ export const RegisterUserApi = async ({ firstName, lastName, email, password }) 
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/User/RegisterUser`, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(userData),

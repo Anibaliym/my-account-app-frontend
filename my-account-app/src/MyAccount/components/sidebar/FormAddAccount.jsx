@@ -1,7 +1,7 @@
 import { Tooltip } from '@nextui-org/react';
 import { CustomInputText } from '../controls/CustomInputText';
 import { useState } from 'react';
-import { CreateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { createAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { useNavigate } from 'react-router-dom';
 
 export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
@@ -22,7 +22,7 @@ export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
     }
 
     const createAccount = async () => {
-        const { isError } = await CreateAccountAPI(userId, newAccountName); 
+        const { isError } = await createAccountFetch(userId, newAccountName); 
         
         if(!isError) {
             navigate('/accounts');

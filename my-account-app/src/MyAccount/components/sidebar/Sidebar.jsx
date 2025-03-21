@@ -3,7 +3,7 @@ import { menuData } from '../../../assets/data/menuData';
 import { AccountMenuList } from './AccountMenuList';
 import { useState, useEffect, useRef } from 'react';
 import { FormAddAccount } from './FormAddAccount';
-import { GetUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { getUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
     const isInitialRender = useRef(true);
@@ -48,7 +48,7 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
         setRetrievedUserType(userType); 
         setUserId(id); 
 
-        const { isError, data: menuData } = await GetUserAccountsWithSheetsFetch(id);
+        const { isError, data: menuData } = await getUserAccountsWithSheetsFetch(id);
 
         if(!isError)
             setUserAccount(menuData.data.accounts); 

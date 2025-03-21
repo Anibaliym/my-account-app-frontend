@@ -1,10 +1,11 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const LoginUserApi = async (email, password) => {
+export const loginUserFetch = async (email, password) => {
+    const url = `${ API_URL }/api/DomainServices/Login`;
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/Login`, {
+        const response = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ email, password })
@@ -37,10 +38,12 @@ export const LoginUserApi = async (email, password) => {
     }
 };
 
-export const getSheetsAccountAPI = async (accountId) => {
+export const getSheetsAccountFetch = async (accountId) => {
+    const url = `${ API_URL }/api/DomainServices/GetSheetsAccount/${ accountId }`;
+
     try
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/GetSheetsAccount/${ accountId }`, {
+        const response = await fetch(url, {
             method: 'get', 
             headers: { 'Accept' : 'text/plain' }, 
         }); 
@@ -71,10 +74,11 @@ export const getSheetsAccountAPI = async (accountId) => {
 }
 
 export const getSheetCardsWithVignettesFetch = async ( sheetId ) => {
+    const url = `${ API_URL }/api/DomainServices/GetSheetCardsWithVignettes/${ sheetId }`;
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/GetSheetCardsWithVignettes/${ sheetId }`, {
+        const response = await fetch(url, {
             headers: { 'accept': 'text/plain' }, 
         });    
 
@@ -88,9 +92,11 @@ export const getSheetCardsWithVignettesFetch = async ( sheetId ) => {
 }
 
 export const deleteCardWithVignettesFetch = async ( cardId ) => {
+    const url = `${ API_URL }/api/DomainServices/DeleteCardWithVignettes/${ cardId }`;
+
     try 
     {
-        const response = await fetch( `${ API_URL }/api/DomainServices/DeleteCardWithVignettes/${ cardId }`, {
+        const response = await fetch(url, {
             method: 'delete', 
             headers: { 'accept' : '*/*' }
         } );   
@@ -106,9 +112,11 @@ export const deleteCardWithVignettesFetch = async ( cardId ) => {
 }
 
 export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
+    const url = `${ API_URL }/api/DomainServices/UpdateVignetteAndRecalculateTotal`;
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteAndRecalculateTotal`,{
+        const response = await fetch(url,{
             method : 'put', 
             headers: { 
                 'Content-Type': 'application/json', 
@@ -126,10 +134,11 @@ export const updateVignetteAndRecalculateTotalFetch = async ( vignette ) => {
 }
 
 export const deleteVignetteAndRecalculateTotalFetch = async ( vignetteId ) => {
+    const url = `${ API_URL }/api/DomainServices/DeleteVignetteAndRecalculateTotal?vignetteId=${ vignetteId }`;
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/DeleteVignetteAndRecalculateTotal?vignetteId=${ vignetteId }`, {
+        const response = await fetch(url, {
             method: 'delete', 
             headers: { 'accept' : '*/*' }
         });
@@ -144,9 +153,11 @@ export const deleteVignetteAndRecalculateTotalFetch = async ( vignetteId ) => {
 }
 
 export const updateVignetteColorThemeFetch = async ( vignetteId, color ) => {
+    const url = `${ API_URL }/api/DomainServices/UpdateVignetteColorTheme?vignetteId=${ vignetteId }&colorTheme=${ color }`; 
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/UpdateVignetteColorTheme?vignetteId=${ vignetteId }&colorTheme=${ color }`, {
+        const response = await fetch(url, {
             method: 'put', 
             headers: { 'accept' : '*/*' }
         }); 
@@ -161,10 +172,12 @@ export const updateVignetteColorThemeFetch = async ( vignetteId, color ) => {
 
 } 
 
-export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
+export const getUserAccountsWithSheetsFetch = async ( userId ) => {
+    const url = `${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`;
+    
     try
     {
-        const response = await fetch(`${ API_URL }/api/DomainServices/GetUserAccountsWithSheets/${ userId }`, {
+        const response = await fetch(url, {
             method: 'GET',
             headers: { 'Accept': 'application/json' }            
         });
@@ -185,7 +198,7 @@ export const GetUserAccountsWithSheetsFetch = async ( userId ) => {
     }
 }
 
-export const CreateSheetBackupFetch = async ( sheetId ) => {
+export const createSheetBackupFetch = async ( sheetId ) => {
     const url = `${ API_URL }/api/DomainServices/CreateSheetBackup?sheetId=${sheetId}`;
 
     try {

@@ -55,10 +55,10 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                     placement="right"
                     closeDelay={200}
                     content={
-                        <div className="px-1 py-2">
+                        <div className="py-2">
                             <div className="text-tiny">
-                                <p style={{fontSize:'20px', color:'var(--primary-color)'}}>{ description }</p>
-                                <hr />
+
+                                <p className="text-center lead text-color-default fs-6">{ description }</p>
                                 {
                                     sheets.map(({ sheet }) => (
                                         <Link

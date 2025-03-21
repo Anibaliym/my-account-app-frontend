@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { getSheetsAccountAPI } from '../../../assets/api/MyAccountAppAPI/DomainServices';
-import { createSheetAPI, updateSheetOrderItemsAPI } from '../../../assets/api/MyAccountAppAPI/Sheet'; 
+import { getSheetsAccountFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { createSheetFetch, updateSheetOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Sheet'; 
 import { CustomButtom } from '../controls/CustomButtom';
 import { CustomInputText } from '../controls/CustomInputText';
 import { SheetsListItemDrag } from './SheetsListItemDrag';
 import { Tooltip } from '@nextui-org/react';
-import { DeleteAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { deleteAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
@@ -38,7 +38,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
     };    
 
     const updateOrder = async (accountsNewOrder) => {
-        const { isError } = await updateSheetOrderItemsAPI(accountsNewOrder);
+        const { isError } = await updateSheetOrderItemsFetch(accountsNewOrder);
         
         if(isError) {
             showUserMessage('Ocurrió un error al intentar actualizar el orden de las hojas de cálculo.', 'error');
@@ -49,7 +49,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
     }
 
     const getSheetsAccount = async () => {
-        const { isError, data } = await getSheetsAccountAPI(accountId);
+        const { isError, data } = await getSheetsAccountFetch(accountId);
 
         if (isError) {
             showUserMessage('Ocurrió un error al intentar cargar las "Hojas de cálculo" de la "cuenta"', 'warning');
@@ -66,7 +66,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
             return; 
         }
 
-        const { isError, resolution, message } = await createSheetAPI( accountId, newSheetDescription ); 
+        const { isError, resolution, message } = await createSheetFetch( accountId, newSheetDescription ); 
         
 
         if(isError)
@@ -89,7 +89,7 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
     }
 
     const deleteAccount = async () => {
-        const { isError, message, resolution } = await DeleteAccountAPI(accountId); 
+        const { isError, message, resolution } = await deleteAccountFetch(accountId); 
 
         if(isError) {
             showUserMessage('Ocurrió un error al intentar eliminar la cuenta.', 'danger');

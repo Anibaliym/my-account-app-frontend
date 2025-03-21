@@ -4,7 +4,7 @@ import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from 
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { useEffect } from 'react';
 import { FormCardDragable } from './FormCardDragable';
-import { UpdateCardOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Card';
+import { updateCardOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 
 export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMode, getSheetCardsWithVignettes, refreshData }) => {
     if(cardsSheetData == null) return;
@@ -42,7 +42,7 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMod
             }));
     
             // Llamamos a la función para actualizar la base de datos o backend
-            UpdateCardOrderItemsFetch(updatedCards);
+            updateCardOrderItemsFetch(updatedCards);
     
             return updatedCards;
         });

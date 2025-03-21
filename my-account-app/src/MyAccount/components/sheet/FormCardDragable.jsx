@@ -1,7 +1,7 @@
 import { Tooltip } from '@nextui-org/react';
 import { useState, useEffect, useRef } from 'react';
 import { deleteCardWithVignettesFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
-import { CreateVignetteFetch, GetVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
+import { createVignetteFetch, getVignetteByCardIdFetch, updateVignetteOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Vignette';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
@@ -41,7 +41,7 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
     }, [cardTotalAmount]);    
 
     const createVignette = async () => {
-        const { isError, message, data: vignette } = await CreateVignetteFetch( id, 5 );
+        const { isError, message, data: vignette } = await createVignetteFetch( id, 5 );
 
         if(isError) {
             if(message === 'No se pueden crear mas de 20 viñetas en una sola carta.') {
@@ -84,7 +84,7 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
     };
 
     const deleteCard = async () => {
-        const { isError, data: vignettes } = await GetVignetteByCardIdFetch(id); 
+        const { isError, data: vignettes } = await getVignetteByCardIdFetch(id); 
         
         if(!isError) 
         {

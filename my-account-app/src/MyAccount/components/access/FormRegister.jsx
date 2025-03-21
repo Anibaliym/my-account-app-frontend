@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from 'react';
-import { RegisterUserApi } from '../../../assets/api/MyAccountAppAPI/User';
+import { registerUserFetch } from '../../../assets/api/MyAccountAppAPI/User';
 
 export const FormRegister = ({ setUserName, toggleForm, setToggleForm, showUserMessage }) => {
 
@@ -67,7 +67,7 @@ export const FormRegister = ({ setUserName, toggleForm, setToggleForm, showUserM
             return false;
         }
 
-        const { isError, data } = await RegisterUserApi({ firstName: name, lastName, email, password });
+        const { isError, data } = await registerUserFetch({ firstName: name, lastName, email, password });
 
         if(isError) {
             showUserMessage('Ocurrió un error al intentar crear el registro.', 'error');

@@ -1,6 +1,8 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const createCardFetch = async ( sheetId, title, description ) => {
+    const url = `${ API_URL }/api/Card/CreateCard`;
+
     const body = {
         sheetId,
         title,
@@ -10,7 +12,7 @@ export const createCardFetch = async ( sheetId, title, description ) => {
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Card/CreateCard`, {
+        const response = await fetch(url, {
             method: 'post', 
             headers: {
                 'accept' : '*/*',
@@ -30,9 +32,11 @@ export const createCardFetch = async ( sheetId, title, description ) => {
 }
 
 export const getCardBySheetIdFetch = async (sheetId) => {
+    const url = `${ API_URL }/api/Card/GetCardBySheetId/${ sheetId }`;
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Card/GetCardBySheetId/${ sheetId }`, {
+        const response = await fetch(url, {
             headers: { 'accept' : 'text/plain' }
         });       
 
@@ -73,7 +77,7 @@ export const updateCardFetch = async ( cardId, sheetId, title, order ) => {
     } 
 }
 
-export const UpdateCardOrderItemsFetch = async ( newCardsOrderArr ) => {
+export const updateCardOrderItemsFetch = async ( newCardsOrderArr ) => {
     const url = `${ API_URL }/api/Card/UpdateCardOrderItems`; 
 
     try 

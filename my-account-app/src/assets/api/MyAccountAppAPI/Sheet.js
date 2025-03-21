@@ -1,7 +1,7 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const createSheetAPI = async (accountId, description) => {
-    let responseMessage = '';
+export const createSheetFetch = async (accountId, description) => {
+    const url = `${ API_URL }/api/Sheet/CreateSheet`;
 
     const payload = {
         accountId: accountId,
@@ -9,8 +9,8 @@ export const createSheetAPI = async (accountId, description) => {
     };
 
     try {
-        const response = await fetch(`${ API_URL }/api/Sheet/CreateSheet`, {
-            method: 'POST',
+        const response = await fetch(url, {
+            method: 'post',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -32,11 +32,11 @@ export const createSheetAPI = async (accountId, description) => {
     }
 }
 
-
-export const deleteSheetAPI = async (sheetId) => {
+export const deleteSheetFetch = async (sheetId) => {
+    const url = `${ API_URL }/api/Sheet/DeleteSheet?id=${ sheetId }`;
 
     try {
-        const response = await fetch(`${ API_URL }/api/Sheet/DeleteSheet?id=${ sheetId }`, {
+        const response = await fetch(url, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json'
@@ -55,11 +55,12 @@ export const deleteSheetAPI = async (sheetId) => {
     }
 }
 
-export const updateSheetAPI = async ( accountId, sheetId, description, cashBalance, currentAccountBalance, order ) => {
+export const updateSheetFetch = async ( accountId, sheetId, description, cashBalance, currentAccountBalance, order ) => {
+    const url = `${ API_URL }/api/Sheet/UpdateSheet`;
 
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Sheet/UpdateSheet`, {
+        const response = await fetch(url, {
             method: 'put',
             headers: {
                 'Accept': 'application/json',
@@ -89,33 +90,12 @@ export const updateSheetAPI = async ( accountId, sheetId, description, cashBalan
     }
 }
 
-export const GetSheetByAccountIdAPI = async ( accountId ) => {
+export const updateSheetOrderItemsFetch = async(sheetOrderItems) => {
+    const url = `${ API_URL }/api/Sheet/UpdateSheetOrderItems`;
+
     try 
     {
-        const response = await fetch(`${ API_URL }/api/Sheet/GetSheetByAccountId/${ accountId }`, {
-            'Accept': 'application/json'
-        }); 
-
-        const responseJSON = await response.json();
-
-        return {
-            isError: false, 
-            data: responseJSON
-        }
-    }
-    catch (error) 
-    {
-        return {
-            isError: true, 
-            data: []
-        }
-    }
-}
-
-export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
-    try 
-    {
-        const response = await fetch( `${ API_URL }/api/Sheet/UpdateSheetOrderItems` , {
+        const response = await fetch(url , {
             method: "PUT", // Método HTTP PUT
             headers: {
                 "Accept": "application/json",
@@ -138,11 +118,12 @@ export const updateSheetOrderItemsAPI  = async(sheetOrderItems) => {
     }
 }
 
-export const GetSheetByIdAsync = async ( sheetId ) => {
+export const getSheetByIdFetch = async ( sheetId ) => {
+    const url = `${ API_URL }/api/Sheet/GetSheetById/${ sheetId }`;
 
     try 
     {
-        const response = await fetch( `${ API_URL }/api/Sheet/GetSheetById/${ sheetId }`, {
+        const response = await fetch(url, {
             method: 'get', 
             headers: { 'accept': 'text/plain' }
         });     
@@ -160,11 +141,12 @@ export const GetSheetByIdAsync = async ( sheetId ) => {
 
 }
 
-export const UpdateCashBalanceAPI = async ( sheetId, cashBalance ) => {
+export const updateCashBalanceFetch = async ( sheetId, cashBalance ) => {
+    const url = `${ API_URL }/api/Sheet/UpdateCashBalance/${ sheetId }`;
 
     try 
     {
-        const response = await fetch( `${ API_URL }/api/Sheet/UpdateCashBalance/${ sheetId }`, {
+        const response = await fetch(url, {
             method: 'patch', 
             headers: {
                 'accept': '*/*', 
@@ -184,11 +166,12 @@ export const UpdateCashBalanceAPI = async ( sheetId, cashBalance ) => {
 }
 
 
-export const UpdateCurrentAccountBalanceAPI = async ( sheetId, currentAccountBalance ) => {
+export const updateCurrentAccountBalanceFetch = async ( sheetId, currentAccountBalance ) => {
+    const url = `${ API_URL }/api/Sheet/UpdateCurrenteAccountBalance/${ sheetId }`;
 
     try 
     {
-        const response = await fetch( `${ API_URL }/api/Sheet/UpdateCurrenteAccountBalance/${ sheetId }`, {
+        const response = await fetch(url, {
             method: 'patch', 
             headers: {
                 'accept': '*/*', 

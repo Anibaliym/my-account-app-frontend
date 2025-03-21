@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { UpdateCashBalanceAPI, UpdateCurrentAccountBalanceAPI, updateSheetAPI } from '../../../assets/api/MyAccountAppAPI/Sheet';
+import { updateCashBalanceFetch, updateCurrentAccountBalanceFetch, updateSheetFetch } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { formatDate } from '../../../assets/utilities/DateFormater';
 import { IconToolsbar } from './IconToolsbar';
@@ -81,7 +81,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
 
                 break;
             case 'cashBalance':
-                const { isError: errorCashBalance } =  await UpdateCashBalanceAPI(sheetId, formatNumber(sheetCashBalance));
+                const { isError: errorCashBalance } =  await updateCashBalanceFetch(sheetId, formatNumber(sheetCashBalance));
     
                 if(errorCashBalance) 
                     showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error'); 
@@ -93,7 +93,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
 
                 break;
             case 'currentAccountBalance':
-                const { isError: errorCurrentAccountBalance } =  await UpdateCurrentAccountBalanceAPI(sheetId, formatNumber(sheetCurrentAccountBalance));
+                const { isError: errorCurrentAccountBalance } =  await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
     
                 if(errorCurrentAccountBalance) 
                     showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error'); 
@@ -159,7 +159,7 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
     };
 
     const updateSheetDescription = async () => {
-        const { isError } = await updateSheetAPI(accountId, sheetId, sheetDescription, cashBalance, currentAccountBalance, order); 
+        const { isError } = await updateSheetFetch(accountId, sheetId, sheetDescription, cashBalance, currentAccountBalance, order); 
         
         if(isError){
             showUserMessage('Ocurrió un error al intentar actualizar el nombre de la hoja de cálculo','error');

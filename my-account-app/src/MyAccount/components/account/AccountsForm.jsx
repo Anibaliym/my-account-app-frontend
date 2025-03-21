@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { CreateAccountAPI } from '../../../assets/api/MyAccountAppAPI/account';
+import { createAccountFetch, updateAccountOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { CustomButtom } from '../controls/CustomButtom';
 import { CustomInputText } from '../controls/CustomInputText';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { UpdateAccountOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { AccountListItemDrag } from './AccountListItemDrag';
 
 export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserMessage, userId, setAccountListener, accountListener, setAccountIdOnView }) => {
@@ -46,7 +45,7 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
             return; 
         }
 
-        const { isError, resolution, message, data } = await CreateAccountAPI( userId, newAccountDescription.trim() );
+        const { isError, resolution, message, data } = await createAccountFetch( userId, newAccountDescription.trim() );
 
         if(isError) {
             showUserMessage('Ocurrió un error al intentar crear la cuenta.', 'error');
@@ -87,7 +86,7 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
     };
     
     const updateOrder = async (accountsNewOrder) => {
-        const { isError } = await UpdateAccountOrderItemsFetch(accountsNewOrder);
+        const { isError } = await updateAccountOrderItemsFetch(accountsNewOrder);
         
         if(isError) {
             showUserMessage('Ocurrió un error al intentar actualizar el orden de las cuentas.', 'error');

@@ -1,8 +1,8 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { LoginUserApi } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { useContext } from 'react';
 import { AuthContext } from '../../../assets/context/AuthContext';
+import { loginUserFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, showUserMessage }) => {
     const navigate = useNavigate(); 
@@ -14,39 +14,6 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
     const [user, setUser] = useState({}); 
     const [ accounts, setAccounts ] = useState([]); 
     const { Login } = useContext(AuthContext); 
-
-    // const login = async () => {
-    //     if (userName.trim().length === 0) {
-    //         userRef.current.select();
-    //         showUserMessage('El correo electrónico es inválido', 'warning')
-    //         return;
-    //     }
-
-    //     if (password.trim().length === 0) {
-    //         passwordRef.current.select();
-    //         showUserMessage('Debes ingresar una contraseña válida.', 'warning')
-    //         return;
-    //     }
-
-    //     const { isError, data } = await LoginUserApi(userName.toUpperCase(), password);
-    //     const { resolution, errors, data: userData } = data; 
-
-    //     if(isError) {
-    //         showUserMessage('Ocurrió un error al intentar ingresar al sistema.','error')
-    //     }
-    //     else {
-    //         if(resolution){
-    //             const { accounts, user } = data.data; 
-
-    //             setUser(user); 
-    //             setAccounts(accounts); 
-    //             setAccessAllowed(true); 
-    //         }
-    //         else 
-    //             showUserMessage('El usuario y/o contraseña son incorrectos.', 'warning'); 
-    //     }
-    // }
-
 
     const login = async () => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -71,7 +38,7 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
 
         try 
         {
-            const { isError, data } = await LoginUserApi(userName.toUpperCase(), password);
+            const { isError, data } = await loginUserFetch(userName.toUpperCase(), password);
             const { resolution, errors, data: userData } = data;
     
             if (isError) {

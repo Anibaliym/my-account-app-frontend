@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { ModalCreateCard } from './ModalCreateCard';
 import { ModalDeleteSheetConfirmation } from './ModalDeleteSheetConfirmation';
-import { CreateSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { createSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAccountListener, accountListener, showUserMessage }) => {
     const {sheetId} = useParams();
@@ -12,7 +12,7 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
     const [modalConfirmDeleteSheet, setModalConfirmDeleteSheet] = useState(false); 
 
     const createSheetBackup = async () => {
-        const { isError } = await CreateSheetBackupFetch(sheetId);
+        const { isError } = await createSheetBackupFetch(sheetId);
         
         if(isError)
             showUserMessage('Ocurrió un error al intentar crear el respaldo de la "Hoja de cálculo"','error');
@@ -49,9 +49,6 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
                 </Tooltip>
                 <Tooltip placement="bottom" content="Crear Respaldo" color="foreground" closeDelay={ 50 }>
                     <i className='bx bxs-backpack icon cursor-pointer text-white ml-2' onClick={ createSheetBackup } ></i>
-                </Tooltip>
-                <Tooltip placement="bottom" content="Exportar a excel" color="success" closeDelay={ 50 }>
-                    <i className='bx bx-export icon cursor-pointer text-white ml-2'></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Eliminar hoja de cálculo" color="danger" closeDelay={ 50 }>
                     <i className="bx bx-trash icon icon-trash cursor-pointer text-white icon-trash ml-2" onClick={ () => setModalConfirmDeleteSheet(true) }></i>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { GetSheetByIdAsync } from '../../assets/api/MyAccountAppAPI/Sheet';
+import { getSheetByIdFetch } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { FormSheetBalance } from '../components/sheet/FormSheetBalance';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { FormCardsSheet } from '../components/sheet/FormCardsSheet';
@@ -17,7 +17,7 @@ const [sheetData, setSheetData] = useState(null);
     const getSheetData = async () => {
         // Obtiene los datos de la hoja de cálculo.
         try {
-            const { isError, data } = await GetSheetByIdAsync(sheetId);
+            const { isError, data } = await getSheetByIdFetch(sheetId);
             if (!isError && data) setSheetData(data);
         } catch (error) {
             showUserMessage("Error al obtener la hoja de cálculo:", error);
