@@ -6,7 +6,7 @@ import { capitalizeWords } from '../../assets/utilities/stringFormar';
 export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsDarkMode, pageName }) => {
 
     const navigate = useNavigate(); 
-    const { logout } = useContext(AuthContext);
+    const { Logout } = useContext(AuthContext);
     const [user, setUser] = useState(null); 
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState(''); 
@@ -34,7 +34,7 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
     }, [user]);
     
     const onLogout = () => {
-        logout(); 
+        Logout(); 
         navigate('/access', { replace: true });
     };
 

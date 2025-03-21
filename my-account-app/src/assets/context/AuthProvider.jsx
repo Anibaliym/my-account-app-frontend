@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
         dispatch(action);
     }
 
-    const logout = () => {
+    const Logout = () => {
         localStorage.removeItem('user');
         localStorage.removeItem('accounts');
 
@@ -39,7 +39,7 @@ export const AuthProvider = ({ children }) => {
 
             // Methods
             Login,
-            logout,
+            Logout,
         }}>
             { children }
         </AuthContext.Provider>

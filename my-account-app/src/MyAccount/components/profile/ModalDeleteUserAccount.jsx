@@ -10,7 +10,7 @@ export const ModalDeleteUserAccount = ({ isDarkMode, userId, showModalDeleteUser
     const [animationClass, setAnimationClass] = useState('');
     const [modalMessage, setModalMessage] = useState(' '); 
     const [isDeletedAccount, setIsDeletedAccount] = useState(false); 
-    const {logout} = useContext(AuthContext);
+    const {Logout} = useContext(AuthContext);
     const navigate = useNavigate();
     
     const handleClick = async (controlName) => {
@@ -48,7 +48,7 @@ export const ModalDeleteUserAccount = ({ isDarkMode, userId, showModalDeleteUser
             setIsDeletedAccount(true);
     
             setTimeout(() => {
-                logout();
+                Logout();
                 navigate('/access', { replace: true });
             }, 5000);
         }
