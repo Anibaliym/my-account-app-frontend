@@ -1,7 +1,8 @@
-import { useReducer, useEffect, useRef } from 'react';
+import { useReducer, useEffect, useRef, useState } from 'react';
 import { AuthContext } from './AuthContext';
 import { authReducer } from './authReducer';
 import { types } from '../types/types';
+import { ModalSessionExpired } from '../../MyAccount/components/ModalSessionExpired';
 
 const init = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -21,11 +22,12 @@ const init = () => {
 
 export const AuthProvider = ({ children }) => {
     const [authState, dispatch] = useReducer(authReducer, {}, init);
-    const timeoutIdRef = useRef(null);  // Aquí almacenamos el ID del timeout actual
-    // const SESSION_DURATION = 10 * 60 * 1000; // 10 minutos en milisegundos
-    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
-    // const SESSION_DURATION = 5 * 1000; // 5 segundos en mil
+    const [showModal, setShowModal] = useState(false);
+    const timeoutIdRef = useRef(null);
 
+    // const SESSION_DURATION = 10 * 60 * 1000; // 10 minutos en milisegundos
+    // const SESSION_DURATION = 2 * 1000; // 2 segundos en mil
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
 
     const Login = (user, accounts) => {
         const action = { type: types.login, payload: user };
@@ -47,7 +49,7 @@ export const AuthProvider = ({ children }) => {
         localStorage.removeItem('user');
         localStorage.removeItem('accounts');
         
-        if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current); // Eliminar cualquier timeout activo
+        if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
 
         const action = { type: types.logout };
         dispatch(action);
@@ -56,19 +58,20 @@ export const AuthProvider = ({ children }) => {
     const scheduleSessionTimeout = (expirationTime) => {
         const currentTime = new Date().getTime();
         const remainingTime = expirationTime - currentTime;
-
+    
         if (remainingTime > 0) {
-            if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);  // Limpiar timeout anterior si existe
-
+            if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
+    
             timeoutIdRef.current = setTimeout(() => {
-                alert("Tu sesión ha expirado. Por favor, inicia sesión nuevamente.");
-                Logout();
-                window.location.href = '/login';
+                setShowModal(true); // 🔥 Muestra el modal
             }, remainingTime);
         }
     }
 
     const refreshSession = () => {
+        // 🔒 Evitar que la sesión se renueve si el modal está abierto (es decir, si ya expiró)
+        if (showModal) return;
+
         const user = JSON.parse(localStorage.getItem('user'));
 
         if (user) {
@@ -82,25 +85,29 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem('user'));
-
+    
         if (user && user.expirationTime) {
             scheduleSessionTimeout(user.expirationTime);
         }
-
+    
         const activityEvents = ['click', 'keydown', 'mousemove', 'scroll'];
-
+    
+        const handleActivity = () => {
+            if (!showModal) refreshSession(); // 🔒 No refrescar la sesión si el modal está activo
+        };
+    
         activityEvents.forEach(event => 
-            window.addEventListener(event, refreshSession)
+            window.addEventListener(event, handleActivity)
         );
-
+    
         return () => {
             activityEvents.forEach(event => 
-                window.removeEventListener(event, refreshSession)
+                window.removeEventListener(event, handleActivity)
             );
-
+    
             if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
         }
-    }, []);
+    }, [showModal]); // 🔒 Asegurarse que depende del estado de showModal
 
     return (
         <AuthContext.Provider value={{
@@ -109,6 +116,7 @@ export const AuthProvider = ({ children }) => {
             Logout,
         }}>
             {children}
+            <ModalSessionExpired show={showModal} onClose={() => setShowModal(false)} />
         </AuthContext.Provider>
     );
 }

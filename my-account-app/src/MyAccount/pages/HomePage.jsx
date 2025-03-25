@@ -16,6 +16,8 @@ export const HomePage = ({ setPageName }) => {
                     <blockquote className="blockquote mb-0">
                     <p>Gestión de cuentas y planificación personal.</p>
                     <footer className="blockquote-footer">{ `${ capitalizeWords(user.firstName) } ${ capitalizeWords(user.lastName) }` }</footer>
+                    {/* <footer className="blockquote-footer">{ `${ user.firstName } ${ user.lastName }` }</footer> */}
+
                     </blockquote>
                 </div>
             </div>
