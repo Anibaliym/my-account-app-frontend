@@ -2,7 +2,7 @@
 
 **My Account App (Mi Cuenta)** es una aplicación que ayuda a los usuarios a gestionar de manera ordenada sus gastos mensuales y planificaciones anuales. Está diseñada tanto para uso personal como para ser potencialmente comercializada en el futuro.
 
-Esta aplicación proporciona una plataforma visual e interactiva para llevar un seguimiento detallado de los movimientos financieros, al tiempo que permite realizar planificaciones a largo plazo mediante herramientas como hojas de cálculo, agendas y calendarios.
+Esta aplicación proporciona una plataforma visual e interactiva para llevar un seguimiento detallado de los movimientos financieros, al tiempo que permite realizar planificaciones a largo plazo mediante herramientas como páginas u hojas de cálculo.
 
 ## Características
 
@@ -25,9 +25,8 @@ Este proyecto está construido utilizando las siguientes tecnologías:
 
 ### Dependencias de desarrollo:
 
-- **ESLint**: Para asegurar la calidad del código.
 - **@vitejs/plugin-react**: Plugin de Vite para optimizar React.
-- **@types/react** y **@types/react-dom**: Para soporte de TypeScript en React.
+- **@treact** y **@react-dom**: Para soporte de TypeScript en React.
 
 ## Instalación y Configuración
 
@@ -49,12 +48,11 @@ Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
 
 Una vez que la aplicación esté en funcionamiento, los usuarios pueden:
 
-- Registrarse por medio de registro manual o por medio de la confiabilidad de el autensificador de google 
+- Registrarse por medio de registro manual.
 - Una vez registrado ya puedes comenzar a añadir sus ingresos y gastos para comenzar con tu orden y planificación.
 - Visualizar y administrar y planificar gastos por mes.
 - Crear y planificar gastos futuros usando las hojas de cálculo integradas.
-- Planificar gastos con nuestra herramienta "CALCULADORA LISTA"
-- Tener una visión general del saldo disponible y por gastar, lo que les permitirá planificar mejor sus finanzas personales.
+- Tener una visión general del saldo disponible y por gastar a largo plazo, lo que les permitirá planificar mejor sus finanzas personales.
 
 ## Próximas funcionalidades
 
