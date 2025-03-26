@@ -1,66 +1,66 @@
 # My Account App
 
-**My Account App (Mi Cuenta)** es una aplicación que ayuda a los usuarios a gestionar de manera ordenada sus gastos mensuales y planificaciones anuales. Está diseñada tanto para uso personal como para ser potencialmente comercializada en el futuro.
+**My Account App ** is an application that helps users to organize their monthly expenses and annual planning in an orderly manner. It is designed for personal use as well as potentially for commercialization in the future.
 
-Esta aplicación proporciona una plataforma visual e interactiva para llevar un seguimiento detallado de los movimientos financieros, al tiempo que permite realizar planificaciones a largo plazo mediante herramientas como páginas u hojas de cálculo.
+This application provides a visual and interactive platform to keep detailed track of financial movements, while allowing long-term planning through tools such as pages or spreadsheets.
 
-## Características
+## Features
 
-- **Gestión de cuentas mensuales**: Administra tus gastos de forma ordenada y clara mes a mes.
-- **Planificación anual de gastos**: Planifica y visualiza tus gastos futuros, para que siempre sepas cómo se distribuyen tus ingresos y en qué se va a gastar el dinero.
-- **Hojas de cálculo personalizadas**: Calcula y organiza tus movimientos financieros con hojas de cálculo personalizadas que funcionan como listas calculadoras.
-- **Agendas y calendarios**: Lleva un registro de tus eventos y actividades relacionadas con tus finanzas para estar siempre al tanto.
-- **Accesibilidad y facilidad de uso**: Una interfaz intuitiva y moderna creada con **React**, diseñada para todo tipo de usuarios.
+- **Monthly account management**: Manage your expenses in an orderly and clear way month by month.
+- **Annual expense planning**: Plan and visualize your future expenses, so you always know how your income is distributed and where your money will be spent.
+- **Custom spreadsheets**: Calculate and organize your financial movements with customized spreadsheets that work as calculator lists.
+- **Agendas and calendars**: Keep track of your events and activities related to your finances to always stay on top of things.
+- **Accessibility and ease of use**: An intuitive and modern interface created with **React**, designed for all types of users.
 
-## Tecnologías
+## Technologies
 
-Este proyecto está construido utilizando las siguientes tecnologías:
+This project is built using the following technologies:
 
-- **React 18.3.1**: Librería de JavaScript para construir interfaces de usuario.
-- **React Router Dom 6.27.0**: Para la navegación de la aplicación.
-- **Vite**: Herramienta de desarrollo para frontend rápido y eficiente.
-- **Bootstrap 5.3.3**: Para el diseño y estilos responsivos.
-- **Boxicons**: Conjunto de iconos para mejorar la UI.
-- **Animate.css**: Biblioteca de animaciones CSS para mejorar la experiencia del usuario.
+- **React 18.3.1**: JavaScript library for building user interfaces.
+- **React Router Dom 6.27.0**: For application navigation.
+- **Vite**: A fast and efficient frontend development tool.
+- **Bootstrap 5.3.3**: For responsive design and styling.
+- **Boxicons**: Icon set to enhance the UI.
+- **Animate.css**: CSS animation library to enhance the user experience.
 
-### Dependencias de desarrollo:
+### Development Dependencies:
 
-- **@vitejs/plugin-react**: Plugin de Vite para optimizar React.
-- **@treact** y **@react-dom**: Para soporte de TypeScript en React.
+- **@vitejs/plugin-react**: Vite plugin to optimize React.
+- **@treact** and **@react-dom**: For TypeScript support in React.
 
-## Instalación y Configuración
+## Installation and Setup
 
-Sigue estos pasos para instalar y ejecutar el proyecto en tu máquina local:
+Follow these steps to install and run the project on your local machine:
 
-1. Clona el repositorio:
+1. Clone the repository:
    ```bash
-   git clone https://github.com/tu-usuario/my-account-app.git
+   git clone https://github.com/your-username/my-account-app.git
 
-2. Instala las dependencias:
+2. Install the dependencies:
    ```bash
    yarn install
 
-3. Ejecuta la aplicación en modo desarrollo:
+3. Run the application in development mode:
    ```bash
    yarn dev
 
-## Uso
+## Usage
 
-Una vez que la aplicación esté en funcionamiento, los usuarios pueden:
+Once the application is running, users can:
 
-- Registrarse por medio de registro manual.
-- Una vez registrado ya puedes comenzar a añadir sus ingresos y gastos para comenzar con tu orden y planificación.
-- Visualizar y administrar y planificar gastos por mes.
-- Crear y planificar gastos futuros usando las hojas de cálculo integradas.
-- Tener una visión general del saldo disponible y por gastar a largo plazo, lo que les permitirá planificar mejor sus finanzas personales.
+- Register through manual registration.
+- Once registered, you can start adding your income and expenses to begin organizing and planning.
+- Visualize, manage, and plan expenses per month.
+- Create and plan future expenses using the integrated spreadsheets.
+- Have an overview of the available balance and future expenses, allowing better planning of personal finances.
 
-## Próximas funcionalidades
+## Upcoming Features
 
-- **Integración con APIs bancarias** para importar movimientos automáticamente.
-- **Notificaciones** para recordar fechas importantes de pagos.
-- **Visualización gráfica de gastos** para tener una mejor representación de los movimientos financieros.
+- **Integration with banking APIs** to automatically import transactions.
+- **Notifications** to remind important payment dates.
+- **Graphical expense visualization** to better represent financial movements.
 
-## Contribuciones
+## Contributions
 
-Este proyecto está en desarrollo, por lo que cualquier contribución es bienvenida. Si tienes ideas, mejoras o encuentras errores, por favor abre un **issue** o envía un **pull request**.
+This project is under development, so any contribution is welcome. If you have ideas, improvements, or find errors, please open an **issue** or submit a **pull request**.
 
