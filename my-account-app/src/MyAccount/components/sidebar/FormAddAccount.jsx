@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { createAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { useNavigate } from 'react-router-dom';
 
-export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
+export const FormAddAccount = ({ userId, reloadAccount }) => {
     const navigate = useNavigate(); 
     const [ newAccount, setNewAccount] = useState(false); 
     const [ newAccountName, setNewAccountName ] = useState(''); 
@@ -47,7 +47,6 @@ export const FormAddAccount = ({ userId, isDarkMode, reloadAccount }) => {
                 (newAccount) && (
                     <div className="mt-2 animate__animated  animate__fadeInDown animate__faster">
                         <CustomInputText
-                            isDarkMode = { isDarkMode }
                             value = { newAccountName }
                             onChangeEvent = { (e) => setNewAccountName(e) }
                             onKeyDownEvent = { onKeyDownAccountName }

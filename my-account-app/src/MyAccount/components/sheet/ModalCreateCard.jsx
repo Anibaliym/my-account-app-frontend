@@ -1,17 +1,21 @@
 import Modal from 'react-bootstrap/Modal';
 import { useParams } from 'react-router-dom';
 import { createCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { CustomInputText } from '../controls/CustomInputText';
 import '/src/assets/css/Modal.css'; 
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const ModalCreateCard = ({ isDarkMode = false, showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
+export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, showUserMessage, refreshData }) => {
+    const {isDarkMode} = useContext(ThemeContext);
+
     const RefTitle = useRef(); 
-    const { sheetId } = useParams();
-    const [ title, setTitle ] = useState(''); 
-    const [ description, setDescription ] = useState(''); 
-    const [ modalMessage, setModalMessage ] = useState(' '); 
-    const [ animationClass, setAnimationClass ] = useState('');
+    
+    const {sheetId} = useParams();
+    const [title, setTitle] = useState(''); 
+    const [description, setDescription] = useState(''); 
+    const [modalMessage, setModalMessage] = useState(' '); 
+    const [animationClass, setAnimationClass] = useState('');
 
     useEffect(() => {
         if(showModalCreateCard)

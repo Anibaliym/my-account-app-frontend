@@ -1,7 +1,9 @@
+import { useContext } from 'react';
 import { updateVignetteColorThemeFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const FormSelectColor = ({ isDarkMode, vignetteId, setVignetteColorTheme }) => {
-
+export const FormSelectColor = ({ vignetteId, setVignetteColorTheme }) => {
+    const {isDarkMode} = useContext(ThemeContext);
     const changeColor = async (color) => {
         const { isError } = await updateVignetteColorThemeFetch(vignetteId, color)
 

@@ -4,7 +4,7 @@ import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Link } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
 
-export const ProfilePage = ({ setPageName, showUserMessage, isDarkMode }) => {
+export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
     const [userName, setUserName] = useState(''); 
     const [userCreationDate, setUserCreationDate] = useState(''); 
@@ -34,7 +34,6 @@ export const ProfilePage = ({ setPageName, showUserMessage, isDarkMode }) => {
             <div className="container-fluid mt-3 animate__animated animate__fadeIn">
 
                 <ModalDeleteUserAccount
-                    isDarkMode={ isDarkMode }
                     userId={ userId }
                     showModalDeleteUserAccount={ showModalDeleteUserAccount }
                     setShowModalDeleteUserAccount={ setShowModalDeleteUserAccount }        

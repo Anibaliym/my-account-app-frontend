@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useContext } from 'react';
 import { formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
 import { deleteVignetteAndRecalculateTotalFetch, updateVignetteAndRecalculateTotalFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
@@ -6,21 +6,23 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from '@dnd-kit/utilities'; 
 import { Tooltip } from '@nextui-org/react';
 import { FormSelectColor } from './FormSelectColor';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, refreshData, isDarkMode }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: vignette.id });
-    const { id: vignetteId, description, amount, order, color } = vignette;
+export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vignettes, setCardTotalAmount, refreshData }) => {
+    const {isDarkMode} = useContext(ThemeContext);
+    const {attributes, listeners, setNodeRef, transform, transition} = useSortable({ id: vignette.id });
+    const {id: vignetteId, description, amount, order, color} = vignette;
 
     const refDesription = useRef(); 
     const refAmount = useRef(); 
 
-    const [ showSuccessIcon, setShowSuccessIcon ] = useState(false); 
-    const [ newDescription, setNewDescription ] = useState(description); 
-    const [ oldDescription, setOldDescription ] = useState(description); 
-    const [ newAmount, setNewAmount ] = useState(amount); 
-    const [ newVignette, setNewVignette] = useState({}); 
-    const [ showSaveIcon, setShowSaveIcon ] = useState(false);
-    const [ vignetteColorTheme, setVignetteColorTheme ] = useState( (color.length === 0) ? 'DEFAULT' : color ); 
+    const [showSuccessIcon, setShowSuccessIcon] = useState(false); 
+    const [newDescription, setNewDescription] = useState(description); 
+    const [oldDescription, setOldDescription] = useState(description); 
+    const [newAmount, setNewAmount] = useState(amount); 
+    const [newVignette, setNewVignette] = useState({}); 
+    const [showSaveIcon, setShowSaveIcon] = useState(false);
+    const [vignetteColorTheme, setVignetteColorTheme] = useState( (color.length === 0) ? 'DEFAULT' : color ); 
     
     useEffect(() => {
         if(showSuccessIcon) {
@@ -143,7 +145,7 @@ export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vign
                         <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
 
                         <Tooltip 
-                            content={<FormSelectColor isDarkMode={ isDarkMode } vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
+                            content={<FormSelectColor vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
                             placement="right"
                             closeDelay={ 200 }
                         >

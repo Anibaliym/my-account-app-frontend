@@ -3,7 +3,7 @@ import { getUserAccountsWithSheetsFetch } from '../../assets/api/MyAccountAppAPI
 import { AccountsForm } from '../components/account/AccountsForm';
 import { SheetsForm } from '../components/account/SheetsForm';
 
-export const AccountsPage = ({ setPageName, isDarkMode, showUserMessage, setAccountListener, accountListener }) => {
+export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener, accountListener }) => {
     const userData = JSON.parse( localStorage.getItem('user') );
     const { id: userId } = userData; 
 
@@ -25,7 +25,6 @@ export const AccountsPage = ({ setPageName, isDarkMode, showUserMessage, setAcco
     return (
         <div className="accounts-principal-container">
             <AccountsForm
-                isDarkMode={ isDarkMode } 
                 userAccountsWithSheetsData = { userAccountsWithSheets }
                 showUserMessage={ showUserMessage }
                 userId={ userId }
@@ -38,7 +37,6 @@ export const AccountsPage = ({ setPageName, isDarkMode, showUserMessage, setAcco
                 && (
                     <SheetsForm 
                         accountId = { accountIdOnView }
-                        isDarkMode={ isDarkMode }
                         showUserMessage={ showUserMessage }
                         setAccountListener = { setAccountListener }
                         accountListener = { accountListener }

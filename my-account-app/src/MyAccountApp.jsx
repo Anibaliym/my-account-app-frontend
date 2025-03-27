@@ -4,11 +4,14 @@ import '/src/assets/css/Global.css';
 
 import { AuthProvider } from './assets/context/AuthProvider';
 import { AppRouter } from './router/AppRouter'; 
+import { ThemeProvider } from './assets/context/ThemeProvider';
 
 export const MyAccountApp = () => {
     return (
         <AuthProvider>
-            <AppRouter/>
+            <ThemeProvider>
+                <AppRouter/>
+            </ThemeProvider>
         </AuthProvider>
     )
 }

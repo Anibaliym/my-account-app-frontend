@@ -9,7 +9,7 @@ import { deleteAccountFetch } from '../../../assets/api/MyAccountAppAPI/account'
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 
-export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountListener, accountListener, setAccountIdOnView }) => {
+export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, accountListener, setAccountIdOnView }) => {
     const [ sheetsArr, setSheetsArr ] = useState([]);
     const [ newSheetDescription, setNewSheetDescription ] = useState(''); 
     const [ accountDescription, setAccountDescription ] = useState('');
@@ -163,7 +163,6 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
                                         <SheetsListItemDrag 
                                             key={ sheet.id }
                                             sheet={ sheet }
-                                            isDarkMode={ isDarkMode }
                                             showUserMessage={ showUserMessage }
                                             setAccountListener = { setAccountListener } 
                                             accountListener = { accountListener }                                    
@@ -178,7 +177,6 @@ export const SheetsForm = ({ accountId, isDarkMode, showUserMessage, setAccountL
             }
 
             <CustomInputText
-                isDarkMode = { isDarkMode }
                 inputRef = { newSheetDescriptionRef }
                 value = { newSheetDescription }
                 onChangeEvent = { setNewSheetDescription }

@@ -5,7 +5,7 @@ import { ModalCreateCard } from './ModalCreateCard';
 import { ModalDeleteSheetConfirmation } from './ModalDeleteSheetConfirmation';
 import { createSheetBackupFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAccountListener, accountListener, showUserMessage }) => {
+export const IconToolsbar = ({ refreshData, sheetDescription, setAccountListener, accountListener, showUserMessage }) => {
     const {sheetId} = useParams();
 
     const [showModalCreateCard, setshowModalCreateCard] = useState(false); 
@@ -26,7 +26,6 @@ export const IconToolsbar = ({ refreshData, isDarkMode, sheetDescription, setAcc
     return (
         <div className="row mt-2">
             <ModalCreateCard
-                isDarkMode={ isDarkMode }
                 showModalCreateCard={ showModalCreateCard } 
                 setShowModalCreateCard={ setshowModalCreateCard } 
                 showUserMessage={ showUserMessage } 

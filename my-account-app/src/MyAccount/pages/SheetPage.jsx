@@ -5,7 +5,7 @@ import { FormSheetBalance } from '../components/sheet/FormSheetBalance';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { FormCardsSheet } from '../components/sheet/FormCardsSheet';
 
-export const SheetPage = ({ setPageName, showUserMessage, isDarkMode, accountListener, setAccountListener }) => {
+export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAccountListener }) => {
 const {sheetId} = useParams();
 
 const [sheetData, setSheetData] = useState(null);
@@ -73,7 +73,6 @@ const [sheetData, setSheetData] = useState(null);
     return (
         <div className="page-principal-container">
             <FormSheetBalance 
-                isDarkMode={ isDarkMode }
                 sheetData={ sheetData }
                 showUserMessage={ showUserMessage }
                 setAccountListener={ setAccountListener }
@@ -85,7 +84,6 @@ const [sheetData, setSheetData] = useState(null);
             <FormCardsSheet
                 cardsSheetData={ cardsSheetData }
                 showUserMessage={ showUserMessage }
-                isDarkMode={ isDarkMode }
                 getSheetCardsWithVignettes={ getSheetCardsWithVignettes }
                 refreshData={ refreshData } 
             />

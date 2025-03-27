@@ -1,13 +1,15 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { deleteSheetFetch, updateSheetFetch } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { Tooltip } from '@nextui-org/react';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const SheetsListItemDrag = ({ sheet, isDarkMode, showUserMessage, setAccountListener, accountListener, setSheetsArr }) => {
-    const { id: sheetId, accountId, cashBalance, currentAccountBalance, description, order } = sheet; 
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: sheetId });
-    const [ sheetDescriptionUpdate , setSheetDescriptionUpdate ] = useState(description); 
+export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener, accountListener, setSheetsArr }) => {
+    const {isDarkMode} = useContext(ThemeContext);
+    const {id: sheetId, accountId, cashBalance, currentAccountBalance, description, order} = sheet; 
+    const {attributes, listeners, setNodeRef, transform, transition} = useSortable({ id: sheetId });
+    const [sheetDescriptionUpdate , setSheetDescriptionUpdate] = useState(description); 
     
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {

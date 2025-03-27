@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../assets/context/AuthContext';
 import { capitalizeWords } from '../../assets/utilities/stringFormar';
+import { AuthContext } from '../../assets/context/AuthProvider';
+import { ThemeContext } from '../../assets/context/ThemeProvider';
+import { ToggleTheme } from './ui/ToggleTheme';
 
-export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsDarkMode, pageName }) => {
+export const Header = ({ setToggleSidebar, toggleSidebar, pageName }) => {
+    const {toggleTheme} = useContext(ThemeContext);
 
     const navigate = useNavigate(); 
     const { Logout } = useContext(AuthContext);
@@ -11,12 +14,18 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
     const [firstName, setFirstName] = useState(''); 
     const [lastName, setLastName] = useState(''); 
 
+    // Guarda el estado de toggleSidebar en localStorage cuando cambia
+    useEffect(() => {
+        localStorage.setItem('isSidebarToggleCollapsed', JSON.stringify(toggleSidebar));
+    }, [toggleSidebar]);
+
+
     useEffect(() => {
         const savedDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
         const connectedUser = JSON.parse(localStorage.getItem('user'));
     
         if (savedDarkMode !== null) {
-            setIsDarkMode(savedDarkMode);
+            toggleTheme();
             document.body.classList.toggle('dark', savedDarkMode);
         }
     
@@ -32,30 +41,27 @@ export const Header = ({ setToggleSidebar, toggleSidebar, toggleDarkMode, setIsD
         }
 
     }, [user]);
+
+    const onToggleSidebar = () => setToggleSidebar(!toggleSidebar); 
     
     const onLogout = () => {
         Logout(); 
         navigate('/access', { replace: true });
     };
 
-    const onToggleSidebar = () => setToggleSidebar(!toggleSidebar); 
-
     return (
         <header className="header">
             <div className="left-header">
                 <button id="toggle-btn" className="toggle-btn" onClick={onToggleSidebar}>
                     <i className="bx bx-menu"></i>
-                </button>
+                </button>            
                 <span className="title-menu lead">{pageName}</span>
             </div>
 
             <div className="user-info">
                 <span className="user-text">{ `${ firstName } ${ lastName }` }</span>
 
-                <div className="toggle-switch" onClick={ toggleDarkMode }>
-                    <span className="switch"></span>
-                </div>
-
+                <ToggleTheme />
                 <i className='bx bx-exit icon exit-icon' onClick={ onLogout }></i>
             </div>
         </header>

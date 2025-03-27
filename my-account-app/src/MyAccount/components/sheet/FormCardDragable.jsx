@@ -13,7 +13,7 @@ import { ModalDeleteCardConfirmation } from './ModalDeleteCardConfirmation';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData, isDarkMode }) => {
+export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
     const style = { transform: CSS.Transform.toString(transform), transition };
 
@@ -213,7 +213,6 @@ export const FormCardDragable = ({ id, title,  order, vignettesData, showUserMes
                                 vignettes={ vignettes }
                                 setCardTotalAmount={ setCardTotalAmount }
                                 refreshData={ refreshData }
-                                isDarkMode = { isDarkMode }
                             />
                         ))
                     }

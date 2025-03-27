@@ -5,7 +5,7 @@ import { formatDate } from '../../../assets/utilities/DateFormater';
 import { IconToolsbar } from './IconToolsbar';
 import { FormCalculatedBalances } from './FormCalculatedBalances';
 
-export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAccountListener, accountListener, calculatedBalances, refreshData }) => {
+export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListener, accountListener, calculatedBalances, refreshData }) => {
     const { id: sheetId, creationDate, accountId, description, cashBalance, currentAccountBalance, order } = sheetData;
 
     const sheetDescriptionRef = useRef(null);
@@ -189,7 +189,6 @@ export const FormSheetBalance = ({ isDarkMode, sheetData, showUserMessage, setAc
 
             <IconToolsbar
                 refreshData={ refreshData }
-                isDarkMode={ isDarkMode }
                 sheetDescription={ sheetDescription }
                 setAccountListener={ setAccountListener } 
                 accountListener={ accountListener }

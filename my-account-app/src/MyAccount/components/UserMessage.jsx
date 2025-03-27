@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { ThemeContext } from '../../assets/context/ThemeProvider';
 
-export const UserMessage = ({ message, show, setShowMessage, isDarkMode }) => {
-    const [ isVisible, setIsVisible ] = useState(show);
+export const UserMessage = ({ message, show, setShowMessage }) => {
+    const {isDarkMode} = useContext(ThemeContext);
+    const [isVisible, setIsVisible] = useState(show);
 
     const getMessageTime = (length) => {
         if (length >= 100) return 10000;

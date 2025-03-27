@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export const AdminPage = ({ setPageName, isDarkMode, showUserMessage }) => {
+export const AdminPage = ({ setPageName, showUserMessage }) => {
     useEffect(() => {
         setPageName('ADMINISTRADOR'); 
     }, []);

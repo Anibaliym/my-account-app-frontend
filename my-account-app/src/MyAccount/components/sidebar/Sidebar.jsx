@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FormAddAccount } from './FormAddAccount';
 import { getUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
+export const Sidebar = ({ toggleSidebar, accountListener }) => {
     const isInitialRender = useRef(true);
 
     // Estado para los dropdowns abiertos
@@ -92,16 +92,9 @@ export const Sidebar = ({ toggleSidebar, accountListener, isDarkMode }) => {
                     ))
                 } 
                 {
-                    (!toggleSidebar) && (
-                        <FormAddAccount
-                            isDarkMode={ isDarkMode }
-                            userId={ userId }
-                            reloadAccount={ reloadAccount }
-                        />
-                    )
+                    (!toggleSidebar) && ( <FormAddAccount userId={ userId } reloadAccount={ reloadAccount } />)
                 }
                 <hr />
-
            </div>
         </nav>
     )

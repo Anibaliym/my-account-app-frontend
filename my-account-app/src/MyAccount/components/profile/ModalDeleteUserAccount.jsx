@@ -1,11 +1,15 @@
 import Modal from 'react-bootstrap/Modal';
 import { useState, useRef, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../../assets/context/AuthContext';
 import { deleteUserAccountFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
+import { AuthContext } from '../../../assets/context/AuthProvider';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const ModalDeleteUserAccount = ({ isDarkMode, userId, showModalDeleteUserAccount, setShowModalDeleteUserAccount, showUserMessage }) => {
+export const ModalDeleteUserAccount = ({ userId, showModalDeleteUserAccount, setShowModalDeleteUserAccount, showUserMessage }) => {
+    const {isDarkMode} = useContext(ThemeContext);
+    
     const passwordRef = useRef(); 
+    
     const [password, setPassword] = useState(''); 
     const [animationClass, setAnimationClass] = useState('');
     const [modalMessage, setModalMessage] = useState(' '); 

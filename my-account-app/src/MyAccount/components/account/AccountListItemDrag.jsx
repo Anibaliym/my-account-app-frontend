@@ -1,9 +1,11 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { updateAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
-export const AccountListItemDrag = ({ accountId, isDarkMode, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
+export const AccountListItemDrag = ({ accountId, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
+    const {isDarkMode} = useContext(ThemeContext);
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: accountId });
     const [ newAccountUpdate, setNewAccountUpdate ] = useState(accountDescription); 
 

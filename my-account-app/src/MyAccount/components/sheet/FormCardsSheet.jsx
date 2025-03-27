@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { FormCardDragable } from './FormCardDragable';
 import { updateCardOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 
-export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMode, getSheetCardsWithVignettes, refreshData }) => {
+export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, getSheetCardsWithVignettes, refreshData }) => {
     if(cardsSheetData == null) return;
 
     // Estado para manejar la lista ordenada de cartas
@@ -76,7 +76,6 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, isDarkMod
                                 vignettesData = { vignettes }
                                 showUserMessage = { showUserMessage }
                                 totalCardAmount = { totalCardAmount }
-                                isDarkMode = { isDarkMode }                        
                                 getSheetCardsWithVignettes = { getSheetCardsWithVignettes }
                                 refreshData = { refreshData }
                             />

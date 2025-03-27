@@ -1,12 +1,16 @@
-import { useState, useEffect } from 'react';
-import '/src/assets/css/Access.css';
-import '/src/assets/css/Global.css';
+import { useState, useContext } from 'react';
 import { FormLogin } from '../components/access/FormLogin';
 import { UserMessage } from '../components/UserMessage';
 import { FormRegister } from '../components/access/FormRegister';
 import { Link, Tooltip } from '@nextui-org/react';
+import { ThemeContext } from '../../assets/context/ThemeProvider';
+
+import '/src/assets/css/Access.css';
+import '/src/assets/css/Global.css';
+import { ToggleTheme } from '../components/ui/ToggleTheme';
+
 export const AccessPage = () => {
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const {toggleTheme} = useContext(ThemeContext);
     const [message, setMessage] = useState({ message: '', type: 'info' });
     const [toggleForm, setToggleForm] = useState(true); 
     const [showMessage, setShowMessage] = useState(false);
@@ -18,36 +22,17 @@ export const AccessPage = () => {
         setShowMessage(true);
     };
 
-    const toggleDarkMode = () => {
-        const newDarkModeState = !isDarkMode;
-        setIsDarkMode(newDarkModeState);
-        document.body.classList.toggle('dark', newDarkModeState);
-        localStorage.setItem('isDarkMode', JSON.stringify(newDarkModeState));
-    };
-
-    useEffect(() => {
-        const savedDarkMode = JSON.parse(localStorage.getItem('isDarkMode'));
-
-        if (savedDarkMode !== null) {
-            setIsDarkMode(savedDarkMode);
-            document.body.classList.toggle('dark', savedDarkMode);
-        }
-    }, []);
-
     return (
         <div className="access-container animate__animated animate__fadeIn">
             <div className="access-login-form">
-                <div className="toggle-switch mb-5" onClick={ toggleDarkMode }>
-                    <span className="switch"></span>
-                </div>
-
+                    <ToggleTheme />
                 {
                     (toggleForm)
                     ? (<FormLogin userName={ userName } setUserName={ setUserName } toggleForm={ toggleForm } setToggleForm={ setToggleForm } showUserMessage={ showUserMessage }/>)
                     : (<FormRegister setUserName={ setUserName } toggleForm={ toggleForm } setToggleForm={ setToggleForm } showUserMessage={ showUserMessage }/>)
                 }
                 
-                <UserMessage message={message}  show={showMessage}  setShowMessage={setShowMessage}  isDarkMode={isDarkMode} />
+                <UserMessage message={message}  show={showMessage}  setShowMessage={setShowMessage} />
             </div>
 
             <div className="access-presentation d-flex flex-column justify-content-start text-white px-4 pt-2 position-relative">

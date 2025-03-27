@@ -1,8 +1,10 @@
 import { useReducer, useEffect, useRef, useState } from 'react';
-import { AuthContext } from './AuthContext';
 import { authReducer } from './authReducer';
 import { types } from '../types/types';
 import { ModalSessionExpired } from '../../MyAccount/components/ModalSessionExpired';
+import { createContext } from 'react';
+
+export const AuthContext = createContext();
 
 const init = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -25,9 +27,9 @@ export const AuthProvider = ({ children }) => {
     const [showModal, setShowModal] = useState(false);
     const timeoutIdRef = useRef(null);
 
-    // const SESSION_DURATION = 10 * 60 * 1000; // 10 minutos en milisegundos
+    // const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
     // const SESSION_DURATION = 2 * 1000; // 2 segundos en mil
-    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
+    const SESSION_DURATION = 10 * 60 * 1000; // 10 minutos en milisegundos
 
     const Login = (user, accounts) => {
         const action = { type: types.login, payload: user };

@@ -6,7 +6,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { AccountListItemDrag } from './AccountListItemDrag';
 
-export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserMessage, userId, setAccountListener, accountListener, setAccountIdOnView }) => {
+export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, userId, setAccountListener, accountListener, setAccountIdOnView }) => {
     const [ accountsArr, setAccountsArr ] = useState([]); 
 
     useEffect(() => {
@@ -99,7 +99,6 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
     return (
         <div className="accounts-balances-form">
             <CustomInputText
-                isDarkMode = { isDarkMode }
                 inputRef = { accountDescriptionRef }
                 value = { newAccountDescription }
                 onChangeEvent = { setNewAccountDescription }
@@ -118,7 +117,6 @@ export const AccountsForm = ({ isDarkMode, userAccountsWithSheetsData, showUserM
                                     <AccountListItemDrag 
                                         key={ accountId } 
                                         accountId={ accountId } 
-                                        isDarkMode={ isDarkMode } 
                                         accountDescription={ accountDescription } 
                                         showUserMessage={ showUserMessage } 
                                         setAccountListener={ setAccountListener }

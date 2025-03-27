@@ -1,4 +1,8 @@
-export const CustomInputText = ({ isDarkMode, inputRef, value, onChangeEvent, onKeyDownEvent, placeHolder }) => {
+import { useContext } from 'react';
+import { ThemeContext } from '../../../assets/context/ThemeProvider';
+
+export const CustomInputText = ({ inputRef, value, onChangeEvent, onKeyDownEvent, placeHolder }) => {
+    const {isDarkMode} = useContext(ThemeContext);
     
     return (
         <div className={ `${ isDarkMode ? 'dark-mode' : 'light-mode' }` }>
