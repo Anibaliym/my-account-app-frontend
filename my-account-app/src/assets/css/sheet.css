@@ -8,10 +8,10 @@
     width: 300px; 
     height: 540px; 
     background-color: var(--primary-color);
-    /* background-color: red; */
-    border-radius: 3px;
+    border-radius: 10px;
     padding:7px; 
     color: white;
+    overflow:hidden; 
 }
 
 .sheet-cards-form {
@@ -56,15 +56,11 @@
     font-size: 15px;
     float:left;
     margin-right:15px; 
-    border-radius:5px;     
+    border-radius:8px;     
     width: 1600px;
     background-color: var(--sidebar-color);
     margin-bottom: 15px;
 } 
-
-.excel-card:last-child {
-    margin-bottom: 0; /* Elimina el margen para la última carta */
-}
 
 .excel-card-header {
     display: flex;
@@ -74,8 +70,9 @@
     border-radius: 3px;
 }
 
+/* Empuja el texto hacia la izquierda */
 .excel-card-header small {
-    margin-right: auto; /* Empuja el texto hacia la izquierda */
+    margin-right: auto; 
 }
 
 .excel-card-header .icons-container {
@@ -136,43 +133,6 @@
     transition: margin 0.3s;
     font-size: 18px;
     cursor:pointer;
-}
-
-@media (max-width: 1000px) {
-    .page-principal-container {
-        flex-direction: column; /* Cambiar de horizontal a vertical */
-        height: auto; /* Ajustar altura para diseño vertical */
-    }
-
-    .sheet-balances-form {
-        width: 350px; /* Ancho fijo */
-        height: 515px; /* Mantiene la altura fija */
-    }
-}
-
-@media (max-width: 2000px) {
-    .excel-card {
-        width: 48%;
-    }
-}
-
-@media (max-width: 1720px) {
-    .excel-card {
-        width: 98.5%;
-    }
-}
-
-@media (max-width: 1300px) {
-    .excel-card {
-        width: 470px;
-    }
-}
-
-
-@media (max-width: 1000px) {
-    .excel-card {
-        width: 350px;
-    }
 }
 
 .vignette-input-text-description {
@@ -280,3 +240,47 @@
 .color-selector-darkTheme-STRONG_BLUE { background-color: #0D1B2A;      color: var(--text-color); }
 .color-selector-darkTheme-STRONG_GRAY { background-color: #242424;      color: var(--text-color); }
 .color-selector-darkTheme-STRONG_PURPLE { background-color: #321A44;    color: var(--text-color); }
+
+
+@media (max-width: 2000px) {
+    .excel-card {
+        width: 48%;
+    }
+}
+
+@media (max-width: 1500px) {
+    .excel-card {
+        width: 600px;
+    }
+}
+
+@media (max-width: 1220px) {
+    .page-principal-container {
+        flex-direction: column; /* Cambiar de horizontal a vertical */
+        height: auto; /* Ajustar altura para diseño vertical */
+
+        /* Habilita el scroll vertical si el contenido excede */
+        /* overflow-y: auto;  */
+        /* Evita scroll horizontal */
+        /* overflow-x: hidden;  */
+    
+    }
+    
+    .sheet-balances-form {
+        width: 350px; 
+    }
+
+    .excel-card {
+        width: 700px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .sheet-balances-form {
+        width: 100%;
+    }
+
+    .excel-card {
+        width: 100%;
+    } 
+}
