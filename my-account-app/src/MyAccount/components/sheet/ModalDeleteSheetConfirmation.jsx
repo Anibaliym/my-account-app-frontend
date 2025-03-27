@@ -28,7 +28,7 @@ export const ModalDeleteSheetConfirmation = ({ sheetId, sheetDescription, modalC
 
                         <p className="text-center modal-text-message">
                             La <b>hoja de cálculo</b>  que intentas eliminar, <span className="text-color-primary">"{ sheetDescription }"</span>, 
-                            aun contiene información que podría ser <b>"relevante"</b>.
+                            aun contiene información que podría ser <b>"Relevante"</b>.
                         </p>
 
                         <figcaption className="blockquote-footer text-center mt-5 modal-text-message">

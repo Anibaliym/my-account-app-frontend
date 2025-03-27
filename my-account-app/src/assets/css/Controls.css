@@ -41,12 +41,6 @@
     color: var(--text-color);
 }
 
-.icon-menu {
-    position: relative;
-    display: inline-block;
-    font-size: 20px;
-}
-
 .icon-trash {
     color: var(--text-color);
 }

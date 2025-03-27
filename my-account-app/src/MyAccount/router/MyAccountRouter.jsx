@@ -14,6 +14,7 @@ import '/src/assets/css/Controls.css';
 import '/src/assets/css/Cards.css';
 import '/src/assets/css/sheet.css';
 import '/src/assets/css/Accounts.css';
+import '/src/assets/css/Test.css';
 
 export const MyAccountRouter = () => {
     

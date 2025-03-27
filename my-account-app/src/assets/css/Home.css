@@ -3,42 +3,11 @@ body {
 }
 
 
-.plus-icon {
-    width:70px;
-    line-height:28px;
-    border-radius: 3px;
-    color: var(--primary-color);
-}
-
-.plus-icon:hover {
-    cursor:pointer;
-    color: var(--success-color);
-    border: 1px solid var(--success-color);
-}
-
 .principal-container {
     display: flex;
     height: 100vh;
-    padding: 5px 10px 100px 10px;
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
-    /* background-color: green;  */
-}
-
-.sidebar {
-    width: 250px;
-    background-color: var(--sidebar-color);
-    color: var(--text-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    transition: all 0.3s ease;
-    padding: 10px;
-}
-
-.sidebar.active {
-    width: 70px;
 }
 
 .main-content {
@@ -50,23 +19,15 @@ body {
     color: var(--text-color);
 }
 
-
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 10px 5px 10px;
-    background-color: rgba(255, 255, 255, 0.1); /* Ligero fondo blanco translúcido */
-    
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-
-    /* Efecto Glassmorphism */
+    background-color: var(--sidebar-color); /* Ligero fondo blanco translúcido */
     backdrop-filter: blur(10px); /* Aplica desenfoque */
     -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave para resaltar el efecto */
-    border-radius: 3px;
+    padding: 10px 10px 5px 5px;
+    /* background-color:red;  */
 }
 
 .left-header {
@@ -80,7 +41,7 @@ body {
     font-size: 1.5rem; /* Ajusta el tamaño del icono si es necesario */
 }
   
-.title-menu {
+.header-title-menu {
     margin-left: 10px; /* Espaciado entre el icono y el texto */
     font-size: 20px; /* Ajusta el tamaño si es necesario */
     display: flex;
@@ -88,9 +49,6 @@ body {
     color: var(--primary-color); 
 }
 
-.sidebar.active + .main-content {
-    margin-left: 70px;
-}
 
 /* Header left container */
 .header-left {
@@ -138,66 +96,6 @@ body {
     flex: 1;
 }
 
-/* Responsive adjustments */
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-    }
-
-    .sidebar.active {
-        width: 60px;
-    }
-
-    .sidebar.active + .main-content {
-        margin-left: 60px;
-    }
-}
-
-@media screen and (max-width: 576px) {
-    .sidebar {
-        position: fixed;
-        left: -200px;
-        transition: all 0.3s;
-    }
-
-    .sidebar.active {
-        left: 0;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
-    .header {
-        padding: 10px;
-    }
-}
-
-
-
-
-.sidebar-body {
-    flex: 1;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.sidebar-body::-webkit-scrollbar {
-    display: none;
-}
-
-.menu-item {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    width: 100%;
-}
-
 .dropdown-btn {
     background-color: var(--sidebar-color);
     color: var(--text-color);
@@ -221,16 +119,10 @@ body {
     margin-top:3px;
 }
 
-.sidebar.collapsed .dropdown-btn span {
-    display: none;
-}
-
 .dropdown-btn:hover {
     background-color: var(--primary-color);
     color: var(--text-hover-color);
 }
-
-
 
 .dropdown-btn-accounts {
     display: flex;
@@ -264,9 +156,6 @@ body {
     flex-shrink: 0; /* Asegura que no cambie de tamaño */
 }
 
-.sidebar.collapsed .dropdown-btn-accounts span {
-    display: none;
-}
 .dropdown-btn-accounts:hover {
     background-color: var(--primary-color);
     color: var(--text-hover-color);
@@ -283,33 +172,7 @@ body {
     transition: var(--tran-05)
 }
 
-.dropdown-container {
-    display: none;
-    /* background-color: var(--sub-menu-container); */
-    width: 100%;
-}
-
-.dropdown-container a {
-    color: var(--text-color);
-    /* background-color:red;  */
-    text-decoration: none;
-    display: block;
-    padding: 0px 0px 0px 10px;
-    font-size: 14px;
-    border-radius:5px;
-    /* margin-top: 3px;  */
-    line-height:30px;
-    margin-left:15px;
-}
-
-.dropdown-container a:hover
-{
-    background-color: var(--primary-color);
-    color: var(--text-hover-color);
-}
-
 .toggle-switch {
-    /* height: 100%; */
     display: flex;
     cursor: pointer;
 }
@@ -442,4 +305,125 @@ span.sheet-list {
     margin: 0px 10px 10px 20px;
 }
 
+.plus-icon {
+    width:70px;
+    line-height:28px;
+    border-radius: 3px;
+    color: var(--primary-color);
+}
 
+.plus-icon:hover {
+    cursor:pointer;
+    color: var(--success-color);
+    border: 1px solid var(--success-color);
+}
+
+
+/* SideBar - inicio *******************************************************************************/
+
+.sidebar {
+    width: 250px;
+    background-color: var(--sidebar-color);
+    color: var(--text-color);
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.sidebar.active {
+    width: 50px;
+}
+
+.icon-menu {
+    position: center;
+    display: inline-block;
+    font-size: 20px;
+    text-align:center; 
+}
+
+.sidebar.active + .main-content {
+    margin-left: 50px;
+}
+
+
+.sidebar-body {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebar-body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.sidebar.collapsed .dropdown-btn span {
+    display: none;
+}
+
+.sidebar.collapsed .dropdown-btn-accounts span {
+    display: none;
+}
+
+
+.sidebar-sub-menu {
+    display: none;
+    width: 100%;
+}
+
+.sidebar-sub-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex; 
+    align-items: center; 
+    padding: 0px;
+    font-size: 14px;
+    border-radius: 5px;
+    line-height: 30px;
+    margin-left: 35px;
+}
+
+.sidebar-sub-menu a:hover
+{
+    background-color: var(--primary-color);
+    color: var(--text-hover-color);
+}
+
+/* SideBar - fin *******************************************************************************/
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+
+    .sidebar.active {
+        width: 60px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .header-toggle-menu, .header-title-menu {
+        display:none;  
+    }
+
+    .sidebar {
+        position: fixed;
+        left: -200px;
+        transition: all 0.3s;
+    }
+
+    .sidebar.active {
+        left: 0;
+    } 
+
+    .main-content {
+        margin-left: 0;
+    } 
+}

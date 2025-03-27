@@ -7,7 +7,7 @@ import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
 export const ModalDeleteUserAccount = ({ userId, showModalDeleteUserAccount, setShowModalDeleteUserAccount, showUserMessage }) => {
     const {isDarkMode} = useContext(ThemeContext);
-    
+    console.log(isDarkMode); 
     const passwordRef = useRef(); 
     
     const [password, setPassword] = useState(''); 

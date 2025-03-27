@@ -5,21 +5,14 @@ export const MenuItem = ({ navigateTo = '/error', description = 'menú name', ic
     const navigate = useNavigate();
 
     return (
-        <Tooltip
-            placement="right"
-            content={ description }
-            color="foreground"
-            closeDelay={ 50 }
-        >
-            <div className="menu-item">
-                <button 
-                    className="dropdown-btn"
-                    onClick={() => navigate(navigateTo)}
-                >
-                    <i className={ `${ icon } icon-menu ml-2` }></i>
-                    <span className="animate__animated animate__fadeIn">{description}</span>
-                </button>
-            </div>
-        </Tooltip>
+        <div>
+            <button 
+                className="dropdown-btn"
+                onClick={() => navigate(navigateTo)}
+            >
+                <i className={ `${ icon } icon-menu ml-1` }></i>
+                <span className="animate__animated animate__fadeIn">{description}</span>
+            </button>
+        </div>
     );
 };

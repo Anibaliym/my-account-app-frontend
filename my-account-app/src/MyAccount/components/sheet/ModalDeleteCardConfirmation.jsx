@@ -12,7 +12,7 @@ export const ModalDeleteCardConfirmation = ({ cardTitle, modalConfirmDeleteCard,
 
                         <p className="text-center modal-text-message">
                             La carta de planificación que intentas eliminar <span className="text-color-primary">"{ cardTitle }"</span>, 
-                            aun contiene información que podría ser <b>"relevante"</b>.
+                            aun contiene información que podría ser <b>"Relevante"</b>.
                         </p>
 
                         <figcaption className="blockquote-footer text-center mt-5 modal-text-message">

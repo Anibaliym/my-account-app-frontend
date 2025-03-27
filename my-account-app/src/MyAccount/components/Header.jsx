@@ -53,9 +53,10 @@ export const Header = ({ setToggleSidebar, toggleSidebar, pageName }) => {
         <header className="header">
             <div className="left-header">
                 <button id="toggle-btn" className="toggle-btn" onClick={onToggleSidebar}>
-                    <i className="bx bx-menu"></i>
-                </button>            
-                <span className="title-menu lead">{pageName}</span>
+                <i className={ `bx ${ (toggleSidebar) ? 'bx-menu' : 'bx-x' } header-toggle-menu animate__animated animate__fadeIn` }></i>
+                </button>        
+
+                {/* <span className="header-title-menu lead animate__animated animate__fadeIn">{pageName}</span> */}
             </div>
 
             <div className="user-info">

@@ -3,14 +3,12 @@ import { FormLogin } from '../components/access/FormLogin';
 import { UserMessage } from '../components/UserMessage';
 import { FormRegister } from '../components/access/FormRegister';
 import { Link, Tooltip } from '@nextui-org/react';
-import { ThemeContext } from '../../assets/context/ThemeProvider';
 
 import '/src/assets/css/Access.css';
 import '/src/assets/css/Global.css';
 import { ToggleTheme } from '../components/ui/ToggleTheme';
 
 export const AccessPage = () => {
-    const {toggleTheme} = useContext(ThemeContext);
     const [message, setMessage] = useState({ message: '', type: 'info' });
     const [toggleForm, setToggleForm] = useState(true); 
     const [showMessage, setShowMessage] = useState(false);
