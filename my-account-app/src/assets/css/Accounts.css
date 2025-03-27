@@ -4,23 +4,24 @@
     gap: 10px;
 }
 
-.account-balances-form {
-    width: 350px; /* Ancho fijo */
-    height: 200px; /* Altura fija */
-    background-color: var(--primary-color);
+.accounts-balances-form, .account-sheets-list-container {
+    width: 350px;
+    height: 680px; 
+    background-color: var(--sub-menu-container, blue);
     border-radius: 8px;
-    padding:5px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    padding: 8px;
     color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; 
 }
 
-.accounts-balances-form {
-    width: 300px; /* Ancho fijo */
-    height: 99%; /* Altura fija */
-    background-color: var(--sub-menu-container);
-    border-radius: 3px;
-    padding:8px; 
+.accounts-balances-form-body, .account-sheets-list-container-body {
+    padding: 3px;
     color: white;
+    max-height: 90%; 
+    overflow-y: auto; 
+    transition: max-height 0.5s ease;
 }
 
 .accounts-form {
@@ -31,80 +32,12 @@
     color: white;
 }
 
-/*********/
-.div-test {
-    width: 100%;
-    height: 90%;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-}
-
-.div-test::-webkit-scrollbar {
-    width: 8px;
-    opacity: 0; /* Inicialmente invisible */
-    transition: opacity 0.5s ease-in-out;
-}
-
-.div-test:hover::-webkit-scrollbar {
-    opacity: 1; /* Se muestra en hover */
-}
-
-.div-test::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-.div-test::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.5);
-}
-/*********/
-
-
-
-
 .account-cards-form {
-    flex: 1; /* Toma el ancho restante */
-    height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
-    overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
-    overflow-x: hidden; /* Evita scroll horizontal */
+    flex: 1; 
+    height: calc(100vh - 110px); 
+    overflow-y: auto; 
+    overflow-x: hidden;
 }
-
-@media (max-width: 1000px) {
-    .accounts-principal-container {
-        flex-direction: column; /* Cambiar de horizontal a vertical */
-        height: auto; /* Ajustar altura para diseño vertical */
-    }
-
-    .account-balances-form {
-        width: 350px; /* Ancho fijo */
-        height: 200px; /* Mantiene la altura fija */
-    }
-
-    .accounts-balances-form {
-        width: 350px; /* Ancho fijo */
-        height: 200px; /* Mantiene la altura fija */
-    }
-
-    .account-cards-form{
-        
-    }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .custom-list {
     list-style: none;
@@ -140,16 +73,42 @@
 }
 
 .input-list {
-    border: none; /* Elimina el borde */
-    outline: none; /* Elimina el contorno azul */
+    border: none; 
+    outline: none; 
     width: 100%;
     color: var(--primary-color);
-    cursor: pointer; /* Hace que el cursor sea de tipo puntero */
+    cursor: pointer; 
 }
 
 .input-list:focus {
     border: none;
     outline: none;
-    cursor: pointer; /* Asegura que mantenga el cursor en focus */
+    cursor: pointer; 
+}
+
+.account-sheets-list-container-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    padding: 5px;
+}
+
+@media (max-width: 1020px) {
+    .accounts-principal-container {
+        flex-direction: column;
+    }
+
+    .accounts-balances-form, .account-sheets-list-container {
+        height: 400px; 
+        width:100%;
+    }
+
+    .account-sheets-list-container {
+        height: 400px; 
+        width:100%;
+        margin-top:20px;
+
+    }
 }
 

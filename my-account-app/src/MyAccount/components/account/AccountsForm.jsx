@@ -105,10 +105,9 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
                 onKeyDownEvent = { onKeyDown }
                 placeHolder={ 'Crear una nueva cuenta' }
             />
-
             <CustomButtom event={ () => createAccount() }/>
-
-            <div className="div-test animate__animated animate__fadeIn">
+            
+            <div className="accounts-balances-form-body">
                 <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
                     <ul className="custom-list">
                         <SortableContext items={ accountsArr } strategy={ verticalListSortingStrategy }> 

@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    
 }
 
 .access-container {
@@ -95,22 +94,9 @@
     text-decoration: underline;
 }
 
-/* Responsive: ajusta en pantallas pequeñas */
-@media (max-width: 768px) {
+@media (max-width: 800px) {
     .access-container {
         flex-direction: column;
-    }
-
-    .access-forms {
-        width: 100%;
-        max-width: 350px; /* Mantiene el ancho */
-        min-width: 350px; /* No se hace más pequeño */
-        box-shadow: none;
-        margin: auto; /* Centra el formulario */
-    }
-
-    .access-presentation {
-        display: none; /* Se oculta en pantallas pequeñas */
     }
 }
 

@@ -130,15 +130,9 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
     }, [ accountId ]);
 
     return (
-        <div style={{ padding: '5px',  width: '400px',  height: '99%' }} className="ml-5">
-            <div style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '5px', 
-            }}>
-                <span className={`text-color-primary mb-2 ${ animationClass }`}>
+        <div className="account-sheets-list-container">
+            <div className="account-sheets-list-container-header">
+                <span className={`text-color-primary mb-2 ${animationClass}`}>
                     {accountDescription.toUpperCase()}
                 </span>
                 
@@ -146,45 +140,48 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                     placement="left"
                     content="Eliminar Cuenta"
                     color="danger"
-                    closeDelay={ 50 }
+                    closeDelay={50}
                 >
-                    <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor:'pointer' }} onClick={ deleteAccount }></i>
+                    <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
                 </Tooltip>
             </div>            
-            {
-                (sheetsArr.length > 0) && 
-                (
-                    <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
-                        <ul className="custom-list animate__animated animate__fadeIn">
-                            <SortableContext items={ sheetsArr } strategy={ verticalListSortingStrategy }>
 
-                                {
-                                    sheetsArr.map( (sheet) => (
-                                        <SheetsListItemDrag 
-                                            key={ sheet.id }
-                                            sheet={ sheet }
-                                            showUserMessage={ showUserMessage }
-                                            setAccountListener = { setAccountListener } 
-                                            accountListener = { accountListener }                                    
-                                            setSheetsArr={ setSheetsArr }
-                                        />
-                                        ))
-                                    }
-                            </SortableContext>
-                        </ul>
-                    </DndContext>
-                )
-            }
+            <div className="account-sheets-list-container-body">
+                {
+                    (sheetsArr.length > 0) && 
+                    (
+                        <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
+                            <ul className="custom-list animate__animated animate__fadeIn">
+                                <SortableContext items={ sheetsArr } strategy={ verticalListSortingStrategy }>
 
-            <CustomInputText
-                inputRef = { newSheetDescriptionRef }
-                value = { newSheetDescription }
-                onChangeEvent = { setNewSheetDescription }
-                onKeyDownEvent = { handleKeyDown }
-                placeHolder={ 'Agregar hoja de calculo ...' }
-            />
+                                    {
+                                        sheetsArr.map( (sheet) => (
+                                            <SheetsListItemDrag 
+                                                key={ sheet.id }
+                                                sheet={ sheet }
+                                                showUserMessage={ showUserMessage }
+                                                setAccountListener = { setAccountListener } 
+                                                accountListener = { accountListener }                                    
+                                                setSheetsArr={ setSheetsArr }
+                                            />
+                                            ))
+                                        }
+                                </SortableContext>
+                            </ul>
+                        </DndContext>
+                    )
+                }
 
-            <CustomButtom event={ createSheet }/>
+                <CustomInputText
+                    inputRef = { newSheetDescriptionRef }
+                    value = { newSheetDescription }
+                    onChangeEvent = { setNewSheetDescription }
+                    onKeyDownEvent = { handleKeyDown }
+                    placeHolder={ 'Agregar hoja de calculo ...' }
+                />
+
+                <CustomButtom event={ createSheet }/>
+            </div>
         </div>
     );
 };

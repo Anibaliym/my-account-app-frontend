@@ -38,7 +38,7 @@ export const AccessPage = () => {
             <div className="access-presentation d-flex flex-column justify-content-start text-white px-4 pt-2 position-relative">
                 <h1 className="display-1 text-end mb-5">MI CUENTA</h1>
 
-                <div className="ml-20">
+                <div className="ml-10">
                     <h2 className="lead fs-2 mb-3">Lleva el control total de tus finanzas</h2>
                     <p className="fs-5 mb-3">
                         Aplicación diseñada para facilitarte ayuda en el control de tus gastos y/o planificaciones.
