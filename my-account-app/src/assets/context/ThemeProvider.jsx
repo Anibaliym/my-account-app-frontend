@@ -4,10 +4,10 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
     const [isDarkMode, setTheme] = useState(null);
-    
+
     useEffect(() => {
-        const savedTheme = JSON.parse(localStorage.getItem('isDarkMode'));
-        if (savedTheme !== null) {  
+        const savedTheme = JSON.parse(localStorage.getItem('my-account-isDarkMode'));
+        if (savedTheme !== null) {
             setTheme(savedTheme);
             document.body.classList.toggle('dark', savedTheme);
         }
@@ -16,7 +16,7 @@ export const ThemeProvider = ({ children }) => {
     const toggleTheme = () => {
         const newTheme = !isDarkMode;
         setTheme(newTheme);
-        localStorage.setItem('isDarkMode', JSON.stringify(newTheme));
+        localStorage.setItem('my-account-isDarkMode', JSON.stringify(newTheme));
         document.body.classList.toggle('dark', newTheme);
     };
 

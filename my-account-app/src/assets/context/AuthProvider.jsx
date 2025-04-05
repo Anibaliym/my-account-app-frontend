@@ -7,14 +7,14 @@ import { createContext } from 'react';
 export const AuthContext = createContext();
 
 const init = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.parse(localStorage.getItem('my-account-user'));
 
     if (user) {
         const currentTime = new Date().getTime();
 
         if (user.expirationTime && currentTime > user.expirationTime) {
-            localStorage.removeItem('user');
-            localStorage.removeItem('accounts');
+            localStorage.removeItem('my-account-user');
+            localStorage.removeItem('my-account-accounts');
             return { logged: false, user: null };
         }
     }
@@ -37,10 +37,10 @@ export const AuthProvider = ({ children }) => {
         const expirationTime = new Date().getTime() + SESSION_DURATION;
 
         const userWithExpiration = { ...user, expirationTime };
-        
-        localStorage.setItem('user', JSON.stringify(userWithExpiration));
-        localStorage.setItem('accounts', JSON.stringify(accounts));
-        localStorage.setItem('activeDropdowns', JSON.stringify(accounts));
+
+        localStorage.setItem('my-account-user', JSON.stringify(userWithExpiration));
+        localStorage.setItem('my-account-accounts', JSON.stringify(accounts));
+        localStorage.setItem('my-account-activeDropdowns', JSON.stringify(accounts));
 
         dispatch(action);
 
@@ -48,9 +48,9 @@ export const AuthProvider = ({ children }) => {
     }
 
     const Logout = () => {
-        localStorage.removeItem('user');
-        localStorage.removeItem('accounts');
-        
+        localStorage.removeItem('my-account-user');
+        localStorage.removeItem('my-account-accounts');
+
         if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
 
         const action = { type: types.logout };
@@ -60,10 +60,10 @@ export const AuthProvider = ({ children }) => {
     const scheduleSessionTimeout = (expirationTime) => {
         const currentTime = new Date().getTime();
         const remainingTime = expirationTime - currentTime;
-    
+
         if (remainingTime > 0) {
             if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
-    
+
             timeoutIdRef.current = setTimeout(() => {
                 setShowModal(true); // 🔥 Muestra el modal
             }, remainingTime);
@@ -74,7 +74,7 @@ export const AuthProvider = ({ children }) => {
         // 🔒 Evitar que la sesión se renueve si el modal está abierto (es decir, si ya expiró)
         if (showModal) return;
 
-        const user = JSON.parse(localStorage.getItem('user'));
+        const user = JSON.parse(localStorage.getItem('my-account-user'));
 
         if (user) {
             const newExpirationTime = new Date().getTime() + SESSION_DURATION;
@@ -86,27 +86,27 @@ export const AuthProvider = ({ children }) => {
     }
 
     useEffect(() => {
-        const user = JSON.parse(localStorage.getItem('user'));
-    
+        const user = JSON.parse(localStorage.getItem('my-account-user'));
+
         if (user && user.expirationTime) {
             scheduleSessionTimeout(user.expirationTime);
         }
-    
+
         const activityEvents = ['click', 'keydown', 'mousemove', 'scroll'];
-    
+
         const handleActivity = () => {
             if (!showModal) refreshSession(); // 🔒 No refrescar la sesión si el modal está activo
         };
-    
-        activityEvents.forEach(event => 
+
+        activityEvents.forEach(event =>
             window.addEventListener(event, handleActivity)
         );
-    
+
         return () => {
-            activityEvents.forEach(event => 
+            activityEvents.forEach(event =>
                 window.removeEventListener(event, handleActivity)
             );
-    
+
             if (timeoutIdRef.current) clearTimeout(timeoutIdRef.current);
         }
     }, [showModal]); // 🔒 Asegurarse que depende del estado de showModal

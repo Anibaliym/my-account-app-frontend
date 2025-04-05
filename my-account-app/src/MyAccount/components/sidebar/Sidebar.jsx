@@ -11,24 +11,24 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
     // Estado para los dropdowns abiertos
     const [activeDropdowns, setActiveDropdowns] = useState(() => {
         // Carga el estado desde localStorage o inicializa un objeto vacío
-        return JSON.parse(localStorage.getItem('activeDropdowns')) || {};
+        return JSON.parse(localStorage.getItem('my-account-activeDropdowns')) || {};
     });
 
-    const [ userAccount, setUserAccount] = useState([]); 
-    const [ userId, setUserId ] = useState(''); 
-    const [ retrievedUserType, setRetrievedUserType ] = useState(''); 
-    
+    const [userAccount, setUserAccount] = useState([]);
+    const [userId, setUserId] = useState('');
+    const [retrievedUserType, setRetrievedUserType] = useState('');
+
     useEffect(() => {
         reloadAccount();
     }, [])
 
     useEffect(() => {
-        if (isInitialRender.current) 
+        if (isInitialRender.current)
             isInitialRender.current = false;
-        else 
+        else
             reloadAccount();
 
-    }, [ accountListener ]);
+    }, [accountListener]);
 
     // Función para manejar el estado de cada dropdown
     const toggleDropdown = (accountId) => {
@@ -42,35 +42,35 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
     };
 
     const reloadAccount = async () => {
-        const userData = JSON.parse( localStorage.getItem('user') );
-        const { id, userType } = userData; 
-        
-        setRetrievedUserType(userType); 
-        setUserId(id); 
+        const userData = JSON.parse(localStorage.getItem('my-account-user'));
+        const { id, userType } = userData;
+
+        setRetrievedUserType(userType);
+        setUserId(id);
 
         const { isError, data: menuData } = await getUserAccountsWithSheetsFetch(id);
 
-        if(!isError)
-            setUserAccount(menuData.data.accounts); 
+        if (!isError)
+            setUserAccount(menuData.data.accounts);
     }
 
     return (
-        <nav className={ `sidebar ${ toggleSidebar ? 'active collapsed' : '' } animate__animated animate__fadeInLeft animate__faster` } >
+        <nav className={`sidebar ${toggleSidebar ? 'active collapsed' : ''} animate__animated animate__fadeInLeft animate__faster`} >
 
 
             <div className="sidebar-body">
-                { 
+                {
                     menuData.map(({ id, name, description, icon }) => {
 
-                        if(retrievedUserType === 'ADMIN' && description === 'Administrador') 
-                            return; 
-                        
+                        if (retrievedUserType === 'ADMIN' && description === 'Administrador')
+                            return;
+
                         return (
-                            <MenuItem 
-                                key={id} 
-                                navigateTo={name} 
-                                description={description} 
-                                icon={icon} 
+                            <MenuItem
+                                key={id}
+                                navigateTo={name}
+                                description={description}
+                                icon={icon}
                             />
                         )
                     })
@@ -78,24 +78,24 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
 
                 <hr />
                 {
-                    userAccount.map( ({ account, sheets }) => (
+                    userAccount.map(({ account, sheets }) => (
                         <AccountMenuList
-                            key={ account.id }
-                            accountId={ account.id } 
+                            key={account.id}
+                            accountId={account.id}
                             isOpen={!!activeDropdowns[account.id]}
-                            activeDropdowns={ activeDropdowns } 
-                            toggleDropdown={ toggleDropdown } 
-                            description={ account.description }
-                            sheets={ sheets }
-                            toggleSidebar = { toggleSidebar }
+                            activeDropdowns={activeDropdowns}
+                            toggleDropdown={toggleDropdown}
+                            description={account.description}
+                            sheets={sheets}
+                            toggleSidebar={toggleSidebar}
                         />
                     ))
-                } 
+                }
                 {
-                    (!toggleSidebar) && ( <FormAddAccount userId={ userId } reloadAccount={ reloadAccount } />)
+                    (!toggleSidebar) && (<FormAddAccount userId={userId} reloadAccount={reloadAccount} />)
                 }
                 <hr />
-           </div>
+            </div>
         </nav>
     )
 }

@@ -17,10 +17,10 @@ import '/src/assets/css/Accounts.css';
 import '/src/assets/css/Test.css';
 
 export const MyAccountRouter = () => {
-    
+
     // Estado inicial de toggleSidebar obteniendo el valor de localStorage
-    const [ toggleSidebar, setToggleSidebar ] = useState(() => {
-        const storedValue = localStorage.getItem('isSidebarToggleCollapsed');
+    const [toggleSidebar, setToggleSidebar] = useState(() => {
+        const storedValue = localStorage.getItem('my-account-isSidebarToggleCollapsed');
         return storedValue !== null ? JSON.parse(storedValue) : false;
     });
 
@@ -38,17 +38,17 @@ export const MyAccountRouter = () => {
     return (
         <div className="principal-container">
             <Sidebar toggleSidebar={toggleSidebar} accountListener={accountListener} />
-            
+
             <div className="main-content">
                 <Header setToggleSidebar={setToggleSidebar} toggleSidebar={toggleSidebar} pageName={pageName} />
 
                 <section className="dashboard-content">
                     <Routes>
-                        <Route path="profile" element={<ProfilePage setPageName={setPageName} showUserMessage={ showUserMessage } />} />
+                        <Route path="profile" element={<ProfilePage setPageName={setPageName} showUserMessage={showUserMessage} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
-                        <Route path="accounts" element={<AccountsPage setPageName={setPageName} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
-                        <Route path="admin" element={<AdminPage setPageName={setPageName} showUserMessage={ showUserMessage } setAccountListener={setAccountListener} accountListener={accountListener} />} />
-                        <Route path="sheet/:sheetId" element={ <SheetPage setPageName={ setPageName } showUserMessage={ showUserMessage } accountListener = { accountListener } setAccountListener = { setAccountListener }/> } />
+                        <Route path="accounts" element={<AccountsPage setPageName={setPageName} showUserMessage={showUserMessage} setAccountListener={setAccountListener} accountListener={accountListener} />} />
+                        <Route path="admin" element={<AdminPage setPageName={setPageName} showUserMessage={showUserMessage} setAccountListener={setAccountListener} accountListener={accountListener} />} />
+                        <Route path="sheet/:sheetId" element={<SheetPage setPageName={setPageName} showUserMessage={showUserMessage} accountListener={accountListener} setAccountListener={setAccountListener} />} />
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
 
@@ -57,6 +57,6 @@ export const MyAccountRouter = () => {
                     </div>
                 </section>
             </div>
-        </div>    
+        </div>
     );
 };
