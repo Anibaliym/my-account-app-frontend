@@ -128,6 +128,15 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
                         >
                             Entrar
                         </button>
+
+                        <button
+                            className="login-button mt-2"
+                            onClick={() => setToggleForm(!toggleForm)}
+                        >
+                            Registrate
+                        </button>
+
+
                         <div style={{ margin: '10px -11px' }}>
                             <label className="access-label">
                                 <input
@@ -140,11 +149,6 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
                 </div>
             </form>
 
-            <p className="register-link text-color-default"> Aún no tienes cuenta?
-                <a className="text-color-primary ml-1 cursor-pointer" onClick={() => setToggleForm(!toggleForm)}>
-                    Crea una cuenta aquí
-                </a>
-            </p>
         </div>
     )
 }

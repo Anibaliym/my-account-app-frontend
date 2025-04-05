@@ -48,6 +48,7 @@ export const ModalDeleteUserAccount = ({ userId, showModalDeleteUserAccount, set
                 response = false;
             }
 
+            localStorage.removeItem('my-account-remembered-email');
             setIsDeletedAccount(true);
 
             setTimeout(() => {
@@ -135,8 +136,8 @@ export const ModalDeleteUserAccount = ({ userId, showModalDeleteUserAccount, set
                                 </h1>
 
                                 <div className="d-flex flex-column justify-content-center align-items-center">
-                                    <div className="spinner-border" role="status"></div>
-                                    <small className="mt-2 text-color-default">Redirigiendo</small> {/* El texto aparece justo debajo del spinner */}
+                                    <div className={`spinner-border ${(isDarkMode) ? 'text-light' : 'text-dark'}`} role="status"></div>
+                                    <small className="mt-2 text-color-default">Redirigiendo</small>
                                 </div>
                             </>
                         )
