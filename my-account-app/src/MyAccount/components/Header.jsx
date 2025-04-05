@@ -25,7 +25,6 @@ export const Header = ({ setToggleSidebar, toggleSidebar, pageName }) => {
         const connectedUser = JSON.parse(localStorage.getItem('my-account-user'));
 
         if (savedDarkMode !== null) {
-            toggleTheme();
             document.body.classList.toggle('dark', savedDarkMode);
         }
 
