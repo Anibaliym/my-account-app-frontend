@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../assets/context/ThemeProvider';
 
 export const UserMessage = ({ message, show, setShowMessage }) => {
-    const {isDarkMode} = useContext(ThemeContext);
+    const { isDarkMode } = useContext(ThemeContext);
     const [isVisible, setIsVisible] = useState(show);
 
     const getMessageTime = (length) => {
@@ -30,9 +30,9 @@ export const UserMessage = ({ message, show, setShowMessage }) => {
 
             return () => clearTimeout(hideTimer);
         }
-    }, [ show, messageTime, setShowMessage, isVisible ]);
+    }, [show, messageTime, setShowMessage, isVisible]);
 
-    let colorType = ''; 
+    let colorType = '';
 
     switch (message.type) {
         case 'success':
@@ -48,14 +48,14 @@ export const UserMessage = ({ message, show, setShowMessage }) => {
             colorType = 'info';
             break;
     }
-    
+
     if (!isVisible) return null;
 
-    const alertClass = `alert-box-message message-${ colorType }${ (isDarkMode) ? '-dark' : '' } animate__animated ${effect} animate__faster`;
+    const alertClass = `alert-box-message message-${colorType}${(isDarkMode) ? '-dark' : ''} animate__animated ${effect} animate__faster`;
 
     return (
-        <div className={ `${ alertClass }` }>
-            <span className="ml-1">{ message.message }</span>
+        <div className={`${alertClass}`}>
+            <span>{message.message}</span>
         </div>
     );
 };

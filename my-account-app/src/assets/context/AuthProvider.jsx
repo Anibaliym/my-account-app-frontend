@@ -80,7 +80,7 @@ export const AuthProvider = ({ children }) => {
             const newExpirationTime = new Date().getTime() + SESSION_DURATION;
             user.expirationTime = newExpirationTime;
 
-            localStorage.setItem('user', JSON.stringify(user));
+            localStorage.setItem('my-account-user', JSON.stringify(user));
             scheduleSessionTimeout(newExpirationTime);
         }
     }

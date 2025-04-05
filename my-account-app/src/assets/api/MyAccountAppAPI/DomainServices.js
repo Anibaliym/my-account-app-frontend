@@ -10,7 +10,6 @@ export const loginUserFetch = async (email, password) => {
             body: JSON.stringify({ email, password })
         });
 
-        console.log(response)
         if (response.status === 200 || response.status === 401) {
             const responseDataParse = await response.json();
 
