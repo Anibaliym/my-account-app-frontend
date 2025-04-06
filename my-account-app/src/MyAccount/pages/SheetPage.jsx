@@ -6,13 +6,13 @@ import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAP
 import { FormCardsSheet } from '../components/sheet/FormCardsSheet';
 
 export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAccountListener }) => {
-const {sheetId} = useParams();
+    const { sheetId } = useParams();
 
-const [sheetData, setSheetData] = useState(null);
-    const [cardsSheetData, setCardsSheetData] = useState([]); 
-    const [availableTotalBalance, setAvailableTotalBalance] = useState(0); 
-    const [toSpendBalance, setToSpendBalance] = useState(0); 
-    const [inFavorBalance, setInFavorBalance] = useState(0); 
+    const [sheetData, setSheetData] = useState(null);
+    const [cardsSheetData, setCardsSheetData] = useState([]);
+    const [availableTotalBalance, setAvailableTotalBalance] = useState(0);
+    const [toSpendBalance, setToSpendBalance] = useState(0);
+    const [inFavorBalance, setInFavorBalance] = useState(0);
 
     const getSheetData = async () => {
         // Obtiene los datos de la hoja de cálculo.
@@ -23,7 +23,7 @@ const [sheetData, setSheetData] = useState(null);
             showUserMessage("Error al obtener la hoja de cálculo:", error);
         }
     };
-    
+
     const getSheetCardsWithVignettes = async () => {
         // Obtiene los datos las cartas y calcula los totales.
         try {
@@ -54,14 +54,14 @@ const [sheetData, setSheetData] = useState(null);
     };
 
     const refreshData = async () => {
-        await getSheetData(); 
+        await getSheetData();
         await getSheetCardsWithVignettes();
-        calculateBalances(); 
+        calculateBalances();
     };
 
     useEffect(() => {
         refreshData();
-        setPageName('HOJA DE CÁLCULO'); 
+        setPageName('HOJA DE CÁLCULO');
     }, [sheetId]);
 
     useEffect(() => {
@@ -72,20 +72,21 @@ const [sheetData, setSheetData] = useState(null);
 
     return (
         <div className="page-principal-container">
-            <FormSheetBalance 
-                sheetData={ sheetData }
-                showUserMessage={ showUserMessage }
-                setAccountListener={ setAccountListener }
-                accountListener={ accountListener }
-                calculatedBalances={ { availableTotalBalance, toSpendBalance, inFavorBalance }}
-                refreshData={ refreshData} 
+            <FormSheetBalance
+                sheetData={sheetData}
+                cardsSheetData={cardsSheetData}
+                showUserMessage={showUserMessage}
+                setAccountListener={setAccountListener}
+                accountListener={accountListener}
+                calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }}
+                refreshData={refreshData}
             />
 
             <FormCardsSheet
-                cardsSheetData={ cardsSheetData }
-                showUserMessage={ showUserMessage }
-                getSheetCardsWithVignettes={ getSheetCardsWithVignettes }
-                refreshData={ refreshData } 
+                cardsSheetData={cardsSheetData}
+                showUserMessage={showUserMessage}
+                getSheetCardsWithVignettes={getSheetCardsWithVignettes}
+                refreshData={refreshData}
             />
         </div>
     );

@@ -100,6 +100,22 @@
     border-radius: 3px; 
 }
 
+.card-item-dragable {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px;
+    border-radius: 3px; 
+}
+
+.card-item-dragable.action {
+    flex: 0 0 20px;
+}
+
+.card-item-dragable.description {
+    flex: 1; /* Este ocupa todo el espacio restante */
+    text-align: left;
+}
+
 .excel-card-row {
     display: flex;
     width: 100%;
@@ -152,6 +168,20 @@
     width:100%; 
     background-color: var(--sidebar-color); 
 }
+
+.card-input-text-description {
+    width:100%; 
+    background-color: var(--body-color); 
+    color: var(--text-color); 
+}
+
+.card-input-text-description:hover {
+    width:100%; 
+    background-color: var(--sidebar-color); 
+    color: var(--text-color); 
+}
+
+
 
 .vignette-input-text-amount {
     width:100%; 

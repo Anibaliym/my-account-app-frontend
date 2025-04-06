@@ -5,29 +5,29 @@ import { formatDate } from '../../../assets/utilities/DateFormater';
 import { IconToolsbar } from './IconToolsbar';
 import { FormCalculatedBalances } from './FormCalculatedBalances';
 
-export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListener, accountListener, calculatedBalances, refreshData }) => {
+export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, setAccountListener, accountListener, calculatedBalances, refreshData }) => {
     const { id: sheetId, creationDate, accountId, description, cashBalance, currentAccountBalance, order } = sheetData;
 
     const sheetDescriptionRef = useRef(null);
-    const sheetCashBalanceRef = useRef(null); 
-    const sheetCurrentAccountBalanceRef = useRef(null); 
+    const sheetCashBalanceRef = useRef(null);
+    const sheetCurrentAccountBalanceRef = useRef(null);
 
     const [sheetDescription, setSheetDescription] = useState('');
     const [sheetDescriptionOld, setSheetDescriptionOld] = useState(description);
-    const [sheetCashBalance, setSheetCashBalance] = useState(''); 
-    const [sheetCurrentAccountBalance, setSheetCurrentAccountBalance] = useState(''); 
-    const [sheetCashBalanceOld, setSheetCashBalanceOld] = useState(''); 
-    const [sheetCurrentAccountBalanceOld, setSheetCurrentAccountBalanceOld] = useState(''); 
-    const [iconCashBalance, setIconCashBalance] = useState(false); 
-    const [iconCurrentAccountBalance, setIconCurrentAccountBalance] = useState(false); 
+    const [sheetCashBalance, setSheetCashBalance] = useState('');
+    const [sheetCurrentAccountBalance, setSheetCurrentAccountBalance] = useState('');
+    const [sheetCashBalanceOld, setSheetCashBalanceOld] = useState('');
+    const [sheetCurrentAccountBalanceOld, setSheetCurrentAccountBalanceOld] = useState('');
+    const [iconCashBalance, setIconCashBalance] = useState(false);
+    const [iconCurrentAccountBalance, setIconCurrentAccountBalance] = useState(false);
     const [animateCashBalance, setAnimateCashBalance] = useState(false);
     const [animateCurrentAccountBalance, setAnimateCurrentAccountBalance] = useState(false);
-    const [animationClass, setAnimationClass] = useState(''); 
+    const [animationClass, setAnimationClass] = useState('');
 
     // Detecta cambios en sheetId y activa la animación
     useEffect(() => {
         setAnimationClass("animate__fadeIn");
-        
+
         // Elimina la clase después de 500ms (duración de la animación)
         const timeout = setTimeout(() => setAnimationClass(""), 500);
 
@@ -36,10 +36,10 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
 
     useEffect(() => {
         // Se ejecuta solo cuando cambia iconCashBalance
-        setAnimateCashBalance(true); 
+        setAnimateCashBalance(true);
         const timeout = setTimeout(() => setAnimateCashBalance(false), 500);
         return () => clearTimeout(timeout);
-    }, [iconCashBalance]); 
+    }, [iconCashBalance]);
 
     useEffect(() => {
         // Se ejecuta solo cuando cambia iconCashBalance
@@ -49,56 +49,55 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
     }, [iconCurrentAccountBalance]);
 
     useEffect(() => {
-        const newCashBalance = Number(formatNumber(sheetCashBalance)); 
-        const oldCashBalance = Number(formatNumber(sheetCashBalanceOld)); 
-        setIconCashBalance( newCashBalance === oldCashBalance ); 
-    }, [ sheetCashBalance ])
+        const newCashBalance = Number(formatNumber(sheetCashBalance));
+        const oldCashBalance = Number(formatNumber(sheetCashBalanceOld));
+        setIconCashBalance(newCashBalance === oldCashBalance);
+    }, [sheetCashBalance])
 
     useEffect(() => {
-        const newCurrentAccountBalance = Number(formatNumber(sheetCurrentAccountBalance)); 
-        const oldCurrentAccountBalance = Number(formatNumber(sheetCurrentAccountBalanceOld)); 
-        setIconCurrentAccountBalance( newCurrentAccountBalance === oldCurrentAccountBalance ); 
-    }, [ sheetCurrentAccountBalance ])
+        const newCurrentAccountBalance = Number(formatNumber(sheetCurrentAccountBalance));
+        const oldCurrentAccountBalance = Number(formatNumber(sheetCurrentAccountBalanceOld));
+        setIconCurrentAccountBalance(newCurrentAccountBalance === oldCurrentAccountBalance);
+    }, [sheetCurrentAccountBalance])
 
     useEffect(() => {
-        setSheetDescription(description); 
-        setSheetCashBalance( `$${formatNumberWithThousandsSeparator(cashBalance)}` ); 
-        setSheetCashBalanceOld( `$${formatNumberWithThousandsSeparator(cashBalance)}` ); 
-        setSheetCurrentAccountBalance( `$${formatNumberWithThousandsSeparator(currentAccountBalance)}` );
-        setSheetCurrentAccountBalanceOld( `$${formatNumberWithThousandsSeparator(currentAccountBalance)}` );
-    }, [ sheetId ]);
+        setSheetDescription(description);
+        setSheetCashBalance(`$${formatNumberWithThousandsSeparator(cashBalance)}`);
+        setSheetCashBalanceOld(`$${formatNumberWithThousandsSeparator(cashBalance)}`);
+        setSheetCurrentAccountBalance(`$${formatNumberWithThousandsSeparator(currentAccountBalance)}`);
+        setSheetCurrentAccountBalanceOld(`$${formatNumberWithThousandsSeparator(currentAccountBalance)}`);
+    }, [sheetId]);
 
-    const handleBlur = async ( controlName ) => {
+    const handleBlur = async (controlName) => {
         switch (controlName) {
             case 'sheetDescription':
-                if(sheetDescription.length === 0)
-                    setSheetDescription(description); 
-                else 
-                {
-                    if(sheetDescriptionOld !== sheetDescription)
-                        updateSheetDescription(); 
+                if (sheetDescription.length === 0)
+                    setSheetDescription(description);
+                else {
+                    if (sheetDescriptionOld !== sheetDescription)
+                        updateSheetDescription();
                 }
 
                 break;
             case 'cashBalance':
-                const { isError: errorCashBalance } =  await updateCashBalanceFetch(sheetId, formatNumber(sheetCashBalance));
-    
-                if(errorCashBalance) 
-                    showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error'); 
+                const { isError: errorCashBalance } = await updateCashBalanceFetch(sheetId, formatNumber(sheetCashBalance));
+
+                if (errorCashBalance)
+                    showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error');
                 else {
-                    setSheetCashBalanceOld(sheetCashBalance); 
-                    setIconCashBalance(true); 
-                    refreshData(); 
+                    setSheetCashBalanceOld(sheetCashBalance);
+                    setIconCashBalance(true);
+                    refreshData();
                 }
 
                 break;
             case 'currentAccountBalance':
-                const { isError: errorCurrentAccountBalance } =  await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
-    
-                if(errorCurrentAccountBalance) 
-                    showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error'); 
+                const { isError: errorCurrentAccountBalance } = await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
+
+                if (errorCurrentAccountBalance)
+                    showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error');
                 else {
-                    setSheetCashBalanceOld(sheetCurrentAccountBalance); 
+                    setSheetCashBalanceOld(sheetCurrentAccountBalance);
                     setIconCurrentAccountBalance(true);
                     refreshData();
                 }
@@ -112,14 +111,14 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
 
         switch (field) {
             case 'sheetDescription':
-                setSheetDescription( value ); 
+                setSheetDescription(value);
                 break;
             case 'cashBalance':
-                setSheetCashBalance( `$${formatNumberWithThousandsSeparator( value.replace(/\D/g, '') )}` );
-               break;
+                setSheetCashBalance(`$${formatNumberWithThousandsSeparator(value.replace(/\D/g, ''))}`);
+                break;
             case 'currentAccountBalance':
-                setSheetCurrentAccountBalance( `$${formatNumberWithThousandsSeparator( value.replace(/\D/g, '') )}` );
-                break;  
+                setSheetCurrentAccountBalance(`$${formatNumberWithThousandsSeparator(value.replace(/\D/g, ''))}`);
+                break;
         }
     };
 
@@ -127,31 +126,31 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
         if (e.key === 'Enter') {
             switch (field) {
                 case 'sheetDescription':
-                    if(sheetDescriptionOld !== sheetDescription)
-                        updateSheetDescription(); 
+                    if (sheetDescriptionOld !== sheetDescription)
+                        updateSheetDescription();
                     break;
                 case 'cashBalance':
-                    const { isError: errorCashBalance } = await updateCashBalanceFetch(sheetId, formatNumber( (value === '$' ? '$0' : value ) ));
-                    
-                    if(errorCashBalance) 
-                        showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error'); 
+                    const { isError: errorCashBalance } = await updateCashBalanceFetch(sheetId, formatNumber((value === '$' ? '$0' : value)));
+
+                    if (errorCashBalance)
+                        showUserMessage('Ocurrió un error al intentar actualizar el saldo en efectivo.', 'error');
                     else {
-                        setSheetCashBalanceOld(value); 
-                        setIconCashBalance(true); 
+                        setSheetCashBalanceOld(value);
+                        setIconCashBalance(true);
                     }
-                    
+
                     break;
                 case 'currentAccountBalance':
-                    const { isError: errorCurrentAccountBalance } =  await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
-    
-                    if(errorCurrentAccountBalance) 
-                        showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error'); 
+                    const { isError: errorCurrentAccountBalance } = await updateCurrentAccountBalanceFetch(sheetId, formatNumber(sheetCurrentAccountBalance));
+
+                    if (errorCurrentAccountBalance)
+                        showUserMessage('Ocurrió un error al intentar actualizar el saldo de cuenta bancaria.', 'error');
                     else {
                         setSheetCurrentAccountBalanceOld(sheetCurrentAccountBalance);
                         setIconCurrentAccountBalance(true);
                     }
-    
-                break;
+
+                    break;
             }
 
             e.target.blur();
@@ -159,62 +158,63 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
     };
 
     const updateSheetDescription = async () => {
-        const { isError } = await updateSheetFetch(accountId, sheetId, sheetDescription, cashBalance, currentAccountBalance, order); 
-        
-        if(isError){
-            showUserMessage('Ocurrió un error al intentar actualizar el nombre de la hoja de cálculo','error');
-            return; 
+        const { isError } = await updateSheetFetch(accountId, sheetId, sheetDescription, cashBalance, currentAccountBalance, order);
+
+        if (isError) {
+            showUserMessage('Ocurrió un error al intentar actualizar el nombre de la hoja de cálculo', 'error');
+            return;
         }
 
-        setSheetDescriptionOld(sheetDescription); 
-        showUserMessage(`Se ha actualizado el nombre de la hoja de cálculo "${ sheetDescriptionOld }" a "${ sheetDescription }".`,'success');
+        setSheetDescriptionOld(sheetDescription);
+        showUserMessage(`Se ha actualizado el nombre de la hoja de cálculo "${sheetDescriptionOld}" a "${sheetDescription}".`, 'success');
         setAccountListener(accountListener + 1);
     }
 
     return (
         <div className="sheet-balances-form">
             <input
-                ref = { sheetDescriptionRef }
-                type = "text"
-                value = { sheetDescription }
-                maxLength = { 11 }
+                ref={sheetDescriptionRef}
+                type="text"
+                value={sheetDescription}
+                maxLength={11}
                 className={`balance-input-text display-6 animate__animated ${animationClass}`}
-                onClick = { () => sheetDescriptionRef.current.select() }
-                onBlur = { () => handleBlur('sheetDescription') }
-                onKeyDown = { (e) => handleKeyDown(e, 'sheetDescription', null)}
-                onChange = { (e) => handleChange(e, 'sheetDescription') }
+                onClick={() => sheetDescriptionRef.current.select()}
+                onBlur={() => handleBlur('sheetDescription')}
+                onKeyDown={(e) => handleKeyDown(e, 'sheetDescription', null)}
+                onChange={(e) => handleChange(e, 'sheetDescription')}
             />
 
-            <small style={{ fontSize: '12px' }}>{ formatDate(creationDate) }</small>
+            <small style={{ fontSize: '12px' }}>{formatDate(creationDate)}</small>
 
             <IconToolsbar
-                refreshData={ refreshData }
-                sheetDescription={ sheetDescription }
-                setAccountListener={ setAccountListener } 
-                accountListener={ accountListener }
-                showUserMessage={ showUserMessage }
+                refreshData={refreshData}
+                cardsSheetData={cardsSheetData}
+                sheetDescription={sheetDescription}
+                setAccountListener={setAccountListener}
+                accountListener={accountListener}
+                showUserMessage={showUserMessage}
             />
 
             <hr />
 
             <small>Saldo Efectivo</small>
             <input
-                ref = { sheetCashBalanceRef }
-                name = "cashBalance"
-                type = "text"
-                className = { `no-focus balance-input-text display-6 animate__animated ${animationClass}` }
+                ref={sheetCashBalanceRef}
+                name="cashBalance"
+                type="text"
+                className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
                 style={{ borderBottom: '1px solid white' }}
-                maxLength = { 11 }
-                value = { sheetCashBalance }
-                onChange = { (e) => handleChange(e, 'cashBalance')}
-                onClick = { () => sheetCashBalanceRef.current.select() }
-                onKeyDown = { (e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
-                onBlur = { () => ( handleBlur('cashBalance') ) }
+                maxLength={11}
+                value={sheetCashBalance}
+                onChange={(e) => handleChange(e, 'cashBalance')}
+                onClick={() => sheetCashBalanceRef.current.select()}
+                onKeyDown={(e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
+                onBlur={() => (handleBlur('cashBalance'))}
                 autoComplete="off"
             />
 
             <div className="icon-save">
-                <li 
+                <li
                     style={{ marginTop: '-35px' }}
                     className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
                 </li>
@@ -223,28 +223,28 @@ export const FormSheetBalance = ({ sheetData, showUserMessage, setAccountListene
             <br />
             <small>Saldo Cuenta Bancaria</small>
             <input
-                ref = { sheetCurrentAccountBalanceRef }
-                name = "currentAccountBalance"
-                type = "text"
-                className = { `no-focus balance-input-text display-6 animate__animated ${animationClass}` }
+                ref={sheetCurrentAccountBalanceRef}
+                name="currentAccountBalance"
+                type="text"
+                className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
                 style={{ borderBottom: '1px solid white' }}
-                maxLength = { 11 }
-                value = { sheetCurrentAccountBalance }
-                onChange = { (e) => handleChange(e, 'currentAccountBalance')}
-                onClick = { () => sheetCurrentAccountBalanceRef.current.select() }
-                onKeyDown = { (e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance )}
-                onBlur = { () => ( handleBlur('currentAccountBalance') ) }
+                maxLength={11}
+                value={sheetCurrentAccountBalance}
+                onChange={(e) => handleChange(e, 'currentAccountBalance')}
+                onClick={() => sheetCurrentAccountBalanceRef.current.select()}
+                onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance)}
+                onBlur={() => (handleBlur('currentAccountBalance'))}
                 autoComplete="off"
             />
 
             <div className="icon-save">
-                <li 
+                <li
                     style={{ marginTop: '-35px' }}
                     className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
                 </li>
             </div>
 
-            <FormCalculatedBalances calculatedBalances = { calculatedBalances } />
+            <FormCalculatedBalances calculatedBalances={calculatedBalances} />
         </div>
     );
 };
