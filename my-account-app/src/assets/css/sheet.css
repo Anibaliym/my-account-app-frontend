@@ -19,7 +19,21 @@
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
+    /* background-color: red;  */
+    
 }
+
+/* ayanez */
+.sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
+    width: 50%;
+    height: 100%;
+    float: left;
+    padding: 5px; 
+
+}
+/* .sheet-cards-form-pilar1 { background-color: blue; }
+.sheet-cards-form-pilar2 { background-color: lightgreen; } */
+
 
 .sheet-balances-form-header {
     border-radius:3px; 
@@ -57,7 +71,6 @@
     float:left;
     margin-right:15px; 
     border-radius:8px;     
-    width: 1600px;
     background-color: var(--sidebar-color);
     margin-bottom: 15px;
 } 
@@ -244,26 +257,25 @@
 
 @media (max-width: 2000px) {
     .excel-card {
-        width: 48%;
+        width: 100%;
     }
+
 }
 
 @media (max-width: 1500px) {
     .excel-card {
-        width: 600px;
+        width: 100%;
+    }
+    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
+        float: none;  
+        width:100%; 
     }
 }
 
-@media (max-width: 1220px) {
+@media (max-width: 1000px) {
     .page-principal-container {
         flex-direction: column; /* Cambiar de horizontal a vertical */
         height: auto; /* Ajustar altura para diseño vertical */
-
-        /* Habilita el scroll vertical si el contenido excede */
-        /* overflow-y: auto;  */
-        /* Evita scroll horizontal */
-        /* overflow-x: hidden;  */
-    
     }
     
     .sheet-balances-form {
@@ -275,12 +287,17 @@
     }
 }
 
+
 @media (max-width: 1000px) {
     .sheet-balances-form {
-        width: 100%;
+        width: 450px;
     }
 
     .excel-card {
-        width: 100%;
+        width: 450px;
+
     } 
+    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
+        width: 450px;
+    }
 }
