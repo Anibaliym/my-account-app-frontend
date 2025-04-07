@@ -1,5 +1,3 @@
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { DndContext, closestCenter } from '@dnd-kit/core';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -19,12 +17,7 @@ export const FormAddCards = ({ id, title }) => {
                 <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners}></i>
             </div>
             <div className="excel-card-cell description">
-                <input
-                    type="text"
-                    className={`card-input-text-description no-focus`}
-                    value={title}
-                    onChange={() => { }}
-                />
+                <span className="text-color-default">{title}</span>
             </div>
         </div>
     )

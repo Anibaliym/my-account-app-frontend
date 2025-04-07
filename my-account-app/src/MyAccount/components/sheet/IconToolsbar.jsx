@@ -43,8 +43,8 @@ export const IconToolsbar = ({ refreshData, cardsSheetData, sheetDescription, se
             />
 
             <div className="col icon-save">
-                <Tooltip placement="bottom" content="Crear carta de planificación" color="foreground" closeDelay={50}>
-                    <i className="bx bx-add-to-queue icon cursor-pointer text-white ml-2" onClick={() => (setshowModalCreateCard(!showModalCreateCard))} ></i>
+                <Tooltip placement="bottom" content="Cartas de planificación" color="foreground" closeDelay={50}>
+                    <i className="bx bx-spreadsheet icon cursor-pointer text-white ml-2" onClick={() => (setshowModalCreateCard(!showModalCreateCard))} ></i>
                 </Tooltip>
                 <Tooltip placement="bottom" content="Crear Respaldo" color="foreground" closeDelay={50}>
                     <i className='bx bxs-backpack icon cursor-pointer text-white ml-2' onClick={createSheetBackup} ></i>

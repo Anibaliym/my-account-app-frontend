@@ -5,7 +5,6 @@ import { useState, useRef, useEffect, useContext } from 'react';
 import { CustomInputText } from '../controls/CustomInputText';
 import { ThemeContext } from '../../../assets/context/ThemeProvider';
 import { FormAddCards } from './FormAddCards';
-
 import { DndContext, closestCenter, useSensor, useSensors, PointerSensor } from "@dnd-kit/core";
 import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable";
 
@@ -108,12 +107,8 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
             size='lg'
         >
 
-            <Modal.Header closeButton>
-                <Modal.Title>
-                    <h5 className="card-title text-color-default">CARTAS DE PLANIFICACIÓN</h5>
-                </Modal.Title>
-            </Modal.Header>
             <Modal.Body className="modal-content">
+                <h5 className=" card-title text-color-default">CARTAS DE PLANIFICACIÓN</h5>
                 <div className="row mt-3 mb-3">
                     <div className="col">
                         <CustomInputText
@@ -133,7 +128,6 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
                         <br />
 
                         <small className={`text-center text-danger mt-3 animate__fast ${animationClass}`}> {modalMessage} </small>
-
                     </div>
                     <div className="col">
                         <DndContext

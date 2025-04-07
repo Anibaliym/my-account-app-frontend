@@ -126,7 +126,8 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
         }
         else {
             showUserMessage(`La carta "${title}", ha actualizado su nombre a "${cardTitle}".`, 'success');
-            setCardTitleOld(cardTitle)
+            setCardTitleOld(cardTitle);
+            refreshData();
         }
     }
 
