@@ -7,16 +7,10 @@ import { useParams } from 'react-router-dom';
 import { updateCardFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 import { Vignette } from './Vignette';
 import { ModalDeleteCardConfirmation } from './ModalDeleteCardConfirmation';
-
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 
 export const FormCardDragable = ({ id, title, order, vignettesData, showUserMessage, getSheetCardsWithVignettes, totalCardAmount, refreshData }) => {
-    const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
-    const style = { transform: CSS.Transform.toString(transform), transition };
-
     const { sheetId } = useParams()
     const cardTitleRef = useRef(null);
 
@@ -26,7 +20,6 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
     const [modalConfirmDeleteCard, setModalConfirmDeleteCard] = useState(false);
     const [cardTotalAmount, setCardTotalAmount] = useState(totalCardAmount);
     const [isAnimating, setIsAnimating] = useState(false);
-
 
     useEffect(() => {
         // Activa la animación cuando cambia el valor de cardTotalAmount
@@ -158,12 +151,7 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
     }
 
     return (
-        <div
-            className={`excel-card animate__animated animate__fadeIn animate__faster mb-4`}
-            ref={setNodeRef}
-            style={style}
-            {...attributes}
-        >
+        <div className={`excel-card animate__animated animate__fadeIn animate__faster mb-4`}>
             <ModalDeleteCardConfirmation
                 cardTitle={title}
                 modalConfirmDeleteCard={modalConfirmDeleteCard}
@@ -226,7 +214,6 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                     ${formatNumberWithThousandsSeparator(cardTotalAmount)}
                 </h2>
             </div>
-            <i className="bx bx-move cursor-pointer mr-2" {...listeners}></i>
         </div>
     )
-}
+}; 
