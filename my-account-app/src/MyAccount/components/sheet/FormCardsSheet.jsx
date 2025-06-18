@@ -1,7 +1,6 @@
 import { memo, useState } from 'react';
 import { useEffect } from 'react';
 import { FormCardDragable } from './FormCardDragable';
-import { updateCardOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Card';
 
 export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, getSheetCardsWithVignettes, refreshData }) => {
     if (cardsSheetData == null) return;

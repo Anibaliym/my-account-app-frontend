@@ -2,7 +2,6 @@ body {
     background-color: var(--body-color);
 }
 
-
 .principal-container {
     display: flex;
     height: 100vh;
@@ -11,7 +10,7 @@ body {
 }
 
 .main-content {
-    margin-left: 250px;
+    margin-left: 255px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -23,11 +22,10 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: var(--sidebar-color); /* Ligero fondo blanco translúcido */
-    backdrop-filter: blur(10px); /* Aplica desenfoque */
-    -webkit-backdrop-filter: blur(10px); /* Soporte para Safari */
-    padding: 10px 10px 5px 5px;
-    /* background-color:red;  */
+    
+    padding: 5px 10px 5px 5px;
+    margin: 5px;
+    border-radius: 5px; 
 }
 
 .left-header {
@@ -332,6 +330,8 @@ span.sheet-list {
     bottom: 0;
     transition: all 0.3s ease;
     padding: 5px;
+    margin: 5px;
+    border-radius: 6px; 
 }
 
 .sidebar.active {
@@ -346,7 +346,7 @@ span.sheet-list {
 }
 
 .sidebar.active + .main-content {
-    margin-left: 50px;
+    margin-left: 55px;
 }
 
 
