@@ -103,5 +103,13 @@
     .access-login-form {
         max-width: 100%;
     }
-}
 
+    .access-page-text-1 {
+        font-size: 10px;
+    }
+
+    .promo-text {
+        display: none;
+    }
+
+}

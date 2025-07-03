@@ -34,26 +34,30 @@ export const AccessPage = () => {
             </div>
 
             <div className="access-presentation d-flex flex-column justify-content-start text-white px-4 pt-2 position-relative">
-                <h1 className="display-1 text-end mb-5">MI CUENTA</h1>
+                <h1 className="display-1 text-end ">MI CUENTA</h1>
 
-                <div className="ml-10">
-                    <h2 className="lead fs-2 mb-3">Lleva el control total de tus finanzas</h2>
-                    <p className="fs-5 mb-3">
-                        Aplicación diseñada para facilitarte ayuda en el control de tus gastos y/o planificaciones.
-                    </p>
-                    
-                    <ul className="list-unstyled fs-5 mb-3">
-                        <li className="ml-5"><i className='bx bxs-hand-right'></i> Registra tus ingresos, gastos, movimientos y planifica.</li>
-                        <li className="ml-5"><i className='bx bxs-hand-right'></i> Genera reportes personalizados que te muestran claramente en qué se va a mover tu dinero.</li>
-                        <li className="ml-5"><i className='bx bxs-hand-right'></i> Establece metas de ahorro y monitorea tu progreso sin complicaciones.</li>
-                        <li className="ml-5"><i className='bx bxs-hand-right'></i> Accede desde cualquier dispositivo, con una experiencia rápida y segura.</li>
-                    </ul>
-                    
-                    <p className="lead fs-5 mt-5">
-                        No dejes que tus finanzas te controlen.<br />
-                        Toma el control y empieza a ahorrar de verdad con MI CUENTA.
-                    </p>
-                </div>
+                <hr />
+                
+                <h2 className="lead fs-2 mb-3 access-page-text-1">
+                    Lleva el control total de tus finanzas
+                </h2>
+                
+                <p className="fs-5 mb-3">
+                    Aplicación diseñada para facilitarte ayuda en el control de tus gastos y/o planificaciones.
+                </p>
+                
+                <ul className="list-unstyled fs-5 mb-3">
+                    <li className="ml-5"><i className='bx bxs-hand-right'></i> Registra tus ingresos, gastos, movimientos y planifica.</li>
+                    <li className="ml-5"><i className='bx bxs-hand-right'></i> Genera reportes personalizados que te muestran claramente en qué se va a mover tu dinero.</li>
+                    <li className="ml-5"><i className='bx bxs-hand-right'></i> Establece metas de ahorro y monitorea tu progreso sin complicaciones.</li>
+                    <li className="ml-5"><i className='bx bxs-hand-right'></i> Accede desde cualquier dispositivo, con una experiencia rápida y segura.</li>
+                </ul>
+                
+                <p className="lead fs-5 mt-5">
+                    No dejes que tus finanzas te controlen.<br />
+                    Toma el control y empieza a ahorrar de verdad con MI CUENTA.
+                </p>
+                
 
                 <div className="promo-text position-absolute">
                     <Tooltip 
@@ -68,6 +72,7 @@ export const AccessPage = () => {
                         placement="up"
                         closeDelay={ 400 }
                     >
+                        
                         <Link 
                             isBlock 
                             size="sm"
