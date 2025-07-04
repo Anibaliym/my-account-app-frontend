@@ -93,22 +93,3 @@
     align-items: center;
     padding: 5px;
 }
-
-@media (max-width: 1020px) {
-    .accounts-principal-container {
-        flex-direction: column;
-    }
-
-    .accounts-balances-form, .account-sheets-list-container {
-        height: 400px; 
-        width:100%;
-    }
-
-    .account-sheets-list-container {
-        height: 400px; 
-        width:100%;
-        margin-top:20px;
-
-    }
-}
-

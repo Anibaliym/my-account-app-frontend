@@ -93,23 +93,3 @@
     text-decoration: underline;
 }
 
-@media (max-width: 900px) {
-    .access-container {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 500px) {
-    .access-login-form {
-        max-width: 100%;
-    }
-
-    .access-page-text-1 {
-        font-size: 10px;
-    }
-
-    .promo-text {
-        display: none;
-    }
-
-}

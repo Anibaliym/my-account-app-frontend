@@ -7,6 +7,7 @@ body {
     height: 100vh;
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
+
 }
 
 .main-content {
@@ -51,7 +52,6 @@ body {
 /* Header left container */
 .header-left {
     display: flex;
-    /* align-items: center; */
 }
 
 .header-left h1 {
@@ -346,9 +346,9 @@ span.sheet-list {
 }
 
 .sidebar.active + .main-content {
-    margin-left: 55px;
+    /* margin-left: 55px; */
+    margin-left: 0px;
 }
-
 
 .sidebar-body {
     flex: 1;
@@ -395,36 +395,3 @@ span.sheet-list {
 }
 
 /* SideBar - fin *******************************************************************************/
-@media screen and (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-    }
-
-    .sidebar.active {
-        width: 60px;
-    }
-}
-
-@media screen and (max-width: 580px) {
-    .header-toggle-menu, .header-title-menu {
-        display:none;  
-    }
-
-    .sidebar {
-        position: fixed;
-        left: -200px;
-        transition: all 0.3s;
-    }
-
-    .sidebar.active {
-        left: 0;
-    } 
-
-    .main-content {
-        margin-left: 0;
-    } 
-}

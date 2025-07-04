@@ -6,6 +6,8 @@ import { Link, Tooltip } from '@nextui-org/react';
 
 import '/src/assets/css/Access.css';
 import '/src/assets/css/Global.css';
+import '/src/assets/css/Responsive.css';
+
 import { ToggleTheme } from '../components/ui/ToggleTheme';
 
 export const AccessPage = () => {

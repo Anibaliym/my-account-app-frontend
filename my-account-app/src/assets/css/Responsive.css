@@ -1,0 +1,107 @@
+@media (max-width: 2000px) {
+    .excel-card {
+        width: 100%;
+    }
+}
+
+@media (max-width: 1500px) {
+    .excel-card {
+        width: 100%;
+    }
+
+    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
+        float: none;  
+        width:100%; 
+    }
+}
+
+
+@media (max-width: 1020px) {
+    .accounts-principal-container {
+        flex-direction: column;
+    }
+
+    .accounts-balances-form, .account-sheets-list-container {
+        height: 400px; 
+        width:100%;
+    }
+
+    .account-sheets-list-container {
+        height: 400px; 
+        width:100%;
+        margin-top:20px;
+    }
+}
+
+@media (max-width: 1000px) {
+    .page-principal-container {
+        flex-direction: column; 
+        height: auto; 
+    }
+    
+    .sheet-balances-form {
+        width: 350px; 
+    }
+
+    .excel-card {
+        width: 700px;
+    }
+
+    .sheet-balances-form {
+        width: 450px;
+    }
+    
+    .excel-card {
+        width: 450px;
+    
+    } 
+    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
+        width: 450px;
+    }
+}
+
+@media (max-width: 900px) {
+    .access-container {
+        flex-direction: column;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+
+    .main-content {
+        margin-left: 200px;
+    }
+
+    .sidebar.active {
+        width: 60px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+
+    .sidebar.active {
+        display: none;
+    } 
+
+  .main-content {
+    
+    width: 100%;
+    flex: 1;
+  }
+
+    .access-login-form {
+        max-width: 100%;
+    }
+
+    .access-page-text-1 {
+        font-size: 10px;
+    }
+
+    .promo-text {
+        display: none;
+    }    
+}
+
