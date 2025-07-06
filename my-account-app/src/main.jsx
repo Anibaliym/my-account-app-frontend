@@ -5,11 +5,11 @@ import { BrowserRouter } from 'react-router-dom';
 import { NextUIProvider } from '@nextui-org/react';
 
 createRoot(document.getElementById('root')).render(
-  // <StrictMode>
+  <StrictMode>
     <BrowserRouter>
       <NextUIProvider>
         <MyAccountApp />
       </NextUIProvider>
     </BrowserRouter>
-  // </StrictMode>,
+  </StrictMode>,
 )

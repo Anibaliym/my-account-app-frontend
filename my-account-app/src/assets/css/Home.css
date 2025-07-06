@@ -346,8 +346,8 @@ span.sheet-list {
 }
 
 .sidebar.active + .main-content {
-    /* margin-left: 55px; */
     margin-left: 0px;
+    margin-left: 55px;
 }
 
 .sidebar-body {
