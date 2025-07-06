@@ -37,10 +37,19 @@ export const MyAccountRouter = () => {
 
     return (
         <div className="principal-container">
-            <Sidebar toggleSidebar={toggleSidebar} accountListener={accountListener} />
+            <Sidebar 
+                toggleSidebar={toggleSidebar} 
+                accountListener={accountListener} 
+            />
 
-            <div className="main-content">
-                <Header setToggleSidebar={setToggleSidebar} toggleSidebar={toggleSidebar} pageName={pageName} />
+            <div 
+                className="main-content" 
+            >
+                <Header 
+                    setToggleSidebar={setToggleSidebar} 
+                    toggleSidebar={toggleSidebar} 
+                    pageName={pageName} 
+                />
 
                 <section className="dashboard-content">
                     <Routes>
@@ -56,7 +65,7 @@ export const MyAccountRouter = () => {
                         <UserMessage message={message} show={showMessage} setShowMessage={setShowMessage} />
                     </div>
                 </section>
-            </div>
+            </div> 
         </div>
     );
 };

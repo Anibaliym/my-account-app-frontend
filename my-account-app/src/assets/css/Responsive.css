@@ -86,6 +86,7 @@
         display: none;
     } 
 
+
     .access-login-form {
         max-width: 100%;
     }
@@ -97,5 +98,5 @@
     .promo-text {
         display: none;
     }    
-}
+} 
 
