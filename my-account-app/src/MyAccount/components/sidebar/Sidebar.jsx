@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from 'react';
 import { FormAddAccount } from './FormAddAccount';
 import { getUserAccountsWithSheetsFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 
-export const Sidebar = ({ toggleSidebar, accountListener }) => {
+export const Sidebar = ({ toggleSidebar, setToggleSidebar, accountListener }) => {
     const isInitialRender = useRef(true);
 
     // Estado para los dropdowns abiertos
@@ -56,9 +56,7 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
 
     return (
         <nav className={`sidebar ${toggleSidebar ? 'active collapsed' : ''} animate__animated animate__fadeInLeft animate__faster`} >
-
-
-            <div className="sidebar-body">
+            {/* <div className="sidebar-body"> */}
                 {
                     menuData.map(({ id, name, description, icon }) => {
 
@@ -71,6 +69,7 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
                                 navigateTo={name}
                                 description={description}
                                 icon={icon}
+                                setToggleSidebar={setToggleSidebar}
                             />
                         )
                     })
@@ -95,7 +94,7 @@ export const Sidebar = ({ toggleSidebar, accountListener }) => {
                     (!toggleSidebar) && (<FormAddAccount userId={userId} reloadAccount={reloadAccount} />)
                 }
                 <hr />
-            </div>
+            {/* </div> */}
         </nav>
     )
 }

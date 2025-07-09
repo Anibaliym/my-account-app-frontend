@@ -35,8 +35,9 @@
 
 body.dark {
     --placeholder-color: #8e8e8e; 
+    /* --body-color: #212121; */
     --body-color: #212121;
-    --sidebar-color: #171717;
+    --sidebar-color: #000000;
     /* --sidebar-color: black; */
     
     --primary-color: #FF7F11; /* Naranja Vibrante - Un naranja fuerte y llamativo. */

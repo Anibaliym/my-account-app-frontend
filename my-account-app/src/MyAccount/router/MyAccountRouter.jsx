@@ -15,6 +15,7 @@ import '/src/assets/css/Cards.css';
 import '/src/assets/css/sheet.css';
 import '/src/assets/css/Accounts.css';
 import '/src/assets/css/Responsive.css';
+import '/src/assets/css/grid.css';
 
 export const MyAccountRouter = () => {
 
@@ -39,22 +40,20 @@ export const MyAccountRouter = () => {
         <div className="principal-container">
             <Sidebar 
                 toggleSidebar={toggleSidebar} 
+                setToggleSidebar={setToggleSidebar}
                 accountListener={accountListener} 
             />
-
-            <div 
-                className="main-content" 
-            >
+            
+            <div className="main-content" >
                 <Header 
                     setToggleSidebar={setToggleSidebar} 
                     toggleSidebar={toggleSidebar} 
                     pageName={pageName} 
                 />
-
-                <section className="dashboard-content">
+                <div className="dashboard-content">
                     <Routes>
-                        <Route path="profile" element={<ProfilePage setPageName={setPageName} showUserMessage={showUserMessage} />} />
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />
+                        <Route path="profile" element={<ProfilePage setPageName={setPageName} showUserMessage={showUserMessage} />} />
                         <Route path="accounts" element={<AccountsPage setPageName={setPageName} showUserMessage={showUserMessage} setAccountListener={setAccountListener} accountListener={accountListener} />} />
                         <Route path="admin" element={<AdminPage setPageName={setPageName} showUserMessage={showUserMessage} setAccountListener={setAccountListener} accountListener={accountListener} />} />
                         <Route path="sheet/:sheetId" element={<SheetPage setPageName={setPageName} showUserMessage={showUserMessage} accountListener={accountListener} setAccountListener={setAccountListener} />} />
@@ -64,7 +63,7 @@ export const MyAccountRouter = () => {
                     <div className="row" style={{ height: "30px", width: '100%' }}>
                         <UserMessage message={message} show={showMessage} setShowMessage={setShowMessage} />
                     </div>
-                </section>
+                </div>
             </div> 
         </div>
     );

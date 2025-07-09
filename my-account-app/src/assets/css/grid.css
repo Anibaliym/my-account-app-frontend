@@ -1,0 +1,107 @@
+.sidebar {
+    background: var(--sidebar-color);
+    width: 250px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    border-radius: 5px;
+    margin: 5px; 
+    height: calc(100vh - 10px);
+    padding: 5px;
+    overflow: hidden;
+    flex-shrink: 0;
+    color: var(--text-color);
+}
+
+.sidebar.collapsed {
+    width: 50px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 5px;
+    border-radius: 5px;
+
+
+}
+
+.main-content {
+    flex-grow: 1;
+    transition: margin-left 0.3s;
+    margin-left: 200px;
+    position: relative;
+    border-radius: 5px;
+    padding-top: 0;
+    margin: 5px 5px 5px 0px; 
+    background-color: var(--body-color);
+}
+
+.dashboard-content {
+    margin-top: 0px;
+    padding: 10px;
+    background-color: var(--body-color);
+    
+    height: calc(100vh - 47px); 
+
+    /* ayanez - afecta el "balance-form" */
+    /* Solo si quieres permitir desplazamiento horizontal */
+    white-space: nowrap;
+    overflow-x: auto; 
+}
+
+.icon-menu {
+    position: center;
+    display: inline-block;
+    font-size: 20px;
+    text-align:center; 
+}
+
+.sidebar.active + .main-content {
+    margin-left: 60px;
+    margin-left: 5px;
+}
+
+.sidebar-body {
+    flex: 1;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.sidebar-body::-webkit-scrollbar {
+    display: none;
+}
+
+
+.sidebar.collapsed .dropdown-btn span {
+    display: none;
+}
+
+.sidebar.collapsed .dropdown-btn-accounts span {
+    display: none;
+}
+
+
+.sidebar-sub-menu {
+    display: none;
+    width: 100%;
+}
+
+.sidebar-sub-menu a {
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex; 
+    align-items: center; 
+    padding: 0px;
+    font-size: 14px;
+    border-radius: 5px;
+    line-height: 30px;
+    margin-left: 35px;
+}
+
+.sidebar-sub-menu a:hover
+{
+    background-color: var(--primary-color);
+    color: var(--text-hover-color);
+}

@@ -7,29 +7,6 @@ body {
     height: 100vh;
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
-    /* background-color: gold; */
-}
-
-.main-content {
-    margin-left: 380px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.3s ease;
-    color: var(--text-color);
-    /* background-color: red; */
-    margin: 5px 5px 5px 260px;
-    border-radius: 6px; 
-    padding: 5px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px 5px 5px;
-    margin-bottom: 5px;
-    border-radius: 5px; 
 }
 
 .left-header {
@@ -91,10 +68,6 @@ body {
 .toggle-btn:hover {
     color: var(--text-color);
     transform: scale(1.05); /* Agranda ligeramente el botón */
-}
-
-.dashboard-content {
-    flex: 1;
 }
 
 .dropdown-btn {
@@ -297,9 +270,7 @@ span.sheet-list {
 }
 
 .account-container {
-    /* background-color: var(--sidebar-color);  */
     width:500px;
-    /* height:100px;  */
     padding:20px;
     border-radius:2px;
     float:left;
@@ -319,84 +290,3 @@ span.sheet-list {
     color: var(--success-color);
     border: 1px solid var(--success-color);
 }
-
-
-/* SideBar - inicio *******************************************************************************/
-
-.sidebar {
-    width: 250px;
-    background-color: var(--sidebar-color);
-    color: var(--text-color);
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    transition: all 0.3s ease;
-    padding: 5px;
-    margin: 5px;
-    border-radius: 6px; 
-}
-
-.sidebar.active {
-    width: 50px;
-    transform: translateX(0);
-
-}
-
-.icon-menu {
-    position: center;
-    display: inline-block;
-    font-size: 20px;
-    text-align:center; 
-}
-
-.sidebar.active + .main-content {
-    margin-left: 60px;
-    margin-left: 5px;
-}
-
-.sidebar-body {
-    flex: 1;
-    overflow-y: auto;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-}
-
-.sidebar-body::-webkit-scrollbar {
-    display: none;
-}
-
-
-.sidebar.collapsed .dropdown-btn span {
-    display: none;
-}
-
-.sidebar.collapsed .dropdown-btn-accounts span {
-    display: none;
-}
-
-
-.sidebar-sub-menu {
-    display: none;
-    width: 100%;
-}
-
-.sidebar-sub-menu a {
-    color: var(--text-color);
-    text-decoration: none;
-    display: flex; 
-    align-items: center; 
-    padding: 0px;
-    font-size: 14px;
-    border-radius: 5px;
-    line-height: 30px;
-    margin-left: 35px;
-}
-
-.sidebar-sub-menu a:hover
-{
-    background-color: var(--primary-color);
-    color: var(--text-hover-color);
-}
-
-/* SideBar - fin *******************************************************************************/

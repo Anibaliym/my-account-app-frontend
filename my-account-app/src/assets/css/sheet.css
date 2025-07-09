@@ -19,8 +19,6 @@
     height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
     overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
     overflow-x: hidden; /* Evita scroll horizontal */
-    /* background-color: red;  */
-    
 }
 
 /* ayanez */
@@ -283,5 +281,3 @@
 .color-selector-darkTheme-STRONG_BLUE { background-color: #0D1B2A;      color: var(--text-color); }
 .color-selector-darkTheme-STRONG_GRAY { background-color: #242424;      color: var(--text-color); }
 .color-selector-darkTheme-STRONG_PURPLE { background-color: #321A44;    color: var(--text-color); }
-
-
