@@ -4,6 +4,8 @@ import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Link } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
 
+import profileIcon from '../../assets/images/profile-icon.png';
+
 export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
     const [userName, setUserName] = useState('');
@@ -14,6 +16,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const [showModalDeleteUserAccount, setShowModalDeleteUserAccount] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem('my-account-user'));
+
+    
 
     useEffect(() => {
         setPageName('PERFIL');
@@ -30,56 +34,34 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const deleteUserAccount = () => setShowModalDeleteUserAccount(!showModalDeleteUserAccount);
 
     return (
-        <div className="page-principal-container">
-            <div className="container-fluid mt-3 animate__animated animate__fadeIn">
+        <>
+            <ModalDeleteUserAccount
+                userId={userId}
+                showModalDeleteUserAccount={showModalDeleteUserAccount}
+                setShowModalDeleteUserAccount={setShowModalDeleteUserAccount}
+                showUserMessage={showUserMessage}
+            />
 
-                <ModalDeleteUserAccount
-                    userId={userId}
-                    showModalDeleteUserAccount={showModalDeleteUserAccount}
-                    setShowModalDeleteUserAccount={setShowModalDeleteUserAccount}
-                    showUserMessage={showUserMessage}
-                />
-
+            <div className="profile-card">
                 <div className="row">
-                    <h6 className="display-6 title-color-text">{userName}</h6>
-                </div>
-                <div className="row">
-                </div>
-                <div className="row">
-                    <small className="lead">{capitalizeWords(userEmail)}</small>
-                </div>
-                <div className="row">
-                    <small className="lead">
-                        {
-                            (user === 'ADMIN') && (
-                                <small className="text-color-primary" style={{ fontSize: '12px' }}>
-                                    ADMINISTRADOR
-                                </small>
-                            )
-                        }
-                    </small>
-
-                    <div className="row">
-                        <div className="col-10"></div>
-                        <div className="col-2">
-                            <Link isBlock showAnchorIcon color="danger" className="ml-1 mt-2 cursor-pointer" onClick={deleteUserAccount}>
-                                Quisiera eliminar mi cuenta.
-                            </Link>
-                        </div>
+                    <div className="col">
+                        <h2 className="text-color-primary">{ userName }</h2>
+                        <span className="text-color-default">{userEmail.toLowerCase()}</span>
+                        
+                        <figcaption className="blockquote-footer mt-5">
+                            Creación: <cite title="Source Title text-color-primary">{userCreationDate}</cite>
+                        </figcaption>
+                    </div>
+                    <div className="col">
+                        <img src={profileIcon} alt="Profile Icon" width={150} height={150} />
                     </div>
                 </div>
-                <hr />
-                <div className="row animate__animated animate__fadeInUp animate__faster">
-                    <figure>
-                        <blockquote className="blockquote" style={{ fontSize: '13px' }}>
-                            <p>Miembre desde: </p>
-                        </blockquote>
-                        <figcaption className="blockquote-footer text-color-primary" style={{ fontSize: '13px' }}>
-                            {userCreationDate}
-                        </figcaption>
-                    </figure>
+                <div className="row">
+                    {/* ayanez - pendiente de implementar */}
+                    {/* <div className="row"><button className={`modal-button `}>Editar</button></div> */}
+                    <div className="row"><button className={`button-danger mt-2 `} onClick={deleteUserAccount}>Eliminar la cuenta</button></div>
                 </div>
             </div>
-        </div>
+        </>
     );
 };

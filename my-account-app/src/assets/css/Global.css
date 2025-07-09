@@ -62,6 +62,15 @@ body.dark {
     color: white; /* Color del texto seleccionado */
 }
 
+.text-color-white {
+    color: white;
+}
+
+.text-color-black {
+    color: black;
+}
+
+
 .text-color-default {
     color: var(--text-color);
 }

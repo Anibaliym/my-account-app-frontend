@@ -290,3 +290,12 @@ span.sheet-list {
     color: var(--success-color);
     border: 1px solid var(--success-color);
 }
+
+.profile-card {
+    width: 100%;
+    max-width: 500px;
+    padding: 20px 0px 20px 20px;
+    border-radius: 20px;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+    background-color: var(--sub-menu-container, blue);
+}
