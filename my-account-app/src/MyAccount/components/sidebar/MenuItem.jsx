@@ -5,8 +5,6 @@ export const MenuItem = ({ navigateTo = '/error', description = 'menú name', ic
     const navigate = useNavigate();
     const { width: screenWith } = useWindowSize();
 
-
-    console.log(screenWith)
     const handleClick = () => {
         //si el ancho de la pantalla es menor a 500px (mobile) entonces contrae el sidebar
         if(screenWith <= 500)

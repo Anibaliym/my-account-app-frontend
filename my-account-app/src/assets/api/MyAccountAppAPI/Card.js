@@ -73,8 +73,6 @@ export const updateCardFetch = async (cardId, sheetId, title, order) => {
 }
 
 export const updateCardOrderItemsFetch = async (newCardsOrderArr) => {
-
-    console.log(newCardsOrderArr)
     const url = `${API_URL}/api/Card/UpdateCardOrderItems`;
 
     try {
