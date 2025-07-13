@@ -45,7 +45,11 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
             <div className="profile-card">
                 <div className="row">
                     <div className="col">
-                        <h2 className="text-color-primary">{ userName }</h2>
+
+                        <h2 className="animate__animated animate__fadeInDown display-1 animate__faster text-color-primary" style={{ fontSize:'35px', }}>
+                            { userName }
+                        </h2>
+
                         <span className="text-color-default">{userEmail.toLowerCase()}</span>
                         
                         <figcaption className="blockquote-footer mt-5">

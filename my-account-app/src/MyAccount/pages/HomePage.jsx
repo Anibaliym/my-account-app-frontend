@@ -8,7 +8,7 @@ export const HomePage = ({ setPageName }) => {
 
     return (
         <>
-            <h1 className="animate__animated animate__fadeIn display-1 animate__faster text-color-primary" style={{ fontSize:'40px', }}>
+            <h1 className="animate__animated animate__fadeInDown display-1 animate__faster text-color-primary" style={{ fontSize:'40px', }}>
                 MI CUENTA
             </h1>
             
