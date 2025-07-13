@@ -22,7 +22,9 @@
 .dashboard-content {
     margin-top: 0px;
     padding: 10px;
+    border-radius: 5px;
     background-color: var(--body-color);
+    background-color: red;
     
     height: calc(100vh - 47px); 
 

@@ -24,26 +24,7 @@ export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener,
 
     return (
         <div className="accounts-principal-container">
-            <AccountsForm
-                userAccountsWithSheetsData={userAccountsWithSheets}
-                showUserMessage={showUserMessage}
-                userId={userId}
-                setAccountListener={setAccountListener}
-                accountListener={accountListener}
-                setAccountIdOnView={setAccountIdOnView}
-            />
-            {
-                (accountIdOnView.length > 0)
-                && (
-                    <SheetsForm
-                        accountId={accountIdOnView}
-                        showUserMessage={showUserMessage}
-                        setAccountListener={setAccountListener}
-                        accountListener={accountListener}
-                        setAccountIdOnView={setAccountIdOnView}
-                    />
-                )
-            }
+            acco
         </div>
     );
 }
