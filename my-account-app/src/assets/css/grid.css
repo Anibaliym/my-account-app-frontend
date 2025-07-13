@@ -1,3 +1,37 @@
+.main-content {
+    flex-grow: 1;
+    transition: margin-left 0.3s;
+    margin-left: 200px;
+    position: relative;
+    border-radius: 5px;
+    padding-top: 0;
+    margin: 5px 5px 5px 0px; 
+    background-color: var(--body-color);
+    /* background-color: red; */
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px 5px 5px;
+    border-radius: 5px;
+    /* background-color: pink; */
+}
+
+.dashboard-content {
+    margin-top: 0px;
+    padding: 10px;
+    background-color: var(--body-color);
+    
+    height: calc(100vh - 47px); 
+
+    /* ayanez - afecta el "balance-form" */
+    /* Solo si quieres permitir desplazamiento horizontal */
+    white-space: nowrap;
+    overflow-x: auto; 
+}
+
 .sidebar {
     background: var(--sidebar-color);
     width: 250px;
@@ -14,40 +48,6 @@
 
 .sidebar.collapsed {
     width: 50px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 10px 5px 5px;
-    border-radius: 5px;
-
-
-}
-
-.main-content {
-    flex-grow: 1;
-    transition: margin-left 0.3s;
-    margin-left: 200px;
-    position: relative;
-    border-radius: 5px;
-    padding-top: 0;
-    margin: 5px 5px 5px 0px; 
-    background-color: var(--body-color);
-}
-
-.dashboard-content {
-    margin-top: 0px;
-    padding: 10px;
-    background-color: var(--body-color);
-    
-    height: calc(100vh - 47px); 
-
-    /* ayanez - afecta el "balance-form" */
-    /* Solo si quieres permitir desplazamiento horizontal */
-    white-space: nowrap;
-    overflow-x: auto; 
 }
 
 .icon-menu {
