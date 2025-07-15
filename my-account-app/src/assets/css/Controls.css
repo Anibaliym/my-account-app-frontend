@@ -17,22 +17,6 @@
     transform: scale(1.02); /* Agranda ligeramente el botón */
 }
 
-
-/* Contenedor para mostrar varios badges */
-.badge-container {
-    display: flex;
-    gap: 10px;
-    padding: 20px;
-}
-
-/* Contenedor de los badges */
-.badge-container {
-    display: flex;
-    gap: 20px;
-    padding: 20px;
-    font-size: 24px; /* Tamaño de los iconos */
-}
-
 .icon {
     position: relative;
     display: inline-block;
@@ -58,8 +42,7 @@
 .badge {
     background: #b63509;
     color: white;
-    font-size: 10px;
-    font-weight: bold;
+    font-size: 11px;
     width: 20px;
     height: 20px;
     display: flex;
@@ -80,6 +63,21 @@
     color: var(--text-color);
     transition: all 0.1s ease-in-out;
     outline: none;
+}
+
+.custom-input-search-account {
+    /* width: 60%; */
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border-input-text-color);
+    background: var(--background-input-text-color);
+    color: var(--text-color);
+    transition: all 0.1s ease-in-out;
+    outline: none;
+}
+.custom-input-search-account:focus {
+    border-color: var(--primary-color);
 }
 
 /* Efecto cuando el input está en foco */

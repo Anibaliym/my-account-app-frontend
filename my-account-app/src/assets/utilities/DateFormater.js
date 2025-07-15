@@ -12,3 +12,18 @@ export const formatDate = (dateString) =>
         // second: '2-digit'
     });
 }
+
+// return "Month Day"
+export const shortFormatDate = (dateString) => {
+    const date = new Date(dateString);
+
+    const options = { month: 'long', day: 'numeric' };
+    const parts = date.toLocaleDateString('es-ES', options).split(' ');
+
+    const day = parts[0];
+    const month = parts[2] || parts[1];
+
+    const monthCapitalized = month.charAt(0).toUpperCase() + month.slice(1);
+
+    return `${monthCapitalized} ${day}`;
+};

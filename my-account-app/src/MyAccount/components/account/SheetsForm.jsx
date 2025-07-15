@@ -8,11 +8,13 @@ import { Tooltip } from '@nextui-org/react';
 import { deleteAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { formatDate, shortFormatDate } from '../../../assets/utilities/DateFormater';
 
 export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, accountListener, setAccountIdOnView }) => {
     const [ sheetsArr, setSheetsArr ] = useState([]);
     const [ newSheetDescription, setNewSheetDescription ] = useState(''); 
     const [ accountDescription, setAccountDescription ] = useState('');
+    const [ accountCreationDate, setAccountCreationDate ] = useState('');
     const [ animationClass, setAnimationClass ] = useState('');
 
     const newSheetDescriptionRef = useRef(); 
@@ -55,6 +57,8 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
             showUserMessage('Ocurrió un error al intentar cargar las "Hojas de cálculo" de la "cuenta"', 'warning');
             return;
         }
+        
+        setAccountCreationDate(formatDate(data.account.creationDate)); 
         setAccountDescription(data.account.name);
         setSheetsArr(data.sheets);
     };
@@ -77,8 +81,6 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                 showUserMessage(message, 'info');
                 return; 
             }
-
-
 
             showUserMessage(`Se ha creado la hoja de cálculo con el nombre "${ newSheetDescription }" correctamente.`, 'success');
             setNewSheetDescription('');
@@ -109,13 +111,13 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
         if (e.key === 'Enter') createSheet(); 
     }
 
-    useEffect(() => {
-        if(accountId.length > 0) {
-            getSheetsAccount(); 
-            newSheetDescriptionRef.current.select(); 
-            setNewSheetDescription('');
-        }
-    }, [ accountId ])
+    // useEffect(() => {
+    //     if(accountId.length > 0) {
+    //         getSheetsAccount(); 
+    //         newSheetDescriptionRef.current.select(); 
+    //         setNewSheetDescription('');
+    //     }
+    // }, [ accountId ])
     
     useEffect(() => {
         if (accountId.length === 0) return;
@@ -130,23 +132,38 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
     }, [ accountId ]);
 
     return (
-        <div className="account-sheets-list-container">
-            <div className="account-sheets-list-container-header">
-                <span className={`text-color-primary mb-2 ${animationClass}`}>
-                    {accountDescription.toUpperCase()}
-                </span>
-                
-                <Tooltip
-                    placement="left"
-                    content="Eliminar Cuenta"
-                    color="danger"
-                    closeDelay={50}
-                >
-                    <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
-                </Tooltip>
-            </div>            
+        <>
+            <h1 className={`display-6 text-color-default ${animationClass}`}>
+                {accountDescription.toUpperCase()}
+            </h1>
+            <span className={`text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
+                Fecha de creación: <b>{ accountCreationDate }</b>
+            </span>
+            <hr />
 
+            <Tooltip
+                placement="right"
+                content="Eliminar Cuenta"
+                color="danger"
+                closeDelay={50}
+            >
+                <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
+            </Tooltip>
+            
+            <hr /> 
             <div className="account-sheets-list-container-body">
+
+                <CustomInputText
+                    inputRef = { newSheetDescriptionRef }
+                    value = { newSheetDescription }
+                    onChangeEvent = { setNewSheetDescription }
+                    onKeyDownEvent = { handleKeyDown }
+                    placeHolder={ 'Agregar hoja de calculo ...' }
+                />
+
+                <CustomButtom event={ createSheet }/>
+
+
                 {
                     (sheetsArr.length > 0) && 
                     (
@@ -172,16 +189,10 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                     )
                 }
 
-                <CustomInputText
-                    inputRef = { newSheetDescriptionRef }
-                    value = { newSheetDescription }
-                    onChangeEvent = { setNewSheetDescription }
-                    onKeyDownEvent = { handleKeyDown }
-                    placeHolder={ 'Agregar hoja de calculo ...' }
-                />
-
-                <CustomButtom event={ createSheet }/>
             </div>
-        </div>
+
+
+        
+        </>
     );
 };

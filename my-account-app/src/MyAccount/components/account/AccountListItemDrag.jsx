@@ -1,11 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
 import { updateAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
-import { useState, useRef, useContext } from 'react';
-import { ThemeContext } from '../../../assets/context/ThemeProvider';
+import { useState, useRef } from 'react';
+import { shortFormatDate } from '../../../assets/utilities/DateFormater';
 
-export const AccountListItemDrag = ({ accountId, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount }) => {
-    const {isDarkMode} = useContext(ThemeContext);
+export const AccountListItemDrag = ({ accountId, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount, creationDate }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: accountId });
     const [ newAccountUpdate, setNewAccountUpdate ] = useState(accountDescription); 
 
@@ -40,39 +39,41 @@ export const AccountListItemDrag = ({ accountId, accountDescription, showUserMes
     }
     
     return (
-        <li 
+        <div 
             ref={ setNodeRef }
-            style={ {
-                transform: CSS.Transform.toString(transform), 
-                transition, 
-            }} 
-            className={`animate__animated animate__fadeIn animate__faster d-flex justify-content-between mb-1 p-2 small ${ isDarkMode ? 'bg-dark' : '' }`}
+            style={ { transform: CSS.Transform.toString(transform), transition }} 
+            className={`accounts-account-list-item animate__animated animate__fadeIn animate__faster justify-content-between`}
             onClick={ ()=>{ setAccountIdOnView(accountId) } }
         >
-            <input
-                type="text"
-                style={{ border: 'none', width: '100%', outline: 'none', background: 'inherit', cursor:'pointer' }}
-                value={ newAccountUpdate } 
-                ref={ accountDescriptionRef }
-                onChange={ onInputChange } 
-                onKeyDown={ onKeyDown }
-                onClick={ () => { accountDescriptionRef.current.select() } }
-                maxLength="20"
-            />
+            <div className="account-item-account-box">
+                <input 
+                    type="text" 
+                    style={{ cursor:'pointer', fontSize:'14px' }}
+                    value={ newAccountUpdate } 
+                    ref={ accountDescriptionRef }
+                    onChange={ onInputChange } 
+                    onKeyDown={ onKeyDown }
+                    onClick={ () => { accountDescriptionRef.current.select() } }
+                    maxLength="20"
+                />
 
-            {
-                (sheetsCount > 0) && (<div className="badge animate__animated animate__fadeInUp animate__faster">{ sheetsCount }</div>)
-            }
+                {
+                    (sheetsCount > 0) 
+                        && (<div className="badge animate__animated animate__fadeInUp animate__faster">{ sheetsCount }</div>)
+                }
 
-            <div className="d-flex gap-2">
                 <i
-                    className="bx bx-sort-alt-2 text-color-primary card-icon ml-2"
+                    className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
                     style={{ cursor: 'move' }}
                     tabIndex="-1"
                     {...listeners}
                     {...attributes}
                 ></i>
             </div>
-        </li>
+            
+            <figcaption className="blockquote-footer mt-1" style={{ fontSize:'11px' }}>
+                { shortFormatDate(creationDate) }
+            </figcaption>
+        </div>
     )
 }

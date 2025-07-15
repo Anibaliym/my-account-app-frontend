@@ -1,7 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 import { createAccountFetch, updateAccountOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/account';
-import { CustomButtom } from '../controls/CustomButtom';
-import { CustomInputText } from '../controls/CustomInputText';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { AccountListItemDrag } from './AccountListItemDrag';
@@ -97,39 +95,45 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
     }
 
     return (
-        <div className="accounts-balances-form">
-            <CustomInputText
-                inputRef = { accountDescriptionRef }
-                value = { newAccountDescription }
-                onChangeEvent = { setNewAccountDescription }
-                onKeyDownEvent = { onKeyDown }
-                placeHolder={ 'Crear una nueva cuenta' }
-            />
-            <CustomButtom event={ () => createAccount() }/>
-            
-            <div className="accounts-balances-form-body">
-                <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
-                    <ul className="custom-list">
-                        <SortableContext items={ accountsArr } strategy={ verticalListSortingStrategy }> 
-                            {
-                                accountsArr.map( ({ id: accountId, description: accountDescription, sheetsCount }) => (
-                                    <AccountListItemDrag 
-                                        key={ accountId } 
-                                        accountId={ accountId } 
-                                        accountDescription={ accountDescription } 
-                                        showUserMessage={ showUserMessage } 
-                                        setAccountListener={ setAccountListener }
-                                        accountListener={ accountListener }
-                                        setAccountsArr = { setAccountsArr }
-                                        setAccountIdOnView={ setAccountIdOnView }
-                                        sheetsCount={ sheetsCount }
-                                    />                                    
-                                ))
-                            }
-                        </SortableContext>
-                    </ul>
-                </DndContext>
+        <div className="accounts-accounts-form">
+            <div className="account-search-box">
+                <input 
+                    type="text" 
+                    placeholder="New account" 
+                    ref={ accountDescriptionRef }
+                    value={ newAccountDescription }
+                    onChange={ (e) => setNewAccountDescription(e.target.value) }
+                    onKeyDown={ onKeyDown }
+                />
+
+                <button className="searcher-icon-button" onClick={ () =>  { createAccount() } }>
+                    <i className="bx bx-plus"></i>
+                </button>
             </div>
-        </div>
+
+            <div className="account-accounts-items">
+                <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
+                    <SortableContext items={ accountsArr } strategy={ verticalListSortingStrategy }> 
+                        {
+                            accountsArr.map( ({ id: accountId, description: accountDescription, sheetsCount, creationDate }) => (
+                                <AccountListItemDrag 
+                                    key={ accountId } 
+                                    accountId={ accountId } 
+                                    accountDescription={ accountDescription } 
+                                    showUserMessage={ showUserMessage } 
+                                    setAccountListener={ setAccountListener }
+                                    accountListener={ accountListener }
+                                    setAccountsArr = { setAccountsArr }
+                                    setAccountIdOnView={ setAccountIdOnView }
+                                    sheetsCount={ sheetsCount }
+                                    creationDate={ creationDate }
+                                />                                    
+                            ))
+                        }
+                    </SortableContext>
+                </DndContext>
+                
+            </div>
+        </div>    
     )
 }

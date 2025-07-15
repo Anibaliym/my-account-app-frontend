@@ -7,14 +7,16 @@ export const CustomButtom = ({ event }) => {
     return (
         <div
             style={{
-                margin: '10px auto',
-                width: '50px',
-                height:'36px', 
+                // margin: '0px auto',
+                width: '30px',
+                height:'40px', 
                 padding: '5px',
-                textAlign: 'center',
+                textAlign: 'left',
                 cursor: 'pointer',
-                borderRadius: '4px',
+                // borderRadius: '4px',
                 transition: 'background-color 0.3s ease-in-out',
+                lineHeight: '30px', 
+                // backgroundColor: 'blue'
             }}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
