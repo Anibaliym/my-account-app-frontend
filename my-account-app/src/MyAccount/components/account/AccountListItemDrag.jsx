@@ -1,43 +1,11 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
-import { updateAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
-import { useState, useRef } from 'react';
-import { shortFormatDate } from '../../../assets/utilities/DateFormater';
+import { useState } from 'react';
+import { useEffect } from 'react';
 
-export const AccountListItemDrag = ({ accountId, accountDescription, showUserMessage, setAccountListener, accountListener, setAccountIdOnView, sheetsCount, creationDate }) => {
+export const AccountListItemDrag = ({ accountId, accountDescription, setAccountIdOnView, sheetsCount, accountIdOnView }) => {
     const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: accountId });
-    const [ newAccountUpdate, setNewAccountUpdate ] = useState(accountDescription); 
 
-    const accountDescriptionRef = useRef(); 
-
-    const onInputChange = (e) => { setNewAccountUpdate(e.target.value); }
-
-    const onKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            if(newAccountUpdate.trim().length === 0){
-                showUserMessage('Debe ingresar un nombre de cuenta válido', 'warning');
-                setNewAccountUpdate(accountDescription);
-                return;  
-            }
-
-            updateAccountDescription();
-        }
-    };
-
-    const updateAccountDescription = async () => {
-        const { isError } = await updateAccountFetch( accountId, newAccountUpdate.trim() );
-        
-        if(isError){
-            showUserMessage('Ocurrió un error al intentar actualizar la cuenta', 'error');
-            setNewAccountUpdate(accountDescription); 
-            return; 
-        }
-        else {
-            showUserMessage('Se ha actualizado el nombre de la cuenta.', 'success');
-            setAccountListener( accountListener + 1 );
-        }
-    }
-    
     return (
         <div 
             ref={ setNodeRef }
@@ -45,17 +13,11 @@ export const AccountListItemDrag = ({ accountId, accountDescription, showUserMes
             className={`accounts-account-list-item animate__animated animate__fadeIn animate__faster justify-content-between`}
             onClick={ ()=>{ setAccountIdOnView(accountId) } }
         >
-            <div className="account-item-account-box">
-                <input 
-                    type="text" 
-                    style={{ cursor:'pointer', fontSize:'14px' }}
-                    value={ newAccountUpdate } 
-                    ref={ accountDescriptionRef }
-                    onChange={ onInputChange } 
-                    onKeyDown={ onKeyDown }
-                    onClick={ () => { accountDescriptionRef.current.select() } }
-                    maxLength="20"
-                />
+            <div className="account-item-account-box" style={{ fontSize:'14px' }}>
+
+                <span className="text-color-default" style={{ fontSize:'14px', width:'100%' }}>
+                    {accountDescription}
+                </span>
 
                 {
                     (sheetsCount > 0) 
@@ -70,10 +32,6 @@ export const AccountListItemDrag = ({ accountId, accountDescription, showUserMes
                     {...attributes}
                 ></i>
             </div>
-            
-            <figcaption className="blockquote-footer mt-1" style={{ fontSize:'11px' }}>
-                { shortFormatDate(creationDate) }
-            </figcaption>
         </div>
     )
 }

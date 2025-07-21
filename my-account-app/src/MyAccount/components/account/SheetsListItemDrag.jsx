@@ -1,12 +1,10 @@
 import { useSortable } from '@dnd-kit/sortable'; 
 import { CSS } from '@dnd-kit/utilities'; 
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 import { deleteSheetFetch, updateSheetFetch } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { Tooltip } from '@nextui-org/react';
-import { ThemeContext } from '../../../assets/context/ThemeProvider';
 
 export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener, accountListener, setSheetsArr }) => {
-    const {isDarkMode} = useContext(ThemeContext);
     const {id: sheetId, accountId, cashBalance, currentAccountBalance, description, order} = sheet; 
     const {attributes, listeners, setNodeRef, transform, transition} = useSortable({ id: sheetId });
     const [sheetDescriptionUpdate , setSheetDescriptionUpdate] = useState(description); 
@@ -55,29 +53,37 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
     }
 
     return (
-        <li 
+        <div 
             ref={ setNodeRef }
             key={ sheetId }
-            style={{ 
-                transform: CSS.Transform.toString(transform), 
-                transition,
-                borderBottom: `2px solid ${ isDarkMode ? 'gray' : 'lightgray' }`, 
-            }} 
-            className={`animate__animated animate__fadeIn animate__faster d-flex justify-content-between p-1 mb-2 small ${ isDarkMode ? 'bg-dark' : '' }`}
+            style={ { transform: CSS.Transform.toString(transform), transition }} 
+            className={`accounts-account-list-item animate__animated animate__fadeIn animate__faster justify-content-between`}
         >
-            <input
-                type="text"
-                style={{ border: 'none', width: '100%', outline: 'none', background: 'inherit' }}
-                value={ sheetDescriptionUpdate } 
-                onChangeCapture={ (e) => ( setSheetDescriptionUpdate(e.target.value)) }
-                onKeyDown={ handleKeyDown }
-                maxLength="20"
-                onChange={ ()=>{} }
-            />
+            <div className="account-item-account-box" style={{ fontSize:'14px' }}>
+                <div className="account-sheet-list-item">
+                    <input 
+                        type="text"
+                        style={{ border: 'none', width: '100%', outline: 'none', background: 'inherit' }}
+                        value={ sheetDescriptionUpdate } 
+                        onChangeCapture={ (e) => ( setSheetDescriptionUpdate(e.target.value)) }
+                        onKeyDown={ handleKeyDown }
+                        maxLength="20"
+                        onChange={ ()=>{} }
+                    />
+                </div>
 
-            <div className="d-flex gap-2">
                 <Tooltip
-                    placement="left"
+                    placement="bottom"
+                    content="Ir a la hoja de cálculo"
+                    color="success"  
+                    closeDelay={ 50 }
+                >
+                    <i className="bx bx-play-circle icon card-icon mr-1" style={{ cursor:'pointer' }} onClick={ deleteSheet }></i>
+                </Tooltip>
+
+                
+                <Tooltip
+                    placement="bottom"
                     content="Eliminar hoja de cálculo"
                     color="danger"  
                     closeDelay={ 50 }
@@ -86,14 +92,13 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
                 </Tooltip>
 
                 <i
-                    className="bx bx-sort-alt-2 text-color-primary card-icon "
+                    className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
                     style={{ cursor: 'move' }}
                     tabIndex="-1"
                     {...listeners}
                     {...attributes}
                 ></i>
             </div>
-
-        </li>     
+        </div>
     )
 }

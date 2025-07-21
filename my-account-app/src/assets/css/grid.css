@@ -115,7 +115,7 @@
 
 .accounts-accounts-form {
     /* background-color: purple;  */
-    min-width: 300px;        
+    min-width: 300px;
     height: 100%;            
     
     
@@ -127,14 +127,11 @@
 }
 
 .accounts-sheets-form {
-    /* background-color: blue; */
+    /* background-color: purple; */
     flex: 1;            
     height: 100%;        
     overflow: hidden;     
-    padding-left: 10px;
+    padding-left: 30px;
+    border-left: 3px solid var(--sidebar-color);
 }
-
-
-
-
 

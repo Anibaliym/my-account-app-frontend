@@ -21,7 +21,7 @@
     overflow-x: hidden; /* Evita scroll horizontal */
 }
 
-/* ayanez */
+
 .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
     width: 50%;
     height: 100%;
@@ -29,8 +29,6 @@
     padding: 5px; 
 
 }
-/* .sheet-cards-form-pilar1 { background-color: blue; }
-.sheet-cards-form-pilar2 { background-color: lightgreen; } */
 
 
 .sheet-balances-form-header {

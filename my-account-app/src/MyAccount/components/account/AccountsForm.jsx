@@ -4,7 +4,7 @@ import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
 import { AccountListItemDrag } from './AccountListItemDrag';
 
-export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, userId, setAccountListener, accountListener, setAccountIdOnView }) => {
+export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, userId, setAccountListener, accountListener, setAccountIdOnView, accountIdOnView }) => {
     const [ accountsArr, setAccountsArr ] = useState([]); 
 
     useEffect(() => {
@@ -18,7 +18,8 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
         }
     }, [ userAccountsWithSheetsData ]);
 
-    const accountDescriptionRef = useRef(); 
+
+    const accountDescriptionRef = useRef();
     const [ newAccountDescription, setNewAccountDescription ] = useState(''); 
 
     useEffect(() => {
@@ -99,11 +100,12 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
             <div className="account-search-box">
                 <input 
                     type="text" 
-                    placeholder="New account" 
+                    placeholder="Cuenta nueva" 
                     ref={ accountDescriptionRef }
                     value={ newAccountDescription }
                     onChange={ (e) => setNewAccountDescription(e.target.value) }
                     onKeyDown={ onKeyDown }
+                    maxLength={ 35}
                 />
 
                 <button className="searcher-icon-button" onClick={ () =>  { createAccount() } }>
@@ -115,18 +117,15 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
                 <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
                     <SortableContext items={ accountsArr } strategy={ verticalListSortingStrategy }> 
                         {
-                            accountsArr.map( ({ id: accountId, description: accountDescription, sheetsCount, creationDate }) => (
+                            accountsArr.map( ({ id: accountId, description: accountDescription, sheetsCount }) => (
                                 <AccountListItemDrag 
                                     key={ accountId } 
                                     accountId={ accountId } 
                                     accountDescription={ accountDescription } 
-                                    showUserMessage={ showUserMessage } 
-                                    setAccountListener={ setAccountListener }
-                                    accountListener={ accountListener }
                                     setAccountsArr = { setAccountsArr }
                                     setAccountIdOnView={ setAccountIdOnView }
                                     sheetsCount={ sheetsCount }
-                                    creationDate={ creationDate }
+                                    accountIdOnView={accountIdOnView}
                                 />                                    
                             ))
                         }

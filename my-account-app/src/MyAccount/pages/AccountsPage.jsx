@@ -10,6 +10,11 @@ export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener,
     const [userAccountsWithSheets, setUserAccountsWithSheets] = useState([]);
     const [accountIdOnView, setAccountIdOnView] = useState('');
 
+    // useEffect(() => {
+    //     console.log(accountIdOnView)
+    // }, [accountIdOnView])
+    
+
     useEffect(() => {
         setPageName('CUENTAS');
         GetUserAccountsWithSheets();
@@ -31,6 +36,7 @@ export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener,
                 setAccountListener={setAccountListener}
                 accountListener={accountListener}
                 setAccountIdOnView={setAccountIdOnView}
+                accountIdOnView={accountIdOnView}
             />
 
             <div className="accounts-sheets-form">
@@ -46,7 +52,6 @@ export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener,
                             />
                     )
                 }
-
             </div> 
         </div>
     );

@@ -1,14 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import { getSheetsAccountFetch } from '../../../assets/api/MyAccountAppAPI/DomainServices';
 import { createSheetFetch, updateSheetOrderItemsFetch } from '../../../assets/api/MyAccountAppAPI/Sheet'; 
-import { CustomButtom } from '../controls/CustomButtom';
-import { CustomInputText } from '../controls/CustomInputText';
 import { SheetsListItemDrag } from './SheetsListItemDrag';
 import { Tooltip } from '@nextui-org/react';
-import { deleteAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
+import { deleteAccountFetch, updateAccountFetch } from '../../../assets/api/MyAccountAppAPI/account';
 import { DndContext, closestCenter } from '@dnd-kit/core';
 import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { formatDate, shortFormatDate } from '../../../assets/utilities/DateFormater';
+import { formatDate } from '../../../assets/utilities/DateFormater';
 
 export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, accountListener, setAccountIdOnView }) => {
     const [ sheetsArr, setSheetsArr ] = useState([]);
@@ -16,8 +14,10 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
     const [ accountDescription, setAccountDescription ] = useState('');
     const [ accountCreationDate, setAccountCreationDate ] = useState('');
     const [ animationClass, setAnimationClass ] = useState('');
+    const [ newAccountUpdate, setNewAccountUpdate ] = useState(''); 
 
     const newSheetDescriptionRef = useRef(); 
+    const newAccountDescriptionRef = useRef(); 
 
     const onDragEnd = (event) => {
         const { active, over } = event;
@@ -60,6 +60,7 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
         
         setAccountCreationDate(formatDate(data.account.creationDate)); 
         setAccountDescription(data.account.name);
+        setNewAccountUpdate(data.account.name); 
         setSheetsArr(data.sheets);
     };
 
@@ -111,14 +112,6 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
         if (e.key === 'Enter') createSheet(); 
     }
 
-    // useEffect(() => {
-    //     if(accountId.length > 0) {
-    //         getSheetsAccount(); 
-    //         newSheetDescriptionRef.current.select(); 
-    //         setNewSheetDescription('');
-    //     }
-    // }, [ accountId ])
-    
     useEffect(() => {
         if (accountId.length === 0) return;
 
@@ -131,15 +124,52 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
         getSheetsAccount();
     }, [ accountId ]);
 
+
+    const onKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            if(newAccountUpdate.trim().length === 0){
+                showUserMessage('Debe ingresar un nombre de cuenta válido', 'warning');
+                setNewAccountUpdate(accountDescription);
+                return;  
+            }
+
+            updateAccountDescription();
+        }
+    };
+
+    const updateAccountDescription = async () => {
+        const { isError } = await updateAccountFetch( accountId, newAccountUpdate.trim() );
+        
+        if(isError){
+            showUserMessage('Ocurrió un error al intentar actualizar la cuenta', 'error');
+            setNewAccountUpdate(accountDescription); 
+            return; 
+        }
+        else {
+            showUserMessage('Se ha actualizado el nombre de la cuenta.', 'success');
+            setAccountListener( accountListener + 1 );
+        }
+    }
+
     return (
         <>
-            <h1 className={`display-6 text-color-default ${animationClass}`}>
-                {accountDescription.toUpperCase()}
-            </h1>
+            <input 
+                type="text"
+                ref={ newAccountDescriptionRef }
+                style={{ outline: 'none', backgroundColor: 'var(--body-color)' }}
+                className={`display-6 text-color-default ${animationClass}`}
+                onKeyDown={ onKeyDown }
+                onChange={ (e)=>  setNewAccountUpdate(e.target.value) }
+                value={ newAccountUpdate }
+                maxLength={20}
+                onClick={ ()=> newAccountDescriptionRef.current.select() }
+            />
+
+            <br />
             <span className={`text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
                 Fecha de creación: <b>{ accountCreationDate }</b>
             </span>
-            <hr />
+            <br />
 
             <Tooltip
                 placement="right"
@@ -147,52 +177,51 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                 color="danger"
                 closeDelay={50}
             >
-                <i className="bx bx-trash icon icon-trash mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
+                <i className="bx bx-trash icon icon-trash mt-2 mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
             </Tooltip>
             
             <hr /> 
-            <div className="account-sheets-list-container-body">
 
-                <CustomInputText
-                    inputRef = { newSheetDescriptionRef }
-                    value = { newSheetDescription }
-                    onChangeEvent = { setNewSheetDescription }
-                    onKeyDownEvent = { handleKeyDown }
-                    placeHolder={ 'Agregar hoja de calculo ...' }
-                />
+            <div className="accounts-accounts-form">
+                <div className="account-search-box">
+                    <input 
+                        type="text" 
+                        placeholder="Hoja de calculo nueva" 
+                        value={newSheetDescription}
+                        onChange={(e)=>setNewSheetDescription(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        maxLength={40}
+                    />
 
-                <CustomButtom event={ createSheet }/>
+                    <button className="searcher-icon-button" onClick={ () =>  {  } }>
+                        <i className="bx bx-plus"></i>
+                    </button>
+                </div>
 
+                <div className="account-sheets-items">
+                    {
+                        (sheetsArr.length <= 0) 
+                            && (<p className="animate__animated animate__fadeInLeft animate__faster text-color-default" style={{ fontSize: '12px' }}>No hay hojas de cálculo en esta cuenta.</p>)
+                    }
 
-                {
-                    (sheetsArr.length > 0) && 
-                    (
-                        <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
-                            <ul className="custom-list animate__animated animate__fadeIn">
-                                <SortableContext items={ sheetsArr } strategy={ verticalListSortingStrategy }>
-
-                                    {
-                                        sheetsArr.map( (sheet) => (
-                                            <SheetsListItemDrag 
-                                                key={ sheet.id }
-                                                sheet={ sheet }
-                                                showUserMessage={ showUserMessage }
-                                                setAccountListener = { setAccountListener } 
-                                                accountListener = { accountListener }                                    
-                                                setSheetsArr={ setSheetsArr }
-                                            />
-                                            ))
-                                        }
-                                </SortableContext>
-                            </ul>
-                        </DndContext>
-                    )
-                }
-
-            </div>
-
-
-        
+                    <DndContext collisionDetection={closestCenter} onDragEnd={onDragEnd}>
+                        <SortableContext items={sheetsArr.map(s => s.id)} strategy={verticalListSortingStrategy}>
+                            {
+                                sheetsArr.map(sheet => (
+                                    <SheetsListItemDrag 
+                                        key={sheet.id}
+                                        sheet={sheet}
+                                        showUserMessage={showUserMessage}
+                                        setAccountListener={setAccountListener}
+                                        accountListener={accountListener}
+                                        setSheetsArr={setSheetsArr}
+                                    />
+                                ))
+                            }
+                        </SortableContext>
+                    </DndContext>
+                </div>
+            </div>    
         </>
     );
 };
