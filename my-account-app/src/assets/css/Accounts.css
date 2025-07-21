@@ -144,7 +144,6 @@
     color: var(--primary-color);
 }
 
-
 .accounts-account-list-item {
     background-color: var(--background-input-text-color);
     width:100%; 
@@ -152,22 +151,11 @@
     margin-top:8px;
     cursor: pointer;
     border: 1px solid var(--background-input-text-color); 
-    /* border: 1px solid red;  */
     padding: 5px;
     color: var(--text-color); 
 }
 
-/* .accounts-account-list-item:focus {
-    border: 1px solid var(--primary-color); 
-    background-color: var(--primary-color);
-    background-color: yellow;
-} */
-
-.accounts-account-list-item-focus {
-    border: 1px solid var(--primary-color); 
-    background-color: var(--primary-color);
-    background-color: yellow;
-}
+.accounts-account-list-item-focus  { border: 1px solid var(--primary-color); }
 
 .account-accounts-items {
     /* background-color: red; */
