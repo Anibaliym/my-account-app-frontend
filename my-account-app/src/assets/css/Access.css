@@ -23,6 +23,7 @@
     background-color: var(--primary-color);
     height: 100vh;
     padding: 0px 0px 0px 30px;
+    min-width: 700px;
     color: white;
 }
 
@@ -93,3 +94,18 @@
     text-decoration: underline;
 }
 
+
+
+
+@media (max-width: 500px) {
+    .access-container {
+        flex-direction: column;
+    }
+
+    .access-login-form {
+        max-width: 100%;
+        min-width: 350px;
+        min-height: 100vh;
+        padding: 30px;
+    }
+}
