@@ -24,7 +24,6 @@
     padding: 10px;
     border-radius: 5px;
     background-color: var(--body-color);
-    /* background-color: gray; */
     height: calc(100vh - 47px); 
 
     /* ayanez - afecta el "balance-form" */

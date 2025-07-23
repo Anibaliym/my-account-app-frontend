@@ -50,6 +50,7 @@ export const MyAccountRouter = () => {
                     toggleSidebar={toggleSidebar} 
                     pageName={pageName} 
                 />
+                
                 <div className="dashboard-content">
                     <Routes>
                         <Route path="home" element={<HomePage setPageName={setPageName} />} />

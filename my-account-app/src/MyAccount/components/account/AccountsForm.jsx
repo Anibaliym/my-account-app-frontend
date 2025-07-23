@@ -96,7 +96,7 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
     }
 
     return (
-        <div className="accounts-accounts-form">
+        <div className="container-accounts">
             <div className="account-search-box">
                 <input 
                     type="text" 

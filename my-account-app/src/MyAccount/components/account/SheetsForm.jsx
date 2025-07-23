@@ -165,11 +165,16 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                 onClick={ ()=> newAccountDescriptionRef.current.select() }
             />
 
-            <br />
-            <span className={`text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
-                Fecha de creación: <b>{ accountCreationDate }</b>
-            </span>
-            <br />
+
+            <div className={`mt-2 text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
+                <span>
+                    Fecha de creación: <b className="text-color-primary">{ accountCreationDate }</b>
+                </span>
+
+                <p>
+                    Hojas de cálculo creadas: <b className="text-color-primary">{sheetsArr.length}</b>
+                </p>
+            </div>
 
             <Tooltip
                 placement="right"
@@ -177,7 +182,7 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                 color="danger"
                 closeDelay={50}
             >
-                <i className="bx bx-trash icon icon-trash mt-2 mb-2" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
+                <i className="bx bx-trash icon icon-trash" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
             </Tooltip>
             
             <hr /> 

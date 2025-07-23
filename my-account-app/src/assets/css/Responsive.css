@@ -80,7 +80,7 @@
     }
 } */
 
-@media screen and (max-width: 500px) {
+@media (max-width: 500px) {
     .sidebar + .main-content {
         margin-left: 260px;
     }
@@ -97,7 +97,10 @@
     .sidebar {
         position: fixed;
         width: 250px;
-        background: red;
     }    
+
+
+    
+    
 } 
 
