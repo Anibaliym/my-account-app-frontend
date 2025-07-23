@@ -61,8 +61,8 @@ export const MyAccountRouter = () => {
                         <Route path="/" element={<Navigate to="/home" />} />
                     </Routes>
 
-                    <div className="row" style={{ height: "30px", width: '100%' }}>
-                        <UserMessage message={message} show={showMessage} setShowMessage={setShowMessage} />
+                    <div className="row" style={{ height: "30px", width: '30%' }}>
+                        <UserMessage message={message} show={showMessage} setShowMessage={setShowMessage} toggleSidebar={ toggleSidebar }/>
                     </div>
                 </div>
             </div> 

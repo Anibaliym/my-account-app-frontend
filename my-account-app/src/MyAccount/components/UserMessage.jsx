@@ -1,9 +1,21 @@
 import { useContext, useEffect, useState } from 'react';
 import { ThemeContext } from '../../assets/context/ThemeProvider';
+import { useWindowSize } from '../hooks/useWindowSize';
 
-export const UserMessage = ({ message, show, setShowMessage }) => {
+export const UserMessage = ({ message, show, setShowMessage, toggleSidebar }) => {
     const { isDarkMode } = useContext(ThemeContext);
     const [isVisible, setIsVisible] = useState(show);
+    const { width } = useWindowSize();
+
+    const isMobile = width <= 500;
+
+    const style = !isMobile
+    ? 
+        {
+            left: toggleSidebar ? '60px' : '260px',
+            maxWidth: toggleSidebar ? 'calc(100vw - 70px)' : 'calc(100vw - 270px)',
+        }
+    : {}; 
 
     const getMessageTime = (length) => {
         if (length >= 100) return 10000;
@@ -54,8 +66,8 @@ export const UserMessage = ({ message, show, setShowMessage }) => {
     const alertClass = `alert-box-message message-${colorType}${(isDarkMode) ? '-dark' : ''} animate__animated ${effect} animate__faster`;
 
     return (
-        <div className={`${alertClass}`}>
+        <div className={`${alertClass}`} style={style}>
             <span>{message.message}</span>
-        </div>
+        </div>        
     );
 };
