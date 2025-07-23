@@ -165,15 +165,9 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                 onClick={ ()=> newAccountDescriptionRef.current.select() }
             />
 
-
             <div className={`mt-2 text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
-                <span>
-                    Fecha de creación: <b className="text-color-primary">{ accountCreationDate }</b>
-                </span>
-
-                <p>
-                    Hojas de cálculo creadas: <b className="text-color-primary">{sheetsArr.length}</b>
-                </p>
+                <span>Fecha de creación: <b className="text-color-primary">{ accountCreationDate }</b></span>
+                <p>Hojas de cálculo creadas: <b className="text-color-primary">{sheetsArr.length}</b></p>
             </div>
 
             <Tooltip
