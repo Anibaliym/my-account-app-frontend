@@ -91,13 +91,15 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
                     <i className="bx bx-trash icon icon-trash card-icon" style={{ cursor:'pointer' }} onClick={ deleteSheet }></i>
                 </Tooltip>
 
-                <i
-                    className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
-                    style={{ cursor: 'move' }}
-                    tabIndex="-1"
-                    {...listeners}
-                    {...attributes}
-                ></i>
+                <div className="account-gragable-item">
+                    <i
+                        className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
+                        style={{ cursor: 'move' }}
+                        tabIndex="-1"
+                        {...listeners}
+                        {...attributes}
+                    ></i>
+                </div>
             </div>
         </div>
     )

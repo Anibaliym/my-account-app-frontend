@@ -40,19 +40,18 @@ export const AccountsPage = ({ setPageName, showUserMessage, setAccountListener,
              />
 
             <div className="container-sheets">
-             {
-                 (accountIdOnView.length > 0)
-                     && (
-                         <SheetsForm
-                             accountId={accountIdOnView}
-                             showUserMessage={showUserMessage}
-                             setAccountListener={setAccountListener}
-                             accountListener={accountListener}
-                             setAccountIdOnView={setAccountIdOnView}
-                         />
-                 )
-             }
-
+                {
+                    (accountIdOnView.length > 0)
+                    && (
+                        <SheetsForm
+                            accountId={accountIdOnView}
+                            showUserMessage={showUserMessage}
+                            setAccountListener={setAccountListener}
+                            accountListener={accountListener}
+                            setAccountIdOnView={setAccountIdOnView}
+                        />
+                    )
+                }
             </div>
         </div>
     );

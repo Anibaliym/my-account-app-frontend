@@ -41,13 +41,16 @@ export const AccountListItemDrag = ({ accountId, accountDescription, setAccountI
                         && (<div className="badge animate__animated animate__fadeInUp animate__faster">{sheetsCount}</div>)
                 }
 
-                <i
-                    className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
-                    style={{ cursor: 'move' }}
-                    tabIndex="-1"
-                    {...listeners}
-                    {...attributes}
-                ></i>
+                <div className="account-gragable-item">
+                    <i
+                        className="bx bx-sort-alt-2 text-color-default card-icon ml-1"
+                        style={{ cursor: 'move' }}
+                        tabIndex="-1"
+                        {...listeners}
+                        {...attributes}
+                    ></i>
+
+                </div>
             </div>
         </div>
     );

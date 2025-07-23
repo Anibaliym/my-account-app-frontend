@@ -109,7 +109,6 @@
 .account-icon-box {
     display: flex;
     align-items: center;
-    background-color: #2d2d2d;  
     background: var(--background-input-text-color);
     border-radius: 5px;
     padding: 8px 8px;
@@ -138,14 +137,13 @@
 
 .account-description-title-box input {
     flex: 1;                
-    margin-right: 8px;      
 }
 
 .account-description-title-box {
     display: flex;
     align-items: center;
-    background-color: #2d2d2d;  
     background: var(--background-input-text-color);
+    background-color: lightcyan;  
     border-radius: 5px;
     width: 100%;               
 }
@@ -188,16 +186,15 @@
 .account-accounts-items {
     /* background-color: green; */
     width:100%; 
-    height:80vh; 
+    height: calc(100vh - 180px);
     margin-top:20px; 
-    overflow-y: scroll;
-    scrollbar-width: none;
-    overflow-x: hidden;
+    overflow-x: scroll;
 }
 
-.account-accounts-items::-webkit-scrollbar {
-    display: none;
+.account-accounts-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+    width: 1px;
 }
+
 
 .account-sheets-items {
     width: 300px;
@@ -284,11 +281,10 @@
     flex: 0.2;
     /* background-color: lightblue; */
     height: calc(100vh - 110px);
-    overflow-y: auto;
-    overflow-x: auto;
     border-radius: 5px;
     max-width: 100%;
     min-width: 300px;
+    overflow: hidden;
 }
 
 .container-sheets {
@@ -363,6 +359,20 @@
         background: var(--primary-color);
     }
 
+    .account-accounts-items {
+        margin-top:0px; 
+        width: 100%;
+        height: calc(100vh - 560px);
+    }
+
+    .account-accounts-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+        width: 4px;
+        padding: 10px;
+    }
+    
+    .account-accounts-items::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+    }
 
     .accounts-account-info {
         display: none;
@@ -374,6 +384,10 @@
     }    
 
     .account-delete-account-buttom {
+        display: none;
+    }
+
+    .account-gragable-item {
         display: none;
     }
 }

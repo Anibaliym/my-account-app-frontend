@@ -163,7 +163,6 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
     return (
         <>
             <div className="account-description-title-box" style={{ outline: 'none', backgroundColor: 'var(--body-color)' }}>
-
                 <input 
                     type="text" 
                     className={`display-6 text-color-default ${animationClass}`}
@@ -219,7 +218,7 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                         maxLength={40}
                     />
 
-                    <button className="searcher-icon-button" onClick={ () =>  {  } }>
+                    <button className="searcher-icon-button" onClick={ createSheet }>
                         <i className="bx bx-plus"></i>
                     </button>
                 </div>
