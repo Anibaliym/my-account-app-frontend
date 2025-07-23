@@ -345,11 +345,12 @@
     }
 
     .account-sheets-items {
-        margin-top:0px; 
+        margin-top:10px; 
         width: 100%;
-        height: calc(100vh - 630px);
+        height: calc(100vh - 480px);
+        /* background-color: blue; */
     }
-
+    
     .account-sheets-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
         width: 4px;
         padding: 10px;
@@ -358,11 +359,13 @@
     .account-sheets-items::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
         background: var(--primary-color);
     }
-
+    
+    /* ayanez */
     .account-accounts-items {
-        margin-top:0px; 
+        margin-top:10px; 
         width: 100%;
-        height: calc(100vh - 560px);
+        height: calc(100vh - 412px);
+        /* background-color: red; */
     }
 
     .account-accounts-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
