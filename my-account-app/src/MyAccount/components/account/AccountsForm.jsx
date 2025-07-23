@@ -97,7 +97,7 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
 
     return (
         <div className="container-accounts">
-            <div className="account-search-box">
+            <div className="account-icon-box">
                 <input 
                     type="text" 
                     placeholder="Cuenta nueva" 

@@ -95,19 +95,18 @@
     padding: 5px;
 }
 
-.account-search-box {
-    display: flex;         /* Habilita Flexbox */
-    justify-content: space-between; /* Espacia input y botón */
+.account-icon-box {
+    display: flex;         
+    justify-content: space-between; 
     width: 100%;
 }
 
-.account-search-box input {
-    flex: 1;                /* Ocupa el espacio disponible */
-    margin-right: 8px;      /* Espaciado entre input y botón */
+.account-icon-box input {
+    flex: 1;                
+    margin-right: 8px;      
 }
 
-.account-search-box {
-    
+.account-icon-box {
     display: flex;
     align-items: center;
     background-color: #2d2d2d;  
@@ -117,8 +116,7 @@
     width: 300px;               
 }
 
-.account-search-box input {
-    
+.account-icon-box input {
     flex: 1;
     background: transparent;
     border: none;
@@ -126,12 +124,38 @@
     color: #fff;
     color: var(--text-color);
     font-size: 14px;
-
-    
 }
 
-.account-search-box input::placeholder {
+.account-icon-box input::placeholder {
     color: #aaa;
+}
+
+.account-description-title-box {
+    display: flex;         
+    justify-content: space-between; 
+    width: 100%;
+}
+
+.account-description-title-box input {
+    flex: 1;                
+    margin-right: 8px;      
+}
+
+.account-description-title-box {
+    display: flex;
+    align-items: center;
+    background-color: #2d2d2d;  
+    background: var(--background-input-text-color);
+    border-radius: 5px;
+    width: 100%;               
+}
+
+.account-description-title-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 40px;
 }
 
 .searcher-icon-button {
@@ -162,53 +186,40 @@
 .accounts-account-list-item-focus  { border: 1px solid var(--primary-color); }
 
 .account-accounts-items {
-    /* background-color: red; */
+    /* background-color: green; */
     width:100%; 
     height:80vh; 
     margin-top:20px; 
-
-    overflow-y: scroll; /* o auto si prefieres */
-    scrollbar-width: none; /* Firefox */
-
-    /* Asegúrate de usar overflow-x si solo quieres scroll vertical */
+    overflow-y: scroll;
+    scrollbar-width: none;
     overflow-x: hidden;
-    /* background-color: red; */
 }
 
 .account-accounts-items::-webkit-scrollbar {
-  display: none;
+    display: none;
 }
-
 
 .account-sheets-items {
+    width: 300px;
+    height: calc(100vh - 300px);
+    margin-top: 15px;
     /* background-color: red; */
-    /* width:100%; */
-    max-width: 300px; 
-    height:80vh; 
-    margin-top:20px; 
-
-    overflow-y: scroll; /* o auto si prefieres */
-    scrollbar-width: none; /* Firefox */
-
-    /* Asegúrate de usar overflow-x si solo quieres scroll vertical */
-    overflow-x: hidden;
-    /* background-color: red; */
+    overflow-y: scroll;
 }
 
-.account-sheets-items::-webkit-scrollbar {
-  display: none;
+.account-sheets-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+    width: 1px;
 }
-
 
 .account-item-account-box {
     display: flex;
-    justify-content: space-between; /* Espacia input y botón */
+    justify-content: space-between;
     width: 100%;
 }
 
 .account-item-account-box input {
     flex: 1;
-    margin-right: 8px;      /* Espaciado entre input y botón */
+    margin-right: 8px;
 }
 
 .account-item-account-box {
@@ -216,7 +227,7 @@
     align-items: center;
     background: var(--background-input-text-color);
     width: 100%;
-    /* background-color: red; */
+    /* background-color: gold; */
 }
 
 .account-item-account-box input {
@@ -231,30 +242,16 @@
     color: #aaa;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .account-sheet-list-item input {
-  flex: 1;                /* Ocupa el espacio disponible */
-  margin-right: 8px;      /* Espaciado entre input y botón */
+  flex: 1;                
+  margin-right: 8px;      
 }
 
 .account-sheet-list-item {
     display: flex;
     align-items: center;
     background: var(--background-input-text-color);
-    /* background: red; */
+    /* background-color: blue; */
     padding: 2px;
     width: 100%;               
 }
@@ -273,17 +270,6 @@
     color: #aaa;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .accounts-wrapper {
     display: flex;
     height: calc(100vh - 97px);
@@ -291,46 +277,51 @@
     border-radius: 5px;
     box-sizing: border-box;
     background-color: var(--body-color);
-    /* background-color: red; */
+    /* background-color: lightcoral; */
 }
 
 .container-accounts {
     flex: 0.2;
     /* background-color: lightblue; */
-    height: 100%;
+    height: calc(100vh - 110px);
     overflow-y: auto;
     overflow-x: auto;
-
     border-radius: 5px;
     max-width: 100%;
     min-width: 300px;
 }
 
 .container-sheets {
-    flex: 1;
     /* background-color: lightgreen; */
-    height: 100%;
-    overflow-y: auto;
-    overflow-x: auto;
-
-    /* border-radius: 5px; */
+    flex: 1;
+    height: calc(100vh - 110px);
+    overflow: hidden;
     min-width: 300px;
     padding-left: 10px;
     margin-left: 10px;
     border-left: 2px solid var(--sidebar-color);
 }
 
-.container-accounts::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
-    width: 5px;
+.accounts-principal-container {
+    display: flex;
+    height: calc(100vh - 100px); 
 }
 
-.container-accounts::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
+.accounts-accounts-form {
+    /* background-color: lightgray;  */
+    padding: 5px;
+    min-width: 300px;
+    height: calc(100vh - 290px);        
+    height: 100vh; 
+    overflow: hidden;
+}
+
+.accounts-accounts-form::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+    width: 3px;
+}
+.accounts-accounts-form::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
     background: var(--primary-color);
     border-radius: 4px;
-}
-
-.container-accounts::-webkit-scrollbar-thumb:hover, .container-sheets::-webkit-scrollbar-thumb:hover {
-    background: #555;
 }
 
 @media (max-width: 500px) {
@@ -348,12 +339,41 @@
         background-color: var(--sidebar-color);
     }
 
-    .account-search-box {
+    .account-icon-box {
         width: 100%;               
     }
 
     .container-sheets {
         margin-left: 0px;
         border-left: none;
+    }
+
+    .account-sheets-items {
+        margin-top:0px; 
+        width: 100%;
+        height: calc(100vh - 630px);
+    }
+
+    .account-sheets-items::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+        width: 4px;
+        padding: 10px;
+    }
+    
+    .account-sheets-items::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
+        background: var(--primary-color);
+    }
+
+
+    .accounts-account-info {
+        display: none;
+    }
+
+    .account-description-title-box input {
+        font-size: 15px;
+        font-weight:500;
+    }    
+
+    .account-delete-account-buttom {
+        display: none;
     }
 }

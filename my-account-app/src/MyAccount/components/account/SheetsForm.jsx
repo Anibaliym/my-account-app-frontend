@@ -15,9 +15,18 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
     const [ accountCreationDate, setAccountCreationDate ] = useState('');
     const [ animationClass, setAnimationClass ] = useState('');
     const [ newAccountUpdate, setNewAccountUpdate ] = useState(''); 
+    const [ screenWidth, setScreenWidth ] = useState(window.innerWidth);
 
     const newSheetDescriptionRef = useRef(); 
     const newAccountDescriptionRef = useRef(); 
+
+    useEffect(() => {
+        const handleResize = () => setScreenWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
 
     const onDragEnd = (event) => {
         const { active, over } = event;
@@ -153,36 +162,54 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
 
     return (
         <>
-            <input 
-                type="text"
-                ref={ newAccountDescriptionRef }
-                style={{ outline: 'none', backgroundColor: 'var(--body-color)' }}
-                className={`display-6 text-color-default ${animationClass}`}
-                onKeyDown={ onKeyDown }
-                onChange={ (e)=>  setNewAccountUpdate(e.target.value) }
-                value={ newAccountUpdate }
-                maxLength={20}
-                onClick={ ()=> newAccountDescriptionRef.current.select() }
-            />
+            <div className="account-description-title-box" style={{ outline: 'none', backgroundColor: 'var(--body-color)' }}>
 
-            <div className={`mt-2 text-color-default ${animationClass}`} style={{ fontSize: '12px' }}>
-                <span>Fecha de creación: <b className="text-color-primary">{ accountCreationDate }</b></span>
-                <p>Hojas de cálculo creadas: <b className="text-color-primary">{sheetsArr.length}</b></p>
+                <input 
+                    type="text" 
+                    className={`display-6 text-color-default ${animationClass}`}
+                    style={{ outline: 'none', backgroundColor: 'var(--body-color)' }}
+                    ref={ newAccountDescriptionRef }
+                    value={ newAccountUpdate }
+                    onChange={ (e)=>  setNewAccountUpdate(e.target.value) }
+                    onKeyDown={ onKeyDown }
+                    maxLength={ 35}
+                />
+
+                {
+                    (screenWidth <= 500) && (
+                        <Tooltip
+                            placement="right"
+                            content="Eliminar Cuenta"
+                            className="searcher-icon-button"
+                            color="danger"
+                            closeDelay={50}
+                        >
+                            <i className="bx bx-trash icon icon-trash" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
+                        </Tooltip>
+                    )
+                }
             </div>
 
-            <Tooltip
-                placement="right"
-                content="Eliminar Cuenta"
-                color="danger"
-                closeDelay={50}
-            >
-                <i className="bx bx-trash icon icon-trash" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
-            </Tooltip>
+            <div className={`accounts-account-info mt-2 text-color-default ${animationClass}`}>
+                <span>Fecha de creación <b className="text-color-primary">{ accountCreationDate }</b></span>
+                <p>Hojas de cálculo creadas <b className="text-color-primary">{sheetsArr.length}</b></p>
+
+                <div className="account-delete-account-buttom">
+                    <Tooltip
+                        placement="right"
+                        content="Eliminar Cuenta"
+                        color="danger"
+                        closeDelay={50}
+                    >
+                        <i className="bx bx-trash icon icon-trash" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i>
+                    </Tooltip> 
+                </div>
+            </div>
             
             <hr /> 
 
             <div className="accounts-accounts-form">
-                <div className="account-search-box">
+                <div className="account-icon-box">
                     <input 
                         type="text" 
                         placeholder="Hoja de calculo nueva" 
@@ -197,7 +224,7 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                     </button>
                 </div>
 
-                <div className="account-sheets-items">
+                <div className="account-sheets-items p-1">
                     {
                         (sheetsArr.length <= 0) 
                             && (<p className="animate__animated animate__fadeInLeft animate__faster text-color-default" style={{ fontSize: '12px' }}>No hay hojas de cálculo en esta cuenta.</p>)

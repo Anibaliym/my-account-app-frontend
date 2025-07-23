@@ -25,9 +25,6 @@
     border-radius: 5px;
     background-color: var(--body-color);
     height: calc(100vh - 47px); 
-
-    /* ayanez - afecta el "balance-form" */
-    /* Solo si quieres permitir desplazamiento horizontal */
     white-space: nowrap;
     overflow-x: auto; 
 }
@@ -107,23 +104,6 @@
 }
 
 
-.accounts-principal-container {
-    display: flex;
-    height: calc(100vh - 100px); 
-}
-
-.accounts-accounts-form {
-    /* background-color: purple;  */
-    min-width: 300px;
-    height: 100%;            
-    
-    
-    overflow-x: hidden;
-}
-
-.accounts-accounts-form::-webkit-scrollbar {
-  display: none;
-}
 
 .accounts-sheets-form {
     /* background-color: purple; */
