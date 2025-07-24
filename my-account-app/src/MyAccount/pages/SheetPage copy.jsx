@@ -71,33 +71,23 @@ export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAc
     if (!sheetData) return (<div className="spinner-border" role="status"></div>);
 
     return (
-        
-        <div className="accounts-wrapper">
-            <div className="container-sheet">
-                <FormSheetBalance
-                    sheetData={sheetData}
-                    cardsSheetData={cardsSheetData}
-                    showUserMessage={showUserMessage}
-                    setAccountListener={setAccountListener}
-                    accountListener={accountListener}
-                    calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }}
-                    refreshData={refreshData}
-                />
+        <div className="page-principal-container">
+            <FormSheetBalance
+                sheetData={sheetData}
+                cardsSheetData={cardsSheetData}
+                showUserMessage={showUserMessage}
+                setAccountListener={setAccountListener}
+                accountListener={accountListener}
+                calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }}
+                refreshData={refreshData}
+            />
 
-            </div>
-            <div className="container-cards">cartas</div>
+            <FormCardsSheet
+                cardsSheetData={cardsSheetData}
+                showUserMessage={showUserMessage}
+                getSheetCardsWithVignettes={getSheetCardsWithVignettes}
+                refreshData={refreshData}
+            />
         </div>
-
-
-        // <div className="page-principal-container">
-
-        //     <FormCardsSheet
-        //         cardsSheetData={cardsSheetData}
-        //         showUserMessage={showUserMessage}
-        //         getSheetCardsWithVignettes={getSheetCardsWithVignettes}
-        //         refreshData={refreshData}
-        //     />
-        // </div>
-
     );
 };

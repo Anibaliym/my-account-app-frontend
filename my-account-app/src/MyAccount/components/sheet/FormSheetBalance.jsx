@@ -172,6 +172,7 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
 
     return (
         <div className="sheet-balances-form">
+
             <input
                 ref={sheetDescriptionRef}
                 type="text"
@@ -183,8 +184,9 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                 onKeyDown={(e) => handleKeyDown(e, 'sheetDescription', null)}
                 onChange={(e) => handleChange(e, 'sheetDescription')}
             />
+            <br />
 
-            <small style={{ fontSize: '12px' }}>{formatDate(creationDate)}</small>
+            <small style={{ fontSize: '12px' }}>{ formatDate(creationDate) }</small>
 
             <IconToolsbar
                 refreshData={refreshData}
@@ -197,7 +199,31 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
 
             <hr />
 
-            <small>Saldo Efectivo</small>
+            <div className="input-container">
+                <input
+                    ref={sheetCashBalanceRef}
+                    name="cashBalance"
+                    type="text"
+                    className={`floating-input no-focus balance-input-text display-6 animate__animated ${animationClass}`}
+                    style={{ borderBottom: '1px solid white' }}
+                    maxLength={11}
+                    value={sheetCashBalance}
+                    onChange={(e) => handleChange(e, 'cashBalance')}
+                    onClick={() => sheetCashBalanceRef.current.select()}
+                    onKeyDown={(e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
+                    onBlur={() => (handleBlur('cashBalance'))}
+                    autoComplete="off"
+                />
+
+                
+                <label for="email" className="floating-label">saldo efectivo</label>
+                <i className='bx bx-plus input-icon'></i>
+                
+            </div>
+
+
+
+            {/* <small>Saldo Efectivo</small>
             <input
                 ref={sheetCashBalanceRef}
                 name="cashBalance"
@@ -218,7 +244,7 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                     style={{ marginTop: '-35px' }}
                     className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
                 </li>
-            </div>
+            </div> */}
 
             <br />
             <small>Saldo Cuenta Bancaria</small>
