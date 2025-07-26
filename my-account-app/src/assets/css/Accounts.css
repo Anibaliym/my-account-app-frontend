@@ -303,6 +303,9 @@
     height: calc(100vh - 100px); 
 }
 
+
+.accounts-account-info { font-size: 14px; }
+
 .accounts-accounts-form {
     /* background-color: lightgray;  */
     padding: 5px;

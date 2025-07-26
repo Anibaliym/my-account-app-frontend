@@ -22,14 +22,11 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
     const accountDescriptionRef = useRef();
     const [ newAccountDescription, setNewAccountDescription ] = useState(''); 
 
-    useEffect(() => {
-        accountDescriptionRef.current.focus();
-    }, [])
-
     const onKeyDown = (event) => {
         if (event.key === 'Enter') {
             if(newAccountDescription.trim().length === 0){
                 showUserMessage('Debe ingresar un nombre de cuenta válido.', 'warning');
+                console.log('test ref')
                 accountDescriptionRef.current.select();
             }
 
@@ -105,6 +102,7 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
                     value={ newAccountDescription }
                     onChange={ (e) => setNewAccountDescription(e.target.value) }
                     onKeyDown={ onKeyDown }
+                    onBlur={() => newAccountDescription.trim().length && createAccount()}
                     maxLength={ 35}
                 />
 
@@ -114,6 +112,14 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
             </div>
 
             <div className="account-accounts-items">
+
+                {
+                    (accountsArr.length <= 0) 
+                        && 
+                        (<p className="animate__animated animate__fadeInLeft animate__faster text-color-default" style={{ fontSize: '12px' }}>No se han creado cuentas aún.</p>)
+                }
+
+
                 <DndContext collisionDetection={ closestCenter } onDragEnd={ onDragEnd }>
                     <SortableContext items={ accountsArr } strategy={ verticalListSortingStrategy }> 
                         {

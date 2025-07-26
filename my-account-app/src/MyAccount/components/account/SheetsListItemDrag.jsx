@@ -36,17 +36,22 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
     }
 
     const updateSheet = async () => {
-        const { isError, resolution, message } = await updateSheetFetch(accountId, sheetId, sheetDescriptionUpdate, cashBalance, currentAccountBalance, order); 
 
+        const { isError, resolution, message } = await updateSheetFetch(accountId, sheetId, sheetDescriptionUpdate, cashBalance, currentAccountBalance, order); 
+        
         if(isError) {
             showUserMessage('ocurrió un error al intentar actualizar el nombre de la "Hoja de cálculo."','danger');
             return;
         }
-
+        
         if(!resolution) {
             showUserMessage(message,'info');
             return; 
         }
+        console.log(description)
+        console.log(sheetDescriptionUpdate)
+
+        
         
         showUserMessage(`Se ha actualizado el nombre de la hoja de cálculo "${ description }" a "${ sheetDescriptionUpdate }"`,'success');
         setAccountListener(accountListener + 1);
@@ -68,7 +73,8 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
                         onChangeCapture={ (e) => ( setSheetDescriptionUpdate(e.target.value)) }
                         onKeyDown={ handleKeyDown }
                         maxLength="20"
-                        onChange={ ()=>{} }
+                        onChange={()=>{}}
+                        onBlur={ ()=> sheetDescriptionUpdate.length && updateSheet() }
                     />
                 </div>
 

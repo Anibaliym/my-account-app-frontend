@@ -133,58 +133,55 @@ export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vign
     }
 
     return (
-        <>
-            <div 
-                ref={ setNodeRef } 
-                style={ {transform: CSS.Transform.toString(transform), transition} } // Estilos dinámicos de movimiento
-                className={ `excel-card-vignette color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
-            >
-                <div className="animate__animated animate__fadeIn animate__faster excel-card-row">
-                    <div className="excel-card-cell action">
-                        <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners} {...attributes}></i>
-                        <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon mr-1' onClick={ deleteVignette } ></i>
-
-                        <Tooltip 
-                            content={<FormSelectColor vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
-                            placement="right"
-                            closeDelay={ 200 }
-                        >
-                            <i className='bx bx-palette icon text-color-primary card-icon mr-1'></i>
-                        </Tooltip> 
-
-
-                        { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                        { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                    </div>
-
-                    <div className="excel-card-cell description">
-                        <input 
-                            type="text" 
-                            className={ `vignette-input-text-description no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
-                            ref={ refDesription }
-                            maxLength={ 60 }
-                            value={ newDescription } 
-                            onChange={ onChangeDescription }
-                            onClick={ () => ( refDesription.current.select() ) }
-                            onBlur={ () => ( handleBlur('description') ) }
-                            onKeyDown={ (e) => handleKeyDown(e, 'description') }
-                        />
-                    </div>
-                    <div className="excel-card-cell value">
-                        <input 
-                            type="text" 
-                            ref={ refAmount }
-                            className={ `vignette-input-text-amount no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
-                            maxLength={ 11 }
-                            value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
-                            onChange={ onChangeAmount }
-                            onBlur={ () => ( handleBlur('amount') ) }
-                            onClick={ () => ( refAmount.current.select() ) }
-                            onKeyDown={ (e) => handleKeyDown(e, 'amount') }
-                        />
-                    </div>
-                </div>
+        <div
+            ref={setNodeRef}
+            style={{ transform: CSS.Transform.toString(transform, transition) }}
+            className={`excel-card-vignette color-selector-${isDarkMode ? 'dark' : 'light'}Theme-${vignetteColorTheme}`}
+        >
+            <div className="card-vignette-description">
+                <input 
+                    type="text" 
+                    className={ `vignette-input-text-description no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
+                    ref={ refDesription }
+                    maxLength={ 60 }
+                    value={ newDescription } 
+                    onChange={ onChangeDescription }
+                    onClick={ () => ( refDesription.current.select() ) }
+                    onBlur={ () => ( handleBlur('description') ) }
+                    onKeyDown={ (e) => handleKeyDown(e, 'description') }
+                />
             </div>
-        </>
+            <div className="card-vignette-amount">
+                <input 
+                    type="text" 
+                    ref={ refAmount }
+                    className={ `vignette-input-text-amount no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
+                    maxLength={ 11 }
+                    value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
+                    onChange={ onChangeAmount }
+                    onBlur={ () => ( handleBlur('amount') ) }
+                    onClick={ () => ( refAmount.current.select() ) }
+                    onKeyDown={ (e) => handleKeyDown(e, 'amount') }
+                />                
+
+            </div>
+            <div className="card-vignette-actions">
+
+                { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                        
+                <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon' onClick={ deleteVignette } ></i>
+
+                <Tooltip 
+                    content={<FormSelectColor vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
+                    placement="down"
+                    closeDelay={ 50 }
+                >
+                    <i className='bx bx-palette icon text-color-primary card-icon '></i>
+                </Tooltip> 
+
+                <i className='bx bx-sort-alt-2 icon text-color-primary card-icon' {...listeners} {...attributes}></i>                
+            </div>
+        </div>            
     )
 }

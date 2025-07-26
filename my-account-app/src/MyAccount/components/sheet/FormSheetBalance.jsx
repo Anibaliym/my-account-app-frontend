@@ -27,6 +27,7 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
     // Detecta cambios en sheetId y activa la animación
     useEffect(() => {
         setAnimationClass("animate__fadeIn");
+        setAnimationClass("animate__fadeIn");
 
         // Elimina la clase después de 500ms (duración de la animación)
         const timeout = setTimeout(() => setAnimationClass(""), 500);
@@ -172,13 +173,12 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
 
     return (
         <div className="sheet-balances-form">
-
             <input
                 ref={sheetDescriptionRef}
                 type="text"
                 value={sheetDescription}
-                maxLength={11}
-                className={`balance-input-text display-6 animate__animated ${animationClass}`}
+                maxLength={15}
+                className={`balance-input-text display-6 animate__animated animate__fadeIn`}
                 onClick={() => sheetDescriptionRef.current.select()}
                 onBlur={() => handleBlur('sheetDescription')}
                 onKeyDown={(e) => handleKeyDown(e, 'sheetDescription', null)}
@@ -187,6 +187,8 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
             <br />
 
             <small style={{ fontSize: '12px' }}>{ formatDate(creationDate) }</small>
+            <br />
+            <small style={{ fontSize: '12px' }}>Cartas creadas <b>{ cardsSheetData.length }</b></small>
 
             <IconToolsbar
                 refreshData={refreshData}
@@ -204,8 +206,8 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                     ref={sheetCashBalanceRef}
                     name="cashBalance"
                     type="text"
-                    className={`floating-input no-focus balance-input-text display-6 animate__animated ${animationClass}`}
-                    style={{ borderBottom: '1px solid white' }}
+                    className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
+                    style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
                     maxLength={11}
                     value={sheetCashBalance}
                     onChange={(e) => handleChange(e, 'cashBalance')}
@@ -215,59 +217,42 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                     autoComplete="off"
                 />
 
+                {/* <label className="floating-label">saldo efectivo</label> */}
+                <label className="floating-label" style={{fontSize:'10px'}}>SALDO EFECTIVO</label>
                 
-                <label for="email" className="floating-label">saldo efectivo</label>
-                <i className='bx bx-plus input-icon'></i>
-                
+                <div className="input-icon">
+                    <li
+                        style={{ marginTop: '-35px' }}
+                        className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
+                    </li>
+                </div> 
             </div>
 
+            <div className="input-container">
+                <input
+                    ref={sheetCurrentAccountBalanceRef}
+                    name="currentAccountBalance"
+                    type="text"
+                    className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
+                    style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
+                    maxLength={11}
+                    value={sheetCurrentAccountBalance}
+                    onChange={(e) => handleChange(e, 'currentAccountBalance')}
+                    onClick={() => sheetCurrentAccountBalanceRef.current.select()}
+                    onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance)}
+                    onBlur={() => (handleBlur('currentAccountBalance'))}
+                    autoComplete="off"
+                />
 
-
-            {/* <small>Saldo Efectivo</small>
-            <input
-                ref={sheetCashBalanceRef}
-                name="cashBalance"
-                type="text"
-                className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
-                style={{ borderBottom: '1px solid white' }}
-                maxLength={11}
-                value={sheetCashBalance}
-                onChange={(e) => handleChange(e, 'cashBalance')}
-                onClick={() => sheetCashBalanceRef.current.select()}
-                onKeyDown={(e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
-                onBlur={() => (handleBlur('cashBalance'))}
-                autoComplete="off"
-            />
-
-            <div className="icon-save">
-                <li
-                    style={{ marginTop: '-35px' }}
-                    className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
-                </li>
-            </div> */}
-
-            <br />
-            <small>Saldo Cuenta Bancaria</small>
-            <input
-                ref={sheetCurrentAccountBalanceRef}
-                name="currentAccountBalance"
-                type="text"
-                className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
-                style={{ borderBottom: '1px solid white' }}
-                maxLength={11}
-                value={sheetCurrentAccountBalance}
-                onChange={(e) => handleChange(e, 'currentAccountBalance')}
-                onClick={() => sheetCurrentAccountBalanceRef.current.select()}
-                onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance)}
-                onBlur={() => (handleBlur('currentAccountBalance'))}
-                autoComplete="off"
-            />
-
-            <div className="icon-save">
-                <li
-                    style={{ marginTop: '-35px' }}
-                    className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
-                </li>
+                {/* <label className="floating-label">saldo cuenta corriente</label> */}
+                <label className="floating-label" style={{fontSize:'10px'}}>SALDO CUENTA CORRIENTE</label>
+                
+                <div className="input-icon">
+                    <li
+                        style={{ marginTop: '-35px' }}
+                        className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
+                    </li>
+                </div> 
             </div>
 
             <FormCalculatedBalances calculatedBalances={calculatedBalances} />

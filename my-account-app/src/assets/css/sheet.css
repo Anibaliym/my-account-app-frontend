@@ -6,30 +6,50 @@
 
 .sheet-balances-form {
     width: 100%; 
-    height: 540px; 
+    max-width: 500pc;
+    height: 580px; 
     background-color: var(--primary-color);
     border-radius: 10px;
-    padding:7px; 
+    padding:10px; 
     color: white;
     overflow:hidden; 
 }
 
-.sheet-cards-form {
-    flex: 1; /* Toma el ancho restante */
-    height: calc(100vh - 110px); /* Ajusta dinámicamente el alto menos el padding */
-    overflow-y: auto; /* Habilita el scroll vertical si el contenido excede */
-    overflow-x: hidden; /* Evita scroll horizontal */
-}
 
+/* ayanez - prueba de balance form con gradient */
+/* .sheet-balances-form {
+    width: 100%; 
+    max-width: 500pc;
+    height: 580px; 
+    border-radius: 10px;
+    padding:10px; 
+    color: white;
+    overflow:hidden; 
+    background-image: linear-gradient(to right bottom, #04030a, #1e1e41, #32327c, #4b47bc, #695cfe);
+} */
+
+
+
+.sheet-cards-form {
+    display: flex;
+    flex-wrap: nowrap; /* evita que las columnas se apilen */
+    height: calc(100vh - 60px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* background-color: red; */
+    padding-left: 10px;
+    gap: 5px; /* espacio entre columnas */
+    box-sizing: border-box;
+
+}
 
 .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
-    width: 50%;
-    height: 100%;
-    float: left;
-    padding: 5px; 
-
+    flex: 1 1 0;   /* ocuparán 50% automáticamente */
+    min-width: 0;  /* evita overflow horizontal */
+    display: flex;
+    flex-direction: column;
+    gap: 0px;     /* espacio entre tarjetas dentro de la columna */
 }
-
 
 .sheet-balances-form-header {
     border-radius:3px; 
@@ -39,12 +59,12 @@
 .balance-input-text {
     width: 100%;
     border: none;
-    background-color: var(--primary-color);
+    /* background-color: var(--primary-color); */
+    background:inherit;
     color: white;
     outline: none;
     padding:2px; 
-    padding-top: 20px;
-    
+    /* padding-top: 20px; */
 }
 
 .balance-input-text:hover {
@@ -57,6 +77,7 @@
     color: var(--primary-color);
 }
 
+/*.ayanez - por revisar en donde se ocupa la clase */
 .icon-save {
     display: flex;
     justify-content: flex-end; /* Alinea los iconos a la derecha */
@@ -89,14 +110,6 @@
     display: flex;
 }
 
-.excel-card-vignette {
-    display: flex;
-    justify-content: space-between;
-    padding: 5px 5px;
-    border-bottom: 1px solid gray; 
-    border-radius: 3px; 
-}
-
 .card-item-dragable {
     display: flex;
     justify-content: space-between;
@@ -106,44 +119,14 @@
 
 .card-item-dragable.action {
     flex: 0 0 20px;
+    /*ayanez - por revisar*/
+    /* background-color: gold;
+    padding: 100px; */
 }
 
 .card-item-dragable.description {
     flex: 1; /* Este ocupa todo el espacio restante */
     text-align: left;
-}
-
-.excel-card-row {
-    display: flex;
-    width: 100%;
-}
-
-.excel-card-cell.description {
-    flex: 1; /* Este ocupa todo el espacio restante */
-    text-align: left;
-    /* background-color: green; */
-}
-
-.excel-card-cell.value {
-    flex: 0 0 100px; /* Ancho fijo de 100px */
-    text-align: right;
-    /* background-color: green; */
-}
-
-.excel-card-cell.action {
-    flex: 0 0 120px;
-}
-
-
-.excel-card-account-cell.action {
-    flex: 0 0 120px;
-    text-align: right;
-}
-
-.excel-card-footer {
-    display: flex;
-    justify-content: space-between;
-    
 }
 
 .card-control-navbar {
@@ -155,8 +138,10 @@
 
 .card-icon {
     transition: margin 0.3s;
-    font-size: 18px;
+    font-size: 17px;
+    top:10%;
     cursor:pointer;
+    margin:1px
 }
 
 .vignette-input-text-description {
@@ -181,7 +166,6 @@
 .vignette-input-text-amount {
     width:100%; 
     text-align:right; 
-    border-left:1px solid lightgray;
     background-color: var(--sidebar-color); 
 }
 
@@ -189,6 +173,7 @@
     width: 100%;
     border-radius: 5px;
     color: var(--text-color); 
+    margin-top:50px; 
 }
 
 .balance-calculate-amount-item {
@@ -218,7 +203,6 @@
 .color-selector-item:hover {
     box-shadow: 1px 1px 10px var(--primary-color);  
 }
-
 
 /* Light Theme */
 .color-selector-lightTheme-DEFAULT { background-color: var(--sidebar-color); color: var(--text-color); }
@@ -285,34 +269,22 @@
     flex: 0.2;
     /* background-color: lightblue; */
     height: calc(100vh - 110px);
-    max-width: 100%;
     min-width: 300px;
     overflow: hidden;
 }
 
 .container-cards {
     flex: 1;
-    height: calc(100vh - 110px);
+    height: calc(100vh - 60px);
     overflow: hidden;
     min-width: 300px;
-    padding-left: 10px;
-    margin-left: 0px;
-    background-color: gray;
-    
+    /* background-color: gray; */
 }
-
-@media (max-width: 500px) {
-
-}
-
-
-
-
-
 
 .input-container {
     position: relative;
     width: 100%;
+    margin-top: 10px;
 }
 
 .floating-label {
@@ -332,8 +304,79 @@
 .input-icon {
     position: absolute;
     right: 0px;
-    top: 60%;
+    top: 55%;
     font-size: 20px;
     color: white;
     pointer-events: none;
+}
+
+@media (max-width: 1400px) {
+
+}
+@media (max-width: 1000px) {
+    .sheet-balances-form {
+        width: 100%;
+    }
+
+    .container-sheet {
+        flex: none;
+        height: 100%;
+        /* padding: 10px; */
+        width:300px; 
+    }
+}
+
+@media (max-width: 500px) {
+    .container-sheet {
+        overflow: scroll;
+        height: 50%;
+        /* padding: 10px; */
+        width:100%; 
+        width:400px; 
+    }
+
+    .container-sheet::-webkit-scrollbar, .container-sheets::-webkit-scrollbar {
+        width: 4px;
+        padding: 10px;
+    }
+    
+    .container-sheet::-webkit-scrollbar-thumb, .container-sheets::-webkit-scrollbar-thumb {
+        background: red;
+    }
+
+}
+
+.excel-card-vignette {
+    display: flex;
+    padding: 4px;
+    border: 1px solid var(--sidebar-color);
+    border-bottom: 1px solid gray;
+
+}
+
+.excel-card-vignette:hover {
+    border-right: 1px solid var(--primary-color);
+    border-left: 1px solid var(--primary-color);
+}
+
+.card-vignette-description {
+    flex: 1;
+    min-width: 250px;
+}
+
+.card-vignette-amount {
+    width: 100px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.card-vignette-actions {
+    width: 80px;
+    text-align: right;
+    flex-shrink: 0;
+}
+
+.card-total-amount {
+    float: right;
+    font-size:30px;
 }

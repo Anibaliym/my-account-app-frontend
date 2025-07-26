@@ -29,7 +29,7 @@ export const FormCalculatedBalances = ({ calculatedBalances }) => {
     }, [inFavorBalance]);
 
     return (
-        <div className="balance-calculate-amount-form mt-3">
+        <div className="balance-calculate-amount-form">
             <div className={ `balance-calculate-amount-item ${animateAvailable ? "animate__animated aniimate__faster animate__flipInX" : ""}` }>
                 <small>Saldo Disponible:</small><br />
                 <small className="display-6 ml-1" style={{ fontSize: '18px' }}>${formatNumberWithThousandsSeparator(availableTotalBalance)}</small>

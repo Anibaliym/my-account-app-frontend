@@ -85,19 +85,14 @@ export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAc
                 />
 
             </div>
-            <div className="container-cards">cartas</div>
+            <div className="container-cards">
+                <FormCardsSheet
+                    cardsSheetData={cardsSheetData}
+                    showUserMessage={showUserMessage}
+                    getSheetCardsWithVignettes={getSheetCardsWithVignettes}
+                    refreshData={refreshData}
+                />                
+            </div>
         </div>
-
-
-        // <div className="page-principal-container">
-
-        //     <FormCardsSheet
-        //         cardsSheetData={cardsSheetData}
-        //         showUserMessage={showUserMessage}
-        //         getSheetCardsWithVignettes={getSheetCardsWithVignettes}
-        //         refreshData={refreshData}
-        //     />
-        // </div>
-
     );
 };

@@ -159,7 +159,7 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                 deleteCardWithVignettes={deleteCardWithVignettes}
             />
 
-            <div className="excel-card-header border-white">
+            <div className="excel-card-header">
                 <input
                     ref={cardTitleRef}
                     name="cardDescription"
@@ -208,11 +208,10 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                 </DndContext>
             </div>
 
-            <div className={`excel-card-footer mt-1 animate__animated animate__faster ${isAnimating ? 'animate__flipInX' : ''}`}>
-                <div className="excel-card-cell"></div>
-                <h2 className="mt-2 dispplay-2" >
+            <div className={`animate__animated animate__faster ${isAnimating ? 'animate__flipInX' : ''}`}>
+                <span className="card-total-amount mt-4 mr-2 display-6 text-color-default">
                     ${formatNumberWithThousandsSeparator(cardTotalAmount)}
-                </h2>
+                </span>
             </div>
         </div>
     )

@@ -215,6 +215,7 @@ export const SheetsForm = ({ accountId, showUserMessage, setAccountListener, acc
                         value={newSheetDescription}
                         onChange={(e)=>setNewSheetDescription(e.target.value)}
                         onKeyDown={handleKeyDown}
+                        onBlur={() => newSheetDescription.trim().length && createSheet()}
                         maxLength={40}
                     />
 

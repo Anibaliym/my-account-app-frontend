@@ -27,9 +27,9 @@ export const AuthProvider = ({ children }) => {
     const [showModal, setShowModal] = useState(false);
     const timeoutIdRef = useRef(null);
 
-    // const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
+    const SESSION_DURATION = 30 * 60 * 1000; // 30 minutos en milisegundos
     // const SESSION_DURATION = 2 * 1000; // 2 segundos en mil
-    const SESSION_DURATION = 3 * 60 * 1000; // 3 minutos en milisegundos
+    // const SESSION_DURATION = 3 * 60 * 1000; // 3 minutos en milisegundos
 
     const Login = (user, accounts) => {
         const action = { type: types.login, payload: user };
