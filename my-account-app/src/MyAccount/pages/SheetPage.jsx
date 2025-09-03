@@ -4,15 +4,16 @@ import { getSheetByIdFetch } from '../../assets/api/MyAccountAppAPI/Sheet';
 import { FormSheetBalance } from '../components/sheet/FormSheetBalance';
 import { getSheetCardsWithVignettesFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 import { FormCardsSheet } from '../components/sheet/FormCardsSheet';
+import { useWindowSize } from '../hooks/useWindowSize';
 
 export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAccountListener }) => {
     const { sheetId } = useParams();
-
-    const [sheetData, setSheetData] = useState(null);
-    const [cardsSheetData, setCardsSheetData] = useState([]);
-    const [availableTotalBalance, setAvailableTotalBalance] = useState(0);
-    const [toSpendBalance, setToSpendBalance] = useState(0);
-    const [inFavorBalance, setInFavorBalance] = useState(0);
+    const { width } = useWindowSize(); 
+    const [ sheetData, setSheetData ] = useState(null);
+    const [ cardsSheetData, setCardsSheetData ] = useState([]);
+    const [ availableTotalBalance, setAvailableTotalBalance ] = useState(0);
+    const [ toSpendBalance, setToSpendBalance ] = useState(0);
+    const [ inFavorBalance, setInFavorBalance ] = useState(0);
 
     const getSheetData = async () => {
         // Obtiene los datos de la hoja de cálculo.
@@ -71,20 +72,19 @@ export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAc
     if (!sheetData) return (<div className="spinner-border" role="status"></div>);
 
     return (
-        
         <div className="accounts-wrapper">
             <div className="container-sheet">
-                <FormSheetBalance
-                    sheetData={sheetData}
-                    cardsSheetData={cardsSheetData}
-                    showUserMessage={showUserMessage}
-                    setAccountListener={setAccountListener}
-                    accountListener={accountListener}
-                    calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }}
+                <FormSheetBalance 
+                    sheetData={sheetData} 
+                    cardsSheetData={cardsSheetData} 
+                    showUserMessage={showUserMessage} 
+                    setAccountListener={setAccountListener} 
+                    accountListener={accountListener} 
+                    calculatedBalances={{ availableTotalBalance, toSpendBalance, inFavorBalance }} 
                     refreshData={refreshData}
                 />
-
             </div>
+
             <div className="container-cards">
                 <FormCardsSheet
                     cardsSheetData={cardsSheetData}
@@ -92,7 +92,7 @@ export const SheetPage = ({ setPageName, showUserMessage, accountListener, setAc
                     getSheetCardsWithVignettes={getSheetCardsWithVignettes}
                     refreshData={refreshData}
                 />                
-            </div>
+            </div> 
         </div>
     );
 };

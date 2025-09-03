@@ -267,6 +267,16 @@
     color: #aaa;
 }
 
+/* .accounts-wrapper {
+    display: flex;
+    height: calc(100vh - 97px);
+    gap: 10px;
+    border-radius: 5px;
+    box-sizing: border-box;
+    background-color: var(--body-color);
+    background-color: lightcoral;
+} */
+
 .accounts-wrapper {
     display: flex;
     height: calc(100vh - 97px);
@@ -325,7 +335,8 @@
 
 @media (max-width: 500px) {
     .accounts-wrapper {
-        flex-direction: column;
+        flex-direction:column;
+        height:100vh;
     }
 
     .container-accounts, .container-sheets {

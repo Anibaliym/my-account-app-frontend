@@ -166,21 +166,23 @@ export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vign
 
             </div>
             <div className="card-vignette-actions">
-
-                { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
-                { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                <span className="mobile-hide">
+                    { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                    { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                </span>
                         
                 <i className='bx bx-trash icon icon icon-trash text-color-danger card-icon' onClick={ deleteVignette } ></i>
 
-                <Tooltip 
-                    content={<FormSelectColor vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
-                    placement="down"
-                    closeDelay={ 50 }
-                >
-                    <i className='bx bx-palette icon text-color-primary card-icon '></i>
-                </Tooltip> 
-
-                <i className='bx bx-sort-alt-2 icon text-color-primary card-icon' {...listeners} {...attributes}></i>                
+                <span className="mobile-hide">
+                    <Tooltip 
+                        content={<FormSelectColor vignetteId={ vignetteId } setVignetteColorTheme={ setVignetteColorTheme }/>} 
+                        placement="down"
+                        closeDelay={ 50 }
+                    >
+                        <i className='bx bx-palette icon text-color-primary card-icon '></i>
+                    </Tooltip> 
+                    <i className='bx bx-sort-alt-2 icon text-color-primary card-icon' {...listeners} {...attributes}></i>                
+                </span>
             </div>
         </div>            
     )

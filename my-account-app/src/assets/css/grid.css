@@ -24,6 +24,7 @@
     padding: 10px;
     border-radius: 5px;
     background-color: var(--body-color);
+    /* background-color: blue; */
     height: calc(100vh - 47px); 
     white-space: nowrap;
     overflow-x: auto; 
@@ -103,8 +104,6 @@
     color: var(--text-hover-color);
 }
 
-
-
 .accounts-sheets-form {
     /* background-color: purple; */
     flex: 1;            
@@ -114,3 +113,11 @@
     border-left: 3px solid var(--sidebar-color);
 }
 
+@media (max-width: 500px){
+    .dashboard-content {
+        padding: 0px;
+        margin-top:5px;
+        height: calc(100vh - 55px); 
+        overflow: hidden; 
+    }   
+}

@@ -1,3 +1,5 @@
+// FormSheetBalanceDesptok
+
 import { useEffect, useState, useRef } from 'react';
 import { updateCashBalanceFetch, updateCurrentAccountBalanceFetch, updateSheetFetch } from '../../../assets/api/MyAccountAppAPI/Sheet';
 import { formatNumber, formatNumberWithThousandsSeparator } from '../../../assets/utilities/BalanceFormater';
@@ -173,87 +175,91 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
 
     return (
         <div className="sheet-balances-form">
-            <input
-                ref={sheetDescriptionRef}
-                type="text"
-                value={sheetDescription}
-                maxLength={15}
-                className={`balance-input-text display-6 animate__animated animate__fadeIn`}
-                onClick={() => sheetDescriptionRef.current.select()}
-                onBlur={() => handleBlur('sheetDescription')}
-                onKeyDown={(e) => handleKeyDown(e, 'sheetDescription', null)}
-                onChange={(e) => handleChange(e, 'sheetDescription')}
-            />
-            <br />
+            <div className="row">
+                <div className="col-9">
+                    <input
+                        ref={sheetDescriptionRef}
+                        type="text"
+                        value={sheetDescription}
+                        maxLength={15}
+                        className={`balance-input-text display-6 animate__animated animate__fadeIn`}
+                        onClick={() => sheetDescriptionRef.current.select()}
+                        onBlur={() => handleBlur('sheetDescription')}
+                        onKeyDown={(e) => handleKeyDown(e, 'sheetDescription', null)}
+                        onChange={(e) => handleChange(e, 'sheetDescription')}
+                    />
 
-            <small style={{ fontSize: '12px' }}>{ formatDate(creationDate) }</small>
-            <br />
-            <small style={{ fontSize: '12px' }}>Cartas creadas <b>{ cardsSheetData.length }</b></small>
-
-            <IconToolsbar
-                refreshData={refreshData}
-                cardsSheetData={cardsSheetData}
-                sheetDescription={sheetDescription}
-                setAccountListener={setAccountListener}
-                accountListener={accountListener}
-                showUserMessage={showUserMessage}
-            />
-
-            <hr />
-
-            <div className="input-container">
-                <input
-                    ref={sheetCashBalanceRef}
-                    name="cashBalance"
-                    type="text"
-                    className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
-                    style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
-                    maxLength={11}
-                    value={sheetCashBalance}
-                    onChange={(e) => handleChange(e, 'cashBalance')}
-                    onClick={() => sheetCashBalanceRef.current.select()}
-                    onKeyDown={(e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
-                    onBlur={() => (handleBlur('cashBalance'))}
-                    autoComplete="off"
-                />
-
-                {/* <label className="floating-label">saldo efectivo</label> */}
-                <label className="floating-label" style={{fontSize:'10px'}}>SALDO EFECTIVO</label>
-                
-                <div className="input-icon">
-                    <li
-                        style={{ marginTop: '-35px' }}
-                        className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
-                    </li>
-                </div> 
+                </div>
+                <div className="col-3">
+                    <IconToolsbar
+                        refreshData={refreshData}
+                        cardsSheetData={cardsSheetData}
+                        sheetDescription={sheetDescription}
+                        setAccountListener={setAccountListener}
+                        accountListener={accountListener}
+                        showUserMessage={showUserMessage}
+                    />
+                </div>
             </div>
 
-            <div className="input-container">
-                <input
-                    ref={sheetCurrentAccountBalanceRef}
-                    name="currentAccountBalance"
-                    type="text"
-                    className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
-                    style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
-                    maxLength={11}
-                    value={sheetCurrentAccountBalance}
-                    onChange={(e) => handleChange(e, 'currentAccountBalance')}
-                    onClick={() => sheetCurrentAccountBalanceRef.current.select()}
-                    onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance)}
-                    onBlur={() => (handleBlur('currentAccountBalance'))}
-                    autoComplete="off"
-                />
 
-                {/* <label className="floating-label">saldo cuenta corriente</label> */}
-                <label className="floating-label" style={{fontSize:'10px'}}>SALDO CUENTA CORRIENTE</label>
-                
-                <div className="input-icon">
-                    <li
-                        style={{ marginTop: '-35px' }}
-                        className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}>
-                    </li>
-                </div> 
+
+            <div className="pr-2 pl-2">
+
+            <small style={{ fontSize: '12px', color:'lightgray' }}>{ formatDate(creationDate) }</small>
+            <br />
+            <small style={{ fontSize: '12px', color:'lightgray' }}>Cartas creadas <b>{ cardsSheetData.length }</b></small>
+                <div className="input-container">
+                    <input
+                        ref={sheetCashBalanceRef}
+                        name="cashBalance"
+                        type="text"
+                        className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
+                        style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
+                        maxLength={11}
+                        value={sheetCashBalance}
+                        onChange={(e) => handleChange(e, 'cashBalance')}
+                        onClick={() => sheetCashBalanceRef.current.select()}
+                        onKeyDown={(e) => handleKeyDown(e, 'cashBalance', sheetCashBalance)}
+                        onBlur={() => (handleBlur('cashBalance'))}
+                        autoComplete="off"
+                    />
+
+                    {/* <label className="floating-label">saldo efectivo</label> */}
+                    <label className="floating-label" style={{fontSize:'10px'}}>Efectivo</label>
+                    
+                    <div className="input-icon">
+                        <li className={`text-white animate__animated ${animateCashBalance ? 'animate__fadeInUp' : ''} bx ${iconCashBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}></li>
+                    </div> 
+                </div>
+
+
+                <div className="input-container">
+                    <input
+                        ref={sheetCurrentAccountBalanceRef}
+                        name="currentAccountBalance"
+                        type="text"
+                        className={`no-focus balance-input-text display-6 animate__animated ${animationClass}`}
+                        style={{ borderBottom: '1px solid white', paddingTop:'20px' }}
+                        maxLength={11}
+                        value={sheetCurrentAccountBalance}
+                        onChange={(e) => handleChange(e, 'currentAccountBalance')}
+                        onClick={() => sheetCurrentAccountBalanceRef.current.select()}
+                        onKeyDown={(e) => handleKeyDown(e, 'currentAccountBalance', sheetCurrentAccountBalance)}
+                        onBlur={() => (handleBlur('currentAccountBalance'))}
+                        autoComplete="off"
+                    />
+
+                    <label className="floating-label" style={{fontSize:'10px'}}>Cuenta corriente</label>
+                    
+                    <div className="input-icon">
+                        <li className={`text-white animate__animated ${animateCurrentAccountBalance ? 'animate__fadeInUp' : ''} bx ${iconCurrentAccountBalance ? 'bx-check-circle' : 'bx-save'} icon animate__faster`}></li>
+                    </div> 
+                </div>
             </div>
+
+            
+
 
             <FormCalculatedBalances calculatedBalances={calculatedBalances} />
         </div>

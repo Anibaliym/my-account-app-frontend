@@ -164,7 +164,7 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                     ref={cardTitleRef}
                     name="cardDescription"
                     type="text"
-                    className={`no-focus card-title-input-text display-6`}
+                    className={`no-focus card-title-input-text`}
                     maxLength={40}
                     value={cardTitle.toUpperCase()}
                     onChange={(e) => (setCardTitle(e.target.value))}
@@ -173,6 +173,7 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                     onBlur={handleBlur}
                     autoComplete="off"
                 />
+                
 
                 <div className="icons-container">
                     <Tooltip placement="bottom" content="Agregar Viñeta" color="foreground" closeDelay={50}>

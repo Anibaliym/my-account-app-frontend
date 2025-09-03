@@ -71,3 +71,9 @@ input::placeholder {
     font-size: 20px; 
     font-weight: 500 
 }
+
+@media (max-width: 500px) {
+    .card-title-input-text {
+        font-size: 15px; 
+    }   
+}
