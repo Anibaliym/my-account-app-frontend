@@ -33,13 +33,37 @@
 .sheet-cards-form {
     display: flex;
     flex-wrap: nowrap; /* evita que las columnas se apilen */
-    height: calc(100vh - 60px);
+    height: calc(100vh - 110px);
     overflow-y: auto;
     overflow-x: hidden;
     padding-left: 10px;
     gap: 5px; /* espacio entre columnas */
     box-sizing: border-box;
 }
+
+.sheet-cards-form::-webkit-scrollbar {
+    width: 6px;                  /* scroll delgado */
+}
+
+.sheet-cards-form::-webkit-scrollbar-track {
+    background: transparent;      /* pista invisible */
+    margin: 4px;                  /* deja aire arriba/abajo */
+}
+
+.sheet-cards-form::-webkit-scrollbar-thumb {
+    background: var(--primary-color); /* azul primario translúcido */
+    border-radius: 12px;
+    transition: background 0.3s ease;    /* animación suave */
+}
+
+.sheet-cards-form::-webkit-scrollbar-thumb:hover {
+    background: rgba(91, 134, 229, 0.8); /* se intensifica en hover */
+    cursor: pointer;
+}
+
+
+
+
 
 .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
     flex: 1 1 0;  
@@ -88,8 +112,9 @@
     float:left;
     margin-right:15px; 
     border-radius:8px;     
-    background-color: var(--sidebar-color);
+    background-color: var(--card-color);
     margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 } 
 
 .excel-card-header {
@@ -107,6 +132,7 @@
 
 .excel-card-header .icons-container {
     display: flex;
+    color:red;
 }
 
 .card-item-dragable {
@@ -181,8 +207,7 @@
     margin-Bottom: 5px;
     padding: 7px;
     border-Radius: 5px;
-    font-Size: 15px;
-    font-weight: bolder; 
+    font-Size: 13px;
 }
 
 .balance-calculate-amount-item-danger {
@@ -204,7 +229,7 @@
 }
 
 /* Light Theme */
-.color-selector-lightTheme-DEFAULT { background-color: var(--sidebar-color); color: var(--text-color); }
+.color-selector-lightTheme-DEFAULT { background-color: var(--card-color); color: var(--text-color); }
 .color-selector-lightTheme-GREEN { background-color: #A2D9A1; color: black; }
 .color-selector-lightTheme-YELLOW { background-color: #FFEE9A; color: black; }
 .color-selector-lightTheme-ORANGE { background-color: #FFCC80; color: black; }
@@ -270,6 +295,7 @@
     height: calc(100vh - 110px);
     min-width: 300px;
     overflow: hidden;
+    /* background-color: blue; */
 }
 
 .container-cards {
@@ -278,7 +304,17 @@
     height: auto;            /* deja crecer según el contenido */
     overflow-y: auto;        /* permite scroll vertical */
     overflow-x: hidden;      /* evita scroll horizontal */
+    /* background-color: red; */
+    /* height: calc(100vh - 110px); */
 }
+
+
+
+
+
+
+
+
 
 .input-container {
     position: relative;
@@ -307,21 +343,16 @@
     font-size: 20px;
     color: white;
     pointer-events: none;
-    line-height: 20px;
+    
 }
-
 
 .excel-card-vignette {
     display: flex;
     padding: 4px;
-    border: 1px solid var(--sidebar-color);
-    border-bottom: 1px solid gray;
-
-}
-
-.excel-card-vignette:hover {
-    border-right: 1px solid var(--primary-color);
-    border-left: 1px solid var(--primary-color);
+    border: 1px solid var(--card-color);
+    border-bottom: 1px solid var(--vignette-border-color);
+    border-radius: 5px;
+    margin-top:2px; 
 }
 
 .card-vignette-description {

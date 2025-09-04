@@ -14,7 +14,14 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, getSheetC
     return (
         <div className="sheet-cards-form">
             <div className="sheet-cards-form-pilar1">
-                {cards
+                {
+                    (cards.length <= 0) 
+                        && 
+                        (<p className="animate__animated animate__fadeInLeft animate__faster text-color-default" style={{ fontSize: '12px' }}>No se han creado cartas aún.</p>)
+                }
+
+                {
+                    cards
                     .filter((_, index) => index % 2 === 0) // 👉 items en posición par (0, 2, 4...)
                     .map(({ id, title, vignettes, totalCardAmount, order }) => (
                         <FormCardDragable
@@ -28,7 +35,8 @@ export const FormCardsSheet = memo(({ cardsSheetData, showUserMessage, getSheetC
                             getSheetCardsWithVignettes={getSheetCardsWithVignettes}
                             refreshData={refreshData}
                         />
-                    ))}
+                    ))
+                }
             </div>
 
             <div className="sheet-cards-form-pilar2">

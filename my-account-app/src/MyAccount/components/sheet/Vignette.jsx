@@ -156,7 +156,7 @@ export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vign
                     type="text" 
                     ref={ refAmount }
                     className={ `vignette-input-text-amount no-focus color-selector-${ (isDarkMode) ? 'dark' : 'light' }Theme-${ vignetteColorTheme }` }
-                    maxLength={ 11 }
+                    maxLength={ 12 }
                     value={ `$${ formatNumberWithThousandsSeparator(newAmount) }` }
                     onChange={ onChangeAmount }
                     onBlur={ () => ( handleBlur('amount') ) }

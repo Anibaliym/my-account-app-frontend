@@ -174,7 +174,6 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
                     autoComplete="off"
                 />
                 
-
                 <div className="icons-container">
                     <Tooltip placement="bottom" content="Agregar Viñeta" color="foreground" closeDelay={50}>
                         <i className="bx bx-plus icon cursor-pointer" onClick={createVignette} ></i>

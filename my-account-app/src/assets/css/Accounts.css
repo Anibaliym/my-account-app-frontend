@@ -284,8 +284,10 @@
     border-radius: 5px;
     box-sizing: border-box;
     background-color: var(--body-color);
-    /* background-color: lightcoral; */
+    /* background-color: green; */
 }
+
+
 
 .container-accounts {
     flex: 0.2;

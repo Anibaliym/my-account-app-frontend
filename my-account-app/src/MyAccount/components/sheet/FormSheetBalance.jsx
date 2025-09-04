@@ -202,13 +202,12 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                 </div>
             </div>
 
-
-
             <div className="pr-2 pl-2">
 
-            <small style={{ fontSize: '12px', color:'lightgray' }}>{ formatDate(creationDate) }</small>
-            <br />
-            <small style={{ fontSize: '12px', color:'lightgray' }}>Cartas creadas <b>{ cardsSheetData.length }</b></small>
+                <small style={{ fontSize: '12px', color:'lightgray' }}>{ formatDate(creationDate) }</small>
+                <br />
+                <small style={{ fontSize: '12px', color:'lightgray' }}>Cartas creadas <b>{ cardsSheetData.length }</b></small>
+                
                 <div className="input-container">
                     <input
                         ref={sheetCashBalanceRef}
@@ -257,9 +256,6 @@ export const FormSheetBalance = ({ sheetData, cardsSheetData, showUserMessage, s
                     </div> 
                 </div>
             </div>
-
-            
-
 
             <FormCalculatedBalances calculatedBalances={calculatedBalances} />
         </div>

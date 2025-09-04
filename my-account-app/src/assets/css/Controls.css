@@ -22,11 +22,12 @@
     display: inline-block;
     transition: all 0.2s ease-in-out;
     font-size: 20px;
-    color: var(--text-color);
+    /* color: var(--text-color); */
+    color: #FF7F11;
 }
 
 .icon-trash {
-    color: var(--text-color);
+    color: #FF7F11;
 }
 
 .icon-trash:hover {
