@@ -111,7 +111,7 @@ export const FormCardDragable = ({ id, title, order, vignettesData, showUserMess
     }
 
     const updateCard = async () => {
-        const { isError } = await updateCardFetch(id, sheetId, cardTitle, order);
+        const { isError } = await updateCardFetch(id, sheetId, cardTitle.toUpperCase(), order);
 
         if (isError) {
             showUserMessage('Ocurrió un error al intentar actualizar el nombre de la carta.', 'error');

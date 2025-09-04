@@ -8,14 +8,13 @@ export const FormAddCards = ({ id, title }) => {
     return (
         <div
             key={id}
-            className=" card-item-dragable"
+            className="card-item-dragable animate__animated animate__fadeIn" 
             ref={setNodeRef}
             style={style}
             {...attributes}
         >
-            <div className="card-item-dragable action">
-                <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners}></i>
-            </div>
+            <i className='bx bx-sort-alt-2 icon text-color-primary card-icon mr-1' {...listeners}></i>
+            
             <div className="excel-card-cell description">
                 <span className="text-color-default">{title}</span>
             </div>

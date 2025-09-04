@@ -58,6 +58,8 @@ export const deleteSheetFetch = async (sheetId) => {
 export const updateSheetFetch = async ( accountId, sheetId, description, cashBalance, currentAccountBalance, order ) => {
     const url = `${ API_URL }/api/Sheet/UpdateSheet`;
 
+    console.log('updateSheetFetch')
+
     try 
     {
         const response = await fetch(url, {
@@ -92,6 +94,8 @@ export const updateSheetFetch = async ( accountId, sheetId, description, cashBal
 
 export const updateSheetOrderItemsFetch = async(sheetOrderItems) => {
     const url = `${ API_URL }/api/Sheet/UpdateSheetOrderItems`;
+
+    console.log('updateSheetOrderItemsFetch')
 
     try 
     {
@@ -144,6 +148,8 @@ export const getSheetByIdFetch = async ( sheetId ) => {
 export const updateCashBalanceFetch = async ( sheetId, cashBalance ) => {
     const url = `${ API_URL }/api/Sheet/UpdateCashBalance/${ sheetId }`;
 
+    console.log('updateCashBalanceFetch')
+
     try 
     {
         const response = await fetch(url, {
@@ -168,6 +174,8 @@ export const updateCashBalanceFetch = async ( sheetId, cashBalance ) => {
 
 export const updateCurrentAccountBalanceFetch = async ( sheetId, currentAccountBalance ) => {
     const url = `${ API_URL }/api/Sheet/UpdateCurrenteAccountBalance/${ sheetId }`;
+
+    console.log('updateCurrentAccountBalanceFetch')
 
     try 
     {

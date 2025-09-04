@@ -48,10 +48,6 @@ export const SheetsListItemDrag = ({ sheet, showUserMessage, setAccountListener,
             showUserMessage(message,'info');
             return; 
         }
-        console.log(description)
-        console.log(sheetDescriptionUpdate)
-
-        
         
         showUserMessage(`Se ha actualizado el nombre de la hoja de cálculo "${ description }" a "${ sheetDescriptionUpdate }"`,'success');
         setAccountListener(accountListener + 1);

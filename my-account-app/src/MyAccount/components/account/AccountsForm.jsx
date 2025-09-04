@@ -26,7 +26,6 @@ export const AccountsForm = ({ userAccountsWithSheetsData, showUserMessage, user
         if (event.key === 'Enter') {
             if(newAccountDescription.trim().length === 0){
                 showUserMessage('Debe ingresar un nombre de cuenta válido.', 'warning');
-                console.log('test ref')
                 accountDescriptionRef.current.select();
             }
 

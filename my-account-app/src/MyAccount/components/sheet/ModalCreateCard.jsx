@@ -44,7 +44,7 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
 
             return () => clearTimeout(timeout); // Limpia el timeout si el componente se desmonta
         }
-    }, [modalMessage]);
+    }, [modalMessage]);    
 
     const handleClick = () => createCard();
 
@@ -104,12 +104,11 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
             show={showModalCreateCard}
             onHide={setShowModalCreateCard}
             className="modal-blur"
-            size='lg'
         >
 
             <Modal.Body className="modal-content">
                 <h5 className=" card-title text-color-default">CARTAS DE PLANIFICACIÓN</h5>
-                <div className="row mt-3 mb-3">
+                <div className="row mt-2 p-2">
                     <div className="col">
                         <CustomInputText
                             isDarkMode={isDarkMode}
@@ -128,8 +127,11 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
                         <br />
 
                         <small className={`text-center text-danger mt-3 animate__fast ${animationClass}`}> {modalMessage} </small>
-                    </div>
-                    <div className="col">
+                        {
+                            (cards.length <= 0) 
+                                && (<p className="mt-2 animate__animated animate__fadeInUp animate__faster text-color-default" style={{ fontSize: '12px' }}>No hay hojas de cálculo en esta cuenta.</p>)
+                        }
+
                         <DndContext
                             collisionDetection={closestCenter}
                             onDragEnd={handleDragEnd}
