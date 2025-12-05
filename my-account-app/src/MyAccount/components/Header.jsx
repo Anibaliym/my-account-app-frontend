@@ -19,18 +19,15 @@ export const Header = ({ setToggleSidebar, toggleSidebar, pageName }) => {
         localStorage.setItem('my-account-isSidebarToggleCollapsed', JSON.stringify(toggleSidebar));
     }, [toggleSidebar]);
 
-
     useEffect(() => {
         const savedDarkMode = JSON.parse(localStorage.getItem('my-account-isDarkMode'));
         const connectedUser = JSON.parse(localStorage.getItem('my-account-user'));
 
-        if (savedDarkMode !== null) {
+        if (savedDarkMode !== null) 
             document.body.classList.toggle('dark', savedDarkMode);
-        }
 
-        if (connectedUser) {
+        if (connectedUser) 
             setUser(connectedUser);
-        }
     }, []);
 
     useEffect(() => {

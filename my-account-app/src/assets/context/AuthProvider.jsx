@@ -7,8 +7,6 @@ import { createContext } from 'react';
 export const AuthContext = createContext();
 
 const init = () => {
-    const user = JSON.parse(localStorage.getItem('my-account-user'));
-
     if (user) {
         const currentTime = new Date().getTime();
 

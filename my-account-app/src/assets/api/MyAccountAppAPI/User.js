@@ -1,5 +1,37 @@
 const API_URL = import.meta.env.VITE_API_URL;
 
+export const updateUserFetch = async (userId, userUpdatedName, userUpdatedLastName, userType, userEmail) => {
+    const url = `${API_URL}/api/User/UpdateUser/${ userId }`;
+
+    try 
+    {
+        const response = await fetch(url, {
+            method: 'put', 
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }, 
+            body: JSON.stringify({
+                id: userId,
+                firstName: userUpdatedName,
+                lastName: userUpdatedLastName,
+                userType: 'STANDAR_USER',
+                email: userEmail,
+            })
+        } ); 
+
+        const data = await response.json()
+        console.log(data)
+
+        return { isError: false }
+    } 
+    catch (error) 
+    {
+        console.log(error)
+        return { isError: true }
+    }
+}
+
 export const registerUserFetch = async ({ firstName, lastName, email, password }) => {
     const url = `${ API_URL }/api/User/RegisterUser`;
 

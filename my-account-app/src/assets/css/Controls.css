@@ -22,12 +22,13 @@
     display: inline-block;
     transition: all 0.2s ease-in-out;
     font-size: 20px;
-    /* color: var(--text-color); */
-    color: #FF7F11;
+    color: var(--text-color);
+    color: var(--primary-color);
+    /* color: #FF7F11; */
 }
 
 .icon-trash {
-    color: #FF7F11;
+    /* color: #FF7F11; */
 }
 
 .icon-trash:hover {
@@ -60,7 +61,8 @@
     font-size: 14px;
     border-radius: 3px;
     border: 1px solid var(--border-input-text-color);
-    background: var(--background-input-text-color);
+    /* background: var(--background-input-text-color); */
+    background: var(--body-color);
     color: var(--text-color);
     transition: all 0.1s ease-in-out;
     outline: none;
@@ -81,10 +83,6 @@
     border-color: var(--primary-color);
 }
 
-/* Efecto cuando el input está en foco */
-.custom-input:focus {
-    border-color: var(--primary-color);
-}
 
 .button-primary {
     background-color: var(--body-color);
@@ -127,3 +125,42 @@
 }
 
 
+
+
+
+
+
+
+.input-box {
+    position: relative;
+    display: flex;
+    /* align-items: center; */
+    /* width: 280px; */
+}
+
+.input-box input {
+    width: 100%;
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid var(--border-input-text-color);
+    /* background: var(--background-input-text-color); */
+    background: var(--body-color);
+    color: var(--text-color);
+    transition: all 0.1s ease-in-out;
+    outline: none;
+}
+
+.input-box .icon {
+    position: absolute;
+    right: 10px;
+    /* font-size: 18px; */
+    /* color: #6d5efc; */
+    /* cursor: pointer; */
+    /* transition: color 0.2s; */
+    top:7px; 
+}
+
+.input-box .icon:hover {
+    color: #5a4de3;
+}

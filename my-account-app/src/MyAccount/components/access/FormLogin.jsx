@@ -44,7 +44,9 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
 
             if (isError) {
                 showUserMessage('Hubo un problema al intentar iniciar sesión. Por favor, intenta nuevamente.', 'error');
-            } else {
+            } 
+            else 
+            {
                 if (resolution) {
                     const { accounts, user } = data.data;
                     showUserMessage(`¡Bienvenido de nuevo, ${user.firstName}! Redirigiéndote al inicio...`, 'success');

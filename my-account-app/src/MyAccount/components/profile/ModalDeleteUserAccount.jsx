@@ -17,6 +17,9 @@ export const ModalDeleteUserAccount = ({ userId, showModalDeleteUserAccount, set
     const navigate = useNavigate();
 
     const handleClick = async (controlName) => {
+        console.log('test'); 
+        console.log(controlName); 
+        
         switch (controlName) {
             case 'DeleteAccount':
                 deleteUserAccount();

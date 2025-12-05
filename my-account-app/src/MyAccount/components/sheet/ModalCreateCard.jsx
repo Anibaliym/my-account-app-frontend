@@ -116,7 +116,7 @@ export const ModalCreateCard = ({ showModalCreateCard, setShowModalCreateCard, s
                             value={title.toUpperCase()}
                             onChangeEvent={setTitle}
                             onKeyDownEvent={(e) => handleKeyDown(e, 'title')}
-                            placeHolder={'Nombre Carta'}
+                            placeHolder={'Ingrese el nombre de la carta'}
                             textAlign='text-left'
                         />
 
