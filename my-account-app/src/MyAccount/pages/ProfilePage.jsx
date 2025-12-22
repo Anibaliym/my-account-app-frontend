@@ -179,6 +179,7 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                         onKeyDown={(e) => ( handleKeyDown(e)) }
                                         onBlur = {(e) => ( handleBlur(e))}
                                         value = { capitalizeWords(userUpdatedName) }
+                                        autoComplete="off"
                                     />
 
                                     <i className='bx bx-save icon card-icon text-primary animate__animated animate__fadeInUp animate__faster'></i>
