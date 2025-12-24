@@ -316,8 +316,20 @@ span.sheet-list {
     z-index: 9999;
 }
 
-@media (max-width: 500px) {
+.alert-box-message-login {
+    word-wrap: break-word;
+    bottom: 10px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 15px;
+    box-sizing: border-box;
+    max-width: 98vw;
+    z-index: 9999; 
+}
 
+@media (max-width: 500px) {
     .alert-box-message {
         font-size: 15px;
         padding: 10px;

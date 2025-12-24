@@ -4,7 +4,7 @@ import { useWindowSize } from '../hooks/useWindowSize';
 
 export const UserMessage = ({ message, show, setShowMessage, toggleSidebar }) => {
     const { isDarkMode } = useContext(ThemeContext);
-    const [isVisible, setIsVisible] = useState(show);
+    const [ isVisible, setIsVisible ] = useState(show);
     const { width } = useWindowSize();
 
     const isMobile = width <= 500;

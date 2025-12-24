@@ -9,6 +9,7 @@ import '/src/assets/css/Global.css';
 import '/src/assets/css/Responsive.css';
 
 import { ToggleTheme } from '../components/ui/ToggleTheme';
+import { UserMessageLogin } from '../components/access/UserMessageLogin';
 
 export const AccessPage = () => {
     const [message, setMessage] = useState({ message: '', type: 'info' });
@@ -25,15 +26,16 @@ export const AccessPage = () => {
     return (
         <div className="access-container animate__animated animate__fadeIn">
             <div className="access-login-form">
-                    <ToggleTheme />
+                <ToggleTheme />
                 {
                     (toggleForm)
                     ? (<FormLogin userName={ userName } setUserName={ setUserName } toggleForm={ toggleForm } setToggleForm={ setToggleForm } showUserMessage={ showUserMessage }/>)
                     : (<FormRegister setUserName={ setUserName } toggleForm={ toggleForm } setToggleForm={ setToggleForm } showUserMessage={ showUserMessage }/>)
                 }
-                
-                <UserMessage message={message}  show={showMessage}  setShowMessage={setShowMessage} />
+
+                <UserMessageLogin message={message}  show={showMessage}  setShowMessage={setShowMessage} />
             </div>
+
 
             <div className="access-presentation d-flex flex-column justify-content-start text-white px-4 pt-2 position-relative">
                 <h1 className="display-1 text-end ">MI CUENTA</h1>
@@ -65,26 +67,27 @@ export const AccessPage = () => {
                     <Tooltip 
                         content={
                             <div style={{ textAlign:'center', lineHeight: '3px' }}>
-                                <p className="text-color-default mt-4">¿Que quien soy yo?</p>
-                                <p className="text-color-default">¿Tienes una idea en mente?</p>
-                                <p className="text-color-default">¿Te ayudo?</p>
+                                <p className="text-color-default mt-4">Que quien soy yo?</p>
+                                <p className="text-color-default">Tienes una idea en mente?</p>
+                                <p className="text-color-default">Te ayudo?</p>
                                 <p className="text-color-default fs-3 mt-5 mb-4">🚀</p>
                             </div>
                         } 
                         placement="up"
                         closeDelay={ 400 }
                     >
-                        
                         <Link 
                             isBlock 
                             size="sm"
                             showAnchorIcon 
                             color="danger"
-                            className="ml-1 mt-2 cursor-pointer link-white" 
-                            onClick={() => {}}
-                            >
-                            ANIBAL YAÑEZ
-                        </Link> 
+                            className="ml-1 mt-2 cursor-pointer link-white"
+                            href="https://ayanez.cl"
+                            isExternal
+                        >
+                            Anibal Yañez
+                        </Link>
+
                     </Tooltip> 
                 </div>
             </div>

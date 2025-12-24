@@ -94,8 +94,8 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
 
     return (
         <div className="animate__animated animate__fadeIn container p-1" /* style={{ backgroundColor: 'lightgray' }} */>
-            <h6 className="mt-5 animate__animated animate__fadeInLeft animate__faster display-6 text-color-primary">
-                LOGIN
+            <h6 style={{ fontSize:'30px' }} className="mt-5 animate__animated animate__fadeInLeft animate__faster display-6 text-color-primary">
+                INICIAR SESIÓN
             </h6>
 
             <form onSubmit={(e) => (e.preventDefault())}>
