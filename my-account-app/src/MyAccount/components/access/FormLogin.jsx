@@ -10,12 +10,12 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
     const userRef = useRef();
     const passwordRef = useRef();
 
-    const [password, setPassword] = useState('');
-    const [accessAllowed, setAccessAllowed] = useState(false);
-    const [user, setUser] = useState({});
-    const [accounts, setAccounts] = useState([]);
+    const [ password, setPassword ] = useState('');
+    const [ accessAllowed, setAccessAllowed ] = useState(false);
+    const [ user, setUser ] = useState({});
+    const [ accounts, setAccounts ] = useState([]);
     const { Login } = useContext(AuthContext);
-    const [rememberMe, setRememberMe] = useState(false);
+    const [ rememberMe, setRememberMe ] = useState(false);
 
     const login = async () => {
         const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -38,13 +38,16 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
             return;
         }
 
-        try {
+        try 
+        {
             const { isError, data } = await loginUserFetch(userName.toUpperCase(), password);
             const { resolution, data: userData } = data;
+            const { allSuccessUserAccessLog } = userData; 
 
-            if (isError) {
+            console.log(allSuccessUserAccessLog)
+
+            if (isError) 
                 showUserMessage('Hubo un problema al intentar iniciar sesión. Por favor, intenta nuevamente.', 'error');
-            } 
             else 
             {
                 if (resolution) {

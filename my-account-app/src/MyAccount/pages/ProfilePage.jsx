@@ -1,22 +1,24 @@
 import { useState, useEffect } from 'react';
-import { formateDateProfilePage } from '../../assets/utilities/DateFormater';
+import { formatDate, formateDateProfilePage } from '../../assets/utilities/DateFormater';
 import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Tooltip } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
 import { updateUserFetch } from '../../assets/api/MyAccountAppAPI/User';
+import { getAllSuccessUserAccessLogByUserIdFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
-    const [userCurrentName, setCurrentUserName] = useState('');
-    const [userCurrentLastName, setCurrentUserLastName] = useState('');
-    const [userUpdatedName, setUpdatedUserName] = useState('');
-    const [userUpdatedLastName, setUpdatedUserLastName] = useState('');
-    const [userCreationDate, setUserCreationDate] = useState('');
-    const [userEmail, setUserEmail] = useState('');
-    const [user, setUser] = useState('');
-    const [userId, setUserId] = useState('');
-    const [userType, setUserType] = useState('');
-    const [showModalDeleteUserAccount, setShowModalDeleteUserAccount] = useState(false);
+    const [ userCurrentName, setCurrentUserName ] = useState('');
+    const [ userCurrentLastName, setCurrentUserLastName ] = useState('');
+    const [ userUpdatedName, setUpdatedUserName ] = useState('');
+    const [ userUpdatedLastName, setUpdatedUserLastName ] = useState('');
+    const [ userCreationDate, setUserCreationDate ] = useState('');
+    const [ userEmail, setUserEmail ] = useState('');
+    const [ user, setUser ] = useState('');
+    const [ userId, setUserId ] = useState('');
+    const [ userType, setUserType ] = useState('');
+    const [ userAccessLog, setUserAccessLog] = useState([]); 
+    const [ showModalDeleteUserAccount, setShowModalDeleteUserAccount ] = useState(false);
 
     const userData = JSON.parse(localStorage.getItem('my-account-user'));
 
@@ -34,7 +36,16 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
         setUserEmail(email);
         setUserId(id);
         setUser(userType);
+
+        getAllSuccessUserAccessLogByUserId(id);
     }, []);
+
+    const getAllSuccessUserAccessLogByUserId = async (userId) => {
+        const { data, isError } = await getAllSuccessUserAccessLogByUserIdFetch(userId); 
+
+        if(!isError)
+            setUserAccessLog(data.data); 
+    }
 
     const handleKeyDown = async (e) => {
         if (e.key === 'Enter') {
@@ -145,7 +156,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                 <section className="card section">
                     <div className="row">
                         <div className="col-11">
-                            <h2 className="title">Información del perfil</h2>
+                            {/* <h2 className="title">Información del perfil</h2> */}
+                            <h2 className="title">INFORMACIÓN DEL PERFIL</h2>
                         </div>
                         <div className="col-1">
                             
@@ -236,17 +248,23 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                     <hr style={{ border: 'none', borderTop: '5px solid var(--primary-color)', borderRadius:'10px' }} />
 
                     <div className="last-logins">
-                        <h3 className="title">
-                            <span className="icon">⏱️</span> Últimos accesos 
-                            {/* <i className="bx bx-time" style={{fontSize:'30px'}}></i> Últimos Accesos */}
-                        </h3>
+                        <h2 className="title">
+                            <i className="bx bx-time" style={{fontSize:'30px'}}></i> ÚLTIMOS ACCESOS
+                        </h2>
 
                         <ul className="logins-list">
-                            <li><i className="bx bx-calendar"></i> 06 de abril del 2025 · 19:02 hrs · <i className="bx bxs-been-here" ></i> </li>
-                            <li><i className="bx bx-calendar"></i> 05 de abril del 2025 · 10:45 hrs</li>
-                            <li><i className="bx bx-calendar"></i> 04 de abril del 2025 · 22:18 hrs</li>
-                            <li><i className="bx bx-calendar"></i> 03 de abril del 2025 · 08:30 hrs</li>
-                            <li><i className="bx bx-calendar"></i> 02 de abril del 2025 · 16:05 hrs</li>
+                            {
+                                userAccessLog.map( (item, index) => (
+                                        <div key={ item.id }>
+                                            <li><i className="bx bx-calendar"></i> { formatDate(item.occurredAt) }
+                                            {
+                                                (index === 0) && ( <span> <i className="bx icon bxs-been-here" ></i></span> )
+                                            }
+                                            </li>                
+                                        </div>
+                                    )
+                                )
+                            }
                         </ul>
                     </div>
                 </section>

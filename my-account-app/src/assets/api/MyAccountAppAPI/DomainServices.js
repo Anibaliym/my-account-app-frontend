@@ -185,6 +185,32 @@ export const getUserAccountsWithSheetsFetch = async (userId) => {
     }
 }
 
+export const getAllSuccessUserAccessLogByUserIdFetch = async (userId) => {
+    const url = `${API_URL}/api/DomainServices/GetAllSuccessUserAccessLogByUserId/${userId}`;
+
+    try {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
+
+        const data = await response.json();
+
+        return {
+            isError: false,
+            data
+        };
+    }
+    catch (error) {
+        return {
+            isError: true,
+            data: {}
+        };
+    }
+}
+
+
+
 export const createSheetBackupFetch = async (sheetId) => {
     const url = `${API_URL}/api/DomainServices/CreateSheetBackup?sheetId=${sheetId}`;
 

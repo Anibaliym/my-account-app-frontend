@@ -26,10 +26,10 @@ export const MyAccountRouter = () => {
         return storedValue !== null ? JSON.parse(storedValue) : false;
     });
 
-    const [accountListener, setAccountListener] = useState(0);
-    const [pageName, setPageName] = useState('Nombre página');
-    const [message, setMessage] = useState({ message: '', type: 'info' });
-    const [showMessage, setShowMessage] = useState(false);
+    const [ accountListener, setAccountListener ] = useState(0);
+    const [ pageName, setPageName ] = useState('Nombre página');
+    const [ message, setMessage ] = useState({ message: '', type: 'info' });
+    const [ showMessage, setShowMessage ] = useState(false);
 
     const showUserMessage = (message, type = 'info') => {
         const validTypes = ['success', 'info', 'warning', 'error'];
