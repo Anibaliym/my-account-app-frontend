@@ -21,13 +21,11 @@ export const updateUserFetch = async (userId, userUpdatedName, userUpdatedLastNa
         } ); 
 
         const data = await response.json()
-        console.log(data)
 
         return { isError: false }
     } 
     catch (error) 
     {
-        console.log(error)
         return { isError: true }
     }
 }

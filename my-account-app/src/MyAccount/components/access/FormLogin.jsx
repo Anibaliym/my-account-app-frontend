@@ -44,8 +44,6 @@ export const FormLogin = ({ userName, setUserName, toggleForm, setToggleForm, sh
             const { resolution, data: userData } = data;
             const { allSuccessUserAccessLog } = userData; 
 
-            console.log(allSuccessUserAccessLog)
-
             if (isError) 
                 showUserMessage('Hubo un problema al intentar iniciar sesión. Por favor, intenta nuevamente.', 'error');
             else 

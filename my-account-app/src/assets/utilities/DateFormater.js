@@ -43,3 +43,24 @@ export const formateDateProfilePage = (fechaISO) => {
 
     return `${dia} ${mes} ${año}`;
 };
+
+export const formatDateUserAccessLog = (dateString) => {
+  const date = new Date(dateString);
+
+  const dayName = date.toLocaleDateString("es-ES", { weekday: "long" });
+  const day = date.toLocaleDateString("es-ES", { day: "2-digit" });
+  const month = date.toLocaleDateString("es-ES", { month: "long" });
+  const year = date.getFullYear();
+
+  const time = date.toLocaleTimeString("es-ES", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false
+  });
+
+  // Capitalizar el día (lunes → Lunes)
+  const capitalizedDay =
+    dayName.charAt(0).toUpperCase() + dayName.slice(1);
+
+  return `${capitalizedDay} ${day} de ${month} de ${year} a las ${time} hrs`;
+};

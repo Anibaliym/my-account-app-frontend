@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { formatDate, formateDateProfilePage } from '../../assets/utilities/DateFormater';
+import { formatDate, formatDateUserAccessLog, formateDateProfilePage } from '../../assets/utilities/DateFormater';
 import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Tooltip } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
@@ -256,7 +256,7 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                             {
                                 userAccessLog.map( (item, index) => (
                                         <div key={ item.id }>
-                                            <li><i className="bx bx-calendar"></i> { formatDate(item.occurredAt) }
+                                            <li><i className="bx bx-calendar"></i> { formatDateUserAccessLog(item.occurredAt) }
                                             {
                                                 (index === 0) && ( <span> <i className="bx icon bxs-been-here" ></i></span> )
                                             }

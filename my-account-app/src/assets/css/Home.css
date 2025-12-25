@@ -299,7 +299,8 @@ span.sheet-list {
     padding: 20px 0px 20px 20px;
     border-radius: 20px;
     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
-    background-color: var(--sub-menu-container, blue);
+    /* background-color: var(--sub-menu-container, blue); */
+    background-color: var(--primary-color);
 }
 
 .alert-box-message {
