@@ -19,18 +19,29 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const [ userType, setUserType ] = useState('');
     const [ userAccessLog, setUserAccessLog] = useState([]); 
     const [ showModalDeleteUserAccount, setShowModalDeleteUserAccount ] = useState(false);
-    const [ showSaveIcon, setShowSaveIcon ] = useState(false); 
-    const [ showSuccessIcon, setShowSuccessIcon ] = useState(false); 
+    const [ showSaveNameIcon, setShowSaveNameIcon ] = useState(false); 
+    const [ showNameSuccessIcon, setShowNameSuccessIcon ] = useState(false); 
+
+    const [ showSaveLastNameIcon, setShowSaveLastNameIcon ] = useState(false); 
+    const [ showLastNameSuccessIcon, setShowLastNameSuccessIcon ] = useState(false); 
 
     const userData = JSON.parse(localStorage.getItem('my-account-user'));
 
     useEffect(() => {
-        if(showSuccessIcon) {
+        if(showNameSuccessIcon) {
             setTimeout(() => {
-                setShowSuccessIcon(false); 
+                setShowNameSuccessIcon(false); 
             }, 1500);
         }
-    }, [ showSuccessIcon ])
+    }, [ showNameSuccessIcon ])
+
+    useEffect(() => {
+        if(showLastNameSuccessIcon) {
+            setTimeout(() => {
+                setShowLastNameSuccessIcon(false); 
+            }, 1500);
+        }
+    }, [ showLastNameSuccessIcon ])
 
     useEffect(() => {
         setPageName('PERFIL');
@@ -51,9 +62,14 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     }, []);
 
     useEffect(() => {
-        setShowSaveIcon(userCurrentName !== userUpdatedName); 
+        setShowSaveNameIcon(userCurrentName !== userUpdatedName); 
     }, [ userUpdatedName ])
     
+    useEffect(() => {
+        setShowSaveLastNameIcon(userCurrentLastName !== userUpdatedLastName); 
+    }, [ userUpdatedLastName ])
+
+
     const getAllSuccessUserAccessLogByUserId = async (userId) => {
         const { data, isError } = await getAllSuccessUserAccessLogByUserIdFetch(userId); 
 
@@ -75,8 +91,18 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
                     setCurrentUserName(userUpdatedName)
                     setCurrentUserLastName(userUpdatedLastName);
-                    setShowSuccessIcon(true);  
-                    setShowSaveIcon(false); 
+
+
+                    if(userCurrentName !== userUpdatedName) {
+                        setShowNameSuccessIcon(true);  
+                        setShowSaveNameIcon(false); 
+                    }
+
+                    if(userCurrentLastName !== userUpdatedLastName) {
+                        setShowLastNameSuccessIcon(true);  
+                        setShowSaveLastNameIcon(false); 
+
+                    }
 
                     localStorage.setItem('my-account-user', JSON.stringify({
                         id,
@@ -183,7 +209,6 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                 color="danger"
                                 closeDelay={50}
                             >
-                                {/* <i className="bx bx-trash icon icon-trash" style={{ cursor: 'pointer' }} onClick={deleteAccount}></i> */}
                                 <i className="bx bx-trash icon icon-trash cursor-pointer" onClick={ deleteUserAccount }></i>
                             </Tooltip>
                         </div>
@@ -210,8 +235,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                         autoComplete="off"
                                     />
 
-                                    { (showSaveIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
-                                    { (showSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                    { (showSaveNameIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                    { (showNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
                                 </div>
 
                         </div>
@@ -232,7 +257,9 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                     value = { capitalizeWords(userUpdatedLastName) }
                                 />
 
-                                <i className='bx bx-save icon card-icon text-primary animate__animated animate__fadeInUp animate__faster'></i>
+                                {/* ayanez */}
+                                { (showSaveLastNameIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                { (showLastNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
                             </div>
                         </div>
 
