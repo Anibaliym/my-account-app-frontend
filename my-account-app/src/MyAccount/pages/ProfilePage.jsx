@@ -19,8 +19,18 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const [ userType, setUserType ] = useState('');
     const [ userAccessLog, setUserAccessLog] = useState([]); 
     const [ showModalDeleteUserAccount, setShowModalDeleteUserAccount ] = useState(false);
+    const [ showSaveIcon, setShowSaveIcon ] = useState(false); 
+    const [ showSuccessIcon, setShowSuccessIcon ] = useState(false); 
 
     const userData = JSON.parse(localStorage.getItem('my-account-user'));
+
+    useEffect(() => {
+        if(showSuccessIcon) {
+            setTimeout(() => {
+                setShowSuccessIcon(false); 
+            }, 1500);
+        }
+    }, [ showSuccessIcon ])
 
     useEffect(() => {
         setPageName('PERFIL');
@@ -40,6 +50,10 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
         getAllSuccessUserAccessLogByUserId(id);
     }, []);
 
+    useEffect(() => {
+        setShowSaveIcon(userCurrentName !== userUpdatedName); 
+    }, [ userUpdatedName ])
+    
     const getAllSuccessUserAccessLogByUserId = async (userId) => {
         const { data, isError } = await getAllSuccessUserAccessLogByUserIdFetch(userId); 
 
@@ -60,7 +74,9 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                     const { creationDate, email, expirationTime, id, registrationMethod } = JSON.parse(localStorage.getItem('my-account-user'));
 
                     setCurrentUserName(userUpdatedName)
-                    setCurrentUserLastName(userUpdatedLastName); 
+                    setCurrentUserLastName(userUpdatedLastName);
+                    setShowSuccessIcon(true);  
+                    setShowSaveIcon(false); 
 
                     localStorage.setItem('my-account-user', JSON.stringify({
                         id,
@@ -194,7 +210,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                         autoComplete="off"
                                     />
 
-                                    <i className='bx bx-save icon card-icon text-primary animate__animated animate__fadeInUp animate__faster'></i>
+                                    { (showSaveIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                    { (showSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
                                 </div>
 
                         </div>

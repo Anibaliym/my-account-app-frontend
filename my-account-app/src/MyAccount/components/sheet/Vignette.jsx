@@ -167,7 +167,7 @@ export const Vignette = ({ cardId, vignette, showUserMessage, setVignettes, vign
             </div>
             <div className="card-vignette-actions">
                 <span className="mobile-hide">
-                    { (showSaveIcon) && ( <i className='bx bx-save card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
+                    { (showSaveIcon) && ( <i className='bx bx-save card-icon text-info animate__animated animate__fadeInUp animate__faster'></i> ) }
                     { (showSuccessIcon) && ( <i className='bx bx-check-circle card-icon text-success animate__animated animate__fadeInUp animate__faster'></i> ) }
                 </span>
                         
