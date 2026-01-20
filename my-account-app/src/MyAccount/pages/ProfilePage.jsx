@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { formatDate, formatDateUserAccessLog, formateDateProfilePage } from '../../assets/utilities/DateFormater';
+import { formatDate, formatDateUserAccessLog, formatDateWithSeparatedHour, formateDateProfilePage, formatTodayHour, groupAccessByDate } from '../../assets/utilities/DateFormater';
 import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Tooltip } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
@@ -7,7 +7,6 @@ import { updateUserFetch } from '../../assets/api/MyAccountAppAPI/User';
 import { getAllSuccessUserAccessLogByUserIdFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
 
 export const ProfilePage = ({ setPageName, showUserMessage }) => {
-
     const [ userCurrentName, setCurrentUserName ] = useState('');
     const [ userCurrentLastName, setCurrentUserLastName ] = useState('');
     const [ userUpdatedName, setUpdatedUserName ] = useState('');
@@ -18,6 +17,7 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const [ userId, setUserId ] = useState('');
     const [ userType, setUserType ] = useState('');
     const [ userAccessLog, setUserAccessLog] = useState([]); 
+    const [ userAccessLogGrouped, setUserAccessLogGrouped ] = useState({}); 
     const [ showModalDeleteUserAccount, setShowModalDeleteUserAccount ] = useState(false);
     const [ showSaveNameIcon, setShowSaveNameIcon ] = useState(false); 
     const [ showNameSuccessIcon, setShowNameSuccessIcon ] = useState(false); 
@@ -72,6 +72,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
     const getAllSuccessUserAccessLogByUserId = async (userId) => {
         const { data, isError } = await getAllSuccessUserAccessLogByUserIdFetch(userId); 
+
+        setUserAccessLogGrouped(groupAccessByDate(data.data)); 
 
         if(!isError)
             setUserAccessLog(data.data); 
@@ -196,9 +198,8 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                 </aside>
 
                 <section className="card section">
-                    <div className="row">
+                    <div className="row mb-3">
                         <div className="col-11">
-                            {/* <h2 className="title">Información del perfil</h2> */}
                             <h2 className="title">INFORMACIÓN DEL PERFIL</h2>
                         </div>
                         <div className="col-1">
@@ -214,7 +215,7 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                         </div>
                     </div>
 
-                    <hr style={{ border: 'none', borderTop: '5px solid var(--primary-color)', borderRadius:'10px' }} />
+                    {/* <hr style={{ border: 'none', borderTop: '5px solid var(--primary-color)', borderRadius:'10px' }} /> */}
 
                     <form className="form mt-2" action="#" method="post">
 
@@ -293,23 +294,98 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
 
                     <div className="last-logins">
                         <h2 className="title">
-                            <i className="bx bx-time" style={{fontSize:'30px'}}></i> ÚLTIMOS ACCESOS
+                            {/* <i className="bx bx-time" style={{fontSize:'30px'}}></i>  */}
+                            ÚLTIMOS ACCESOS
                         </h2>
 
-                        <ul className="logins-list">
+                        
+
+
+
+
+                <section className="last-access">
+                    <div className="access-grid">
+
+                    {/* <!-- Hoy --> */}
+                        <div className="access-card">
+                            <h4 className="card-title">Hoy</h4>
+
                             {
-                                userAccessLog.map( (item, index) => (
-                                        <div key={ item.id }>
-                                            <li><i className="bx bx-calendar"></i> { formatDateUserAccessLog(item.occurredAt) }
-                                            {
-                                                (index === 0) && ( <span> <i className="bx icon bxs-been-here" ></i></span> )
-                                            }
-                                            </li>                
+                                userAccessLogGrouped.today?.map( (item) => {
+                                    return (
+                                        <div key={ item.id } className="access-item">
+                                            <span className="access-label">{ formatTodayHour(item.occurredAt) }</span>
                                         </div>
                                     )
-                                )
+                                })
+                                    
                             }
-                        </ul>
+                        </div>
+
+                    {/* <!-- Ayer --> */}
+                    <div className="access-card">
+                        <h4 className="card-title">Ayer</h4>
+
+                        {
+                            userAccessLogGrouped.yesterday?.map( (item) => {
+                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
+
+                                return (
+
+                                    <div key={ item.id } className="access-item">
+                                        <span className="access-label">{ day }</span>
+                                        <span className="access-time">{ time }</span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+
+                    {/* <!-- Esta semana --> */}
+                    <div className="access-card">
+                        <h4 className="card-title">Esta semana</h4>
+
+                        {
+                            userAccessLogGrouped.thisWeek?.map( (item) => {
+                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
+
+                                return (
+
+                                    <div key={ item.id } className="access-item">
+                                        <span className="access-label">{ day }</span>
+                                        <span className="access-time">{ time }</span>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+
+                    {/* <!-- Anteriores --> */}
+                    <div className="access-card">
+                        <h4 className="card-title">Anteriores</h4>
+
+                        {
+                            userAccessLogGrouped.older?.map( (item) => {
+                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
+
+                                return (
+
+                                    <div key={ item.id } className="access-item">
+                                        <span className="access-label">{ day }</span>
+                                        <span className="access-time">{ time }</span>
+                                    </div>
+                                )
+                            })
+                        }
+
+
+                        <a href="#" className="view-more">Ver historial completo →</a>
+                    </div>
+
+                </div>
+                </section>
+                            
+                        
                     </div>
                 </section>
             </div>

@@ -7,10 +7,9 @@
 
 .profile-container{
     max-width: none;
-    width: 1000px;
+    width: 100%;
     padding: 100;
     margin-right:100px;
-
 }
 
 .grid {
@@ -123,8 +122,7 @@
 }
 
 .title {
-    font-size:20px;
-    color: var(--primary-color);
+    font-size:17px;
 }
 
 .form {
@@ -183,15 +181,13 @@
     color:var(--primary-color)
 }
 
-
-
 .last-logins {
     padding-top: 10px;
 }
 
 .last-logins .title {
     font-size: 15px;
-    font-weight: 600;
+    /* font-weight: 600; */
     margin-bottom: 10px;
     color: var(--primary-color);
     display: flex;
@@ -255,6 +251,119 @@
 .profile-icon-box input::placeholder {
     color: #aaa;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.last-access {
+  margin-top: 10px;
+  /* font-family: 'Inter', system-ui, sans-serif; */
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  /* font-weight: 600; */
+  /* color: #6b5cff; */
+  /* margin-bottom: 16px; */
+}
+
+.access-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.access-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 10px 16px;
+  border: 1px solid #eee;
+}
+
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #6b5cff;
+  margin-bottom: 10px;
+}
+
+.access-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+}
+
+.access-item:last-of-type {
+  border-bottom: none;
+}
+
+.access-label {
+  color: #444;
+}
+
+.access-time {
+  color: #555;
+  font-weight: 500;
+}
+
+.access-item.muted {
+  opacity: 0.6;
+}
+
+.view-more {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  color: #6b5cff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-more:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .access-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media (max-width: 900px){
     .profile-container{ margin: 16px; }
