@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
-import { formatDate, formatDateUserAccessLog, formatDateWithSeparatedHour, formateDateProfilePage, formatTodayHour, groupAccessByDate } from '../../assets/utilities/DateFormater';
+
+import { AccessHistory } from "../components/profile/AccessHistory";
+import { ProfileInfoItem } from "../components/profile/ProfileInfoItem";
+import { ProfileUserStaticInfo } from "../components/profile/ProfileUserStaticInfo";
+import { formateDateProfilePage, groupAccessByDate } from '../../assets/utilities/DateFormater';
 import { capitalizeWords } from '../../assets/utilities/stringFormar';
 import { Tooltip } from '@nextui-org/react';
 import { ModalDeleteUserAccount } from '../components/profile/ModalDeleteUserAccount';
 import { updateUserFetch } from '../../assets/api/MyAccountAppAPI/User';
 import { getAllSuccessUserAccessLogByUserIdFetch } from '../../assets/api/MyAccountAppAPI/DomainServices';
+
 
 export const ProfilePage = ({ setPageName, showUserMessage }) => {
     const [ userCurrentName, setCurrentUserName ] = useState('');
@@ -161,11 +166,10 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
         }
     }
 
-    const deleteUserAccount = () => setShowModalDeleteUserAccount(!showModalDeleteUserAccount);
+    const deleteUserAccount = () => setShowModalDeleteUserAccount(!showModalDeleteUserAccount);    
     
     return (
-        <main className="profile-container animate__animated animate__fadeIn">
-
+        <div className="accounts-wrapper animate__animated animate__fadeIn">
             <ModalDeleteUserAccount
                 userId={userId}
                 showModalDeleteUserAccount={showModalDeleteUserAccount}
@@ -173,222 +177,108 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                 showUserMessage={showUserMessage}
             />
 
-            <div className="grid">
-                <aside className="card profile">
-                    <div className="avatar animate__animated animate__fadeInUp animate__faster" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M12 12c2.8 0 5-2.7 5-6s-2.2-5-5-5-5 2.2-5 5 2.2 6 5 6zm0 2c-4.4 0-8 2.5-8 5.5V22h16v-2.5C20 16.5 16.4 14 12 14z"/>
-                        </svg>
-                    </div>
-
-                    <h1 className="name animate__animated animate__fadeInDown display-1 animate__faster text-color-primary" style={{ fontSize:'30px', }}>
-                        { capitalizeWords(`${ userCurrentName } ${ userCurrentLastName}`) }
-                    </h1>
-
-                    <p className="subtitle">Perfil de usuario</p>
-
-                    <div className="summary">
-                        <h3 className="title" style={{ fontSize:'14px', opacity:'.9' }}>Resumen</h3>
-                        <div className="row small mt-3"><i className="bx bx-calendar icon"></i> Email: Anibalyim@gmail.com</div>
-                        <div className="row small mt-2"><i className="bx bx-calendar-check icon"></i> Miembro desde: { userCreationDate }</div>
-                        <div className="row small mt-2"><i className="bx bx-star icon"></i> Tipo de usuario: { userType }</div>
-                        <div className="row small mt-2"><i className="bx bx-world icon"></i> Idioma: Español</div>
-                        <div className="row small mt-4"><i className="bx bx-time-five icon"></i> Último acceso: 6 abril 2025, 19:02</div>
-                    </div>
-                </aside>
-
-                <section className="card section">
-                    <div className="row mb-3">
-                        <div className="col-11">
-                            <h2 className="title">INFORMACIÓN DEL PERFIL</h2>
-                        </div>
-                        <div className="col-1">
-                            
-                            <Tooltip
-                                placement="right"
-                                content="Eliminar Cuenta"
-                                color="danger"
-                                closeDelay={50}
-                            >
-                                <i className="bx bx-trash icon icon-trash cursor-pointer" onClick={ deleteUserAccount }></i>
-                            </Tooltip>
-                        </div>
-                    </div>
-
-                    {/* <hr style={{ border: 'none', borderTop: '5px solid var(--primary-color)', borderRadius:'10px' }} /> */}
-
-                    <form className="form mt-2" action="#" method="post">
-
-                        <div>
-                            <label className="label">Nombre</label>
-                                <div className="input-box">
-                                    <input 
-                                        name="txtUserName"
-                                        // ref={inputRef}
-                                        type="text"
-                                        className="custom-input"
-                                        placeholder="Escribe tu nombre"
-                                        maxLength={35}
-                                        onChange={ (e) => { handleChange(e) } } 
-                                        onKeyDown={(e) => ( handleKeyDown(e)) }
-                                        onBlur = {(e) => ( handleBlur(e))}
-                                        value = { capitalizeWords(userUpdatedName) }
-                                        autoComplete="off"
-                                    />
-
-                                    { (showSaveNameIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
-                                    { (showNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
-                                </div>
-
-                        </div>
-                        <div>
-                            <label className="label">Apellido</label>
-
-                            <div className="input-box">
-                                <input 
-                                    name="txtUserLastName"
-                                    // ref={inputRef}
-                                    type="text"
-                                    className="custom-input"
-                                    placeholder="Tu apellido"
-                                    maxLength={35}
-                                    onChange={ (e) => { handleChange(e) } } 
-                                    onKeyDown={(e) => ( handleKeyDown(e)) }
-                                    onBlur = {(e) => ( handleBlur(e))}
-                                    value = { capitalizeWords(userUpdatedLastName) }
-                                />
-
-                                {/* ayanez */}
-                                { (showSaveLastNameIcon) && ( <i className='bx bx-save icon card-icon text-info  animate__animated animate__fadeInUp animate__faster'></i> ) }
-                                { (showLastNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
-                            </div>
-                        </div>
-
-                        <table className="mt-4">
-                            <tbody>
-                                <tr className="p-5">
-                                    <td>
-                                        <label className="label">Tipo de usuario:</label>
-                                    </td>
-                                    <td>
-                                        <label className="label">
-                                            { userType }
-                                        </label>
-                                    </td>
-                                </tr>
-                                
-                                <tr className="mt-5">
-                                    <td>
-                                        <label className="label">Correo electronico:</label>
-                                    </td>
-                                    <td>
-                                        <label className="label">{ capitalizeWords( userEmail ) }</label>
-                                    </td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                    </form>
-
-                    <hr style={{ border: 'none', borderTop: '5px solid var(--primary-color)', borderRadius:'10px' }} />
-
-                    <div className="last-logins">
-                        <h2 className="title">
-                            {/* <i className="bx bx-time" style={{fontSize:'30px'}}></i>  */}
-                            ÚLTIMOS ACCESOS
-                        </h2>
-
-                        
-
-
-
-
-                <section className="last-access">
-                    <div className="access-grid">
-
-                    {/* <!-- Hoy --> */}
-                        <div className="access-card">
-                            <h4 className="card-title">Hoy</h4>
-
-                            {
-                                userAccessLogGrouped.today?.map( (item) => {
-                                    return (
-                                        <div key={ item.id } className="access-item">
-                                            <span className="access-label">{ formatTodayHour(item.occurredAt) }</span>
-                                        </div>
-                                    )
-                                })
-                                    
-                            }
-                        </div>
-
-                    {/* <!-- Ayer --> */}
-                    <div className="access-card">
-                        <h4 className="card-title">Ayer</h4>
-
-                        {
-                            userAccessLogGrouped.yesterday?.map( (item) => {
-                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
-
-                                return (
-
-                                    <div key={ item.id } className="access-item">
-                                        <span className="access-label">{ day }</span>
-                                        <span className="access-time">{ time }</span>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-                    {/* <!-- Esta semana --> */}
-                    <div className="access-card">
-                        <h4 className="card-title">Esta semana</h4>
-
-                        {
-                            userAccessLogGrouped.thisWeek?.map( (item) => {
-                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
-
-                                return (
-
-                                    <div key={ item.id } className="access-item">
-                                        <span className="access-label">{ day }</span>
-                                        <span className="access-time">{ time }</span>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-
-                    {/* <!-- Anteriores --> */}
-                    <div className="access-card">
-                        <h4 className="card-title">Anteriores</h4>
-
-                        {
-                            userAccessLogGrouped.older?.map( (item) => {
-                                const { day, time } = formatDateWithSeparatedHour(item.occurredAt); 
-
-                                return (
-
-                                    <div key={ item.id } className="access-item">
-                                        <span className="access-label">{ day }</span>
-                                        <span className="access-time">{ time }</span>
-                                    </div>
-                                )
-                            })
-                        }
-
-
-                        <a href="#" className="view-more">Ver historial completo →</a>
-                    </div>
-
-                </div>
-                </section>
-                            
-                        
-                    </div>
-                </section>
+            <div className="container-sheet">
+                <ProfileUserStaticInfo 
+                    name = { capitalizeWords(`${ userCurrentName } ${ userCurrentLastName}`) }    
+                    userType = { userType }
+                    userCreationDate = { userCreationDate }
+                    userLastAccess={ '' }
+                />
             </div>
-        </main>        
+
+            <div className="container-cards">
+                <div className="sheet-cards-form">
+                    <div className="profile-cards-form-pilar1">
+                        <div className="profile-edit-card mb-3">
+                            <div className="row mb-3">
+                                <div className="col-11">
+                                    <figure>
+                                        <blockquote className="blockquote">
+                                            <h4 className="text-medium font-medium text-color-default">INFORMACIÓN DEL PERFIL</h4>
+                                        </blockquote>
+                                        <figcaption className="blockquote-footer">
+                                            Administra tu información y revisa tu actividad  <cite title="Source Title">reciente</cite>
+                                        </figcaption>
+                                    </figure>
+                                </div>
+                                <div className="col-1">
+                                    <Tooltip
+                                        placement="right"
+                                        content="Eliminar Cuenta"
+                                        color="danger"
+                                        closeDelay={50}
+                                    >
+                                        <i className="bx bx-trash icon icon-trash cursor-pointer" onClick={ deleteUserAccount }></i>
+                                    </Tooltip>
+                                </div>
+                            </div>
+                                <div className="row">
+                                    <div className="col">
+                                        <label className="label">Nombre</label>
+                                            <div className="input-box">
+                                                <input 
+                                                    name="txtUserName"
+                                                    type="text"
+                                                    className="custom-input"
+                                                    placeholder="Escribe tu nombre"
+                                                    maxLength={35}
+                                                    onChange={ (e) => { handleChange(e) } } 
+                                                    onKeyDown={(e) => ( handleKeyDown(e)) }
+                                                    onBlur = {(e) => ( handleBlur(e))}
+                                                    value = { capitalizeWords(userUpdatedName) }
+                                                    autoComplete="off"
+                                                />
+
+                                                { (showSaveNameIcon) && ( <i className='bx bx-save icon card-icon text-primary  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                                { (showNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                        </div>
+                                </div>
+                                <div className="col">
+                                    <label className="label">Apellido</label>
+                                    <div className="input-box">
+                                        <input 
+                                            name="txtUserLastName"
+                                            type="text"
+                                            className="custom-input"
+                                            placeholder="Tu apellido"
+                                            maxLength={35}
+                                            onChange={ (e) => { handleChange(e) } } 
+                                            onKeyDown={(e) => ( handleKeyDown(e)) }
+                                            onBlur = {(e) => ( handleBlur(e))}
+                                            value = { capitalizeWords(userUpdatedLastName) }
+                                        />
+
+                                        { (showSaveLastNameIcon) && ( <i className='bx bx-save icon card-icon text-primary  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                        { (showLastNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
+                                    </div>                                    
+                                </div>                                
+                            </div>
+
+                            <figure>
+                                <blockquote className="blockquote">
+                                    <h4 className="text-medium font-medium text-color-default mt-4">DETALLES DE LA CUENTA</h4>
+                                </blockquote>
+                                <figcaption className="blockquote-footer">
+                                    Información general <cite title="Source Title">(no editable)</cite>
+                                </figcaption>
+                            </figure>
+
+                            <div className="row mt-4">
+                                <div className="col">                                   
+                                    <ProfileInfoItem icon={'bxs-user-circle'} firstTitle={'Tipo de usuario'} secondTitle={'Administrador'}/>
+                                </div>
+                                <div className="col">
+                                    <ProfileInfoItem icon={'bxs-envelope'} firstTitle={'Correo'} secondTitle={'Anibaliym@gmail.com'}/>
+                                </div>
+                            </div>
+
+                            <h4 className="text-medium font-medium mt-4 text-color-default">ÚLTIMOS ACCESOS</h4>
+
+                            <AccessHistory userAccessLogGrouped={ userAccessLogGrouped }/>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
     );
 };

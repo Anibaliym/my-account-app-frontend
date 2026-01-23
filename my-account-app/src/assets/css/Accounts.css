@@ -267,16 +267,6 @@
     color: #aaa;
 }
 
-/* .accounts-wrapper {
-    display: flex;
-    height: calc(100vh - 97px);
-    gap: 10px;
-    border-radius: 5px;
-    box-sizing: border-box;
-    background-color: var(--body-color);
-    background-color: lightcoral;
-} */
-
 .accounts-wrapper {
     display: flex;
     height: calc(100vh - 97px);

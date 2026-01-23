@@ -268,89 +268,6 @@
 
 
 
-.last-access {
-  margin-top: 10px;
-  /* font-family: 'Inter', system-ui, sans-serif; */
-}
-
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 15px;
-  /* font-weight: 600; */
-  /* color: #6b5cff; */
-  /* margin-bottom: 16px; */
-}
-
-.access-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.access-card {
-  background: #ffffff;
-  border-radius: 10px;
-  padding: 10px 16px;
-  border: 1px solid #eee;
-}
-
-.card-title {
-  font-size: 14px;
-  font-weight: 600;
-  color: #6b5cff;
-  margin-bottom: 10px;
-}
-
-.access-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 5px 0;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 15px;
-}
-
-.access-item:last-of-type {
-  border-bottom: none;
-}
-
-.access-label {
-  color: #444;
-}
-
-.access-time {
-  color: #555;
-  font-weight: 500;
-}
-
-.access-item.muted {
-  opacity: 0.6;
-}
-
-.view-more {
-  display: inline-block;
-  margin-top: 10px;
-  font-size: 13px;
-  color: #6b5cff;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.view-more:hover {
-  text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .access-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
 
 
 
@@ -422,5 +339,293 @@
 
     .summary .row {
         font-size: 13px;
+    }
+}
+
+.profile-container {
+    background-color: greenyellow;
+    display: flex;
+    gap: 10px;
+    width: 95%;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+
+/* Izquierda (fija) */
+.user-info-static{
+    height: 500px;
+    background-color: purple;
+    padding: 10px;
+    color: white;
+    border-radius: 7px;
+    flex: 0 0 350px;  /* fijo */
+    width: 350px;
+}
+
+/* Derecha (toma el resto) */
+.user-info-edit{
+    height: 400px;
+    background-color: red;
+    padding: 10px;
+    color: white;
+    border-radius: 7px;
+    flex: 1 1 auto;   /* ocupa lo restante */
+    min-width: 0;     /* evita overflow en flex */
+}
+
+
+
+
+
+
+
+
+
+
+.info-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 5px;
+  border-radius: 5px;
+
+  background: var(--body-color);
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+
+.info-item:hover {
+  background: #f9fafb;
+  border-color: #dbeafe;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+}
+
+/* IZQUIERDA */
+.info-item-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* ICONO */
+.info-item-icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--sidebar-color);
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.info-item-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* TEXTO */
+.info-item-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.info-item-title {
+    font-size: 12px;
+    color: gray;
+}
+
+.info-item-subtitle {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+/* FLECHA */
+.info-item-arrow {
+  font-size: 18px;
+  color: #9ca3af;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Contenido interno del panel estático */
+
+/* Header con degradado suave */
+.pstatic-hero{
+    padding: 10px;
+    text-align: center;
+    background: radial-gradient(500px 220px at 50% 0%, rgba(108,92,231,.20), transparent 60%), linear-gradient(180deg, rgba(108,92,231,.10), rgba(255,255,255,.85));
+}
+
+.pstatic-avatar {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 10px;
+    border-radius: 100%;
+    background: rgba(108,92,231,.14);
+    border: 1px solid rgba(108,92,231,.18);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pstatic-avatar-icon{
+    font-size: 26px;
+    opacity: .75;
+}
+
+.pstatic-name{
+    margin: 6px 0 4px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #111827;
+}
+
+.pstatic-subtitle{
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.pstatic-divider{
+    height: 1px;
+    background: #ececf3;
+}
+
+.pstatic-section-title{
+    margin: 6px 6px 10px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .6px;
+    color: white;
+}
+
+.access-item{
+    display: grid;
+    grid-template-columns: 15px 1fr auto;
+    align-items: center;
+    padding: 7px;
+    border-radius: 10px;
+    background-color: var(--body-color);
+    border: 1px solid var(--sidebar-color);
+    font-size: 14px;
+}
+
+/* 🔘 Estado base (inactivo) */
+.access-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    background: #9ca3af;
+}
+
+/* 🟢 Estado activo */
+.access-item--active .access-dot{
+    background: lightseagreen;
+}
+
+.access-label{
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+.access-time{
+    font-weight: 800;
+    color: var(--text-color);
+    padding-left: 12px;
+}
+
+.access-item:hover{
+    border-color: rgba(108,92,231,.18);
+    box-shadow: 0 8px 18px rgba(0,0,0,.05);
+}
+
+
+
+.profile-cards-form-pilar1 {
+    flex: 1 1 0;  
+    min-width: 400px;
+    max-width: 800px; 
+    display: flex;
+    flex-direction: column;
+    gap: 0px;     
+    border-radius: 8px;
+    /* background-color: lightgreen; */
+}
+
+.profile-edit-card {
+    padding:15px 10px 10px 10px; 
+    font-size: 15px;
+    float:left;
+    margin-right:0px; 
+    border-radius:8px;     
+    background-color: var(--card-color);
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+} 
+
+
+
+
+@media (max-width: 1100px){
+  .profile-container{
+    flex-wrap: wrap;      /* permite bajar */
+  }
+
+  .user-info-static{
+    flex: 0 0 320px;
+    width: 320px;         /* un poco más angosto */
+  }
+
+  .user-info-edit{
+    flex: 1 1 500px;      /* que tome el resto, y si no cabe, baja */
+  }
+}
+
+/* ✅ Mobile: apilado 100% */
+@media (max-width: 768px){
+    .profile-container{
+        flex-direction: column;
+    }
+
+    .user-info-static, .user-info-edit{
+        width: 100%;
+        flex: 0 0 auto;
+        height: auto;         /* opcional: que crezca con contenido */
+        min-height: 240px;    /* opcional: mantiene “caja” */
+    }
+
+}
+
+/* ✅ Extra pequeño: menos padding */
+@media (max-width: 420px){
+  .user-info-static, .user-info-edit{
+        padding: 8px;
+        border-radius: 8px;
     }
 }

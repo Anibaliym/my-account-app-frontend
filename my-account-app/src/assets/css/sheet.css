@@ -62,9 +62,6 @@
 }
 
 
-
-
-
 .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
     flex: 1 1 0;  
     min-width: 0; 
@@ -72,6 +69,7 @@
     flex-direction: column;
     gap: 0px;     
     border-radius: 8px;
+    /* background-color: lightgreen; */
 }
 
 .sheet-balances-form-header {
@@ -286,7 +284,6 @@
 
 .container-sheet {
     flex: 0.2;
-    /* background-color: lightgreen; */
     height: calc(100vh - 110px);
     min-width: 300px;
     overflow: hidden;
@@ -363,45 +360,6 @@
     float: right;
     font-size:30px;
 }
-
-/* @media (max-width: 1400px) {
-    .excel-card {
-        width: 100%;
-    }
-
-    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
-        float: none;  
-        width:100%; 
-    }
-} */
-
-
-/* @media (max-width: 1000px) {
-    .page-principal-container {
-        flex-direction: column; 
-        height: auto; 
-    }
-    
-    .sheet-balances-form {
-        width: 350px; 
-    }
-
-    .excel-card {
-        width: 700px;
-    }
-
-    .sheet-balances-form {
-        width: 450px;
-    }
-    
-    .excel-card {
-        width: 450px;
-    } 
-    .sheet-cards-form-pilar1, .sheet-cards-form-pilar2 {
-        width: 450px;
-    }
-} */
-
 
 @media (max-width: 1000px) {
     .sheet-balances-form {

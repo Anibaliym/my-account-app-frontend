@@ -28,13 +28,8 @@
 }
 
 .icon-trash {
-    /* color: #FF7F11; */
+    color: var(--primary-color);
 }
-
-.icon-trash:hover {
-    color: red;
-}
-
 
 .icon:hover {
     transform: translateY(-3px) scale(1.2); /* Se levanta y agranda */
