@@ -252,8 +252,10 @@ export const ProfilePage = ({ setPageName, showUserMessage }) => {
                                         { (showLastNameSuccessIcon) && ( <i className='bx bx-check-circle icon card-icon text-success  animate__animated animate__fadeInUp animate__faster'></i> ) }
                                     </div>                                    
                                 </div>                                
-                            </div>
+                            </div>   
+                        </div>
 
+                        <div className="profile-edit-card mb-3">
                             <figure>
                                 <blockquote className="blockquote">
                                     <h4 className="text-medium font-medium text-color-default mt-4">DETALLES DE LA CUENTA</h4>
