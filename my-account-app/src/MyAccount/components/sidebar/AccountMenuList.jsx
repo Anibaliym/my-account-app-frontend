@@ -1,11 +1,16 @@
 import { Tooltip } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description, sheets, toggleSidebar }) => {
 
     // Estado interno para controlar si el menú está abierto
     const [isItemMenuOpen, setIsItemMenuOpen] = useState(isOpen);
+
+
+    const location = useLocation(); 
+    const isSheetActive = (sheetId) => location.pathname === `/sheet/${sheetId}`;
+    const isAnySheetActive = sheets?.some(({ sheet }) => isSheetActive(sheet.id));
 
     // Sincronizar el estado interno con la prop `isOpen` cuando cambie
     useEffect(() => {
@@ -29,16 +34,18 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
 
     const setSubMenuText = (sheet) => {
         const { id, description } = sheet;
-        
-        let setDescription = description.length >= 23 ? `${description.substring(0, 23)} ...` : description;
-        
-        return (
-            <Link key={id} to={`/sheet/${id}`}>
-                <i className='bx bx-caret-right ml-1'></i>
-                <span className="ml-1">
-                    {setDescription}
+        const setDescription = description.length >= 23 ? `${description.substring(0, 23)} ...` : description;
+        const active = isSheetActive(id);
 
-                </span>
+        return (
+            <Link 
+                key={id} 
+                to={`/sheet/${id}`}
+                className={`${active ? 'dropdown-btn-active' : ''}`}
+
+            >
+                <i className='bx bx-caret-right ml-1'></i>
+                <span className="ml-1">{ setDescription }</span>
             </Link>
         );
     };
@@ -102,7 +109,7 @@ export const AccountMenuList = ({ accountId, isOpen, toggleDropdown, description
                 className="sidebar-sub-menu animate__animated animate__fadeIn animate__faster"
                 style={{ display: isItemMenuOpen ? 'block' : 'none' }}
             >
-                {sheets.map(({ sheet }) => setSubMenuText(sheet))}
+                { sheets.map(({ sheet }) => setSubMenuText(sheet)) }
             </div>
         </div>
     );

@@ -95,7 +95,11 @@ html, body {
     display: flex;
     height: 35px;
     transition: var(--tran-03);
-    border-radius: 3px;
+    border-radius: 2px;
+}
+
+.dropdown-btn-active {
+    background-color: var(--body-color);
 }
 
 .dropdown-btn span {

@@ -1,25 +1,25 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useWindowSize } from '../../hooks/useWindowSize';
 
-export const MenuItem = ({ navigateTo = '/error', description = 'menú name', icon = '', setToggleSidebar }) => {
+export const MenuItem = ({ navigateTo = '/error',description = 'menú name',icon = '',setToggleSidebar }) => {
     const navigate = useNavigate();
-    const { width: screenWith } = useWindowSize();
+    const location = useLocation();
+    const { width: screenWidth } = useWindowSize();
+
+    const normalizePath = (p) => (p.startsWith('/') ? p : `/${p}`);
+    const targetPath = normalizePath(navigateTo);
+
+    const isActive = location.pathname === targetPath || location.pathname.startsWith(`${targetPath}/`);
 
     const handleClick = () => {
-        //si el ancho de la pantalla es menor a 500px (mobile) entonces contrae el sidebar
-        if(screenWith <= 500)
-            setToggleSidebar(true); 
-
-        navigate(navigateTo); 
-    }
+        if (screenWidth <= 500) setToggleSidebar(true);
+        navigate(targetPath);
+    };
 
     return (
-        <div>
-            <button 
-                className="dropdown-btn"
-                onClick={handleClick}
-            >
-                <i className={ `${ icon } icon-menu ml-1` }></i>
+        <div style={{ borderRadius:'2px' }} className={isActive ? 'dropdown-btn-active' : ''}>
+            <button className={`dropdown-btn ${isActive ? 'dropdown-btn-active' : ''}`} onClick={handleClick}>
+                <i className={`${icon} icon-menu ml-1`} />
                 <span className="animate__animated animate__fadeIn">{description}</span>
             </button>
         </div>

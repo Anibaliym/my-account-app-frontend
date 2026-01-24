@@ -56,45 +56,43 @@ export const Sidebar = ({ toggleSidebar, setToggleSidebar, accountListener }) =>
 
     return (
         <nav className={`sidebar ${toggleSidebar ? 'active collapsed' : ''} animate__animated animate__fadeInLeft animate__faster`} >
-            {/* <div className="sidebar-body"> */}
-                {
-                    menuData.map(({ id, name, description, icon }) => {
+            {
+                menuData.map(({ id, name, description, icon }) => {
 
-                        if (retrievedUserType === 'ADMIN' && description === 'Administrador')
-                            return;
+                    if (retrievedUserType === 'ADMIN' && description === 'Administrador')
+                        return;
 
-                        return (
-                            <MenuItem
-                                key={id}
-                                navigateTo={name}
-                                description={description}
-                                icon={icon}
-                                setToggleSidebar={setToggleSidebar}
-                            />
-                        )
-                    })
-                }
-
-                <hr />
-                {
-                    userAccount.map(({ account, sheets }) => (
-                        <AccountMenuList
-                            key={account.id}
-                            accountId={account.id}
-                            isOpen={!!activeDropdowns[account.id]}
-                            activeDropdowns={activeDropdowns}
-                            toggleDropdown={toggleDropdown}
-                            description={account.description}
-                            sheets={sheets}
-                            toggleSidebar={toggleSidebar}
+                    return (
+                        <MenuItem
+                            key={id}
+                            navigateTo={name}
+                            description={description}
+                            icon={icon}
+                            setToggleSidebar={setToggleSidebar}
                         />
-                    ))
-                }
-                {
-                    (!toggleSidebar) && (<FormAddAccount userId={userId} reloadAccount={reloadAccount} />)
-                }
-                <hr />
-            {/* </div> */}
+                    )
+                })
+            }
+
+            <hr />
+            {
+                userAccount.map(({ account, sheets }) => (
+                    <AccountMenuList
+                        key={account.id}
+                        accountId={account.id}
+                        isOpen={!!activeDropdowns[account.id]}
+                        activeDropdowns={activeDropdowns}
+                        toggleDropdown={toggleDropdown}
+                        description={account.description}
+                        sheets={sheets}
+                        toggleSidebar={toggleSidebar}
+                    />
+                ))
+            }
+            {
+                (!toggleSidebar) && (<FormAddAccount userId={userId} reloadAccount={reloadAccount} />)
+            }
+            <hr />
         </nav>
     )
 }
